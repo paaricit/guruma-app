@@ -13,7 +13,8 @@ export type SiteRoute =
   | "wisdom-blogs"
   | "sapt-sadhana"
   | "contact"
-  | "dedicated-spiritual-speaker-program";
+  | "dedicated-spiritual-speaker-program"
+  | "divine-day";
 
 export type NavItem = {
   label: string;
@@ -48,6 +49,7 @@ export const siteNavItems: NavItem[] = [
   { label: "About Her", href: "/about-her" },
   { label: "Sessions", href: "/sessions" },
   { label: "Events", href: "/events" },
+  { label: "Divine Day", href: "/divine-day" },
   { label: "Delhi", href: "/delhi" },
   { label: "Programs", href: "/meditation-program" },
   { label: "Wisdom", href: "/wisdom-videos" },
@@ -63,7 +65,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Guru Maa Shubha Didi",
       title: "Happiness, Freedom & Peace",
       description: "Join transformative discourses, spiritual guidance, and daily practices designed for modern seekers.",
-      image: "/images/pages/shared/home-hero.png",
+      image: "/images/Home Page Photos/Home Page Banner.webp",
       primaryCta: "Join Divine Discourses",
       secondaryCta: "Explore Knowledge Shala"
     },
@@ -91,7 +93,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "The Journey",
       title: "Who is Guru Maa Shubha Didi?",
       description: "Learn about her journey, lineage, and mission to guide seekers toward inner transformation.",
-      image: "/images/home/ImageWithFallback.png",
+      image: "/images/About Her Page Photos/ABOUT HER Banner.webp",
       primaryCta: "Read Her Journey",
       secondaryCta: "Explore Lineage"
     },
@@ -119,7 +121,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Free for All Seekers",
       title: "SESSIONS (FREE LIVE SPIRITUAL SESSIONS)",
       description: "Join live and interactive sessions online and offline with no additional cost.",
-      image: "/images/home/SAIL8920 1.png",
+      image: "/images/SESSIONS (FREE LIVE SPIRITUAL SESSIONS) Photos/SESSIONS (FREE LIVE SPIRITUAL SESSIONS) Banner.webp",
       primaryCta: "Register for Next Session",
       secondaryCta: "View Session Format"
     },
@@ -138,7 +140,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Community Gatherings",
       title: "Events (Upcoming & Past)",
       description: "Stay updated on retreats, satsangs, and special gatherings across locations.",
-      image: "/images/home/carousel-2.png",
+      image: "/images/EVENTS (PAST & UPCOMING) Photos/EVENTS (PAST & UPCOMING) Banner.webp",
       primaryCta: "Reserve Your Spot",
       secondaryCta: "Browse Past Events"
     },
@@ -157,7 +159,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Regional Programs",
       title: "Delhi Spiritual Community",
       description: "Dedicated sessions and gatherings curated for Delhi seekers and families.",
-      image: "/images/home/carousel-4.png",
+      image: "/images/Home Page Photos/Home Page Banner.webp",
       primaryCta: "Join Delhi Session",
       secondaryCta: "See Delhi Calendar"
     },
@@ -176,7 +178,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Relationship Healing",
       title: "Marriage Counselling",
       description: "Support couples with mindful communication, emotional healing, and spiritual alignment.",
-      image: "/images/home/carousel-5.png",
+      image: "/images/Marriage Counselling Page Photos/Marriage Counselling Banner BG.webp",
       primaryCta: "Book Counselling",
       secondaryCta: "Learn Program Flow"
     },
@@ -195,7 +197,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Family Harmony",
       title: "Family Counselling",
       description: "Bring clarity, emotional safety, and shared understanding into the family system.",
-      image: "/images/home/carousel.png",
+      image: "/images/Personal Counselling Page Photos/Personal Counselling Banner BG.webp",
       primaryCta: "Start Family Guidance",
       secondaryCta: "Understand Benefits"
     },
@@ -214,7 +216,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Inner Practice",
       title: "Meditation Program",
       description: "A progressive practice system to strengthen awareness, steadiness, and inner peace.",
-      image: "/images/home/carousel-1.png",
+      image: "/images/Meditation Programs page Photos/Meditation Programs Banner BG.webp",
       primaryCta: "Join Program",
       secondaryCta: "View Curriculum"
     },
@@ -233,7 +235,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Immersive Experiences",
       title: "Spiritual Retreats",
       description: "Step away from routine and enter transformative retreat spaces for inner renewal.",
-      image: "/images/home/carousel-2.png",
+      image: "/images/Retreats Page Photos/Spiritual Retreats Banner BG.webp",
       primaryCta: "Explore Retreats",
       secondaryCta: "Retreat Preparation Guide"
     },
@@ -252,7 +254,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Wisdom Library",
       title: "Wisdom Videos",
       description: "Explore visual teachings, discourse clips, and guided instructions by topic.",
-      image: "/images/pages/wisdom-videos/page-main.png",
+      image: "/images/Blongs Internal Page Photos/Wisdom Pages Banner BG.webp",
       primaryCta: "Watch Now",
       secondaryCta: "Browse Categories"
     },
@@ -271,7 +273,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Listen & Absorb",
       title: "Wisdom Audios",
       description: "Carry spiritual guidance with you through curated audio wisdom and chants.",
-      image: "/images/pages/wisdom/audios-hero.png",
+      image: "/images/Blongs Internal Page Photos/Wisdom Pages Banner BG.webp",
       primaryCta: "Play Audios",
       secondaryCta: "Download Offline"
     },
@@ -290,7 +292,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Read & Reflect",
       title: "Wisdom Blogs",
       description: "Read practical and contemplative articles for spiritual growth in everyday life.",
-      image: "/images/pages/sessions/page-main.png",
+      image: "/images/WISDOM- Blogs Page Photos/Daily Life & Spirituality.webp",
       primaryCta: "Read Articles",
       secondaryCta: "View Popular Topics"
     },
@@ -309,7 +311,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Serving Beyond Self",
       title: "Sapt Sadhana",
       description: "A holistic path that integrates discipline, devotion, service, and self-transformation.",
-      image: "/images/pages/sapt-sadhana/12c752fb-e956-46b2-aabe-567572d9bf44.jpg",
+      image: "/images/Sapt Sadhana Page Photos/SAPT SADHANA Banner BG.webp",
       primaryCta: "Join Sapt Sadhana",
       secondaryCta: "Understand the 7 Steps"
     },
@@ -328,7 +330,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Stay Connected",
       title: "Contact & Guidance",
       description: "Reach out for sessions, courses, retreats, and personalized spiritual guidance.",
-      image: "/images/home/SAIL8920 1.png",
+      image: "/images/CONTACT Page Photo.webp",
       primaryCta: "Submit Enquiry",
       secondaryCta: "Talk to Support"
     },
@@ -340,6 +342,26 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       { title: "Community Connect", description: "Join local and global circles of learning and practice." }
     ]
   },
+  "divine-day": {
+    route: "divine-day",
+    pageTitle: "The Divine Day",
+    hero: {
+      eyebrow: "Annual gathering",
+      title: "The Divine Day",
+      description:
+        "An evening of meditation, wisdom, and inner calm with Guru Maa Shubha Didi—free, open, and deeply restorative.",
+      image: "/images/Divine day page Photos/Divine day Banner Video Operlap.webp",
+      primaryCta: "Register Free",
+      secondaryCta: "Reserve My Spot"
+    },
+    sectionTitle: "What you will experience",
+    sectionDescription: "Meditation, spiritual talk, collective practice, and the calming presence of Guru Maa.",
+    highlights: [
+      { title: "Guided Meditation", description: "Stillness and inner silence through a guided session." },
+      { title: "Spiritual Talk", description: "Wisdom that uplifts the heart and quiets the mind." },
+      { title: "Sacred Community", description: "Share the space with seekers in a welcoming atmosphere." }
+    ]
+  },
   "dedicated-spiritual-speaker-program": {
     route: "dedicated-spiritual-speaker-program",
     pageTitle: "Dedicated Spiritual Speaker Program",
@@ -347,7 +369,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       eyebrow: "Leadership Through Wisdom",
       title: "Dedicated Spiritual Speaker Program",
       description: "A guided pathway for seekers called to serve as authentic spiritual communicators.",
-      image: "/images/pages/dedicated-spiritual-speaker-program/page-main.png",
+      image: "/images/Dedicated spiritual seekers program Page Photos/Workshops.webp",
       primaryCta: "Apply to Program",
       secondaryCta: "Download Program Details"
     },
@@ -378,7 +400,8 @@ export const routeFromSlug = (slug?: string): SiteRoute | null => {
     "wisdom-blogs",
     "sapt-sadhana",
     "contact",
-    "dedicated-spiritual-speaker-program"
+    "dedicated-spiritual-speaker-program",
+    "divine-day"
   ]);
 
   return routeKeys.has(normalized as SiteRoute) ? (normalized as SiteRoute) : null;

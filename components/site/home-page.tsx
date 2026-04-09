@@ -565,6 +565,103 @@ export default function HomePage() {
         <Container>
           <Stack spacing={1.5}>
             {programRows.map((row) => (
+              row.title === "Counselling & Healing Sessions" ? (
+                <Box
+                  key={row.title}
+                  sx={{
+                    position: "relative",
+                    minHeight: { xs: 360, md: 529.54 },
+                    borderTop: "1px solid rgba(255,255,255,0.7)",
+                    borderBottom: "1px solid rgba(255,255,255,0.7)",
+                    overflow: "hidden"
+                  }}
+                >
+                  <Image alt={row.title} fill sizes="100vw" src={row.image} style={{ objectFit: "cover" }} />
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(90deg, rgba(3,25,66,0.78) 0%, rgba(3,25,66,0.55) 35%, rgba(3,25,66,0.16) 68%, rgba(3,25,66,0.04) 100%)"
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      position: "relative",
+                      zIndex: 1,
+                      py: { xs: 3, md: 4 },
+                      px: { xs: 2.5, md: 4.2 },
+                      maxWidth: { xs: "100%", md: 780 },
+                      color: "#fff"
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontFamily: "var(--font-forum), serif",
+                        fontSize: { xs: 34, md: "55.864px" },
+                        lineHeight: 1.15,
+                        letterSpacing: { md: "-1.1173px" }
+                      }}
+                    >
+                      {row.title}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        mt: 1,
+                        fontSize: { xs: 11, md: "15.961px" },
+                        letterSpacing: { xs: 1.7, md: "2.5538px" },
+                        fontWeight: 600,
+                        textTransform: "uppercase",
+                        color: "rgba(255,255,255,0.92)"
+                      }}
+                    >
+                      {row.subtitle}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        mt: 1.6,
+                        color: "rgba(255,255,255,0.92)",
+                        fontSize: { xs: 14, md: "20.903px" },
+                        letterSpacing: { md: "-0.4181px" },
+                        lineHeight: 1.5,
+                        maxWidth: 640
+                      }}
+                    >
+                      {row.description}
+                    </Typography>
+
+                    <Stack direction="row" spacing={1.2} sx={{ mt: 2 }}>
+                      <Button
+                        variant="contained"
+                        sx={{
+                          ...uiPresets.ctaButton,
+                          height: "47.883px",
+                          px: "23.942px",
+                          fontSize: "15.961px",
+                          borderRadius: "7.981px",
+                          bgcolor: "#031942"
+                        }}
+                      >
+                        {row.primaryCta}
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          ...uiPresets.ctaButton,
+                          height: "47.883px",
+                          px: "23.942px",
+                          fontSize: "15.961px",
+                          borderRadius: "7.981px",
+                          color: "#fff",
+                          borderColor: "rgba(255,255,255,0.85)",
+                          borderWidth: "0.998px"
+                        }}
+                      >
+                        {row.secondaryCta}
+                      </Button>
+                    </Stack>
+                  </Box>
+                </Box>
+              ) : (
               <Box
                 key={row.title}
                 sx={{
@@ -668,6 +765,7 @@ export default function HomePage() {
                   </Stack>
                 </Box>
               </Box>
+              )
             ))}
           </Stack>
         </Container>
@@ -930,7 +1028,12 @@ export default function HomePage() {
                 opacity: 0.35
               }}
             >
-              <Image alt="Sapt service side" fill src="/images/pages/sapt-sadhana/page-main.jpg" style={{ objectFit: "cover" }} />
+              <Image
+                alt="Sapt service side"
+                fill
+                src="/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (1).webp"
+                style={{ objectFit: "cover" }}
+              />
             </Box>
             <Box
               sx={{
@@ -944,7 +1047,12 @@ export default function HomePage() {
                 opacity: 0.35
               }}
             >
-              <Image alt="Sapt service side" fill src="/images/pages/sapt-sadhana/page-main.jpg" style={{ objectFit: "cover" }} />
+              <Image
+                alt="Sapt service side"
+                fill
+                src="/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (3).webp"
+                style={{ objectFit: "cover" }}
+              />
             </Box>
             <Box
               sx={{
@@ -957,7 +1065,12 @@ export default function HomePage() {
                 boxShadow: "0 10px 22px rgba(0,0,0,0.18)"
               }}
             >
-              <Image alt="Sapt Sadhana" fill src="/images/pages/sapt-sadhana/page-main.jpg" style={{ objectFit: "cover" }} />
+              <Image
+                alt="Sapt Sadhana"
+                fill
+                src="/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (2).webp"
+                style={{ objectFit: "cover" }}
+              />
             </Box>
           </Box>
 

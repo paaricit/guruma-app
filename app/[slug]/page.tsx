@@ -1,4 +1,7 @@
 import { notFound } from "next/navigation";
+import AboutHerPage from "@/components/site/about-her-page";
+import DivineDayPage from "../../components/site/divine-day-page";
+import SessionsPage from "@/components/site/sessions-page";
 import SharedHeader from "@/components/site/shared-header";
 import ImageFullPage from "@/components/site/image-full-page";
 import SharedFooter from "@/components/site/shared-footer";
@@ -18,20 +21,30 @@ export default async function DynamicPage({ params }: DynamicPageProps) {
   }
 
   const fullPageImageRoutes: Partial<Record<typeof route, string>> = {
-    "about-her": "/images/about-her/page-main.jpg",
-    "sessions": "/images/pages/sessions/page-main.png",
-    "events": "/images/pages/dedicated-spiritual-speaker-program/page-main.png",
-    "delhi": "/images/pages/delhi/page-main.jpg",
-    "marriage-counselling": "/images/pages/marriage-counselling/page-main.png",
-    "family-counselling": "/images/pages/family-counselling/page-main.png",
-    "meditation-program": "/images/pages/meditation-program/page-main.jpg",
-    "spiritual-retreats": "/images/pages/spiritual-retreats/page-main.png",
-    "wisdom-audios": "/images/pages/sessions/page-main.png",
-    "dedicated-spiritual-speaker-program": "/images/pages/dedicated-spiritual-speaker-program/page-main.png",
-    "sapt-sadhana": "/images/pages/sapt-sadhana/page-main.jpg",
-    "wisdom-blogs": "/images/pages/wisdom-blogs/page-main.png",
-    "wisdom-videos": "/images/pages/wisdom-videos/page-main.png"
+    events: "/images/EVENTS (PAST & UPCOMING) Photos/EVENTS (PAST & UPCOMING) Banner.webp",
+    delhi: "/images/Home Page Photos/Home Page Banner.webp",
+    "marriage-counselling": "/images/Marriage Counselling Page Photos/Marriage Counselling Banner BG.webp",
+    "family-counselling": "/images/Personal Counselling Page Photos/Personal Counselling Banner BG.webp",
+    "meditation-program": "/images/Meditation Programs page Photos/Meditation Programs Banner BG.webp",
+    "spiritual-retreats": "/images/Retreats Page Photos/Spiritual Retreats Banner BG.webp",
+    "wisdom-audios": "/images/Blongs Internal Page Photos/Wisdom Pages Banner BG.webp",
+    "dedicated-spiritual-speaker-program": "/images/Dedicated spiritual seekers program Page Photos/Section Below Benifits.webp",
+    "sapt-sadhana": "/images/Sapt Sadhana Page Photos/SAPT SADHANA Banner BG.webp",
+    "wisdom-blogs": "/images/Blongs Internal Page Photos/Blogs internal Page Photo.webp",
+    "wisdom-videos": "/images/Blongs Internal Page Photos/Wisdom Pages Banner BG.webp"
   };
+
+  if (route === "about-her") {
+    return <AboutHerPage />;
+  }
+
+  if (route === "sessions") {
+    return <SessionsPage />;
+  }
+
+  if (route === "divine-day") {
+    return <DivineDayPage />;
+  }
 
   const fullPageImage = fullPageImageRoutes[route];
 
