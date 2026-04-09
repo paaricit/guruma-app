@@ -1,10 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
-import PanToolOutlinedIcon from "@mui/icons-material/PanToolOutlined";
-import SelfImprovementOutlinedIcon from "@mui/icons-material/SelfImprovementOutlined";
-import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 import {
   Box,
   Button,
@@ -31,7 +27,7 @@ const programRows = [
     description: "Struggling in your career, life choices, marriage, family or during pregnancy. Counselling offers a safe space to share and heal.",
     primaryCta: "Get started",
     secondaryCta: "Learn more",
-    image: "/images/home/counselling_1.png",
+    image: "/images/Home Page Photos/Counselling & Healing Sessions BG.webp",
     imageLeft: false
   },
   {
@@ -40,7 +36,7 @@ const programRows = [
     description: "Your path to fast-tracking your spiritual growth and being in Guru Maa Shubha Didi's divine presence.",
     primaryCta: "Get started",
     secondaryCta: "Learn more",
-    image: "/images/home/counselling_2.png",
+    image: "/images/Home Page Photos/Spiritual Retreats BG (1).webp",
     imageLeft: true
   },
   {
@@ -49,7 +45,7 @@ const programRows = [
     description: "Move beyond just knowing about meditation to practicing it. Learn the art of meditation to purify karmic layers and unlock the eternal wealth of steadiness and intuitive wisdom.",
     primaryCta: "Get started",
     secondaryCta: "Learn more",
-    image: "/images/home/counselling_3.png",
+    image: "/images/Home Page Photos/Guided Meditation  BG.webp",
     imageLeft: false
   },
   {
@@ -58,7 +54,7 @@ const programRows = [
     description: "ISHT is a community of like-minded individuals, all focused on uplifting themselves and making a positive impact on those around them.",
     primaryCta: "Get started",
     secondaryCta: "Learn more",
-    image: "/images/home/counselling_4.png",
+    image: "/images/Home Page Photos/IISHT GOLD Membership BG.webp",
     imageLeft: true
   },
   {
@@ -67,21 +63,21 @@ const programRows = [
     description: "Be a part of a mission that has fed over 10,000 people, funded several scholarships, and provided critical medical aid. Through Sapt Sadhana, we turn compassion into action.",
     primaryCta: "Support Our Mission",
     secondaryCta: "Learn more",
-    image: "/images/home/counselling_5.png",
+    image: "/images/Home Page Photos/Sapt Sadhana  BG.webp",
     imageLeft: false
   }
 ];
 
 const wisdomCards = [
-  { title: "The art of letting go", badge: "The Most Rated", image: "/images/home/wisdom_1.png" },
-  { title: "Morning Meditation for Peace", badge: "The Most Watched", image: "/images/home/wisdom_2.png" },
-  { title: "7 Steps to Inner Transformation", badge: "The Most Saved", image: "/images/home/wisdom_3.png" }
+  { title: "The art of letting go", badge: "The Most Rated", image: "/images/Home Page Photos/The art of letting go.webp" },
+  { title: "Morning Meditation for Peace", badge: "The Most Watched", image: "/images/Home Page Photos/Morning Meditation for Peace.webp" },
+  { title: "7 Steps to Inner Transformation", badge: "The Most Saved", image: "/images/Home Page Photos/7 Steps to Inner Transformation.webp" }
 ];
 
 const seekerVideos = [
-  { name: "Priya Sharma", image: "/images/home/seekers_1.png" },
-  { name: "Karan Paul", image: "/images/home/seekers_2.png" },
-  { name: "Priya Das", image: "/images/home/seekers_3.png" }
+  { name: "Priya Sharma", image: "/images/Home Page Photos/Home page second section Video thumbnail.webp" },
+  { name: "Karan Paul", image: "/images/Home Page Photos/Morning Meditation for Peace.webp" },
+  { name: "Priya Das", image: "/images/Home Page Photos/7 Steps to Inner Transformation.webp" }
 ];
 
 const testimonials = [
@@ -121,7 +117,7 @@ export default function HomePage() {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 28.993%, #00224c 100%), url('/images/home/home-hero-mcp.webp')",
+              "linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 28.993%, #00224c 100%), url('/images/Home Page Photos/Home Page Banner.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center"
           }}
@@ -200,22 +196,7 @@ export default function HomePage() {
                 </Button>
               </Stack>
             </Box>
-            <Box
-              sx={{
-                position: "relative",
-                height: { xs: 320, md: 760 },
-                display: { xs: "none", md: "block" }
-              }}
-            >
-              <Image
-                alt="Guru Maa"
-                fill
-                priority
-                sizes="(max-width: 900px) 0vw, 45vw"
-                src="/images/home/hero-1.webp"
-                style={{ objectFit: "contain", objectPosition: "bottom right" }}
-              />
-            </Box>
+            
           </Box>
         </Container>
         <Box
@@ -248,7 +229,7 @@ export default function HomePage() {
           >
             <Box sx={{ position: "relative", borderRadius: "22px", overflow: "hidden", border: "4px solid rgba(255,255,255,0.9)" }}>
               <Box sx={{ position: "relative", height: { xs: 360, md: 510 } }}>
-                <Image alt="Guru Maa session" fill src="/images/home/guru_maa_image_1.png" style={{ objectFit: "cover" }} />
+                <Image alt="Guru Maa session" fill src="/images/Home Page Photos/Home page second section Video thumbnail.webp" style={{ objectFit: "cover" }} />
               </Box>
               <Box
                 sx={{
@@ -294,10 +275,10 @@ export default function HomePage() {
                 }}
               >
                 {[
-                  { iconSrc: "/images/home/group2_icons.png", label: "A Divine Guru" },
-                  { iconSrc: "/images/home/group2_icons1.png", label: "A Spiritual Guide" },
-                  { iconSrc: "/images/home/group2_icons2.png", label: "A Life Coach" },
-                  { iconSrc: "/images/home/group2_icons3.png", label: "A Visionary Leader" }
+                  { iconSrc: "/images/Home Page Photos/group2_icons.png", label: "A Divine Guru" },
+                  { iconSrc: "/images/Home Page Photos/group2_icons1.png", label: "A Spiritual Guide" },
+                  { iconSrc: "/images/Home Page Photos/group2_icons2.png", label: "A Life Coach" },
+                  { iconSrc: "/images/Home Page Photos/group2_icons3.png", label: "A Visionary Leader" }
                 ].map((item) => (
                   <Box key={item.label} sx={{ display: "flex", alignItems: "center", gap: 1, color: "#233250" }}>
                     <Box sx={{ position: "relative", width: 22, height: 22, flex: "0 0 auto" }}>
@@ -344,7 +325,7 @@ export default function HomePage() {
           sx={{
             position: "absolute",
             inset: 0,
-            backgroundImage: "linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/images/home/section.png')",
+            backgroundImage: "linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/images/Home Page Photos/Home Page Banner.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center"
           }}
@@ -423,7 +404,7 @@ export default function HomePage() {
           </Typography>
 
           <Stack direction="row" spacing={3} sx={{ mt: 2, justifyContent: "center", alignItems: "center" }}>
-            {["/images/home/icons-3.png", "/images/home/icons-1.png", "/images/home/icons-2.png"].map((src) => (
+            {["/images/Home Page Photos/icons-3.png", "/images/Home Page Photos/icons-1.png", "/images/Home Page Photos/icons-2.png"].map((src) => (
               <Box key={src} sx={{ position: "relative", width: 46, height: 46, opacity: 0.9 }}>
                 <Image alt="" fill src={src} style={{ objectFit: "contain" }} />
               </Box>
@@ -442,7 +423,7 @@ export default function HomePage() {
           >
             <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "390px 1fr" }, gap: { xs: 2, md: 3 } }}>
               <Box sx={{ position: "relative", borderRadius: "8px", overflow: "hidden", minHeight: { xs: 280, md: 420 } }}>
-                <Image alt="Session preview" fill src="/images/home/guru_maa_2.png" style={{ objectFit: "cover" }} />
+                <Image alt="Session preview" fill src="/images/Home Page Photos/Divine Discourses Schedule image.webp" style={{ objectFit: "cover" }} />
                 <Box
                   sx={{
                     position: "absolute",
@@ -468,19 +449,19 @@ export default function HomePage() {
                     </Box>
                     <Stack direction="row" spacing={1} sx={{ mt: 1.4, alignItems: "center" }}>
                       <Box sx={{ position: "relative", width: 18, height: 18, flex: "0 0 auto" }}>
-                        <Image alt="" fill src="/images/home/Icon-profile.png" style={{ objectFit: "contain" }} />
+                        <Image alt="" fill src="/images/Home Page Photos/Icon-profile.png" style={{ objectFit: "contain" }} />
                       </Box>
                       <Typography sx={{ fontSize: 18, color: "#353535" }}>Chennai Live Sessions:</Typography>
                     </Stack>
                     <Stack direction="row" spacing={1} sx={{ mt: 0.8, alignItems: "center" }}>
                       <Box sx={{ position: "relative", width: 16, height: 16, flex: "0 0 auto" }}>
-                        <Image alt="" fill src="/images/home/icons-calendar.png" style={{ objectFit: "contain" }} />
+                        <Image alt="" fill src="/images/Home Page Photos/icons-calendar.png" style={{ objectFit: "contain" }} />
                       </Box>
                       <Typography sx={{ fontSize: 14, color: "#555" }}>Thursday : 5:00-6:00 PM IST</Typography>
                     </Stack>
                     <Stack direction="row" spacing={1} sx={{ mt: 0.5, alignItems: "center" }}>
                       {/* <Box sx={{ position: "relative", width: 16, height: 16, flex: "0 0 auto" }}>
-                        <Image alt="" fill src="/images/home/icons-calendar.png" style={{ objectFit: "contain" }} />
+                        <Image alt="" fill src="/images/Home Page Photos/icons-calendar.png" style={{ objectFit: "contain" }} />
                       </Box> */}
                       <Typography sx={{ fontSize: 14, color: "#555" }}>Sunday : 11:30 AM IST</Typography>
                     </Stack>
@@ -493,19 +474,19 @@ export default function HomePage() {
                     </Box>
                     <Stack direction="row" spacing={1} sx={{ mt: 1.4, alignItems: "center" }}>
                       <Box sx={{ position: "relative", width: 18, height: 18, flex: "0 0 auto" }}>
-                        <Image alt="" fill src="/images/home/Icon-profile.png" style={{ objectFit: "contain" }} />
+                        <Image alt="" fill src="/images/Home Page Photos/Icon-profile.png" style={{ objectFit: "contain" }} />
                       </Box>
                       <Typography sx={{ fontSize: 18, color: "#353535" }}>Zoom Live Sessions:</Typography>
                     </Stack>
                     <Stack direction="row" spacing={1} sx={{ mt: 0.8, alignItems: "center" }}>
                       <Box sx={{ position: "relative", width: 16, height: 16, flex: "0 0 auto" }}>
-                        <Image alt="" fill src="/images/home/icons-calendar.png" style={{ objectFit: "contain" }} />
+                        <Image alt="" fill src="/images/Home Page Photos/icons-calendar.png" style={{ objectFit: "contain" }} />
                       </Box>
                       <Typography sx={{ fontSize: 14, color: "#555" }}>Mon, Tue, Wed, Fri</Typography>
                     </Stack>
                     <Stack direction="row" spacing={1} sx={{ mt: 0.5, alignItems: "center" }}>
                       {/* <Box sx={{ position: "relative", width: 16, height: 16, flex: "0 0 auto" }}>
-                        <Image alt="" fill src="/images/home/icons-calendar.png" style={{ objectFit: "contain" }} />
+                        <Image alt="" fill src="/images/Home Page Photos/icons-calendar.png" style={{ objectFit: "contain" }} />
                       </Box> */}
                       <Typography sx={{ fontSize: 14, color: "#555" }}>7:30 - 8:30 AM IST</Typography>
                     </Stack>
@@ -541,7 +522,7 @@ export default function HomePage() {
       <Box
         sx={{
           bgcolor: "#091a43",
-          backgroundImage: "linear-gradient(rgba(9,26,67,0.15), rgba(9,26,67,0.15)), url(\"/images/home/Content Block.png\")",
+          backgroundImage: "linear-gradient(rgba(9,26,67,0.15), rgba(9,26,67,0.15)), url('/images/Home Page Photos/Sapt Sadhana  BG.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           borderRadius: "0",
@@ -554,10 +535,10 @@ export default function HomePage() {
         }}
       >
         {[
-          { label: "NAME", hint: "Enter your name", iconSrc: "/images/home/Icon-profile.png" },
-          { label: "PHONE", hint: "Enter your phone number", iconSrc: "/images/home/icons-2.png" },
-          { label: "EMAIL", hint: "Enter your Email ID", iconSrc: "/images/home/icons-1.png" },
-          { label: "MESSAGE", hint: "Give us a message", iconSrc: "/images/home/icons-3.png" }
+          { label: "NAME", hint: "Enter your name", iconSrc: "/images/Home Page Photos/Icon-profile.png" },
+          { label: "PHONE", hint: "Enter your phone number", iconSrc: "/images/Home Page Photos/icons-2.png" },
+          { label: "EMAIL", hint: "Enter your Email ID", iconSrc: "/images/Home Page Photos/icons-1.png" },
+          { label: "MESSAGE", hint: "Give us a message", iconSrc: "/images/Home Page Photos/icons-3.png" }
         ].map((field) => (
           <Box key={field.label}>
             <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
@@ -805,7 +786,7 @@ export default function HomePage() {
           sx={{
             position: "absolute",
             inset: 0,
-            backgroundImage: "linear-gradient(rgba(3,25,66,0.72), rgba(3,25,66,0.72)), url('/images/home/seekers_bg.png')",
+            backgroundImage: "linear-gradient(rgba(3,25,66,0.72), rgba(3,25,66,0.72)), url('/images/Home Page Photos/Spiritual Retreats BG (1).webp')",
             backgroundSize: "cover",
             backgroundPosition: "center"
           }}
@@ -900,7 +881,7 @@ export default function HomePage() {
             {testimonials.map((item) => (
               <Card key={item.name} sx={{ borderRadius: "12px", boxShadow: "none", bgcolor: "#fff", color: "#1e2f54", position: "relative" }}>
                 <Box sx={{ position: "absolute", top: -12, left: 14, width: 26, height: 26 }}>
-                  <Image alt="" fill src="/images/home/icon-orange.png" style={{ objectFit: "contain" }} />
+                  <Image alt="" fill src="/images/Home Page Photos/icon-orange.png" style={{ objectFit: "contain" }} />
                 </Box>
                 <Box sx={{ p: 2.2, pt: 2.8 }}>
                   <Typography sx={{ color: "rgba(31,47,84,0.82)", fontSize: 13.5, lineHeight: 1.45 }}>{`"${item.quote}"`}</Typography>
