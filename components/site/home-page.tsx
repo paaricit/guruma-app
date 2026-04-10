@@ -529,7 +529,11 @@ export default function HomePage() {
           px: { xs: 2, md: 4 },
           py: { xs: 2.2, md: 3 },
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr 1fr auto" },
+          gridTemplateColumns: {
+            xs: "minmax(0, 1fr)",
+            sm: "repeat(2, minmax(0, 1fr))",
+            md: "repeat(4, minmax(0, 1fr)) auto"
+          },
           alignItems: "center",
           gap: { xs: 1.8, md: 2.2 }
         }}
@@ -540,7 +544,7 @@ export default function HomePage() {
           { label: "EMAIL", hint: "Enter your Email ID", iconSrc: "/images/Home Page Photos/icons-1.png" },
           { label: "MESSAGE", hint: "Give us a message", iconSrc: "/images/Home Page Photos/icons-3.png" }
         ].map((field) => (
-          <Box key={field.label}>
+          <Box key={field.label} sx={{ minWidth: 0 }}>
             <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
               <Box sx={{ position: "relative", width: 20, height: 20, flex: "0 0 auto" }}>
                 <Image alt="" fill src={field.iconSrc} style={{ objectFit: "contain" }} />
@@ -552,8 +556,8 @@ export default function HomePage() {
           </Box>
         ))}
 
-        <Box sx={{ justifySelf: { xs: "start", md: "end" } }}>
-          <Typography sx={{ color: "#f5f7ff", fontWeight: 700, fontSize: { xs: 28, md: 52 }, lineHeight: 0.95 }}>
+        <Box sx={{ justifySelf: { xs: "center", sm: "start", md: "end" }, gridColumn: { xs: "1 / -1", sm: "1 / -1", md: "auto" }, textAlign: { xs: "center", md: "left" } }}>
+          <Typography sx={{ color: "#f5f7ff", fontWeight: 700, fontSize: { xs: "clamp(1.5rem, 6vw, 2rem)", md: 52 }, lineHeight: 0.95 }}>
             Get a
             <br />
             call back

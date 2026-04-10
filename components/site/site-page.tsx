@@ -20,7 +20,7 @@ type SitePageProps = {
 
 export default function SitePage({ content }: SitePageProps) {
   return (
-    <Box sx={{ bgcolor: "background.default", minHeight: "100vh" }}>
+    <Box sx={{ bgcolor: "background.default", minHeight: "100vh", width: "100%", maxWidth: "100%", overflowX: "hidden" }}>
       <SharedHeader />
 
       <Box
@@ -28,7 +28,8 @@ export default function SitePage({ content }: SitePageProps) {
           position: "relative",
           pt: { xs: 14, md: 18 },
           pb: { xs: 8, md: 10 },
-          overflow: "hidden"
+          overflow: "hidden",
+          width: "100%"
         }}
       >
         <Box
@@ -40,7 +41,7 @@ export default function SitePage({ content }: SitePageProps) {
             backgroundPosition: "center"
           }}
         />
-        <Container sx={{ position: "relative", zIndex: 1 }}>
+        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, px: { xs: 2, sm: 3 } }}>
           <Stack spacing={2} maxWidth={700}>
             <Typography sx={{ color: "#ffc19a", letterSpacing: 0.4, fontWeight: 600 }}>{content.hero.eyebrow}</Typography>
             <Typography variant="h1" sx={{ color: "white", fontSize: { xs: "2.2rem", md: "4rem" }, lineHeight: 1.05 }}>
@@ -65,7 +66,7 @@ export default function SitePage({ content }: SitePageProps) {
         </Container>
       </Box>
 
-      <Container sx={{ ...uiPresets.sectionContainer, pb: { xs: 9, md: 12 } }}>
+      <Container maxWidth="lg" sx={{ ...uiPresets.sectionContainer, pb: { xs: 9, md: 12 }, px: { xs: 2, sm: 3 } }}>
         <Stack spacing={1.5} mb={4}>
           <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "3.1rem" } }}>
             {content.sectionTitle}

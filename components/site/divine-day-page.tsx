@@ -329,33 +329,44 @@ export default function DivineDayPage() {
         </Container>
       </Box>
 
-      {/* Give yourself this pause — split + curved image */}
+      {/* Give yourself this pause — split + curved image + peach edge (matches design reference) */}
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "minmax(280px, 42%) 1fr" },
-          minHeight: { xs: "auto", md: 420 },
-          bgcolor: "#f0f9f8"
+          gridTemplateColumns: { xs: "1fr", md: "minmax(280px, 44%) 1fr" },
+          minHeight: { xs: "auto", md: 440 },
+          bgcolor: "#f2f1ed",
+          alignItems: "stretch"
         }}
       >
-        <Box sx={{ py: { xs: 5, md: 8 }, px: { xs: 2.5, md: 5 }, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <Box
+          sx={{
+            py: { xs: 5, md: 9 },
+            px: { xs: 2.5, md: 6 },
+            pl: { md: 8 },
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            maxWidth: { md: 560 }
+          }}
+        >
           <Typography
             sx={{
               fontFamily: "var(--font-forum), serif",
-              fontSize: { xs: 28, md: 38 },
-              color: "#1f2f52",
+              fontSize: { xs: 26, md: 36 },
+              color: "#031942",
               fontWeight: 500,
-              letterSpacing: "0.04em",
+              letterSpacing: "0.06em",
               textTransform: "uppercase",
               mb: 2,
-              lineHeight: 1.15
+              lineHeight: 1.2
             }}
           >
             Give yourself this pause.
           </Typography>
-          <Typography sx={{ color: "#5a5a5a", fontSize: { xs: 15, md: 16 }, lineHeight: 1.75, maxWidth: 520, mb: 3 }}>
-            Come experience a space of meditation, silence, peace, and bliss with Guru Maa Shubha Didi. Entry is free, but the experience can stay
-            with you for a lifetime.
+          <Typography sx={{ fontFamily: "var(--font-inter), sans-serif", color: "#3d3d3d", fontSize: { xs: 15, md: 16 }, lineHeight: 1.75, mb: 3 }}>
+            Come experience a space of meditation, wisdom, peace, and bliss with Guru Maa Shubha Didi. Entry is free—and this experience can stay with
+            you for a lifetime.
           </Typography>
           <Button
             component={Link}
@@ -364,37 +375,52 @@ export default function DivineDayPage() {
             sx={{
               alignSelf: "flex-start",
               borderRadius: 999,
-              px: 3.5,
-              py: 1.25,
+              px: 4,
+              py: 1.35,
               textTransform: "none",
               fontWeight: 700,
-              bgcolor: "#f29985",
+              fontSize: "1rem",
+              bgcolor: "#f4a48b",
               color: "#fff",
               boxShadow: "none",
-              "&:hover": { bgcolor: "#e08874", boxShadow: "none" }
+              "&:hover": { bgcolor: "#e9967b", boxShadow: "none" }
             }}
           >
             Register Now
           </Button>
-          <Stack direction="row" spacing={3} sx={{ mt: 4, color: "#e5c090" }}>
-            <LandscapeOutlinedIcon sx={{ fontSize: 32 }} />
-            <FlightOutlinedIcon sx={{ fontSize: 32 }} />
-            <WavesOutlinedIcon sx={{ fontSize: 32 }} />
+          <Stack direction="row" spacing={3.5} sx={{ mt: 4, color: "#e9967b" }}>
+            <LandscapeOutlinedIcon sx={{ fontSize: 34 }} />
+            <FlightOutlinedIcon sx={{ fontSize: 34 }} />
+            <WavesOutlinedIcon sx={{ fontSize: 34 }} />
           </Stack>
         </Box>
         <Box
           sx={{
             position: "relative",
-            minHeight: { xs: 280, md: "auto" },
+            minHeight: { xs: 300, sm: 340, md: "auto" },
             order: { xs: -1, md: 0 }
           }}
         >
+          {/* Peach rim: slightly larger clipped layer behind the photo */}
+          <Box
+            aria-hidden
+            sx={{
+              display: { xs: "none", md: "block" },
+              position: "absolute",
+              inset: -5,
+              right: -2,
+              clipPath: "ellipse(91% 117% at 100% 50%)",
+              bgcolor: "#f4a48b",
+              zIndex: 0
+            }}
+          />
           <Box
             sx={{
               position: "absolute",
               inset: 0,
+              zIndex: 1,
               clipPath: { xs: "none", md: "ellipse(90% 115% at 100% 50%)" },
-              borderRadius: { xs: 0, md: 0 }
+              borderRadius: { xs: 0, sm: 0 }
             }}
           >
             <Image src={IMG.givePause} alt="Meditation during Divine Day" fill sizes="(max-width: 900px) 100vw, 58vw" style={{ objectFit: "cover" }} />
@@ -589,8 +615,17 @@ export default function DivineDayPage() {
               <Typography sx={{ color: "#ffc19a", fontWeight: 700, fontSize: 14 }}>Entry: FREE</Typography>
               <Typography sx={{ color: "rgba(255,255,255,0.7)", fontSize: 12, mt: 0.5 }}>Entry by invite — register to receive details</Typography>
             </Box>
-            <Box sx={{ flex: { md: 1 }, minWidth: { xs: "100%", md: 200 }, textAlign: { xs: "center", md: "right" } }}>
-              <Typography sx={{ color: "rgba(255,255,255,0.85)", fontSize: { xs: 11, md: 12 }, lineHeight: 1.5 }}>
+            <Box sx={{ flex: { md: 1 }, minWidth: 0, width: { xs: "100%", md: "auto" }, textAlign: { xs: "center", md: "right" } }}>
+              <Typography
+                sx={{
+                  color: "rgba(255,255,255,0.85)",
+                  fontSize: { xs: 11, md: 12 },
+                  lineHeight: 1.5,
+                  wordBreak: "break-word",
+                  overflowWrap: "break-word",
+                  px: { xs: 0.5, md: 0 }
+                }}
+              >
                 Sir Mutha Venkatasubba Rao Concert Hall, Lady Andal School campus, Chetpet, Chennai
               </Typography>
             </Box>

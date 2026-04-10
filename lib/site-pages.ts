@@ -7,6 +7,7 @@ export type SiteRoute =
   | "marriage-counselling"
   | "family-counselling"
   | "meditation-program"
+  | "isht-gold"
   | "spiritual-retreats"
   | "wisdom-videos"
   | "wisdom-audios"
@@ -209,6 +210,25 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
       { title: "Resilience Building", description: "Build practical coping and emotional regulation strategies." }
     ]
   },
+  "isht-gold": {
+    route: "isht-gold",
+    pageTitle: "ISHT Gold Membership",
+    hero: {
+      eyebrow: "Membership",
+      title: "ISHT Gold",
+      description: "Yearly access to courses, live sessions, and a global community of seekers.",
+      image: "/images/Home Page Photos/IISHT GOLD Membership BG.webp",
+      primaryCta: "Register now",
+      secondaryCta: "Contact us"
+    },
+    sectionTitle: "Member Benefits",
+    sectionDescription: "Courses, retreats, workshops, and resources in one membership journey.",
+    highlights: [
+      { title: "All courses", description: "Structured learning paths for steady inner growth." },
+      { title: "Live touchpoints", description: "Webinars and workshops reserved for members." },
+      { title: "Community", description: "Practice alongside thousands of sincere seekers." }
+    ]
+  },
   "meditation-program": {
     route: "meditation-program",
     pageTitle: "Meditation Program",
@@ -394,6 +414,7 @@ export const routeFromSlug = (slug?: string): SiteRoute | null => {
     "marriage-counselling",
     "family-counselling",
     "meditation-program",
+    "isht-gold",
     "spiritual-retreats",
     "wisdom-videos",
     "wisdom-audios",

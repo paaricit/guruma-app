@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Forum, Inter, Montserrat, Poppins } from "next/font/google";
 import MuiProvider from "@/components/providers/mui-provider";
 import { APP_NAME } from "@/lib/design-system";
@@ -27,6 +27,12 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   weight: ["600"]
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#ffffff"
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://gurumaa.app"),

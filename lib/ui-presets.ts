@@ -15,13 +15,14 @@ export const uiPresets: Record<string, SxProps<Theme>> = {
   },
   statsGrid: {
     display: "grid",
-    gridTemplateColumns: { xs: "1fr", md: "repeat(4, minmax(0, 1fr))" },
+    gridTemplateColumns: { xs: "repeat(2, minmax(0, 1fr))", sm: "repeat(2, minmax(0, 1fr))", md: "repeat(4, minmax(0, 1fr))" },
     gap: { xs: 2.5, md: 3.5 }
   },
   footerGrid: {
     display: "grid",
-    gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+    gridTemplateColumns: { xs: "minmax(0, 1fr)", md: "repeat(2, minmax(0, 1fr))" },
     gap: { xs: 4, md: 7 },
-    alignItems: "start"
+    alignItems: "start",
+    width: "100%"
   }
 };

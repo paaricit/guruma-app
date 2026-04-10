@@ -38,19 +38,19 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
         bgcolor: "transparent"
       }}
     >
-      <Toolbar sx={{ minHeight: { xs: 72, md: 90 }, px: { xs: 2, md: 3 } }}>
+      <Toolbar sx={{ minHeight: { xs: 72, md: 90 }, px: { xs: 1.5, sm: 2, md: 3 }, maxWidth: "100vw", boxSizing: "border-box" }}>
         <Stack
           direction="column"
           component={Link}
           href="/"
           spacing={1}
           alignItems="center"
-          sx={{ textDecoration: "none", mr: 2 }}
+          sx={{ textDecoration: "none", mr: { xs: 1, md: 2 }, flexShrink: 1, minWidth: 0, maxWidth: { xs: "calc(100vw - 120px)", sm: "none" } }}
         >
-          <Box sx={{ position: "relative", width: { xs: 36, md: 48 }, height: { xs: 36, md: 48 } }}>
+          <Box sx={{ position: "relative", width: { xs: 34, md: 48 }, height: { xs: 34, md: 48 }, flexShrink: 0 }}>
             <Image alt="Guru Maa logo" fill src="/images/logo.svg" style={{ objectFit: "contain" }} />
           </Box>
-          <Box sx={{ position: "relative", width: { xs: 130, md: 180 }, height: { xs: 22, md: 30 } }}>
+          <Box sx={{ position: "relative", width: { xs: "min(120px, 32vw)", sm: 130, md: 180 }, height: { xs: 20, md: 30 }, flexShrink: 0 }}>
             <Image alt="Guru Maa Shubha Didi" fill src="/images/logo-desc.svg" style={{ objectFit: "contain" }} />
           </Box>
         </Stack>
@@ -123,10 +123,12 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
         onClose={handleCloseMobileMenu}
         PaperProps={{
           sx: {
-            width: 280,
+            width: { xs: "min(300px, calc(100vw - 32px))", sm: 300 },
+            maxWidth: "100vw",
             bgcolor: "rgba(2, 20, 51, 0.96)",
             color: "#fff",
-            p: 2
+            p: 2,
+            boxSizing: "border-box"
           }
         }}
       >
