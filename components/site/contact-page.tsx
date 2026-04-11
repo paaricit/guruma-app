@@ -3,11 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
-import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import TelegramIcon from "@mui/icons-material/Telegram";
-import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import {
   Accordion,
   AccordionDetails,
@@ -19,7 +14,6 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import SharedFooter from "@/components/site/shared-footer";
 import SharedHeader from "@/components/site/shared-header";
 import { uiPresets } from "@/lib/ui-presets";
 
@@ -39,22 +33,22 @@ const communityCards = [
   {
     title: "WhatsApp Group",
     body: "Join our daily wisdom community.",
-    Icon: ChatBubbleOutlineRoundedIcon,
+    imgSrc: "/images/contact/whatsup.png",
     href: "https://wa.me/"
   },
   {
     title: "Telegram Channel",
     body: "Receive spiritual insights.",
-    Icon: TelegramIcon,
+    imgSrc: "/images/contact/telegram.png",
     href: "https://t.me/"
   },
   {
     title: "Email Newsletter",
     body: "Monthly spiritual teachings.",
-    Icon: EmailOutlinedIcon,
+    imgSrc: "/images/contact/email.png",
     href: "/contact"
   }
-] as const;
+];
 
 const fieldSx = {
   "& .MuiInput-underline:before": { borderColor: "rgba(255,255,255,0.5)" },
@@ -72,8 +66,8 @@ export default function ContactPage() {
       <Box
         sx={{
           position: "relative",
-          pt: { xs: 11, md: 12 },
-          pb: { xs: 6, md: 8 },
+          pt: { xs: 13, md: 16 },
+          pb: { xs: 10, md: 14 },
           px: { xs: 2, md: 3 },
           backgroundImage: `linear-gradient(165deg, rgba(3,15,40,0.94) 0%, rgba(5,22,48,0.9) 55%, rgba(8,28,58,0.92) 100%), url('${heroBg}')`,
           backgroundSize: "cover",
@@ -105,69 +99,89 @@ export default function ContactPage() {
               <Typography sx={{ fontFamily: "var(--font-forum), serif", color: "#fff", fontSize: { xs: 36, md: 48 }, fontWeight: 500, mb: 3 }}>
                 Contact Us
               </Typography>
-              <Stack component="form" spacing={2.5} sx={{ maxWidth: 480 }} noValidate>
-                <TextField label="Full Name" variant="standard" fullWidth sx={fieldSx} />
-                <TextField label="E-mail" variant="standard" type="email" fullWidth sx={fieldSx} />
-                <TextField label="Phone / WhatsApp Number" variant="standard" fullWidth sx={fieldSx} />
-                <TextField label="Message" variant="standard" fullWidth multiline minRows={3} sx={fieldSx} />
-                <Button
-                  type="submit"
-                  variant="contained"
-                  sx={{
-                    ...uiPresets.ctaButton,
-                    alignSelf: "flex-start",
-                    bgcolor: "#fff",
-                    color: "#031942",
-                    fontWeight: 700,
-                    px: 4,
-                    py: 1.25,
-                    mt: 1,
-                    "&:hover": { bgcolor: "rgba(255,255,255,0.92)" }
-                  }}
-                >
-                  Contact Us
-                </Button>
-              </Stack>
+              <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr auto" }, gap: { xs: 4, sm: 5 }, alignItems: "start" }}>
+                <Stack component="form" spacing={2.5} noValidate>
+                  <TextField label="Full Name" variant="standard" fullWidth sx={fieldSx} />
+                  <TextField label="E-mail" variant="standard" type="email" fullWidth sx={fieldSx} />
+                  <TextField label="Phone / WhatsApp Number" variant="standard" fullWidth sx={fieldSx} />
+                  <TextField label="Message" variant="standard" fullWidth multiline minRows={3} sx={fieldSx} />
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      ...uiPresets.ctaButton,
+                      alignSelf: "flex-start",
+                      bgcolor: "#fff",
+                      color: "#031942",
+                      fontWeight: 700,
+                      px: 4,
+                      py: 1.25,
+                      mt: 1,
+                      "&:hover": { bgcolor: "rgba(255,255,255,0.92)" }
+                    }}
+                  >
+                    Contact Us
+                  </Button>
+                </Stack>
 
-              <Stack direction={{ xs: "column", sm: "row" }} spacing={4} sx={{ mt: 5, flexWrap: "wrap" }} alignItems={{ sm: "flex-start" }} justifyContent="space-between">
-                <Box>
-                  <Typography sx={{ color: "rgba(255,255,255,0.7)", fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", mb: 1 }}>Contact</Typography>
-                  <Typography sx={{ color: "#fff", fontWeight: 600, fontSize: 16 }}>+91-9123-456-789</Typography>
-                  <Typography sx={{ color: "#fff", fontSize: 15, mt: 0.5 }}>info@iishtgold.com</Typography>
-                  <Typography sx={{ color: "rgba(255,255,255,0.7)", fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", mt: 2, mb: 0.5 }}>Based in</Typography>
-                  <Typography sx={{ color: "rgba(255,255,255,0.9)", fontSize: 14, maxWidth: 280 }}>
+                <Box sx={{ minWidth: { sm: 200 }, mt: { xs: 0, sm: 6 } }}>
+                  <Typography sx={{ color: "rgba(255,255,255,0.7)", fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", mb: 1.5 }}>Contact</Typography>
+                  <Typography sx={{ color: "#fff", fontWeight: 600, fontSize: 16, mb: 1 }}>+91-9123-456-789</Typography>
+                  <Typography sx={{ color: "#fff", fontSize: 15, mb: 2 }}>info@iishtgold.com</Typography>
+                  <Typography sx={{ color: "rgba(255,255,255,0.7)", fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", mb: 0.75 }}>Based in</Typography>
+                  <Typography sx={{ color: "rgba(255,255,255,0.9)", fontSize: 14, maxWidth: 220, mb: 3 }}>
                     4th floor, Abhinav centre, Chamiers Road, Chennai, Tamil Nadu
                   </Typography>
+                  <Stack direction="row" spacing={1.5}>
+                    <Box
+                      component={Link}
+                      href="#"
+                      aria-label="Facebook"
+                      sx={{ width: 44, height: 44, borderRadius: "50%", bgcolor: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}
+                    >
+                      <Image src="/images/contact/Facebook - Negative.png" alt="Facebook" width={24} height={24} style={{ objectFit: "contain" }} />
+                    </Box>
+                    <Box
+                      component={Link}
+                      href="#"
+                      aria-label="Instagram"
+                      sx={{ width: 44, height: 44, borderRadius: "50%", bgcolor: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}
+                    >
+                      <Image src="/images/contact/Instagram - Negative.png" alt="Instagram" width={24} height={24} style={{ objectFit: "contain" }} />
+                    </Box>
+                    <Box
+                      component={Link}
+                      href="#"
+                      aria-label="Twitter"
+                      sx={{ width: 44, height: 44, borderRadius: "50%", bgcolor: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}
+                    >
+                      <Image src="/images/contact/Twitter - Negative.png" alt="Twitter" width={24} height={24} style={{ objectFit: "contain" }} />
+                    </Box>
+                  </Stack>
                 </Box>
-                <Stack direction="row" spacing={1.5} sx={{ alignSelf: { xs: "flex-start", sm: "flex-end" } }}>
-                  <Box
-                    component={Link}
-                    href="#"
-                    aria-label="Facebook"
-                    sx={{ width: 44, height: 44, borderRadius: "50%", bgcolor: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff" }}
-                  >
-                    <FacebookRoundedIcon />
-                  </Box>
-                  <Box
-                    component={Link}
-                    href="#"
-                    aria-label="Instagram"
-                    sx={{ width: 44, height: 44, borderRadius: "50%", bgcolor: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff" }}
-                  >
-                    <InstagramIcon />
-                  </Box>
-                </Stack>
-              </Stack>
+              </Box>
             </Box>
           </Box>
         </Container>
       </Box>
 
-      <Box sx={{ bgcolor: "#d8eef4", pt: { xs: 1, md: 0 } }}>
-        <Box sx={{ height: { xs: 36, md: 48 }, bgcolor: "#0a1628", borderBottomLeftRadius: "50% 100%", borderBottomRightRadius: "50% 100%" }} />
-      </Box>
-
-      <Box sx={{ bgcolor: "#d8eef4", py: { xs: 7, md: 9 }, px: { xs: 2, md: 3 } }}>
+      <Box sx={{ bgcolor: "#d8eef4", position: "relative", pt: { xs: 7, md: 9 }, px: { xs: 2, md: 3 } }}>
+        <Box
+          aria-hidden
+          sx={{
+            position: "absolute",
+            left: 0,
+            top: -87,
+            width: "100%",
+            height: { xs: 200, md: 260 },
+            backgroundImage: "url('/contact/contact-curve-divider.png')",
+            backgroundSize: "100% auto",
+            backgroundPosition: "center top",
+            backgroundRepeat: "no-repeat",
+            pointerEvents: "none",
+            zIndex: 2
+          }}
+        />
         <Container maxWidth="lg">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", color: "#031942", fontSize: { xs: 28, md: 36 }, fontWeight: 600, textAlign: "center" }}>
             Join the Community
@@ -178,7 +192,7 @@ export default function ContactPage() {
             <Typography sx={{ fontSize: 10 }}>◇</Typography>
           </Stack>
           <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" }, gap: 2.5, mt: 2 }}>
-            {communityCards.map(({ title, body, Icon, href }) => (
+            {communityCards.map(({ title, body, imgSrc, href }) => (
               <Box
                 key={title}
                 component={Link}
@@ -195,21 +209,8 @@ export default function ContactPage() {
                   "&:hover": { transform: "translateY(-4px)" }
                 }}
               >
-                <Box
-                  sx={{
-                    width: 56,
-                    height: 56,
-                    borderRadius: "50%",
-                    bgcolor: "#e8907d",
-                    color: "#fff",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    mx: "auto",
-                    mb: 2
-                  }}
-                >
-                  <Icon sx={{ fontSize: 28 }} />
+                <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+                  <Image src={imgSrc} alt={title} width={64} height={64} style={{ objectFit: "contain" }} />
                 </Box>
                 <Typography sx={{ fontWeight: 700, color: "#031942", fontSize: "1.05rem", mb: 0.75 }}>{title}</Typography>
                 <Typography sx={{ color: "#555", fontSize: 14 }}>{body}</Typography>
@@ -219,7 +220,7 @@ export default function ContactPage() {
         </Container>
       </Box>
 
-      <Box sx={{ bgcolor: "#d8eef4", pb: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
+      <Box sx={{ bgcolor: "#d8eef4", pt: { xs: "48px", md: "64px" }, pb: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="md">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", color: "#031942", fontSize: { xs: 26, md: 32 }, fontWeight: 600, textAlign: "center" }}>
             Frequently Asked Questions
@@ -231,26 +232,28 @@ export default function ContactPage() {
               defaultExpanded={i === 0}
               disableGutters
               sx={{
-                mb: 1.5,
-                borderRadius: "12px !important",
+                mb: 2,
+                borderRadius: "14px !important",
                 overflow: "hidden",
                 border: "1px solid rgba(0,0,0,0.08)",
                 bgcolor: "#fff",
                 "&:before": { display: "none" }
               }}
             >
-              <AccordionSummary expandIcon={<ExpandMoreRoundedIcon sx={{ color: "#e8907d" }} />}>
-                <Typography sx={{ fontWeight: 600, color: "#1f2f52" }}>{item.q}</Typography>
+              <AccordionSummary
+                expandIcon={<ExpandMoreRoundedIcon sx={{ color: "#e8907d", fontSize: 28 }} />}
+                sx={{ py: 1.5, px: 3 }}
+              >
+                <Typography sx={{ fontWeight: 600, color: "#1f2f52", fontSize: { xs: 15, md: 17 } }}>{item.q}</Typography>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography sx={{ color: "#555", lineHeight: 1.65 }}>{item.a}</Typography>
+              <AccordionDetails sx={{ px: 3, pb: 2.5 }}>
+                <Typography sx={{ color: "#555", lineHeight: 1.75, fontSize: { xs: 14, md: 16 } }}>{item.a}</Typography>
               </AccordionDetails>
             </Accordion>
           ))}
         </Container>
       </Box>
 
-      <SharedFooter />
     </Box>
   );
 }
