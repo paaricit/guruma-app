@@ -24,6 +24,8 @@ export default async function DynamicPage({ params }: DynamicPageProps) {
     notFound();
   }
 
+  // Dynamic routes: section markers live in each page component’s JSX.
+
   const fullPageImageRoutes: Partial<Record<typeof route, string>> = {
     events: "/images/EVENTS (PAST & UPCOMING) Photos/EVENTS (PAST & UPCOMING) Banner.webp",
     delhi: "/images/Home Page Photos/Home Page Banner.webp",

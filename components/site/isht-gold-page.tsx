@@ -96,8 +96,10 @@ const faqItems: { q: string; a: string }[] = [
 export default function IshtGoldPage() {
   return (
     <Box sx={{ bgcolor: navyDark, overflowX: "hidden" }}>
+      {/* --- Section: Site header --- */}
       <SharedHeader />
 
+      {/* --- Section: Hero --- */}
       <Box
         sx={{
           position: "relative",
@@ -162,6 +164,7 @@ export default function IshtGoldPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Membership value --- */}
       <Box sx={{ bgcolor: "#eceae4", pt: { xs: 8, md: 10 }, pb: { xs: 8, md: 11 }, px: { xs: 2, md: 3 }, position: "relative", overflow: "hidden" }}>
         <Box
           aria-hidden
@@ -250,6 +253,7 @@ export default function IshtGoldPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Global stats --- */}
       <Box
         sx={{
           py: { xs: 7, md: 9 },
@@ -271,6 +275,7 @@ export default function IshtGoldPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Benefits --- */}
       <Box sx={{ bgcolor: "#f5f3ee", py: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", color: navy, fontSize: { xs: 28, md: 36 }, fontWeight: 600, textAlign: "center" }}>
@@ -294,6 +299,7 @@ export default function IshtGoldPage() {
         </Container>
       </Box>
 
+      {/* --- Section: What you will learn --- */}
       <Box sx={{ bgcolor: "#eceae4", py: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: { xs: 3, md: 5 }, alignItems: "center" }}>
@@ -326,6 +332,7 @@ export default function IshtGoldPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Pricing --- */}
       <Box
         sx={{
           py: { xs: 8, md: 11 },
@@ -396,6 +403,7 @@ export default function IshtGoldPage() {
         </Container>
       </Box>
 
+      {/* --- Section: FAQ --- */}
       <Box sx={{ bgcolor: "#d8eef4", py: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="md">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", color: navy, fontSize: { xs: 26, md: 32 }, fontWeight: 600, textAlign: "center" }}>
@@ -427,10 +435,12 @@ export default function IshtGoldPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Curve divider --- */}
       <Box sx={{ bgcolor: navyDark, height: { xs: 28, md: 40 } }}>
         <Box sx={{ height: "100%", bgcolor: "#b8dce8", borderTopLeftRadius: "50% 100%", borderTopRightRadius: "50% 100%" }} />
       </Box>
 
+      {/* --- Section: Site footer --- */}
       <SharedFooter />
     </Box>
   );

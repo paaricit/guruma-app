@@ -21,8 +21,10 @@ type SitePageProps = {
 export default function SitePage({ content }: SitePageProps) {
   return (
     <Box sx={{ bgcolor: "background.default", minHeight: "100vh", width: "100%", maxWidth: "100%", overflowX: "hidden" }}>
+      {/* --- Section: Site header --- */}
       <SharedHeader />
 
+      {/* --- Section: Hero --- */}
       <Box
         sx={{
           position: "relative",
@@ -66,6 +68,7 @@ export default function SitePage({ content }: SitePageProps) {
         </Container>
       </Box>
 
+      {/* --- Section: Content highlights --- */}
       <Container maxWidth="lg" sx={{ ...uiPresets.sectionContainer, pb: { xs: 9, md: 12 }, px: { xs: 2, sm: 3 } }}>
         <Stack spacing={1.5} mb={4}>
           <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "3.1rem" } }}>

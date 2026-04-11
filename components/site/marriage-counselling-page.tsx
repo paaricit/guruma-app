@@ -95,9 +95,10 @@ export default function MarriageCounsellingPage() {
 
   return (
     <Box sx={{ bgcolor: "#fff", overflowX: "hidden" }}>
+      {/* --- Section: Site header --- */}
       <SharedHeader />
 
-      {/* Hero */}
+      {/* --- Section: Hero --- */}
       <Box
         sx={{
           position: "relative",
@@ -188,7 +189,7 @@ export default function MarriageCounsellingPage() {
         </Container>
       </Box>
 
-      {/* Philosophy — forge better relationships */}
+      {/* --- Section: Philosophy — forge better relationships --- */}
       <Box sx={{ position: "relative", bgcolor: "#faf8f5", py: { xs: 7, md: 10 }, px: { xs: 2, md: 3 } }}>
         <LotusWatermark />
         <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
@@ -256,7 +257,7 @@ export default function MarriageCounsellingPage() {
         </Container>
       </Box>
 
-      {/* What to expect + Is this for you */}
+      {/* --- Section: What to expect + Is this for you --- */}
       <Box
         sx={{
           position: "relative",
@@ -347,7 +348,7 @@ export default function MarriageCounsellingPage() {
         </Container>
       </Box>
 
-      {/* How to Enrol */}
+      {/* --- Section: How to Enrol --- */}
       <Box
         sx={{
           position: "relative",
@@ -412,7 +413,7 @@ export default function MarriageCounsellingPage() {
         </Container>
       </Box>
 
-      {/* Experiences from Seekers */}
+      {/* --- Section: Experiences from Seekers --- */}
       <Box sx={{ bgcolor: navyDeep, py: { xs: 7, md: 9 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Typography
@@ -480,7 +481,7 @@ export default function MarriageCounsellingPage() {
         </Container>
       </Box>
 
-      {/* Wave into footer */}
+      {/* --- Section: Wave into footer --- */}
       <Box sx={{ bgcolor: navyDeep, height: { xs: 28, md: 40 } }}>
         <Box
           sx={{
@@ -492,6 +493,7 @@ export default function MarriageCounsellingPage() {
         />
       </Box>
 
+      {/* --- Section: Site footer --- */}
       <SharedFooter />
     </Box>
   );

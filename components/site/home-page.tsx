@@ -1,16 +1,28 @@
 "use client";
 
 import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
+import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import {
+  Alert,
   Box,
   Button,
   Card,
   Container,
+  Dialog,
+  DialogContent,
+  IconButton,
   Stack,
-  Typography
+  TextField,
+  Typography,
+  useMediaQuery,
+  useTheme
 } from "@mui/material";
 import SharedFooter from "@/components/site/shared-footer";
 import SharedHeader from "@/components/site/shared-header";
+import { SaptSadhanaStackCarousel } from "@/components/site/sapt-sadhana-stack-carousel";
 import { uiPresets } from "@/lib/ui-presets";
 
 const stats = [
@@ -18,6 +30,22 @@ const stats = [
   { value: "5L+", label: "Beautiful Lives Touched" },
   { value: "50+", label: "Countries, our Yogis Divine Abode" },
   { value: "10,000+", label: "Transformative Discourses & Workshops" }
+];
+
+const callbackFieldSx = {
+  "& .MuiInput-underline:before": { borderColor: "rgba(255,255,255,0.5)" },
+  "& .MuiInput-underline:hover:not(.Mui-disabled):before": { borderColor: "rgba(255,255,255,0.8)" },
+  "& .MuiInput-underline:after": { borderColor: "#fff" },
+  "& .MuiInputLabel-root": { color: "rgba(255,255,255,0.85)" },
+  "& .MuiInputBase-input": { color: "#fff" },
+  "& .MuiInputBase-input::placeholder": { color: "rgba(255,255,255,0.55)", opacity: 1 }
+};
+
+const callbackFormFields = [
+  { key: "name", label: "NAME", hint: "Enter your name", type: "text" as const },
+  { key: "phone", label: "PHONE", hint: "Enter your phone number", type: "tel" as const },
+  { key: "email", label: "EMAIL", hint: "Enter your Email ID", type: "email" as const },
+  { key: "message", label: "MESSAGE", hint: "Give us a message", type: "text" as const }
 ];
 
 const programRows = [
@@ -68,17 +96,52 @@ const programRows = [
   }
 ];
 
+const wisdomStarIcon = "/images/Home Page Photos/Star 6.png";
+
 const wisdomCards = [
-  { title: "The art of letting go", badge: "The Most Rated", image: "/images/Home Page Photos/The art of letting go.webp" },
-  { title: "Morning Meditation for Peace", badge: "The Most Watched", image: "/images/Home Page Photos/Morning Meditation for Peace.webp" },
-  { title: "7 Steps to Inner Transformation", badge: "The Most Saved", image: "/images/Home Page Photos/7 Steps to Inner Transformation.webp" }
+  {
+    title: "The art of letting go",
+    badge: "The Most Rated",
+    image: "/images/Home Page Photos/The art of letting go.webp",
+    icon: "/images/Home Page Photos/wisdom_icon1.png"
+  },
+  {
+    title: "Morning Meditation for Peace",
+    badge: "The Most Rated",
+    image: "/images/Home Page Photos/Morning Meditation for Peace.webp",
+    icon: "/images/Home Page Photos/wisdom_icon2.png"
+  },
+  {
+    title: "7 Steps to Inner Transformation",
+    badge: "The Most Rated",
+    image: "/images/Home Page Photos/7 Steps to Inner Transformation.webp",
+    icon: "/images/Home Page Photos/wisdom_icon3.png"
+  }
 ];
 
+/** Card opens in-app dialog; `embedSrc` matches YouTube embed iframe URLs (see https://www.youtube.com/watch?v=… ). */
 const seekerVideos = [
-  { name: "Priya Sharma", image: "/images/Home Page Photos/Home page second section Video thumbnail.webp" },
-  { name: "Karan Paul", image: "/images/Home Page Photos/Morning Meditation for Peace.webp" },
-  { name: "Priya Das", image: "/images/Home Page Photos/7 Steps to Inner Transformation.webp" }
-];
+  {
+    name: "Priya Sharma",
+    image: "/images/Home Page Photos/Home page second section Video thumbnail.webp",
+    embedSrc: "https://www.youtube.com/embed/GErQ_J7GUEM?autoplay=1"
+  },
+  {
+    name: "Karan Paul",
+    image: "/images/Home Page Photos/Morning Meditation for Peace.webp",
+    embedSrc: "https://www.youtube.com/embed/JBKC19rmG1M?autoplay=1"
+  },
+  {
+    name: "Priya Das",
+    image: "/images/Home Page Photos/7 Steps to Inner Transformation.webp",
+    embedSrc: "https://www.youtube.com/embed/VdGV5qiFX44?autoplay=1"
+  },
+  {
+    name: "Neha Verma",
+    image: "/images/Home Page Photos/The art of letting go.webp",
+    embedSrc: "https://www.youtube.com/embed/GIuMzYxKjX8?si=6JYuIxPQodEE3yuz&autoplay=1"
+  }
+] as const;
 
 const testimonials = [
   {
@@ -98,11 +161,96 @@ const testimonials = [
   }
 ];
 
+const saptSadhanaCarouselSlides = [
+  "/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (1).webp",
+  "/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (2).webp",
+  "/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (3).webp",
+  "/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (4).webp"
+] as const;
+
+const saptCarouselArrowLeft = "/images/Home Page Photos/Arrow Left-poiint.png";
+const saptCarouselArrowRight = "/images/Home Page Photos/Arrow Right-point.png";
+
+type CallbackFormValues = Record<(typeof callbackFormFields)[number]["key"], string>;
+
+const initialCallbackValues: CallbackFormValues = {
+  name: "",
+  phone: "",
+  email: "",
+  message: ""
+};
+
 export default function HomePage() {
+  const theme = useTheme();
+  const seekerMdUp = useMediaQuery(theme.breakpoints.up("md"), { defaultMatches: false });
+  const seekerVisibleCount = seekerMdUp ? 3 : 1;
+  const seekerMaxSlide = Math.max(0, seekerVideos.length - seekerVisibleCount);
+
+  const [callbackValues, setCallbackValues] = useState<CallbackFormValues>(initialCallbackValues);
+  const [callbackStatus, setCallbackStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [callbackError, setCallbackError] = useState("");
+  const [seekerDialogOpen, setSeekerDialogOpen] = useState(false);
+  const [activeSeekerEmbedSrc, setActiveSeekerEmbedSrc] = useState<string | null>(null);
+  const [seekerSlideIndex, setSeekerSlideIndex] = useState(0);
+  const [saptSlideIndex, setSaptSlideIndex] = useState(0);
+  const saptSlideCount = saptSadhanaCarouselSlides.length;
+
+  const saptOnStep = useCallback((delta: 1 | -1) => {
+    setSaptSlideIndex((i) =>
+      delta === 1 ? (i + 1) % saptSlideCount : (i - 1 + saptSlideCount) % saptSlideCount
+    );
+  }, [saptSlideCount]);
+
+  useEffect(() => {
+    setSeekerSlideIndex((i) => Math.min(i, seekerMaxSlide));
+  }, [seekerMaxSlide]);
+
+  function openSeekerVideo(embedSrc: string) {
+    setActiveSeekerEmbedSrc(embedSrc);
+    setSeekerDialogOpen(true);
+  }
+
+  function closeSeekerVideo() {
+    setSeekerDialogOpen(false);
+    setActiveSeekerEmbedSrc(null);
+  }
+
+  async function handleCallbackSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setCallbackStatus("loading");
+    setCallbackError("");
+    try {
+      const res = await fetch("/api/callback-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(callbackValues)
+      });
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+      setCallbackStatus("success");
+      setCallbackValues(initialCallbackValues);
+    } catch (err) {
+      setCallbackStatus("error");
+      setCallbackError(err instanceof Error ? err.message : "Request failed");
+    }
+  }
+
   return (
-    <Box sx={{ bgcolor: "transparent", overflowX: "hidden" }}>
+    <Box
+      sx={{
+        bgcolor: "transparent",
+        // `overflow-x: hidden` forces `overflow-y: auto` in CSS and clips children that extend
+        // upward (e.g. footer contact card). `clip` limits horizontal bleed without clipping Y.
+        overflowX: "clip",
+        overflowY: "visible"
+      }}
+    >
+      {/* --- Section: Site header --- */}
       <SharedHeader showProgramsMenu />
 
+      {/* --- Section: Hero --- */}
       <Box
         sx={{
           minHeight: { xs: 700, md: 900 },
@@ -127,7 +275,7 @@ export default function HomePage() {
             sx={{
               display: "grid",
               gridTemplateColumns: { xs: "1fr", md: "1fr 0.92fr" },
-              alignItems: "end",
+              alignItems: "center",
               minHeight: { xs: 620, md: 820 }
             }}
           >
@@ -164,7 +312,7 @@ export default function HomePage() {
                   sx={{
                     ...uiPresets.ctaButton,
                     height: 52.1,
-                    width: { xs: 260, sm: 252.9 },
+                    // width: { xs: 260, sm: 252.9 },
                     bgcolor: "#fffdfb",
                     color: "#1a305b",
                     borderRadius: "11.6px",
@@ -181,7 +329,7 @@ export default function HomePage() {
                   sx={{
                     ...uiPresets.ctaButton,
                     height: 52.1,
-                    width: { xs: 260, sm: 252.9 },
+                    // width: { xs: 260, sm: 252.9 },
                     borderColor: "rgba(255,255,255,0)",
                     color: "#fffdfb",
                     backgroundColor: "rgba(255,255,255,0.2)",
@@ -196,42 +344,61 @@ export default function HomePage() {
                 </Button>
               </Stack>
             </Box>
-            
+
           </Box>
         </Container>
+
+      </Box>
+
+      {/* --- Section: Guru Maa intro (video + roles) --- */}
+      <Box
+        sx={{
+          background: "linear-gradient(180deg, #D1F1F5 0%, #F2F2EE 50%, #FDFDF8 100%)",
+          position: "relative",
+          pt: { xs: 7, md: 9 },
+          pb: { xs: 8, md: 10 }
+        }}
+      >
         <Box
+          aria-hidden
           sx={{
             position: "absolute",
             left: 0,
             right: 0,
-            bottom: 0,
-            height: { xs: 42, md: 62 },
-            bgcolor: "#bfe0e6",
-            borderTopLeftRadius: "50% 100%",
-            borderTopRightRadius: "50% 100%"
+            top: 0,
+            transform: "translateY(-50%)",
+            width: "100%",
+            height: { xs: 72, md: 100 },
+            zIndex: 2,
+            pointerEvents: "none",
+            // mixBlendMode: "screen"
           }}
-        />
-      </Box>
-
-      <Box sx={{ bgcolor: "#c7e3e8", pt: { xs: 7, md: 9 }, pb: { xs: 8, md: 10 } }}>
-        <Container>
+        >
+          <Image
+            alt=""
+            fill
+            src="/images/Home Page Photos/curve.png"
+            style={{ objectPosition: "center center" }}
+          />
+        </Box>
+        <Container sx={{ position: "relative", zIndex: 1 }}>
           <Box
             sx={{
-              bgcolor: "#fff",
-              borderRadius: { xs: 4, md: "30px" },
+              // bgcolor: "#fff",
+              // borderRadius: { xs: 4, md: "30px" },
               p: { xs: 2.5, md: 4 },
-              boxShadow: "0 8px 22px rgba(0,0,0,0.08)",
+              // boxShadow: "0 8px 22px rgba(0,0,0,0.08)",
               display: "grid",
               gridTemplateColumns: { xs: "1fr", md: "420px 1fr" },
               gap: { xs: 3, md: 4 },
               alignItems: "center"
             }}
           >
-            <Box sx={{ position: "relative", borderRadius: "22px", overflow: "hidden", border: "4px solid rgba(255,255,255,0.9)" }}>
+            <Box sx={{ position: "relative", overflow: "hidden", }}>
               <Box sx={{ position: "relative", height: { xs: 360, md: 510 } }}>
                 <Image alt="Guru Maa session" fill src="/images/Home Page Photos/Home page second section Video thumbnail.webp" style={{ objectFit: "cover" }} />
               </Box>
-              <Box
+              {/* <Box
                 sx={{
                   position: "absolute",
                   inset: 0,
@@ -255,7 +422,7 @@ export default function HomePage() {
                 >
                   ▶
                 </Box>
-              </Box>
+              </Box> */}
             </Box>
 
             <Box>
@@ -313,6 +480,7 @@ export default function HomePage() {
         </Container>
       </Box>
 
+      {/* --- Section: Impact stats --- */}
       <Box
         sx={{
           position: "relative",
@@ -325,23 +493,12 @@ export default function HomePage() {
           sx={{
             position: "absolute",
             inset: 0,
-            backgroundImage: "linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/images/Home Page Photos/Home Page Banner.webp')",
+            backgroundImage: "linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/images/Home Page Photos/section-background.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center"
           }}
         />
-        <Box
-          sx={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: { xs: 34, md: 52 },
-            bgcolor: "#f2f1ed",
-            borderTopLeftRadius: "50% 100%",
-            borderTopRightRadius: "50% 100%"
-          }}
-        />
+
         <Container sx={{ position: "relative", zIndex: 1 }}>
           <Box
             sx={uiPresets.statsGrid}
@@ -376,40 +533,67 @@ export default function HomePage() {
         </Container>
       </Box>
 
-      <Box sx={{ bgcolor: "#f2f1ed", pt: { xs: 6, md: 8 }, pb: { xs: 8, md: 9 }, position: "relative", overflow: "hidden" }}>
-        <Container>
-          <Typography
-            sx={{
-              textAlign: "center",
-              fontFamily: "var(--font-forum), serif",
-              fontSize: { xs: 46, md: "73.943px" },
-              lineHeight: { md: "94.228px" },
-              color: "#031942"
-            }}
-          >
-            Divine Discourses Schedule
-          </Typography>
-          <Typography
-            sx={{
-              mt: 0.4,
-              textAlign: "center",
-              fontSize: { xs: 15, md: 26 },
-              letterSpacing: 2.5,
-              fontWeight: 700,
-              color: "#212121",
-              textTransform: "none"
-            }}
-          >
-            All are Welcome, Completely Free
-          </Typography>
+      {/* --- Section: Divine Discourses Schedule --- */}
+      <Box
+        sx={{
+          position: "relative",
+          zIndex: 1,
+          background: "linear-gradient(180deg, rgba(243, 242, 238, 0) 0%, #F3F2EE 14%, #FFF 100%)",
+          pb: { xs: 8, md: 9 },
+          overflow: "visible"
+        }}
+      >
+        <Box
+          aria-hidden
+          sx={{
+            position: "absolute",
+            left: 0,
+            top: -87,
+            width: "100%",
+            height: { xs: 200, md: 260 },
+            backgroundImage: "url('/images/Home Page Photos/curve-disclosure.png')",
+            backgroundSize: "100% auto",
+            backgroundPosition: "center top",
+            backgroundRepeat: "no-repeat",
+            pointerEvents: "none",
+            zIndex: 2
+          }}
+        />
+        <Container sx={{ position: "relative", zIndex: 3 }}>
+          <Box sx={{ pt: { xs: 1, md: 2 }, pb: { xs: 2, md: 3 } }}>
+            <Typography
+              sx={{
+                textAlign: "center",
+                fontFamily: "var(--font-forum), serif",
+                fontSize: { xs: 46, md: "73.943px" },
+                lineHeight: { md: "94.228px" },
+                color: "#031942"
+              }}
+            >
+              Divine Discourses Schedule
+            </Typography>
+            <Typography
+              sx={{
+                mt: 0.4,
+                textAlign: "center",
+                fontSize: { xs: 15, md: 26 },
+                letterSpacing: 2.5,
+                fontWeight: 700,
+                color: "#212121",
+                textTransform: "none"
+              }}
+            >
+              All are Welcome, Completely Free
+            </Typography>
 
-          <Stack direction="row" spacing={3} sx={{ mt: 2, justifyContent: "center", alignItems: "center" }}>
-            {["/images/Home Page Photos/icons-3.png", "/images/Home Page Photos/icons-1.png", "/images/Home Page Photos/icons-2.png"].map((src) => (
-              <Box key={src} sx={{ position: "relative", width: 46, height: 46, opacity: 0.9 }}>
-                <Image alt="" fill src={src} style={{ objectFit: "contain" }} />
-              </Box>
-            ))}
-          </Stack>
+            <Stack direction="row" spacing={3} sx={{ mt: 2, justifyContent: "center", alignItems: "center" }}>
+              {["/images/Home Page Photos/icons-1.png", "/images/Home Page Photos/icons-2.png", "/images/Home Page Photos/icons-3.png"].map((src) => (
+                <Box key={src} sx={{ position: "relative", width: 80, height: 40, opacity: 1 }}>
+                  <Image alt="" fill src={src} style={{}} />
+                </Box>
+              ))}
+            </Stack>
+          </Box>
 
           <Card
             sx={{
@@ -519,195 +703,160 @@ export default function HomePage() {
 
         </Container>
       </Box>
-      <Box
+
+      {/* --- Section: Callback request form --- */}
+      <Stack
+        component="form"
+        onSubmit={handleCallbackSubmit}
+        noValidate
+        direction={{ xs: "column", md: "row" }}
         sx={{
-          bgcolor: "#091a43",
-          backgroundImage: "linear-gradient(rgba(9,26,67,0.15), rgba(9,26,67,0.15)), url('/images/Home Page Photos/Sapt Sadhana  BG.webp')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          borderRadius: "0",
-          px: { xs: 2, md: 4 },
-          py: { xs: 2.2, md: 3 },
-          display: "grid",
-          gridTemplateColumns: {
-            xs: "minmax(0, 1fr)",
-            sm: "repeat(2, minmax(0, 1fr))",
-            md: "repeat(4, minmax(0, 1fr)) auto"
-          },
-          alignItems: "center",
-          gap: { xs: 1.8, md: 2.2 }
+          width: "100%",
+          gap: { xs: 1.8, md: 2.2 },
+          alignItems: { xs: "center", md: "stretch" }
         }}
       >
-        {[
-          { label: "NAME", hint: "Enter your name", iconSrc: "/images/Home Page Photos/Icon-profile.png" },
-          { label: "PHONE", hint: "Enter your phone number", iconSrc: "/images/Home Page Photos/icons-2.png" },
-          { label: "EMAIL", hint: "Enter your Email ID", iconSrc: "/images/Home Page Photos/icons-1.png" },
-          { label: "MESSAGE", hint: "Give us a message", iconSrc: "/images/Home Page Photos/icons-3.png" }
-        ].map((field) => (
-          <Box key={field.label} sx={{ minWidth: 0 }}>
-            <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
-              <Box sx={{ position: "relative", width: 20, height: 20, flex: "0 0 auto" }}>
-                <Image alt="" fill src={field.iconSrc} style={{ objectFit: "contain" }} />
-              </Box>
-              <Typography sx={{ color: "#fff", fontWeight: 700, fontSize: { xs: 14, md: 18 } }}>{field.label}</Typography>
-            </Stack>
-            <Typography sx={{ color: "rgba(255,255,255,0.75)", fontSize: 13 }}>{field.hint}</Typography>
-            <Box sx={{ borderBottom: "1px solid rgba(255,255,255,0.6)", mt: 0.5 }} />
+        <Box
+          sx={{
+            flex: { md: 1 },
+            width: "100%",
+            minWidth: 0,
+            alignSelf: { xs: "stretch", md: "auto" },
+            bgcolor: "#091a43",
+            backgroundImage: "linear-gradient(rgba(9,26,67,0.15), rgba(9,26,67,0.15)), url('/images/Home Page Photos/section-background.webp')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            borderRadius: 0,
+            py: { xs: 2.2, md: 3 }
+          }}
+        >
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "minmax(0, 1fr)",
+                sm: "repeat(2, minmax(0, 1fr))",
+                md: "repeat(4, minmax(0, 1fr))"
+              },
+              alignItems: "start",
+              gap: { xs: 1.8, md: 2.2 },
+              px: { xs: 2, md: 4 },
+              height: "100%"
+            }}
+          >
+            {callbackFormFields.map((field) => (
+              <TextField
+                key={field.key}
+                name={field.key}
+                variant="standard"
+                type={field.type}
+                label={field.label}
+                placeholder={field.hint}
+                value={callbackValues[field.key]}
+                onChange={(ev) =>
+                  setCallbackValues((prev) => ({
+                    ...prev,
+                    [field.key]: ev.target.value
+                  }))
+                }
+                fullWidth
+                sx={callbackFieldSx}
+                slotProps={{
+                  inputLabel: { shrink: true }
+                }}
+              />
+            ))}
           </Box>
-        ))}
-
-        <Box sx={{ justifySelf: { xs: "center", sm: "start", md: "end" }, gridColumn: { xs: "1 / -1", sm: "1 / -1", md: "auto" }, textAlign: { xs: "center", md: "left" } }}>
-          <Typography sx={{ color: "#f5f7ff", fontWeight: 700, fontSize: { xs: "clamp(1.5rem, 6vw, 2rem)", md: 52 }, lineHeight: 0.95 }}>
-            Get a
-            <br />
-            call back
-          </Typography>
         </Box>
-      </Box>
 
-      <Box sx={{ background: "linear-gradient(180deg, #f2f1ed 0%, #ffffff 52%, #d1f1f5 100%)", pb: { xs: 6, md: 8 }, pt: { xs: 2.2, md: 8 } }}>
-        <Container>
+        <Box
+          sx={{
+            flexShrink: 0,
+            textAlign: { xs: "center", md: "left" },
+            alignSelf: { xs: "center", md: "center" },
+            px: { xs: 2, md: 4 },
+            py: { xs: 0, md: 3 },
+            maxWidth: { xs: 360, md: 280 }
+          }}
+        >
+          <Button
+            type="submit"
+            disabled={callbackStatus === "loading"}
+            sx={{
+              ...uiPresets.ctaButton,
+              textTransform: "none",
+              p: 0,
+              minWidth: 0,
+              bgcolor: "transparent",
+              color: "#031942",
+              boxShadow: "none",
+              justifyContent: { xs: "center", md: "flex-start" },
+              width: "100%",
+              "&:hover": { bgcolor: "transparent", boxShadow: "none", opacity: 0.85 },
+              "&.Mui-disabled": { color: "rgba(3,25,66,0.45)" }
+            }}
+          >
+            <Typography component="span" sx={{ fontWeight: 700, fontSize: { xs: "clamp(1.5rem, 6vw, 2rem)", md: 52 }, lineHeight: 0.95, textAlign: { xs: "center", md: "left" } }}>
+              Get a
+              <br />
+              call back
+            </Typography>
+          </Button>
+          {callbackStatus === "success" ? (
+            <Alert severity="success" sx={{ mt: 1.5, textAlign: "left" }}>
+              Thank you — we will reach out soon.
+            </Alert>
+          ) : null}
+          {callbackStatus === "error" ? (
+            <Alert severity="error" sx={{ mt: 1.5, textAlign: "left" }} onClose={() => setCallbackStatus("idle")}>
+              {callbackError}
+            </Alert>
+          ) : null}
+        </Box>
+      </Stack>
+
+      {/* --- Section: Programs (full-bleed cards) --- */}
+      <Box
+        sx={{
+          width: "100%",
+          maxWidth: "100%",
+          // background: "linear-gradient(180deg, #f2f1ed 0%, #ffffff 52%, #d1f1f5 100%)",
+          pb: { xs: 6, md: 8 },
+          pt: { xs: 2.2, md: 8 }
+        }}
+      >
+        <Container maxWidth={false} disableGutters>
           <Stack spacing={1.5}>
             {programRows.map((row) => (
-              row.title === "Counselling & Healing Sessions" ? (
-                <Box
-                  key={row.title}
-                  sx={{
-                    position: "relative",
-                    minHeight: { xs: 360, md: 529.54 },
-                    borderTop: "1px solid rgba(255,255,255,0.7)",
-                    borderBottom: "1px solid rgba(255,255,255,0.7)",
-                    overflow: "hidden"
-                  }}
-                >
-                  <Image alt={row.title} fill sizes="100vw" src={row.image} style={{ objectFit: "cover" }} />
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "linear-gradient(90deg, rgba(3,25,66,0.78) 0%, rgba(3,25,66,0.55) 35%, rgba(3,25,66,0.16) 68%, rgba(3,25,66,0.04) 100%)"
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      position: "relative",
-                      zIndex: 1,
-                      py: { xs: 3, md: 4 },
-                      px: { xs: 2.5, md: 4.2 },
-                      maxWidth: { xs: "100%", md: 780 },
-                      color: "#fff"
-                    }}
-                  >
-                    <Typography
-                      sx={{
-                        fontFamily: "var(--font-forum), serif",
-                        fontSize: { xs: 34, md: "55.864px" },
-                        lineHeight: 1.15,
-                        letterSpacing: { md: "-1.1173px" }
-                      }}
-                    >
-                      {row.title}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        mt: 1,
-                        fontSize: { xs: 11, md: "15.961px" },
-                        letterSpacing: { xs: 1.7, md: "2.5538px" },
-                        fontWeight: 600,
-                        textTransform: "uppercase",
-                        color: "rgba(255,255,255,0.92)"
-                      }}
-                    >
-                      {row.subtitle}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        mt: 1.6,
-                        color: "rgba(255,255,255,0.92)",
-                        fontSize: { xs: 14, md: "20.903px" },
-                        letterSpacing: { md: "-0.4181px" },
-                        lineHeight: 1.5,
-                        maxWidth: 640
-                      }}
-                    >
-                      {row.description}
-                    </Typography>
-
-                    <Stack direction="row" spacing={1.2} sx={{ mt: 2 }}>
-                      <Button
-                        variant="contained"
-                        sx={{
-                          ...uiPresets.ctaButton,
-                          height: "47.883px",
-                          px: "23.942px",
-                          fontSize: "15.961px",
-                          borderRadius: "7.981px",
-                          bgcolor: "#031942"
-                        }}
-                      >
-                        {row.primaryCta}
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        sx={{
-                          ...uiPresets.ctaButton,
-                          height: "47.883px",
-                          px: "23.942px",
-                          fontSize: "15.961px",
-                          borderRadius: "7.981px",
-                          color: "#fff",
-                          borderColor: "rgba(255,255,255,0.85)",
-                          borderWidth: "0.998px"
-                        }}
-                      >
-                        {row.secondaryCta}
-                      </Button>
-                    </Stack>
-                  </Box>
-                </Box>
-              ) : (
               <Box
                 key={row.title}
                 sx={{
-                  bgcolor: "transparent",
+                  position: "relative",
+                  minHeight: { xs: 360, md: 529.54 },
                   borderTop: "1px solid rgba(255,255,255,0.7)",
                   borderBottom: "1px solid rgba(255,255,255,0.7)",
-                  display: "grid",
-                  gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-                  overflow: "hidden",
-                  minHeight: { md: 529.54 }
+                  overflow: "hidden"
                 }}
               >
+                <Image alt={row.title} fill sizes="100vw" src={row.image} style={{ objectFit: "cover" }} />
                 <Box
                   sx={{
-                    order: { xs: 2, md: row.imageLeft ? 1 : 2 },
                     position: "relative",
-                    minHeight: { xs: 260, md: 529.54 },
-                    // borderRight: { md: row.imageLeft ? "10px solid #f4b99a" : "none" },
-                    // borderLeft: { md: row.imageLeft ? "none" : "10px solid #f4b99a" }
-                  }}
-                >
-                  <Image alt={row.title} fill sizes="(max-width: 900px) 100vw, 50vw" src={row.image} />
-                </Box>
-
-                <Box
-                  sx={{
-                    order: { xs: 1, md: row.imageLeft ? 2 : 1 },
-                    py: { xs: 3, md: 4 },
+                    zIndex: 1,
+                    py: { xs: 3, md: 8 },
                     px: { xs: 2.5, md: 4.2 },
-                    bgcolor: "transparent",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center"
+                    maxWidth: { xs: "100%", md: 780 },
+                    ...(row.imageLeft ? { ml: { md: "auto" } } : {})
                   }}
                 >
                   <Typography
                     sx={{
-                      color: "#111125",
                       fontFamily: "var(--font-forum), serif",
                       fontSize: { xs: 34, md: "55.864px" },
                       lineHeight: 1.15,
-                      letterSpacing: { md: "-1.1173px" }
+                      letterSpacing: { md: "-1.1173px" },
+                      color: "#111125"
                     }}
                   >
                     {row.title}
@@ -718,8 +867,8 @@ export default function HomePage() {
                       fontSize: { xs: 11, md: "15.961px" },
                       letterSpacing: { xs: 1.7, md: "2.5538px" },
                       fontWeight: 600,
-                      color: "#111125",
-                      textTransform: "uppercase"
+                      textTransform: "uppercase",
+                      color: "#111125"
                     }}
                   >
                     {row.subtitle}
@@ -727,7 +876,8 @@ export default function HomePage() {
                   <Typography
                     sx={{
                       mt: 1.6,
-                      color: "#5c5c6f",
+                      pt: { xs: 0.5, md: 0.75 },
+                      color: "#5C5C6F",
                       fontSize: { xs: 14, md: "20.903px" },
                       letterSpacing: { md: "-0.4181px" },
                       lineHeight: 1.5,
@@ -769,13 +919,13 @@ export default function HomePage() {
                   </Stack>
                 </Box>
               </Box>
-              )
             ))}
           </Stack>
         </Container>
       </Box>
 
-      <Box sx={{ bgcolor: "#f2f1ed", py: { xs: 7, md: 9 }, position: "relative", overflow: "hidden" }}>
+      {/* --- Section: Wisdom in Action --- */}
+      <Box sx={{ py: { xs: 7, md: 9 }, position: "relative", overflow: "hidden" }}>
         <Container>
           <Typography
             sx={{
@@ -823,6 +973,20 @@ export default function HomePage() {
                   <Image alt={card.title} fill sizes="(max-width: 900px) 100vw, 33vw" src={card.image} style={{ objectFit: "cover" }} />
                   <Box sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.2)" }} />
 
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      bottom: { xs: 20, md: 8 },
+                      right: "0%",
+                      transform: "translateX(-50%)",
+                      width: { xs: 56, md: 41 },
+                      height: { xs: 56, md: 72 },
+                      pointerEvents: "none"
+                    }}
+                  >
+                    <Image alt="" src={card.icon} fill sizes="72px" style={{ objectFit: "contain" }} />
+                  </Box>
+
                   <Stack direction="row" spacing={1} sx={{ position: "absolute", top: 25.5, left: 25.5 }}>
                     <Box
                       sx={{
@@ -839,7 +1003,9 @@ export default function HomePage() {
                       <Typography sx={{ fontFamily: "var(--font-inter), sans-serif", fontSize: "14.85px", lineHeight: 1.2, color: "#000" }}>
                         4.6
                       </Typography>
-                      <Typography sx={{ fontSize: 14, lineHeight: 1, color: "#000" }}>★</Typography>
+                      <Box sx={{ position: "relative", width: 18, height: 18, flexShrink: 0 }}>
+                        <Image alt="" src={wisdomStarIcon} fill sizes="18px" style={{ objectFit: "contain" }} />
+                      </Box>
                     </Box>
                     <Box
                       sx={{
@@ -854,7 +1020,23 @@ export default function HomePage() {
                         backdropFilter: "blur(31.831px)"
                       }}
                     >
-                      <Box sx={{ width: "8.488px", height: "8.488px", borderRadius: "50%", bgcolor: "#2b46a1" }} />
+                      <Box
+                        aria-hidden
+                        sx={{
+                          position: "relative",
+                          width: "8.488px",
+                          height: "8.488px",
+                          flexShrink: 0
+                        }}
+                      >
+                        <Image
+                          alt=""
+                          src="/images/Home Page Photos/Ellipse 176.png"
+                          fill
+                          sizes="9px"
+                          style={{ objectFit: "contain" }}
+                        />
+                      </Box>
                       <Typography sx={{ fontFamily: "var(--font-inter), sans-serif", fontSize: "14.85px", lineHeight: 1.2, color: "#000" }}>
                         {card.badge}
                       </Typography>
@@ -883,16 +1065,23 @@ export default function HomePage() {
         </Container>
       </Box>
 
-      <Box sx={{ position: "relative", py: { xs: 6, md: 8 }, color: "#fff" }}>
-        <Box
+      {/* --- Section: Experiences from Seekers & testimonials --- */}
+      <Box sx={{
+        position: "relative",
+        py: { xs: 8, md: 11 },
+        pb: { xs: 9, md: 12 },
+        color: "#fff",
+        backgroundImage: " url('/images/Home Page Photos/Section-background-2.webp')",
+        backgroundSize: "cover",
+        backgroundPosition: "center"
+      }}>
+        {/* <Box
           sx={{
             position: "absolute",
             inset: 0,
-            backgroundImage: "linear-gradient(rgba(3,25,66,0.72), rgba(3,25,66,0.72)), url('/images/Home Page Photos/Spiritual Retreats BG (1).webp')",
-            backgroundSize: "cover",
-            backgroundPosition: "center"
+
           }}
-        />
+        /> */}
         <Container sx={{ position: "relative", zIndex: 1 }}>
           <Typography
             sx={{
@@ -901,94 +1090,274 @@ export default function HomePage() {
               fontSize: { xs: 34, md: "47.313px" },
               lineHeight: { md: "70.97px" },
               color: "#e7ebf8",
-              mb: 2.2
+              mb: { xs: 2.5, md: 3.5 }
             }}
           >
             Experiences from Seekers
           </Typography>
 
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: { xs: "1fr", md: "repeat(3, minmax(0, 1fr))" },
-              gap: { xs: 1.5, md: 2.2 }
+          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "stretch", gap: { xs: 2, md: 2.5 } }}>
+            <Box sx={{ width: "100%", minWidth: 0, overflow: "hidden" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  width: `calc(100% * ${seekerVideos.length} / ${seekerVisibleCount})`,
+                  transform: `translateX(calc(-${seekerSlideIndex} * 100% / ${seekerVideos.length}))`,
+                  transition: theme.transitions.create("transform", { duration: 360, easing: theme.transitions.easing.easeOut }),
+                  alignItems: "stretch"
+                }}
+              >
+                {seekerVideos.map((video) => (
+                  <Box
+                    key={video.name}
+                    sx={{
+                      flex: `0 0 calc(100% / ${seekerVideos.length})`,
+                      minWidth: 0,
+                      px: { xs: 0.75, md: 1.1 },
+                      boxSizing: "border-box"
+                    }}
+                  >
+                    <Box
+                      component="button"
+                      type="button"
+                      onClick={() => openSeekerVideo(video.embedSrc)}
+                      aria-label={`Play video: ${video.name}`}
+                      sx={{
+                        position: "relative",
+                        borderRadius: "8px",
+                        overflow: "hidden",
+                        minHeight: { xs: 220, md: 300 },
+                        width: "100%",
+                        height: "100%",
+                        p: 0,
+                        border: "none",
+                        cursor: "pointer",
+                        textAlign: "left",
+                        display: "block",
+                        "&:focus-visible": { outline: "2px solid #fff", outlineOffset: 2 }
+                      }}
+                    >
+                      <Image
+                        alt=""
+                        fill
+                        src={video.image}
+                        sizes={seekerMdUp ? "(max-width: 1200px) 33vw, 28vw" : "90vw"}
+                        style={{ objectFit: "cover" }}
+                        aria-hidden
+                      />
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          inset: 0,
+                          background: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, transparent 40%, rgba(0,0,0,0.45) 100%)",
+                          pointerEvents: "none"
+                        }}
+                      />
+                      <Typography sx={{ position: "absolute", top: 8, left: 10, color: "#f6f6f6", fontSize: 13, pointerEvents: "none" }}>
+                        {video.name}
+                      </Typography>
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          inset: 0,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          pointerEvents: "none"
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            width: 38,
+                            height: 38,
+                            borderRadius: "50%",
+                            bgcolor: "rgba(255,255,255,0.88)",
+                            color: "#2c4a9b",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontWeight: 700
+                          }}
+                        >
+                          ▶
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+
+            <Stack direction="row" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} sx={{ mt: { xs: 0.5, md: 0 } }}>
+              <IconButton
+                type="button"
+                aria-label="Previous seeker videos"
+                onClick={() => setSeekerSlideIndex((i) => Math.max(0, i - 1))}
+                disabled={seekerSlideIndex <= 0}
+                sx={{
+                  color: "#e7ebf8",
+                  border: "1px solid rgba(231,235,248,0.35)",
+                  bgcolor: "rgba(0,0,0,0.2)",
+                  width: { xs: 48, md: 52 },
+                  height: { xs: 48, md: 52 },
+                  "&:hover": { bgcolor: "rgba(0,0,0,0.35)" },
+                  "&.Mui-disabled": { color: "rgba(231,235,248,0.35)", borderColor: "rgba(231,235,248,0.12)" }
+                }}
+              >
+                <ChevronLeftRoundedIcon sx={{ fontSize: { xs: 28, md: 30 } }} />
+              </IconButton>
+              <IconButton
+                type="button"
+                aria-label="Next seeker videos"
+                onClick={() => setSeekerSlideIndex((i) => Math.min(seekerMaxSlide, i + 1))}
+                disabled={seekerSlideIndex >= seekerMaxSlide}
+                sx={{
+                  color: "#e7ebf8",
+                  border: "1px solid rgba(231,235,248,0.35)",
+                  bgcolor: "rgba(0,0,0,0.2)",
+                  width: { xs: 48, md: 52 },
+                  height: { xs: 48, md: 52 },
+                  "&:hover": { bgcolor: "rgba(0,0,0,0.35)" },
+                  "&.Mui-disabled": { color: "rgba(231,235,248,0.35)", borderColor: "rgba(231,235,248,0.12)" }
+                }}
+              >
+                <ChevronRightRoundedIcon sx={{ fontSize: { xs: 28, md: 30 } }} />
+              </IconButton>
+            </Stack>
+          </Box>
+
+          <Dialog
+            open={seekerDialogOpen}
+            onClose={closeSeekerVideo}
+            maxWidth="md"
+            fullWidth
+            aria-label="Seeker experience video"
+            slotProps={{
+              paper: {
+                sx: { bgcolor: "#0a0a0a", maxHeight: "92vh" }
+              }
             }}
           >
-            {seekerVideos.map((video) => (
-              <Box key={video.name} sx={{ position: "relative", borderRadius: "8px", overflow: "hidden", minHeight: { xs: 180, md: 210 } }}>
-                <Image alt={video.name} fill src={video.image} style={{ objectFit: "cover" }} />
-                <Typography sx={{ position: "absolute", top: 8, left: 10, color: "#f6f6f6", fontSize: 13 }}>{video.name}</Typography>
+            <DialogContent sx={{ p: 0, position: "relative" }}>
+              <IconButton
+                type="button"
+                aria-label="Close video"
+                onClick={closeSeekerVideo}
+                sx={{
+                  position: "absolute",
+                  top: 8,
+                  right: 8,
+                  zIndex: 2,
+                  color: "#fff",
+                  bgcolor: "rgba(0,0,0,0.5)",
+                  "&:hover": { bgcolor: "rgba(0,0,0,0.7)" }
+                }}
+              >
+                <CloseRoundedIcon />
+              </IconButton>
+              {activeSeekerEmbedSrc ? (
                 <Box
                   sx={{
-                    position: "absolute",
-                    inset: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center"
+                    position: "relative",
+                    width: "100%",
+                    pt: "56.25%"
                   }}
                 >
                   <Box
+                    component="iframe"
+                    key={activeSeekerEmbedSrc}
+                    title="YouTube video player"
+                    src={activeSeekerEmbedSrc}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    referrerPolicy="strict-origin-when-cross-origin"
                     sx={{
-                      width: 38,
-                      height: 38,
-                      borderRadius: "50%",
-                      bgcolor: "rgba(255,255,255,0.88)",
-                      color: "#2c4a9b",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontWeight: 700
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      border: "none"
                     }}
-                  >
-                    ▶
-                  </Box>
+                  />
                 </Box>
-              </Box>
-            ))}
-          </Box>
-
-          <Box sx={{ mt: 2.6, display: "flex", justifyContent: "center", gap: 1 }}>
-            <Box sx={{ width: 24, height: 24, borderRadius: "50%", bgcolor: "rgba(255,255,255,0.95)", color: "#1e2f5a", textAlign: "center", lineHeight: "24px" }}>
-              ‹
-            </Box>
-            <Box sx={{ width: 24, height: 24, borderRadius: "50%", bgcolor: "rgba(255,255,255,0.95)", color: "#1e2f5a", textAlign: "center", lineHeight: "24px" }}>
-              ›
-            </Box>
-          </Box>
+              ) : null}
+            </DialogContent>
+          </Dialog>
 
           <Typography
             sx={{
-              mt: 6.5,
+              mt: { xs: 7, md: 8.5 },
               textAlign: "center",
               fontFamily: "var(--font-forum), serif",
-              fontSize: { xs: 42, md: "50px" },
-              lineHeight: { md: "76.608px" },
+              fontSize: { xs: 46, md: 58 },
+              lineHeight: { xs: 1.15, md: 1.12 },
               color: "#e7ebf8"
             }}
           >
             Hear what our global community has to say
           </Typography>
-          <Typography sx={{ mt: 0.7, textAlign: "center", color: "rgba(239,244,255,0.85)", fontSize: 14 }}>
+          <Typography
+            sx={{
+              mt: 1.2,
+              textAlign: "center",
+              color: "rgba(239,244,255,0.9)",
+              fontSize: { xs: 15, md: 18 },
+              lineHeight: 1.45,
+              maxWidth: 720,
+              mx: "auto"
+            }}
+          >
             Hear from those whose lives have been transformed by these sessions
           </Typography>
 
           <Box
             sx={{
-              mt: 2.4,
+              mt: { xs: 3, md: 3.5 },
               display: "grid",
               gridTemplateColumns: { xs: "1fr", md: "repeat(3, minmax(0, 1fr))" },
-              gap: { xs: 1.6, md: 2.3 }
+              gap: { xs: 2.2, md: 3 },
+              overflow: "visible"
             }}
           >
             {testimonials.map((item) => (
-              <Card key={item.name} sx={{ borderRadius: "12px", boxShadow: "none", bgcolor: "#fff", color: "#1e2f54", position: "relative" }}>
-                <Box sx={{ position: "absolute", top: -12, left: 14, width: 26, height: 26 }}>
-                  <Image alt="" fill src="/images/Home Page Photos/icon-orange.png" style={{ objectFit: "contain" }} />
+              <Card
+                key={item.name}
+                sx={{
+                  borderRadius: "16px",
+                  boxShadow: "none",
+                  bgcolor: "#fff",
+                  color: "#1e2f54",
+                  position: "relative",
+                  overflow: "visible",
+                  minHeight: { xs: 220, md: 260 },
+                  pt: 1.5
+                }}
+              >
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: { xs: -18, md: -22 },
+                    left: { xs: 18, md: 22 },
+                    width: { xs: 44, md: 52 },
+                    height: { xs: 44, md: 52 },
+                    zIndex: 2,
+                    pointerEvents: "none"
+                  }}
+                >
+                  <Box sx={{ position: "relative", width: "100%", height: "100%" }}>
+                    <Image
+                      alt=""
+                      fill
+                      src="/images/Home Page Photos/icon-orange.png"
+                      sizes="52px"
+                      style={{ objectFit: "contain" }}
+                    />
+                  </Box>
                 </Box>
-                <Box sx={{ p: 2.2, pt: 2.8 }}>
-                  <Typography sx={{ color: "rgba(31,47,84,0.82)", fontSize: 13.5, lineHeight: 1.45 }}>{`"${item.quote}"`}</Typography>
-                  <Typography sx={{ mt: 2.2, fontSize: 15, fontWeight: 700 }}>{item.name}</Typography>
-                  <Typography sx={{ fontSize: 12, color: "rgba(31,47,84,0.7)" }}>{item.location}</Typography>
+                <Box sx={{ p: { xs: 2.6, md: 3.2 }, pt: { xs: 3.2, md: 3.8 } }}>
+                  <Typography sx={{ color: "rgba(31,47,84,0.82)", fontSize: { xs: 15, md: 16.5 }, lineHeight: 1.5 }}>{`"${item.quote}"`}</Typography>
+                  <Typography sx={{ mt: { xs: 2.4, md: 2.8 }, fontSize: { xs: 16, md: 17.5 }, fontWeight: 700 }}>{item.name}</Typography>
+                  <Typography sx={{ fontSize: { xs: 13, md: 14 }, color: "rgba(31,47,84,0.7)" }}>{item.location}</Typography>
                 </Box>
               </Card>
             ))}
@@ -998,98 +1367,207 @@ export default function HomePage() {
 
       </Box>
 
+      {/* --- Section: Sapt Sadhana promo (+ footer overlap; keep overflow visible) --- */}
       <Box
         sx={{
-          background: "linear-gradient(180deg, #F3F2EE 0%, #FFF 50%, #D1F1F5 100%)",
-          pt: { xs: 6, md: 8 },
-          pb: { xs: 7, md: 9 },
           position: "relative",
-          overflow: "hidden",
-
+          zIndex: 1,
+          background: "linear-gradient(180deg, rgba(243, 242, 238, 0) 0%, #F3F2EE 14%, #FFF 50%, #D1F1F5 100%)",
+          pb: { xs: 7, md: 6 },
+          overflow: "visible"
         }}
       >
-        
-        <Container>
-          <Typography sx={{ textAlign: "center", color: "#f4b497", fontSize: { xs: 32, md: 44 }, lineHeight: 1 }}>〰</Typography>
-          <Typography sx={{ mt: 0.5, textAlign: "center", fontFamily: "var(--font-forum), serif", fontSize: { xs: 44, md: 56 }, color: "#1f2f52" }}>
-            SAPT SADHANA - Serving Beyond Self
-          </Typography>
-          <Typography sx={{ mt: 1.2, mx: "auto", textAlign: "center", color: "rgba(20,20,20,0.8)", fontSize: { xs: 16, md: 22 }, maxWidth: 1040, lineHeight: 1.4 }}>
-            <b>Sapt Sadhana</b> is our commitment to selfless service (seva), transforming spiritual wisdom into compassionate action. Through
-            various initiatives, we serve underprivileged communities, provide education,
-          </Typography>
+        <Box
+          aria-hidden
+          sx={{
+            position: "absolute",
+            left: 0,
+            top: -87,
+            width: "100%",
+            height: { xs: 200, md: 260 },
+            backgroundImage: "url('/images/Home Page Photos/curve-disclosure.png')",
+            backgroundSize: "100% auto",
+            backgroundPosition: "center top",
+            backgroundRepeat: "no-repeat",
+            pointerEvents: "none",
+            zIndex: 2
+          }}
+        />
+        <Container sx={{ position: "relative", zIndex: 3 }}>
+          <Box sx={{ pt: { xs: 6, md: 8 } }}>
+            <Typography sx={{ textAlign: "center", color: "#f4b497", fontSize: { xs: 32, md: 44 }, lineHeight: 1 }}>〰</Typography>
+            <Typography sx={{ mt: 0.5, textAlign: "center", fontFamily: "var(--font-forum), serif", fontSize: { xs: 44, md: 56 }, color: "#1f2f52" }}>
+              SAPT SADHANA - Serving Beyond Self
+            </Typography>
+            <Typography sx={{ mt: 1.2, mx: "auto", textAlign: "center", color: "rgba(20,20,20,0.8)", fontSize: { xs: 16, md: 22 }, maxWidth: 1040, lineHeight: 1.4 }}>
+              <b>Sapt Sadhana</b> is our commitment to selfless service (seva), transforming spiritual wisdom into compassionate action. Through
+              various initiatives, we serve underprivileged communities, provide education,
+            </Typography>
 
-          <Box sx={{ mt: 3.5, position: "relative", minHeight: { xs: 230, md: 320 } }}>
-            <Box
-              sx={{
-                position: "absolute",
-                left: { xs: "4%", md: "8%" },
-                top: { xs: 25, md: 28 },
-                width: { xs: "32%", md: "28%" },
-                height: { xs: 170, md: 230 },
-                borderRadius: "22px",
-                overflow: "hidden",
-                opacity: 0.35
-              }}
-            >
-              <Image
-                alt="Sapt service side"
-                fill
-                src="/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (1).webp"
-                style={{ objectFit: "cover" }}
+            <Box sx={{ mt: 3.5 }}>
+              <SaptSadhanaStackCarousel
+                slides={saptSadhanaCarouselSlides}
+                activeIndex={saptSlideIndex}
+                onStep={saptOnStep}
               />
             </Box>
+
             <Box
               sx={{
-                position: "absolute",
-                right: { xs: "4%", md: "8%" },
-                top: { xs: 25, md: 28 },
-                width: { xs: "32%", md: "28%" },
-                height: { xs: 170, md: 230 },
-                borderRadius: "22px",
-                overflow: "hidden",
-                opacity: 0.35
-              }}
-            >
-              <Image
-                alt="Sapt service side"
-                fill
-                src="/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (3).webp"
-                style={{ objectFit: "cover" }}
-              />
-            </Box>
-            <Box
-              sx={{
-                position: "relative",
+                mt: { xs: 2, md: 2.5 },
+                display: "grid",
+                gridTemplateColumns: { xs: "minmax(44px,auto) 1fr minmax(44px,auto)", sm: "auto 1fr auto" },
+                alignItems: "center",
+                justifyItems: "center",
+                columnGap: { xs: 1, sm: 2, md: 3 },
+                rowGap: 1,
+                maxWidth: { sm: 520 },
                 mx: "auto",
-                width: { xs: "86%", md: "62%" },
-                height: { xs: 190, md: 260 },
-                borderRadius: "28px",
-                overflow: "hidden",
-                boxShadow: "0 10px 22px rgba(0,0,0,0.18)"
+                width: "100%"
               }}
             >
-              <Image
-                alt="Sapt Sadhana"
-                fill
-                src="/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (2).webp"
-                style={{ objectFit: "cover" }}
-              />
-            </Box>
-          </Box>
+              <IconButton
+                type="button"
+                aria-label="Previous Sapt Sadhana slide"
+                onClick={() => saptOnStep(-1)}
+                disableRipple
+                sx={{
+                  justifySelf: "center",
+                  p: { xs: 0.5, md: 0.75 },
+                  borderRadius: "12px",
+                  "&:hover": { bgcolor: "rgba(43,70,161,0.08)" }
+                }}
+              >
+                <Box sx={{ position: "relative", width: { xs: 30, sm: 36, md: 42 }, height: { xs: 30, sm: 36, md: 42 } }}>
+                  <Image alt="" fill src={saptCarouselArrowLeft} sizes="42px" style={{ objectFit: "contain" }} />
+                </Box>
+              </IconButton>
 
-          <Box sx={{ mt: 1.4, display: "flex", justifyContent: "center", alignItems: "center", gap: 1.1 }}>
-            <Typography sx={{ color: "rgba(35,55,92,0.72)", fontSize: 22, lineHeight: 1 }}>‹</Typography>
-            <Box sx={{ width: 8, height: 8, borderRadius: "50%", bgcolor: "#2b46a1" }} />
-            <Box sx={{ width: 8, height: 8, borderRadius: "50%", bgcolor: "rgba(43,70,161,0.38)" }} />
-            <Box sx={{ width: 8, height: 8, borderRadius: "50%", bgcolor: "rgba(43,70,161,0.38)" }} />
-            <Box sx={{ width: 8, height: 8, borderRadius: "50%", bgcolor: "rgba(43,70,161,0.38)" }} />
-            <Typography sx={{ color: "rgba(35,55,92,0.72)", fontSize: 22, lineHeight: 1 }}>›</Typography>
+              <Box
+                component="ul"
+                sx={{
+                  m: 0,
+                  p: 0,
+                  listStyle: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: { xs: 1, md: 1.5 },
+                  flexWrap: "wrap",
+                  width: "100%"
+                }}
+              >
+                {saptSadhanaCarouselSlides.map((_, dotIdx) => (
+                  <Box key={dotIdx} component="li" sx={{ display: "flex", alignItems: "center" }}>
+                    <Box
+                      component="button"
+                      type="button"
+                      aria-label={`Go to Sapt Sadhana slide ${dotIdx + 1}`}
+                      aria-current={dotIdx === saptSlideIndex ? true : undefined}
+                      onClick={() => setSaptSlideIndex(dotIdx)}
+                      sx={{
+                        width: { xs: 9, md: 10 },
+                        height: { xs: 9, md: 10 },
+                        borderRadius: "50%",
+                        border: "none",
+                        p: 0,
+                        cursor: "pointer",
+                        bgcolor: dotIdx === saptSlideIndex ? "#1e2f54" : "rgba(180,188,204,0.75)",
+                        transition: theme.transitions.create(["background-color", "transform"], { duration: 220 }),
+                        transform: dotIdx === saptSlideIndex ? "scale(1.15)" : "scale(1)",
+                        "&:focus-visible": { outline: "2px solid #2b46a1", outlineOffset: 3 }
+                      }}
+                    />
+                  </Box>
+                ))}
+              </Box>
+
+              <IconButton
+                type="button"
+                aria-label="Next Sapt Sadhana slide"
+                onClick={() => saptOnStep(1)}
+                disableRipple
+                sx={{
+                  justifySelf: "center",
+                  p: { xs: 0.5, md: 0.75 },
+                  borderRadius: "12px",
+                  "&:hover": { bgcolor: "rgba(43,70,161,0.08)" }
+                }}
+              >
+                <Box sx={{ position: "relative", width: { xs: 30, sm: 36, md: 42 }, height: { xs: 30, sm: 36, md: 42 } }}>
+                  <Image alt="" fill src={saptCarouselArrowRight} sizes="42px" style={{ objectFit: "contain" }} />
+                </Box>
+              </IconButton>
+            </Box>
+
+            {/* Bridge above site footer: headline + dots + art in one responsive row */}
+            <Box
+              sx={{
+                mt: { xs: 4, md: 6 },
+                pt: { xs: 2, md: 3 },
+                // pb: { xs: 1, md: 1.5 },
+                position: "relative",
+                zIndex: 1,
+                width: "100%",
+                minWidth: 0
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: { xs: 0.75, sm: 1.25, md: 2 },
+                  flexWrap: "nowrap",
+                  width: "100%",
+                  minWidth: 0
+                }}
+              >
+                <Typography
+                  sx={{
+                    flex: "0 1 auto",
+                    minWidth: 0,
+                    color: "#162b53",
+                    fontFamily: "var(--font-forum), serif",
+                    fontSize: { xs: "clamp(1.05rem, 3.8vw, 1.65rem)", sm: "clamp(1.5rem, 2.8vw, 2.25rem)", md: "clamp(2rem, 3.5vw, 4.4rem)" },
+                    lineHeight: 1.05,
+                    letterSpacing: { xs: "-0.02em", md: 0 },
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden"
+                  }}
+                >
+                  Stay Connected
+                </Typography>
+
+                <Box
+                  sx={{
+                    position: "relative",
+                    flex: "1 1 0%",
+                    minWidth: { xs: 72, sm: 100, md: 140 },
+                    height: { xs: 28, sm: 36, md: 48 },
+                    minHeight: { xs: 28, sm: 36, md: 48 },
+                    maxWidth: { xs: "48%", sm: "52%", md: "58%" },
+                    ml: { xs: 0.25, sm: 0.5 }
+                  }}
+                >
+                  <Image
+                    alt=""
+                    src="/images/footer-above-icon.png"
+                    fill
+                    sizes="(max-width: 600px) 50vw, 520px"
+                    style={{ objectFit: "contain", objectPosition: "center" }}
+                  />
+                </Box>
+              </Box>
+            </Box>
           </Box>
         </Container>
       </Box>
 
-      <SharedFooter />
+      {/* --- Section: Site footer --- */}
+      <SharedFooter showStayConnectedBanner={false} />
     </Box>
   );
 }

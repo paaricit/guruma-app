@@ -122,8 +122,10 @@ export default function AboutHerPage() {
 
   return (
     <Box sx={{ bgcolor: "#0a1628", overflowX: "hidden" }}>
+      {/* --- Section: Site header --- */}
       <SharedHeader />
 
+      {/* --- Section: Hero --- */}
       <Box
         sx={{
           position: "relative",
@@ -193,6 +195,7 @@ export default function AboutHerPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Her Journey (timeline + portrait) --- */}
       <Box
         sx={{
           position: "relative",
@@ -421,6 +424,7 @@ export default function AboutHerPage() {
         />
       </Box>
 
+      {/* --- Section: Vision, Mission & Pathways --- */}
       <Box sx={{ position: "relative", bgcolor: "#ffffff", py: { xs: 6, md: 10 }, overflow: "hidden" }}>
         <Box
           aria-hidden
@@ -601,6 +605,7 @@ export default function AboutHerPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Her Teachings --- */}
       <Box sx={{ bgcolor: "#f9f9f7", py: { xs: 6, md: 10 } }}>
         <Container maxWidth="lg">
           <Box
@@ -697,6 +702,7 @@ export default function AboutHerPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Impact stats --- */}
       <Box sx={{ position: "relative", py: { xs: 6, md: 8 }, color: "#fff", overflow: "hidden" }}>
         <Box
           sx={{
@@ -744,6 +750,7 @@ export default function AboutHerPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Sapt Sadhana promo --- */}
       <Box sx={{ bgcolor: "#e8f5f3", pt: { xs: 5, md: 7 }, pb: { xs: 7, md: 9 } }}>
         <Container maxWidth="lg">
           <Typography sx={{ textAlign: "center", color: "#f4b497", fontSize: { xs: 28, md: 36 }, lineHeight: 1 }}>〰</Typography>
@@ -872,6 +879,7 @@ export default function AboutHerPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Site footer --- */}
       <SharedFooter />
     </Box>
   );

@@ -35,9 +35,11 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
       position="fixed"
       elevation={0}
       sx={{
-        bgcolor: "transparent"
+        background:
+          "linear-gradient(0deg, rgba(2, 22, 73, 0) 23.64%, #031942 61.82%, #000 100%)"
       }}
     >
+      {/* --- Section: Primary toolbar (logo + nav + menu button) --- */}
       <Toolbar sx={{ minHeight: { xs: 72, md: 90 }, px: { xs: 1.5, sm: 2, md: 3 }, maxWidth: "100vw", boxSizing: "border-box" }}>
         <Stack
           direction="column"
@@ -45,7 +47,15 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
           href="/"
           spacing={1}
           alignItems="center"
-          sx={{ textDecoration: "none", mr: { xs: 1, md: 2 }, flexShrink: 1, minWidth: 0, maxWidth: { xs: "calc(100vw - 120px)", sm: "none" } }}
+          sx={{
+            textDecoration: "none",
+            mr: { xs: 1, md: 2 },
+            flexShrink: 1,
+            minWidth: 0,
+            maxWidth: { xs: "calc(100vw - 120px)", sm: "none" },
+            // Nudge logo down without padding (padding grows the flex item and re-centers the whole toolbar).
+            transform: { xs: "translateY(28px)", md: "translateY(28px)" }
+          }}
         >
           <Box sx={{ position: "relative", width: { xs: 34, md: 48 }, height: { xs: 34, md: 48 }, flexShrink: 0 }}>
             <Image alt="Guru Maa logo" fill src="/images/logo.svg" style={{ objectFit: "contain" }} />
@@ -55,12 +65,12 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
           </Box>
         </Stack>
 
-        <Stack direction="row" spacing={0} sx={{ ml: "auto", display: { xs: "none", lg: "flex" } }}>
+        <Stack direction="row" spacing={0} sx={{ display: { xs: "none", lg: "flex" } }}>
           {navItems.map((item) => (
             <Button
               component={Link}
               href={item.href}
-              key={item.href}
+              key={`${item.href}-${item.label}`}
               sx={{
                 color: "#fff",
                 textTransform: "none",
@@ -86,6 +96,7 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
         </IconButton>
       </Toolbar>
 
+      {/* --- Section: Programs flyout (when configured) --- */}
       {showProgramsMenu && programsMenuItems.length > 0 && (
         <Box
           sx={{
@@ -117,6 +128,7 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
         </Box>
       )}
 
+      {/* --- Section: Mobile navigation drawer --- */}
       <Drawer
         anchor="right"
         open={mobileMenuOpen}

@@ -179,9 +179,10 @@ export default function DivineDayPage() {
 
   return (
     <Box sx={{ bgcolor: "#0a1628", overflowX: "hidden" }}>
+      {/* --- Section: Site header --- */}
       <SharedHeader />
 
-      {/* Hero */}
+      {/* --- Section: Hero --- */}
       <Box
         sx={{
           position: "relative",
@@ -277,7 +278,7 @@ export default function DivineDayPage() {
         />
       </Box>
 
-      {/* Zigzag: Come experience + Why this event */}
+      {/* --- Section: Zigzag — Come experience + Why this event --- */}
       <Box sx={{ position: "relative", bgcolor: "#d8eef4", py: { xs: 6, md: 10 }, px: { xs: 2, md: 3 }, overflow: "hidden" }}>
         <LotusBackdrop />
         <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
@@ -329,7 +330,7 @@ export default function DivineDayPage() {
         </Container>
       </Box>
 
-      {/* Give yourself this pause — split + curved image + peach edge (matches design reference) */}
+      {/* --- Section: Give yourself this pause (split + curved image) --- */}
       <Box
         sx={{
           display: "grid",
@@ -401,7 +402,7 @@ export default function DivineDayPage() {
             order: { xs: -1, md: 0 }
           }}
         >
-          {/* Peach rim: slightly larger clipped layer behind the photo */}
+          {/* --- Subsection: Peach rim behind photo --- */}
           <Box
             aria-hidden
             sx={{
@@ -428,7 +429,7 @@ export default function DivineDayPage() {
         </Box>
       </Box>
 
-      {/* What you will experience */}
+      {/* --- Section: What you will experience --- */}
       <Box sx={{ bgcolor: "#fdfcf8", py: { xs: 7, md: 11 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Box
@@ -506,7 +507,7 @@ export default function DivineDayPage() {
         </Container>
       </Box>
 
-      {/* About Guru Maa */}
+      {/* --- Section: About Guru Maa --- */}
       <Box sx={{ position: "relative", bgcolor: "#fdfcf8", py: { xs: 7, md: 10 }, px: { xs: 2, md: 3 }, overflow: "hidden" }}>
         <Box
           aria-hidden
@@ -572,7 +573,7 @@ export default function DivineDayPage() {
         </Container>
       </Box>
 
-      {/* THE DIVINE DAY — cosmic */}
+      {/* --- Section: The Divine Day (cosmic) --- */}
       <Box
         sx={{
           position: "relative",
@@ -701,7 +702,7 @@ export default function DivineDayPage() {
         />
       </Box>
 
-      {/* Who should attend */}
+      {/* --- Section: Who should attend --- */}
       <Box sx={{ bgcolor: "#fff", pt: { xs: 5, md: 6 }, pb: { xs: 7, md: 10 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1.15fr 1fr" }, gap: { xs: 4, md: 5 } }}>
@@ -750,7 +751,7 @@ export default function DivineDayPage() {
         </Container>
       </Box>
 
-      {/* Experiences from Seekers — video strip + quotes */}
+      {/* --- Section: Experiences from Seekers (video + quotes) --- */}
       <Box sx={{ bgcolor: "#fff", py: { xs: 7, md: 9 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Typography sx={{ ...peachTitle, textAlign: "center", display: "block", mb: 0.5, fontSize: { xs: "0.8rem", md: "0.95rem" } }}>
@@ -837,7 +838,7 @@ export default function DivineDayPage() {
         </Container>
       </Box>
 
-      {/* FAQ */}
+      {/* --- Section: FAQ --- */}
       <Box sx={{ position: "relative", bgcolor: "#faf8f5", py: { xs: 7, md: 10 }, px: { xs: 2, md: 3 }, overflow: "hidden" }}>
         <Box
           aria-hidden
@@ -885,6 +886,7 @@ export default function DivineDayPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Site footer --- */}
       <SharedFooter />
     </Box>
   );

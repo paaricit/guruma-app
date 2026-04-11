@@ -172,8 +172,10 @@ function InitiativeBlock({
 export default function SaptSadhanaPage() {
   return (
     <Box sx={{ bgcolor: "#fff", overflowX: "hidden" }}>
+      {/* --- Section: Site header --- */}
       <SharedHeader />
 
+      {/* --- Section: Hero --- */}
       <Box sx={{ position: "relative", minHeight: { xs: 480, md: 580 }, pt: { xs: 12, md: 14 }, pb: { xs: 6, md: 8 }, display: "flex", alignItems: "flex-end" }}>
         <Box sx={{ position: "absolute", inset: 0, zIndex: 0 }}>
           <Image src={IMG.banner} alt="Sapt Sadhana community seva" fill priority sizes="100vw" style={{ objectFit: "cover", objectPosition: "center" }} />
@@ -205,6 +207,7 @@ export default function SaptSadhanaPage() {
         </Container>
       </Box>
 
+      {/* --- Section: What is Sapt Sadhana --- */}
       <Box sx={{ bgcolor: "#d8eef4", py: { xs: 7, md: 9 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="md">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", color: navy, fontSize: { xs: 28, md: 36 }, fontWeight: 600, textAlign: "center", mb: 2 }}>
@@ -222,6 +225,7 @@ export default function SaptSadhanaPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Our Key Seva Initiatives --- */}
       <Box sx={{ bgcolor: "#faf8f5", py: { xs: 6, md: 9 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Typography
@@ -247,6 +251,7 @@ export default function SaptSadhanaPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Impact stats --- */}
       <Box
         sx={{
           position: "relative",
@@ -275,6 +280,7 @@ export default function SaptSadhanaPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Experiences from Seekers --- */}
       <Box sx={{ bgcolor: "#d8eef4", py: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", color: peach, fontSize: { xs: 13, md: 14 }, letterSpacing: "0.12em", textTransform: "uppercase", textAlign: "center", mb: 1 }}>
@@ -296,6 +302,7 @@ export default function SaptSadhanaPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Be the Change CTA --- */}
       <Box sx={{ bgcolor: "#faf8f5", py: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="md" sx={{ textAlign: "center" }}>
           <Typography sx={{ fontFamily: "var(--font-forum), serif", color: navy, fontSize: { xs: 30, md: 38 }, fontWeight: 600, mb: 2 }}>
@@ -320,10 +327,12 @@ export default function SaptSadhanaPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Curve divider --- */}
       <Box sx={{ bgcolor: "#0a1628", height: { xs: 28, md: 40 } }}>
         <Box sx={{ height: "100%", bgcolor: "#b8dce8", borderTopLeftRadius: "50% 100%", borderTopRightRadius: "50% 100%" }} />
       </Box>
 
+      {/* --- Section: Site footer --- */}
       <SharedFooter />
     </Box>
   );

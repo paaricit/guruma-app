@@ -22,6 +22,7 @@ export default function ImageFullPage({ imageSrc, title }: ImageFullPageProps) {
         boxSizing: "border-box"
       }}
     >
+      {/* --- Section: Full-width page image --- */}
       <Box sx={{ position: "relative", width: "100%", maxWidth: { xs: "100%", md: 1528 }, minWidth: 0 }}>
         <Image
           alt={title}

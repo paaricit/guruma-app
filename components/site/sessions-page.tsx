@@ -251,9 +251,10 @@ export default function SessionsPage() {
 
   return (
     <Box sx={{ bgcolor: "#0a1628", overflowX: "hidden" }}>
+      {/* --- Section: Site header --- */}
       <SharedHeader />
 
-      {/* Hero */}
+      {/* --- Section: Hero --- */}
       <Box
         sx={{
           position: "relative",
@@ -322,7 +323,7 @@ export default function SessionsPage() {
         </Container>
       </Box>
 
-      {/* Curve into light band */}
+      {/* --- Section: Curve into light band --- */}
       <Box sx={{ position: "relative", bgcolor: "#0a1628", height: { xs: 40, md: 52 } }}>
         <Box
           sx={{
@@ -338,7 +339,7 @@ export default function SessionsPage() {
         />
       </Box>
 
-      {/* Divine Discourses */}
+      {/* --- Section: Divine Discourses --- */}
       <Box
         sx={{
           background: "linear-gradient(180deg, #e8f4f8 0%, #f7fbfc 35%, #ffffff 100%)",
@@ -426,7 +427,7 @@ export default function SessionsPage() {
         </Container>
       </Box>
 
-      {/* What are these free live sessions */}
+      {/* --- Section: What are these free live sessions --- */}
       <Box sx={{ bgcolor: "#ffffff", py: { xs: 6, md: 9 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Typography
@@ -470,7 +471,7 @@ export default function SessionsPage() {
         </Container>
       </Box>
 
-      {/* What happens in a session */}
+      {/* --- Section: What happens in a session --- */}
       <Box id="session-format" sx={{ bgcolor: "#f3fafc", py: { xs: 6, md: 10 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Typography
@@ -525,7 +526,7 @@ export default function SessionsPage() {
         </Container>
       </Box>
 
-      {/* Session schedule intro */}
+      {/* --- Section: Session schedule intro --- */}
       <Box sx={{ bgcolor: "#ffffff", pt: { xs: 6, md: 8 }, pb: 0, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", fontSize: { xs: 32, md: 48 }, color: "#2a2a2a", textAlign: "center" }}>
@@ -537,7 +538,7 @@ export default function SessionsPage() {
         </Container>
       </Box>
 
-      {/* Schedule cards on art + How to join */}
+      {/* --- Section: Schedule cards on art + How to join --- */}
       <Box
         sx={{
           position: "relative",
@@ -570,7 +571,7 @@ export default function SessionsPage() {
         </Container>
       </Box>
 
-      {/* How to join */}
+      {/* --- Section: How to join --- */}
       <Box
         sx={{
           position: "relative",
@@ -661,7 +662,7 @@ export default function SessionsPage() {
         />
       </Box>
 
-      {/* Guidelines */}
+      {/* --- Section: Guidelines --- */}
       <Box
         sx={{
           position: "relative",
@@ -760,7 +761,7 @@ export default function SessionsPage() {
         />
       </Box>
 
-      {/* Testimonials */}
+      {/* --- Section: Testimonials --- */}
       <Box sx={{ bgcolor: "#fff", py: { xs: 7, md: 9 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", fontSize: { xs: 32, md: 48 }, color: "#2a2a2a", textAlign: "center" }}>
@@ -826,7 +827,7 @@ export default function SessionsPage() {
         </Container>
       </Box>
 
-      {/* FAQ */}
+      {/* --- Section: FAQ --- */}
       <Box sx={{ bgcolor: "#f7fbfc", pt: { xs: 4, md: 5 }, pb: { xs: 7, md: 9 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="md">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", fontSize: { xs: 32, md: 48 }, color: "#2a2a2a", textAlign: "center", mb: 1 }}>
@@ -848,7 +849,7 @@ export default function SessionsPage() {
         </Container>
       </Box>
 
-      {/* Final CTA */}
+      {/* --- Section: Final CTA --- */}
       <Box sx={{ bgcolor: "#e8f4f8", py: { xs: 5, md: 6 }, px: 2 }}>
         <Container maxWidth="lg">
           <Stack direction={{ xs: "column", sm: "row" }} spacing={2} justifyContent="center" alignItems="center">
@@ -888,6 +889,7 @@ export default function SessionsPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Site footer --- */}
       <SharedFooter />
     </Box>
   );

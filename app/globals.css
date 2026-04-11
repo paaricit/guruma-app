@@ -23,6 +23,7 @@
 
 html {
   overflow-x: clip;
+  overflow-y: visible;
 }
 
 html,
@@ -36,6 +37,7 @@ body {
 
 body {
   overflow-x: clip;
+  overflow-y: visible;
   background: #fff;
   color: var(--text);
   -webkit-text-size-adjust: 100%;
