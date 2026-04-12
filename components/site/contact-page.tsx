@@ -18,7 +18,7 @@ import SharedHeader from "@/components/site/shared-header";
 import { uiPresets } from "@/lib/ui-presets";
 
 const heroBg = "/images/Blongs Internal Page Photos/Wisdom Pages Banner BG.webp";
-const sideImage = "/images/CONTACT Page Photo.webp";
+const sideImage = "/images/contact/CONTACT Page Photo.webp";
 
 const faqItems: { q: string; a: string }[] = [
   { q: "Is it really free?", a: "Yes. Our live spiritual sessions are offered without a participation fee so seekers everywhere can join." },
@@ -60,7 +60,7 @@ const fieldSx = {
 
 export default function ContactPage() {
   return (
-    <Box sx={{ bgcolor: "#e8f6f8", overflowX: "hidden" }}>
+    <Box sx={{ bgcolor: "#e8f6f8", overflowX: "clip", overflowY: "visible" }}>
       <SharedHeader />
 
       <Box
@@ -74,7 +74,7 @@ export default function ContactPage() {
           backgroundPosition: "center"
         }}
       >
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
+        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, mt: { xs: 6, md: 6 }, mb: { xs: 6, md: 6 } }}>
           <Box
             sx={{
               display: "grid",
@@ -165,16 +165,25 @@ export default function ContactPage() {
         </Container>
       </Box>
 
-      <Box sx={{ bgcolor: "#d8eef4", position: "relative", pt: { xs: 7, md: 9 }, px: { xs: 2, md: 3 } }}>
+      <Box
+        sx={{
+          bgcolor: "#d8eef4",
+          position: "relative",
+          zIndex: 1,
+          pt: { xs: 7, md: 9 },
+          px: { xs: 2, md: 3 },
+          overflow: "visible"
+        }}
+      >
         <Box
           aria-hidden
           sx={{
             position: "absolute",
             left: 0,
-            top: -87,
+            top: -93,
             width: "100%",
             height: { xs: 200, md: 260 },
-            backgroundImage: "url('/contact/contact-curve-divider.png')",
+            backgroundImage: "url('/images/contact/curve-header.png')",
             backgroundSize: "100% auto",
             backgroundPosition: "center top",
             backgroundRepeat: "no-repeat",
@@ -182,15 +191,29 @@ export default function ContactPage() {
             zIndex: 2
           }}
         />
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 3 }}>
           <Typography sx={{ fontFamily: "var(--font-forum), serif", color: "#031942", fontSize: { xs: 28, md: 36 }, fontWeight: 600, textAlign: "center" }}>
             Join the Community
           </Typography>
-          <Stack direction="row" justifyContent="center" spacing={0.5} sx={{ my: 1.5, color: "#e8907d" }}>
-            <Typography sx={{ fontSize: 10 }}>◇</Typography>
-            <Typography sx={{ fontSize: 10 }}>◇</Typography>
-            <Typography sx={{ fontSize: 10 }}>◇</Typography>
-          </Stack>
+          <Box
+            aria-hidden
+            sx={{
+              position: "relative",
+              width: "100%",
+              maxWidth: { xs: 300, sm: 420, md: 520 },
+              height: { xs: 16, md: 22 },
+              mx: "auto",
+              my: { xs: 1.25, md: 1.5 }
+            }}
+          >
+            <Image
+              src="/images/contact/join-community_icon.png"
+              alt=""
+              fill
+              sizes="(max-width: 600px) 300px, (max-width: 900px) 420px, 520px"
+              style={{ objectFit: "contain" }}
+            />
+          </Box>
           <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" }, gap: 2.5, mt: 2 }}>
             {communityCards.map(({ title, body, imgSrc, href }) => (
               <Box
@@ -220,7 +243,7 @@ export default function ContactPage() {
         </Container>
       </Box>
 
-      <Box sx={{ bgcolor: "#d8eef4", pt: { xs: "48px", md: "64px" }, pb: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
+      <Box sx={{ bgcolor: "#d8eef4", pt: { xs: "48px", md: "84px" }, pb: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="md">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", color: "#031942", fontSize: { xs: 26, md: 32 }, fontWeight: 600, textAlign: "center" }}>
             Frequently Asked Questions

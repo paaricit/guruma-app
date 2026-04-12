@@ -285,8 +285,8 @@ export default function HomePage() {
                   color: "#ecede5",
                   fontFamily: "var(--font-inter), sans-serif",
                   fontWeight: 500,
-                  fontSize: { xs: 24, md: 38.2 },
-                  lineHeight: { xs: 1.25, md: "52.257px" },
+                  fontSize: { xs: 16, sm: 20, md: 28, lg: 38.2 },
+                  lineHeight: { xs: 1.35, md: 1.37 },
                   maxWidth: 520
                 }}
               >
@@ -298,8 +298,8 @@ export default function HomePage() {
                   mt: 1.5,
                   color: "#ecede5",
                   fontFamily: "var(--font-forum), serif",
-                  fontSize: { xs: 56, md: 95.1 },
-                  lineHeight: { xs: 0.9, md: 0.685 }
+                  fontSize: { xs: 44, sm: 62, md: 78, lg: 95.1 },
+                  lineHeight: { xs: 0.92, md: 0.85, lg: 0.685 }
                 }}
               >
                 Guru Maa
@@ -311,14 +311,14 @@ export default function HomePage() {
                   variant="contained"
                   sx={{
                     ...uiPresets.ctaButton,
-                    height: 52.1,
+                    height: { xs: 44, md: 52 },
                     // width: { xs: 260, sm: 252.9 },
                     bgcolor: "#fffdfb",
                     color: "#1a305b",
                     borderRadius: "11.6px",
                     fontFamily: "var(--font-inter), sans-serif",
                     fontWeight: 500,
-                    fontSize: 18.24,
+                    fontSize: { xs: 15, md: 18 },
                     "&:hover": { bgcolor: "#f0efea" }
                   }}
                 >
@@ -328,7 +328,7 @@ export default function HomePage() {
                   variant="outlined"
                   sx={{
                     ...uiPresets.ctaButton,
-                    height: 52.1,
+                    height: { xs: 44, md: 52 },
                     // width: { xs: 260, sm: 252.9 },
                     borderColor: "rgba(255,255,255,0)",
                     color: "#fffdfb",
@@ -336,7 +336,7 @@ export default function HomePage() {
                     borderRadius: "11.6px",
                     fontFamily: "var(--font-inter), sans-serif",
                     fontWeight: 500,
-                    fontSize: 18.24,
+                    fontSize: { xs: 15, md: 18 },
                     "&:hover": { backgroundColor: "rgba(255,255,255,0.26)", borderColor: "rgba(255,255,255,0)" }
                   }}
                 >
@@ -389,13 +389,13 @@ export default function HomePage() {
               p: { xs: 2.5, md: 4 },
               // boxShadow: "0 8px 22px rgba(0,0,0,0.08)",
               display: "grid",
-              gridTemplateColumns: { xs: "1fr", md: "420px 1fr" },
+              gridTemplateColumns: { xs: "1fr", md: "340px 1fr", lg: "420px 1fr" },
               gap: { xs: 3, md: 4 },
               alignItems: "center"
             }}
           >
             <Box sx={{ position: "relative", overflow: "hidden", }}>
-              <Box sx={{ position: "relative", height: { xs: 360, md: 510 } }}>
+              <Box sx={{ position: "relative", height: { xs: 280, sm: 360, md: 420, lg: 510 } }}>
                 <Image alt="Guru Maa session" fill src="/images/Home Page Photos/Home page second section Video thumbnail.webp" style={{ objectFit: "cover" }} />
               </Box>
               {/* <Box
@@ -426,7 +426,7 @@ export default function HomePage() {
             </Box>
 
             <Box>
-              <Typography sx={{ fontFamily: "var(--font-forum), serif", fontSize: { xs: 38, md: 52 }, color: "#1c2842", lineHeight: 1.05 }}>
+              <Typography sx={{ fontFamily: "var(--font-forum), serif", fontSize: { xs: 30, sm: 38, md: 44, lg: 52 }, color: "#1c2842", lineHeight: 1.05 }}>
                 Guru Maa Shubha Didi
               </Typography>
               <Typography sx={{ mt: 1, fontSize: 12, letterSpacing: 2.2, color: "#1d2e4f", fontWeight: 700 }}>
@@ -451,12 +451,12 @@ export default function HomePage() {
                     <Box sx={{ position: "relative", width: 22, height: 22, flex: "0 0 auto" }}>
                       <Image alt="" fill src={item.iconSrc} style={{ objectFit: "contain" }} />
                     </Box>
-                    <Typography sx={{ fontSize: { xs: 16, md: 22 } }}>{item.label}</Typography>
+                    <Typography sx={{ fontSize: { xs: 15, md: 18, lg: 22 } }}>{item.label}</Typography>
                   </Box>
                 ))}
               </Box>
 
-              <Typography sx={{ mt: 2.3, color: "rgba(39,39,39,0.78)", fontSize: { xs: 15, md: 21 }, lineHeight: 1.45 }}>
+              <Typography sx={{ mt: 2.3, color: "rgba(39,39,39,0.78)", fontSize: { xs: 14, sm: 15, md: 17, lg: 21 }, lineHeight: 1.45 }}>
                 Guru Maa Shubha Didi is a Beacon (Torchbearer) of Love & Wisdom. Her Sacred Mission is to unlock the Secret Treasures of
                 Infinite Happiness and spread Love, Peace and Joy through Internal Fulfilment.
               </Typography>
@@ -466,11 +466,11 @@ export default function HomePage() {
                 sx={{
                   ...uiPresets.ctaButton,
                   mt: 2.8,
-                  height: 46,
-                  width: { xs: 210, md: 220 },
+                  height: { xs: 42, md: 46 },
+                  width: { xs: "100%", sm: 220 },
                   borderRadius: "10px",
                   bgcolor: "#031942",
-                  fontSize: { xs: 16, md: 18 }
+                  fontSize: { xs: 15, md: 17 }
                 }}
               >
                 Know Her Journey
@@ -508,9 +508,9 @@ export default function HomePage() {
                 <Typography
                   sx={{
                     fontFamily: "var(--font-poppins), sans-serif",
-                    fontSize: { xs: 46, md: "70.78px" },
+                    fontSize: { xs: 36, sm: 48, md: 58, lg: 70 },
                     fontWeight: 600,
-                    lineHeight: { xs: 1.05, md: "84.936px" },
+                    lineHeight: { xs: 1.1, md: 1.2 },
                     letterSpacing: { md: "0.9331px" }
                   }}
                 >
@@ -520,8 +520,8 @@ export default function HomePage() {
                 <Typography
                   sx={{
                     fontFamily: "var(--font-forum), serif",
-                    fontSize: { xs: 24, md: "28.884px" },
-                    lineHeight: { xs: 1.18, md: "34.823px" },
+                    fontSize: { xs: 16, sm: 20, md: 24, lg: 28 },
+                    lineHeight: { xs: 1.25, md: 1.3 },
                     letterSpacing: { md: "-0.3103px" }
                   }}
                 >
@@ -565,8 +565,8 @@ export default function HomePage() {
               sx={{
                 textAlign: "center",
                 fontFamily: "var(--font-forum), serif",
-                fontSize: { xs: 46, md: "73.943px" },
-                lineHeight: { md: "94.228px" },
+                fontSize: { xs: 32, sm: 46, md: 60, lg: 74 },
+                lineHeight: { xs: 1.1, md: 1.27 },
                 color: "#031942"
               }}
             >
@@ -576,7 +576,7 @@ export default function HomePage() {
               sx={{
                 mt: 0.4,
                 textAlign: "center",
-                fontSize: { xs: 15, md: 26 },
+                fontSize: { xs: 12, sm: 15, md: 20, lg: 26 },
                 letterSpacing: 2.5,
                 fontWeight: 700,
                 color: "#212121",
@@ -605,7 +605,7 @@ export default function HomePage() {
               bgcolor: "rgba(255,255,255,0.92)"
             }}
           >
-            <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "390px 1fr" }, gap: { xs: 2, md: 3 } }}>
+            <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "300px 1fr", lg: "390px 1fr" }, gap: { xs: 2, md: 3 } }}>
               <Box sx={{ position: "relative", borderRadius: "8px", overflow: "hidden", minHeight: { xs: 280, md: 420 } }}>
                 <Image alt="Session preview" fill src="/images/Home Page Photos/Divine Discourses Schedule image.webp" style={{ objectFit: "cover" }} />
                 <Box
@@ -678,7 +678,7 @@ export default function HomePage() {
                 </Box>
 
                 <Box sx={{ mt: 2, p: 1.6, borderRadius: "10px", bgcolor: "rgba(255,237,226,0.5)" }}>
-                  <Typography sx={{ color: "#031942", fontSize: { xs: 18, md: 32 }, lineHeight: 1.2 }}>
+                  <Typography sx={{ color: "#031942", fontSize: { xs: 14, sm: 18, md: 24, lg: 32 }, lineHeight: 1.2 }}>
                     These Divine Transformative Sessions will be Interactive and Open to all Audiences. Join these sessions at No Additional
                     Cost. <b>*All are Welcome*</b>
                   </Typography>
@@ -833,7 +833,7 @@ export default function HomePage() {
                 key={row.title}
                 sx={{
                   position: "relative",
-                  minHeight: { xs: 360, md: 529.54 },
+                  minHeight: { xs: 300, sm: 360, md: 440, lg: 530 },
                   borderTop: "1px solid rgba(255,255,255,0.7)",
                   borderBottom: "1px solid rgba(255,255,255,0.7)",
                   overflow: "hidden"
@@ -853,7 +853,7 @@ export default function HomePage() {
                   <Typography
                     sx={{
                       fontFamily: "var(--font-forum), serif",
-                      fontSize: { xs: 34, md: "55.864px" },
+                      fontSize: { xs: 26, sm: 34, md: 44, lg: 56 },
                       lineHeight: 1.15,
                       letterSpacing: { md: "-1.1173px" },
                       color: "#111125"
@@ -878,7 +878,7 @@ export default function HomePage() {
                       mt: 1.6,
                       pt: { xs: 0.5, md: 0.75 },
                       color: "#5C5C6F",
-                      fontSize: { xs: 14, md: "20.903px" },
+                      fontSize: { xs: 13, sm: 14, md: 17, lg: 21 },
                       letterSpacing: { md: "-0.4181px" },
                       lineHeight: 1.5,
                       maxWidth: 640
@@ -892,9 +892,9 @@ export default function HomePage() {
                       variant="contained"
                       sx={{
                         ...uiPresets.ctaButton,
-                        height: "47.883px",
-                        px: "23.942px",
-                        fontSize: "15.961px",
+                        height: { xs: 40, md: 48 },
+                        px: { xs: 2, md: 3 },
+                        fontSize: { xs: 13, md: 16 },
                         borderRadius: "7.981px",
                         bgcolor: "#031942"
                       }}
@@ -905,9 +905,9 @@ export default function HomePage() {
                       variant="outlined"
                       sx={{
                         ...uiPresets.ctaButton,
-                        height: "47.883px",
-                        px: "23.942px",
-                        fontSize: "15.961px",
+                        height: { xs: 40, md: 48 },
+                        px: { xs: 2, md: 3 },
+                        fontSize: { xs: 13, md: 16 },
                         borderRadius: "7.981px",
                         color: "#031942",
                         borderColor: "#031942",
@@ -925,14 +925,25 @@ export default function HomePage() {
       </Box>
 
       {/* --- Section: Wisdom in Action --- */}
-      <Box sx={{ py: { xs: 7, md: 9 }, position: "relative", overflow: "hidden" }}>
+      <Box
+        sx={{
+          py: { xs: 7, md: 9 },
+          position: "relative",
+          overflow: "hidden",
+          bgcolor: "#fff",
+          backgroundImage: "url('/images/Home Page Photos/wisdom_action.png')",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center top",
+          backgroundSize: "100% auto"
+        }}
+      >
         <Container>
           <Typography
             sx={{
               textAlign: "center",
               fontFamily: "var(--font-forum), serif",
-              fontSize: { xs: 46, md: "70.954px" },
-              lineHeight: { md: "90.42px" },
+              fontSize: { xs: 32, sm: 46, md: 58, lg: 71 },
+              lineHeight: { xs: 1.1, md: 1.27 },
               color: "#181818"
             }}
           >
@@ -969,7 +980,7 @@ export default function HomePage() {
                   bgcolor: "#fff"
                 }}
               >
-                <Box sx={{ position: "relative", height: { xs: 280, md: 552.8 } }}>
+                <Box sx={{ position: "relative", height: { xs: 260, sm: 340, md: 430, lg: 553 } }}>
                   <Image alt={card.title} fill sizes="(max-width: 900px) 100vw, 33vw" src={card.image} style={{ objectFit: "cover" }} />
                   <Box sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.2)" }} />
 
@@ -1087,8 +1098,8 @@ export default function HomePage() {
             sx={{
               textAlign: "center",
               fontFamily: "var(--font-forum), serif",
-              fontSize: { xs: 34, md: "47.313px" },
-              lineHeight: { md: "70.97px" },
+              fontSize: { xs: 26, sm: 34, md: 42, lg: 47 },
+              lineHeight: { xs: 1.2, md: 1.5 },
               color: "#e7ebf8",
               mb: { xs: 2.5, md: 3.5 }
             }}
@@ -1289,8 +1300,8 @@ export default function HomePage() {
               mt: { xs: 7, md: 8.5 },
               textAlign: "center",
               fontFamily: "var(--font-forum), serif",
-              fontSize: { xs: 46, md: 58 },
-              lineHeight: { xs: 1.15, md: 1.12 },
+              fontSize: { xs: 28, sm: 38, md: 48, lg: 58 },
+              lineHeight: { xs: 1.2, md: 1.12 },
               color: "#e7ebf8"
             }}
           >
@@ -1396,10 +1407,10 @@ export default function HomePage() {
         <Container sx={{ position: "relative", zIndex: 3 }}>
           <Box sx={{ pt: { xs: 6, md: 8 } }}>
             <Typography sx={{ textAlign: "center", color: "#f4b497", fontSize: { xs: 32, md: 44 }, lineHeight: 1 }}>〰</Typography>
-            <Typography sx={{ mt: 0.5, textAlign: "center", fontFamily: "var(--font-forum), serif", fontSize: { xs: 44, md: 56 }, color: "#1f2f52" }}>
+            <Typography sx={{ mt: 0.5, textAlign: "center", fontFamily: "var(--font-forum), serif", fontSize: { xs: 28, sm: 38, md: 48, lg: 56 }, color: "#1f2f52" }}>
               SAPT SADHANA - Serving Beyond Self
             </Typography>
-            <Typography sx={{ mt: 1.2, mx: "auto", textAlign: "center", color: "rgba(20,20,20,0.8)", fontSize: { xs: 16, md: 22 }, maxWidth: 1040, lineHeight: 1.4 }}>
+            <Typography sx={{ mt: 1.2, mx: "auto", textAlign: "center", color: "rgba(20,20,20,0.8)", fontSize: { xs: 14, sm: 16, md: 18, lg: 22 }, maxWidth: 1040, lineHeight: 1.4 }}>
               <b>Sapt Sadhana</b> is our commitment to selfless service (seva), transforming spiritual wisdom into compassionate action. Through
               various initiatives, we serve underprivileged communities, provide education,
             </Typography>
