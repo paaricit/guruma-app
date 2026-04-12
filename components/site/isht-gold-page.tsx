@@ -79,9 +79,9 @@ const learnItems = [
 
 const pricingFeatures = [
   "Unlimited access to all courses",
-  "Exclusive webinars and workshops",
+  "Exclusive seminars and workshops",
   "Digital library subscription",
-  "Recognition for learning milestones (CPD-style tracking)"
+  "CPD points for all activities"
 ] as const;
 
 const faqItems: { q: string; a: string }[] = [
@@ -96,72 +96,130 @@ const faqItems: { q: string; a: string }[] = [
 export default function IshtGoldPage() {
   return (
     <Box sx={{ bgcolor: navyDark, overflowX: "hidden" }}>
+      {/* --- Section: Site header --- */}
       <SharedHeader />
 
+      {/* --- Section: Hero --- */}
       <Box
         sx={{
           position: "relative",
-          pt: { xs: 14, md: 16 },
-          pb: { xs: 6, md: 8 },
-          textAlign: "center",
-          backgroundImage: `linear-gradient(180deg, rgba(2,8,22,0.88) 0%, rgba(5,14,32,0.92) 100%), url('${heroBg}')`,
+          height: { xs: 320, md: 440 },
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundImage: `linear-gradient(180deg, rgba(2,6,18,0.82) 0%, rgba(4,12,30,0.88) 100%), url('${heroBg}')`,
           backgroundSize: "cover",
-          backgroundPosition: "center"
+          backgroundPosition: "center",
+          overflow: "hidden"
         }}
       >
-        <Container maxWidth="lg">
+        {/* Starfield shimmer dots */}
+        {[...Array(12)].map((_, i) => (
+          <Box
+            key={i}
+            aria-hidden
+            sx={{
+              position: "absolute",
+              width: i % 3 === 0 ? 3 : 2,
+              height: i % 3 === 0 ? 3 : 2,
+              borderRadius: "50%",
+              bgcolor: "rgba(212,175,55,0.6)",
+              top: `${10 + (i * 13) % 75}%`,
+              left: `${5 + (i * 17) % 90}%`,
+              pointerEvents: "none"
+            }}
+          />
+        ))}
+
+        <Box sx={{ position: "relative", zIndex: 1, textAlign: "center" }}>
           <Typography
             sx={{
               fontFamily: "var(--font-forum), serif",
-              fontSize: { xs: 42, md: 64 },
-              fontWeight: 600,
-              color: gold,
-              letterSpacing: "0.06em",
-              textShadow: "0 4px 24px rgba(0,0,0,0.45)"
+              fontSize: { xs: 52, sm: 72, md: 96 },
+              fontWeight: 700,
+              letterSpacing: "0.08em",
+              lineHeight: 1,
+              background: `linear-gradient(135deg, #c8a227 0%, #f0d060 35%, #d4af37 55%, #b8941f 75%, #e8c84a 100%)`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              textShadow: "none",
+              userSelect: "none"
             }}
           >
-            ISHT GOLD
+            IISHT GOLD
           </Typography>
+
+          {/* Play button overlay */}
           <Box
             sx={{
-              mt: 3,
-              mx: "auto",
-              maxWidth: 900,
-              px: { xs: 2, md: 3 },
-              py: 2,
-              borderRadius: "14px",
-              bgcolor: "rgba(3,25,66,0.75)",
-              border: `1px solid rgba(212,175,55,0.35)`,
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: { xs: 52, md: 68 },
+              height: { xs: 52, md: 68 },
+              borderRadius: "50%",
+              border: "2px solid rgba(255,255,255,0.85)",
               display: "flex",
-              flexDirection: { xs: "column", sm: "row" },
               alignItems: "center",
-              justifyContent: "space-between",
-              gap: 2
+              justifyContent: "center",
+              cursor: "pointer",
+              backdropFilter: "blur(2px)",
+              bgcolor: "rgba(0,0,0,0.15)",
+              transition: "transform 0.2s",
+              "&:hover": { transform: "translate(-50%, -50%) scale(1.08)" }
             }}
           >
-            <Typography sx={{ color: "#fff", fontSize: { xs: 15, md: 17 }, textAlign: { xs: "center", sm: "left" } }}>
-              Access all courses for <strong>FREE</strong> with ISHT Gold Membership
-            </Typography>
-            <Button
-              component={Link}
-              href="/contact"
-              variant="contained"
+            <Box
               sx={{
-                ...uiPresets.ctaButton,
-                bgcolor: gold,
-                color: navyDark,
-                fontWeight: 800,
-                px: 3,
-                flexShrink: 0,
-                "&:hover": { bgcolor: goldDeep }
+                width: 0,
+                height: 0,
+                borderTop: "10px solid transparent",
+                borderBottom: "10px solid transparent",
+                borderLeft: "18px solid rgba(255,255,255,0.9)",
+                ml: "3px"
               }}
-            >
-              Register now
-            </Button>
+            />
           </Box>
-        </Container>
+        </Box>
       </Box>
 
+      {/* --- Section: Access banner --- */}
+      <Box
+        sx={{
+          bgcolor: navy,
+          px: { xs: 2, md: 3 },
+          py: { xs: 1.5, md: 2 },
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          alignItems: "center",
+          justifyContent: "center",
+          gap: { xs: 1.5, sm: 3 }
+        }}
+      >
+        <Typography sx={{ color: "#fff", fontSize: { xs: 14, md: 16 }, textAlign: "center" }}>
+          Access all courses for <strong>FREE</strong> with ISHT Gold Membership
+        </Typography>
+        <Button
+          component={Link}
+          href="/contact"
+          variant="contained"
+          sx={{
+            ...uiPresets.ctaButton,
+            bgcolor: gold,
+            color: navyDark,
+            fontWeight: 800,
+            px: 3,
+            py: 0.75,
+            flexShrink: 0,
+            "&:hover": { bgcolor: goldDeep }
+          }}
+        >
+          Register now
+        </Button>
+      </Box>
+
+      {/* --- Section: Membership value --- */}
       <Box sx={{ bgcolor: "#eceae4", pt: { xs: 8, md: 10 }, pb: { xs: 8, md: 11 }, px: { xs: 2, md: 3 }, position: "relative", overflow: "hidden" }}>
         <Box
           aria-hidden
@@ -250,6 +308,7 @@ export default function IshtGoldPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Global stats --- */}
       <Box
         sx={{
           py: { xs: 7, md: 9 },
@@ -271,6 +330,7 @@ export default function IshtGoldPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Benefits --- */}
       <Box sx={{ bgcolor: "#f5f3ee", py: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", color: navy, fontSize: { xs: 28, md: 36 }, fontWeight: 600, textAlign: "center" }}>
@@ -294,6 +354,7 @@ export default function IshtGoldPage() {
         </Container>
       </Box>
 
+      {/* --- Section: What you will learn --- */}
       <Box sx={{ bgcolor: "#eceae4", py: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="lg">
           <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: { xs: 3, md: 5 }, alignItems: "center" }}>
@@ -326,6 +387,7 @@ export default function IshtGoldPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Pricing --- */}
       <Box
         sx={{
           py: { xs: 8, md: 11 },
@@ -396,6 +458,7 @@ export default function IshtGoldPage() {
         </Container>
       </Box>
 
+      {/* --- Section: FAQ --- */}
       <Box sx={{ bgcolor: "#d8eef4", py: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="md">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", color: navy, fontSize: { xs: 26, md: 32 }, fontWeight: 600, textAlign: "center" }}>
@@ -427,10 +490,12 @@ export default function IshtGoldPage() {
         </Container>
       </Box>
 
+      {/* --- Section: Curve divider --- */}
       <Box sx={{ bgcolor: navyDark, height: { xs: 28, md: 40 } }}>
         <Box sx={{ height: "100%", bgcolor: "#b8dce8", borderTopLeftRadius: "50% 100%", borderTopRightRadius: "50% 100%" }} />
       </Box>
 
+      {/* --- Section: Site footer --- */}
       <SharedFooter />
     </Box>
   );
