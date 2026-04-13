@@ -11,8 +11,6 @@ import {
   Typography
 } from "@mui/material";
 import type { SitePageContent } from "@/lib/site-pages";
-import SharedHeader from "@/components/site/shared-header";
-import { uiPresets } from "@/lib/ui-presets";
 
 type SitePageProps = {
   content: SitePageContent;
@@ -20,10 +18,18 @@ type SitePageProps = {
 
 export default function SitePage({ content }: SitePageProps) {
   return (
-    <Box sx={{ bgcolor: "background.default", minHeight: "100vh", width: "100%", maxWidth: "100%", overflowX: "hidden" }}>
-      {/* --- Section: Site header --- */}
-      <SharedHeader />
-
+    <Box
+      sx={{
+        bgcolor: "background.default",
+        width: "100%",
+        maxWidth: "100%",
+        overflowX: "hidden",
+        minHeight: "100vh",
+        "@supports (height: 100dvh)": {
+          minHeight: "100dvh"
+        }
+      }}
+    >
       {/* --- Section: Hero --- */}
       <Box
         sx={{
@@ -69,7 +75,7 @@ export default function SitePage({ content }: SitePageProps) {
       </Box>
 
       {/* --- Section: Content highlights --- */}
-      <Container maxWidth="lg" sx={{ ...uiPresets.sectionContainer, pb: { xs: 9, md: 12 }, px: { xs: 2, sm: 3 } }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 7, md: 10 }, pb: { xs: 9, md: 12 }, px: { xs: 2, sm: 3 } }}>
         <Stack spacing={1.5} mb={4}>
           <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "3.1rem" } }}>
             {content.sectionTitle}

@@ -26,9 +26,6 @@ import {
   Stack,
   Typography
 } from "@mui/material";
-import SharedFooter from "@/components/site/shared-footer";
-import SharedHeader from "@/components/site/shared-header";
-import { uiPresets } from "@/lib/ui-presets";
 
 const IMG = {
   banner: "/images/SESSIONS (FREE LIVE SPIRITUAL SESSIONS) Photos/SESSIONS (FREE LIVE SPIRITUAL SESSIONS) Banner.webp",
@@ -231,7 +228,6 @@ function ScheduleCard({
         href="/contact"
         variant="contained"
         sx={{
-          ...uiPresets.ctaButton,
           bgcolor: "#031942",
           color: "#fffdfb",
           px: 3,
@@ -251,9 +247,6 @@ export default function SessionsPage() {
 
   return (
     <Box sx={{ bgcolor: "#0a1628", overflowX: "hidden" }}>
-      {/* --- Section: Site header --- */}
-      <SharedHeader />
-
       {/* --- Section: Hero --- */}
       <Box
         sx={{
@@ -309,7 +302,6 @@ export default function SessionsPage() {
                 variant="contained"
                 size="large"
                 sx={{
-                  ...uiPresets.ctaButton,
                   bgcolor: "#e9967b",
                   color: "#1a120c",
                   fontWeight: 700,
@@ -378,7 +370,6 @@ export default function SessionsPage() {
                 href="/contact"
                 variant="contained"
                 sx={{
-                  ...uiPresets.ctaButton,
                   bgcolor: "#031942",
                   color: "#fff",
                   fontWeight: 600,
@@ -705,7 +696,6 @@ export default function SessionsPage() {
               variant="contained"
               endIcon={<ArrowForwardRoundedIcon />}
               sx={{
-                ...uiPresets.ctaButton,
                 bgcolor: "#031942",
                 color: "#fff",
                 px: 3.5,
@@ -724,7 +714,6 @@ export default function SessionsPage() {
               href="/contact"
               variant="outlined"
               sx={{
-                ...uiPresets.ctaButton,
                 borderColor: "#031942",
                 color: "#031942",
                 px: 3.5,
@@ -859,7 +848,6 @@ export default function SessionsPage() {
               variant="contained"
               endIcon={<ChevronRightRoundedIcon />}
               sx={{
-                ...uiPresets.ctaButton,
                 bgcolor: "#031942",
                 color: "#fff",
                 px: 3,
@@ -875,7 +863,6 @@ export default function SessionsPage() {
               href="/sessions#session-format"
               variant="outlined"
               sx={{
-                ...uiPresets.ctaButton,
                 borderColor: "#031942",
                 color: "#031942",
                 px: 3,
@@ -890,7 +877,6 @@ export default function SessionsPage() {
       </Box>
 
       {/* --- Section: Site footer --- */}
-      <SharedFooter />
     </Box>
   );
 }

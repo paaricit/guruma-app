@@ -14,8 +14,6 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import SharedHeader from "@/components/site/shared-header";
-import { uiPresets } from "@/lib/ui-presets";
 
 const heroBg = "/images/Blongs Internal Page Photos/Wisdom Pages Banner BG.webp";
 const sideImage = "/images/contact/CONTACT Page Photo.webp";
@@ -61,8 +59,6 @@ const fieldSx = {
 export default function ContactPage() {
   return (
     <Box sx={{ bgcolor: "#e8f6f8", overflowX: "clip", overflowY: "visible" }}>
-      <SharedHeader />
-
       <Box
         sx={{
           position: "relative",
@@ -109,7 +105,6 @@ export default function ContactPage() {
                     type="submit"
                     variant="contained"
                     sx={{
-                      ...uiPresets.ctaButton,
                       alignSelf: "flex-start",
                       bgcolor: "#fff",
                       color: "#031942",

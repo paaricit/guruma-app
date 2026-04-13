@@ -1,0 +1,90 @@
+---
+description: Core standards for Guruma — Next.js App Router (prefer static routes), MUI theme, SSR, content, and links to layout skills
+alwaysApply: true
+---
+
+# Guruma app — engineering standards
+
+**Stack (see `package.json`):** Next.js **16**, MUI **7**, React **19**. Prefer MCP or current docs for these versions.
+
+## MCP
+
+- Use **official or project MCPs** for **Next.js**, **MUI**, and **Figma** when available; otherwise use upstream docs. Do not invent APIs.
+
+## App Router
+
+- **Server Components by default.** Add `"use client"` only for hooks, browser-only APIs, non-delegated handlers, or client-only MUI boundaries.
+- **Thin `app/**/page.tsx`:** metadata + data when needed + **import composed UI** — no large JSX trees in route files.
+- **SSR / SEO:** Metadata API, semantic landmarks (`main`, `nav`, headings), meaningful text in initial HTML. Do not hide primary copy behind client-only rendering without a server path.
+
+### Routing preference (finite site pages)
+
+- For **known, fixed URLs** (typical marketing site), prefer **one explicit folder per path:** **`app/<segment>/page.tsx`** paired with **`modules/<segment>/`**. Colocate **`metadata` / `generateMetadata`** with that route.
+- Use **`app/[slug]/page.tsx`** (or other dynamic segments) only when URLs are **not** fixed at build time (e.g. CMS slugs, large template families), or **temporarily** while migrating away from a catch-all router. **Static `app/<segment>` wins over `[slug]`** for the same path—migrate by adding static routes until **`[slug]`** can be removed.
+
+## Where code lives (skills)
+
+- **Feature folders, barrels, shared top-level folders (`theme/`, `hooks/`, …):** **`.cursor/skills/guruma-feature-modules/SKILL.md`**
+- **Figma → screen workflow:** **`.cursor/skills/guruma-figma-to-mui/SKILL.md`**
+
+## Additive migration (leave old, add new)
+
+- **Keep** existing **`components/`**, **`lib/`**, and **`app/`** files as they are until you choose to clean up. **Do not** require a big-bang move to adopt the new layout.
+- **Add** new top-level folders when needed (**`modules/`**, **`theme/`**, **`hooks/`**, **`utils/`**, **`model/`**, **`component/`**, **`content/`**) and wire **new** work through them. **Migrate or delete legacy in later passes.**
+
+## Legacy vs new work
+
+- **New features and new Figma work:** implement under **`modules/<segment>/`** per the **feature-modules** skill. **Do not grow `components/site/`** with new full pages.
+- **Existing code** under **`components/site/`** and **`components/providers/`** may stay until migrated; refactor in slices, do not duplicate shared UI inside each module.
+
+## Layout and responsiveness
+
+- **MUI breakpoints** and fluid layout (stack → row, `maxWidth`, `flexWrap`, `gap`); sections must reflow, not overflow.
+- Prefer **reusable blocks** (primitives, section shells) over one-off page markup.
+
+## MUI theme (no hardcoded visuals)
+
+- **New theme work** (`createTheme`, palette extensions, typography scales, gradient tokens, re-exports for `ThemeProvider`) lives under the top-level **`theme/`** folder. **`lib/mui-theme.ts`**, **`lib/design-system.ts`**, and provider imports may stay until you migrate or re-export from **`theme/`** — prefer **`theme/`** for anything added from now on.
+- **No ad-hoc hex/rgb or one-off gradients** in components. Use **`theme.palette`**, **`theme.custom*`** if defined, **`sx` with theme**, and **`alpha(theme.palette.*.*, opacity)`** from `@mui/material/styles`.
+
+```tsx
+// ✅ GOOD
+import { alpha } from "@mui/material/styles";
+sx={{ bgcolor: (t) => alpha(t.palette.primary.main, 0.08) }}
+
+// ❌ BAD
+sx={{ bgcolor: "rgba(12, 34, 56, 0.08)" }}
+```
+
+- **Gradients** live in the **theme**. If the theme cannot express it, **ask** before hardcoding.
+- **Figma:** use **family, weight, hierarchy** as inspiration — **do not** copy **`letterSpacing`** or **`lineHeight`** from Figma; use **`theme.typography`**. Figma is reference, not a rigid spec.
+
+## Units
+
+- Prefer **`rem`** and **`theme.spacing()`** over raw **`px`** in hand-written layout and typography unless the theme defines otherwise.
+
+## Images
+
+- **`public/…`**, appropriate formats, **Next.js `Image`** where agreed; **`priority`** only for above-the-fold / LCP.
+
+## Content and i18n
+
+- Prefer **data-driven** copy: **`content/*.json`** (or `.ts` modules) **or** typed aggregates under **`lib/`** (e.g. existing **`lib/site-pages.ts`**) — serializable, typed shapes so locales can swap later without restructuring trees.
+
+## Testing
+
+- **Do not add unit tests** unless explicitly requested.
+
+## When to ask
+
+- If a visual **cannot** match the **existing theme contract**, propose the smallest change under **`theme/`** (or legacy **`lib/`** if not moved yet) and **ask before** hardcoding in components.
+
+## Definition of done (touched surface)
+
+When changing or adding user-facing UI, aim for:
+
+- [ ] New **theme** tokens / `createTheme` work under **`theme/`** (unless the change is legacy-only in **`lib/`**).
+- [ ] No **new** stray hex/rgba/inline gradients in **touched** files (theme + `alpha` / tokens).
+- [ ] **New** routes: thin **`app/<segment>/page.tsx`** (prefer **static** segment, not catch-all) + **`modules/<segment>/`** (unless legacy-only).
+- [ ] **`"use client"`** only where needed for that change.
+- [ ] **Metadata / primary copy** still valid for SEO where the route is public.

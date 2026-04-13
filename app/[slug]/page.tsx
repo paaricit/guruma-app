@@ -6,9 +6,7 @@ import IshtGoldPage from "@/components/site/isht-gold-page";
 import MarriageCounsellingPage from "@/components/site/marriage-counselling-page";
 import SaptSadhanaPage from "@/components/site/sapt-sadhana-page";
 import SessionsPage from "@/components/site/sessions-page";
-import SharedHeader from "@/components/site/shared-header";
 import ImageFullPage from "@/components/site/image-full-page";
-import SharedFooter from "@/components/site/shared-footer";
 import SitePage from "@/components/site/site-page";
 import { routeFromSlug, sitePages } from "@/lib/site-pages";
 
@@ -69,19 +67,8 @@ export default async function DynamicPage({ params }: DynamicPageProps) {
   const fullPageImage = fullPageImageRoutes[route];
 
   if (fullPageImage) {
-    return (
-      <>
-        <SharedHeader />
-        <ImageFullPage imageSrc={fullPageImage} title={sitePages[route].pageTitle} />
-        <SharedFooter />
-      </>
-    );
+    return <ImageFullPage imageSrc={fullPageImage} title={sitePages[route].pageTitle} />;
   }
 
-  return (
-    <>
-      <SitePage content={sitePages[route]} />
-      <SharedFooter />
-    </>
-  );
+  return <SitePage content={sitePages[route]} />;
 }
