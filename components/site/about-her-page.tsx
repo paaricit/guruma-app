@@ -144,26 +144,7 @@ export default function AboutHerPage() {
             backgroundPosition: "center"
           }}
         />
-        <Box
-          sx={{
-            position: "absolute",
-            right: 0,
-            top: 0,
-            bottom: 0,
-            width: { xs: "52%", md: "52%" },
-            maxWidth: 820,
-            display: { xs: "none", sm: "block" }
-          }}
-        >
-          <Image
-            alt="Guru Maa Shubha Didi"
-            fill
-            priority
-            sizes="(max-width: 600px) 0px, 52vw"
-            src={IMG.overlap}
-            style={{ objectFit: "cover", objectPosition: "center top" }}
-          />
-        </Box>
+    
         <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, py: { xs: 4, md: 6 } }}>
           <Box sx={{ maxWidth: { xs: "100%", md: "min(755px, 52%)" } }}>
             <Typography
