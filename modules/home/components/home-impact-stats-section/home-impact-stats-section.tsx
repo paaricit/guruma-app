@@ -12,7 +12,7 @@ import {
 } from "@/theme/page-section";
 import { homeImpactStats } from "@/modules/home/content/home-impact-stats";
 
-const SECTION_BG = "/images/Home Page Photos/section-background.webp" as const;
+const SECTION_BG = "/images/Home Page Photos/Section-background.webp" as const;
 
 export function HomeImpactStatsSection() {
   const theme = useTheme();
@@ -26,7 +26,7 @@ export function HomeImpactStatsSection() {
       sx={{
         position: "relative",
         pb: {
-          xs: "clamp(2.75rem, 5.5vw, 4rem)",
+          xs: "clamp(4.75rem, 5.5vw, 4rem)",
           md: 20
         },
         pt: {
