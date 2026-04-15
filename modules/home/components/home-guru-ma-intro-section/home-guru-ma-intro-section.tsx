@@ -63,8 +63,8 @@ export function HomeGuruMaIntroSection() {
               position: "relative",
               borderRadius: mediaRadius,
               overflow: "hidden",
-              border: (t) => `2px solid ${alpha(t.palette.common.white, 0.92)}`,
-              boxShadow: (t) => `0 1rem 2.5rem ${alpha(t.palette.primary.dark, 0.14)}`
+              // border: (t) => `2px solid ${alpha(t.palette.common.white, 0.92)}`,
+              // boxShadow: (t) => `0 1rem 2.5rem ${alpha(t.palette.primary.dark, 0.14)}`
             }}
           >
             <Box sx={{ position: "relative", width: "100%", aspectRatio: "1 / 1", minHeight: 0 }}>
@@ -73,7 +73,7 @@ export function HomeGuruMaIntroSection() {
                 fill
                 sizes="(max-width: 899px) 100vw, 42vw"
                 src={guruMaIntroContent.thumbnailSrc}
-                style={{ objectFit: "none" }}
+                style={{ objectFit: "contain" }}
               />
             </Box>
             <Box
@@ -87,7 +87,7 @@ export function HomeGuruMaIntroSection() {
                 pointerEvents: "none"
               }}
             >
-              <Box
+              {/* <Box
                 sx={{
                   width: { xs: 44, sm: 48, md: 52 },
                   height: { xs: 44, sm: 48, md: 52 },
@@ -102,7 +102,7 @@ export function HomeGuruMaIntroSection() {
                 }}
               >
                 <PlayArrow sx={{ fontSize: { xs: 28, md: 32 }, ml: 0.35 }} aria-hidden />
-              </Box>
+              </Box> */}
             </Box>
           </Box>
 

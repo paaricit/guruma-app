@@ -74,7 +74,7 @@ export function SeekerExperiencesSection({
       sx={{
         position: "relative",
         minHeight: "100rem",
-        py: { xs: 8, md: 30 },
+        py: { xs: 8, md: 10 },
         color: theme.palette.common.white,
         backgroundImage: `url('${seekerExperiencesSectionBg}')`,
         backgroundSize: "cover",
@@ -87,8 +87,25 @@ export function SeekerExperiencesSection({
           Experiences from Seekers
         </Typography>
 
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "stretch", gap: { xs: 2, md: 2.5 } }}>
-          <Box sx={{ width: "100%", minWidth: 0, overflow: "hidden" }}>
+        <Box
+          sx={{
+            width: "100vw",
+            maxWidth: "100vw",
+            marginLeft: "calc(50% - 50vw)",
+            boxSizing: "border-box"
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "stretch",
+              gap: { xs: 2, md: 2.5 },
+              width: "100%",
+              maxWidth: "100%"
+            }}
+          >
+            <Box sx={{ width: "100%", maxWidth: "100%", minWidth: 0, overflow: "hidden" }}>
             <Box
               sx={{
                 display: "flex",
@@ -103,6 +120,8 @@ export function SeekerExperiencesSection({
                   key={video.name}
                   sx={{
                     flex: `0 0 calc(100% / ${videos.length})`,
+                    width: "100%",
+                    maxWidth: "100%",
                     minWidth: 0,
                     px: { xs: 0.75, md: 1.1 },
                     boxSizing: "border-box"
@@ -119,6 +138,7 @@ export function SeekerExperiencesSection({
                       overflow: "hidden",
                       minHeight: { xs: 220, md: 300 },
                       width: "100%",
+                      maxWidth: "100%",
                       height: "100%",
                       p: 0,
                       border: "none",
@@ -135,7 +155,7 @@ export function SeekerExperiencesSection({
                       alt=""
                       fill
                       src={video.image}
-                      sizes={mdUp ? "(max-width: 1200px) 33vw, 28vw" : "90vw"}
+                      sizes={mdUp ? "33vw" : "100vw"}
                       style={{ objectFit: "cover" }}
                       aria-hidden
                     />
@@ -148,7 +168,7 @@ export function SeekerExperiencesSection({
                         pointerEvents: "none"
                       }}
                     />
-                    <Typography
+                    {/* <Typography
                       sx={{
                         position: "absolute",
                         top: 8,
@@ -161,8 +181,8 @@ export function SeekerExperiencesSection({
                       }}
                     >
                       {video.name}
-                    </Typography>
-                    <Box
+                    </Typography> */}
+                    {/* <Box
                       sx={{
                         position: "absolute",
                         inset: 0,
@@ -187,14 +207,20 @@ export function SeekerExperiencesSection({
                       >
                         ▶
                       </Box>
-                    </Box>
+                    </Box> */}
                   </Box>
                 </Box>
               ))}
             </Box>
           </Box>
 
-          <Stack direction="row" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} sx={{ mt: { xs: 0.5, md: 0 } }}>
+          <Stack
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            spacing={{ xs: 2, md: 3 }}
+            sx={{ mt: { xs: 0.5, md: 0 }, width: "100%", maxWidth: "100%" }}
+          >
             <IconButton
               type="button"
               aria-label="Previous seeker videos"
@@ -236,6 +262,7 @@ export function SeekerExperiencesSection({
               <ChevronRightRoundedIcon sx={{ fontSize: { xs: 28, md: 30 } }} />
             </IconButton>
           </Stack>
+          </Box>
         </Box>
 
         <Dialog

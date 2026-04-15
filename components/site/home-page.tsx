@@ -24,6 +24,7 @@ const saptSadhanaCarouselSlides = [
 
 const saptCarouselArrowLeft = "/images/Home Page Photos/Arrow Left-poiint.png";
 const saptCarouselArrowRight = "/images/Home Page Photos/Arrow Right-point.png";
+const saptSadhanaWaveIcon = "/images/Home Page Photos/sapt -sadhana-icon.png";
 
 export default function HomePage() {
   const theme = useTheme();
@@ -94,7 +95,23 @@ export default function HomePage() {
         />
         <Container sx={{ position: "relative", zIndex: 3 }}>
           <Box sx={{ pt: { xs: 6, md: 8 } }}>
-            <Typography sx={{ textAlign: "center", color: "#f4b497", fontSize: { xs: 32, md: 44 }, lineHeight: 1 }}>〰</Typography>
+            <Box sx={{ display: "flex", justifyContent: "center", width: "100%", lineHeight: 0 }}>
+              <Box
+                sx={{
+                  position: "relative",
+                  height: { xs: 32, md: 44 },
+                  aspectRatio: "288 / 89"
+                }}
+              >
+                <Image
+                  src={saptSadhanaWaveIcon}
+                  alt=""
+                  fill
+                  sizes="(max-width: 900px) 120px, 160px"
+                  style={{ objectFit: "contain" }}
+                />
+              </Box>
+            </Box>
             <Typography sx={{ mt: 0.5, textAlign: "center", fontFamily: "var(--font-forum), serif", fontSize: { xs: 28, sm: 38, md: 48, lg: 56 }, color: "#1f2f52" }}>
               SAPT SADHANA - Serving Beyond Self
             </Typography>

@@ -20,27 +20,40 @@ export const seekerExperiencesSectionBg = "/images/Home Page Photos/pink-backgro
 
 export const seekerTestimonialCornerIcon = "/images/Home Page Photos/icon-orange.png";
 
+/** Shared YouTube embed for all seeker carousel cards (thumbnails differ). */
+const seekerCarouselEmbedSrc = "https://www.youtube.com/embed/GErQ_J7GUEM?autoplay=1";
+
 /** Card opens in-app dialog; `embedSrc` is a YouTube embed iframe URL. */
 export const seekerVideos: readonly SeekerVideoItem[] = [
   {
     name: "Priya Sharma",
-    image: "/images/Home Page Photos/Home page second section Video thumbnail.webp",
-    embedSrc: "https://www.youtube.com/embed/GErQ_J7GUEM?autoplay=1"
+    image: "/images/Home Page Photos/carousel-0.png",
+    embedSrc: seekerCarouselEmbedSrc
   },
   {
     name: "Karan Paul",
-    image: "/images/Home Page Photos/Morning Meditation for Peace.webp",
-    embedSrc: "https://www.youtube.com/embed/JBKC19rmG1M?autoplay=1"
+    image: "/images/Home Page Photos/carousel-1.png",
+    embedSrc: seekerCarouselEmbedSrc
   },
   {
     name: "Priya Das",
-    image: "/images/Home Page Photos/7 Steps to Inner Transformation.webp",
-    embedSrc: "https://www.youtube.com/embed/VdGV5qiFX44?autoplay=1"
+    image: "/images/Home Page Photos/carousel-2.png",
+    embedSrc: seekerCarouselEmbedSrc
   },
   {
     name: "Neha Verma",
-    image: "/images/Home Page Photos/The art of letting go.webp",
-    embedSrc: "https://www.youtube.com/embed/GIuMzYxKjX8?si=6JYuIxPQodEE3yuz&autoplay=1"
+    image: "/images/Home Page Photos/carousel-3.png",
+    embedSrc: seekerCarouselEmbedSrc
+  },
+  {
+    name: "Vikram Singh",
+    image: "/images/Home Page Photos/carousel-4.png",
+    embedSrc: seekerCarouselEmbedSrc
+  },
+  {
+    name: "Ananya Iyer",
+    image: "/images/Home Page Photos/carousel-5.png",
+    embedSrc: seekerCarouselEmbedSrc
   }
 ];
 

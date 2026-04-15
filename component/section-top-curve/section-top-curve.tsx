@@ -3,8 +3,8 @@
 import Box from "@mui/material/Box";
 import { alpha, useTheme, type Theme } from "@mui/material/styles";
 
-/** Default SVG height — matches Sapt Sadhana home promo. */
-export const SECTION_TOP_ARC_HEIGHT = "clamp(4.65rem, 17vw, 11.75rem)" as const;
+/** Default SVG height — matches Sapt Sadhana home promo (min = narrow / mobile). */
+export const SECTION_TOP_ARC_HEIGHT = "clamp(5.65rem, 17vw, 11.75rem)" as const;
 
 /** Arc fill must match the section body behind it (seam where SVG meets the box). */
 export type SectionTopArcSurface = "default" | "paper" | "primaryLight";

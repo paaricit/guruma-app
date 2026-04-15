@@ -138,7 +138,7 @@ export default function AboutHerPage() {
             backgroundPosition: "center"
           }}
         />
-        <Box
+        {/* <Box
           sx={{
             position: "absolute",
             right: 0,
@@ -157,7 +157,7 @@ export default function AboutHerPage() {
             src={IMG.overlap}
             style={{ objectFit: "cover", objectPosition: "center top" }}
           />
-        </Box>
+        </Box> */}
         <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, py: { xs: 4, md: 6 } }}>
           <Box sx={{ maxWidth: { xs: "100%", md: "min(755px, 52%)" } }}>
             <Typography

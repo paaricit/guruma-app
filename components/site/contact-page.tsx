@@ -170,7 +170,7 @@ export default function ContactPage() {
                     fontWeight: 700,
                     px: 4,
                     py: 1.25,
-                    mt: 5,
+                    mt: 10,
                     "&:hover": { bgcolor: "rgba(255,255,255,0.92)" }
                   }}
                 >
@@ -199,11 +199,11 @@ export default function ContactPage() {
                 Contact
               </Typography>
               <Typography sx={{ color: "#fff", fontWeight: 600, fontSize: 16, mb: 1 }}>+91-9123-456-789</Typography>
-              <Typography sx={{ color: "#fff", fontSize: 15, mb: 2 }}>info@iishtgold.com</Typography>
+              <Typography sx={{ color: "#fff", fontSize: 15, mb: 4 }}>info@iishtgold.com</Typography>
               <Typography sx={{ color: "rgba(255,255,255,0.7)", fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", mb: 0.75 }}>
                 Based in
               </Typography>
-              <Typography sx={{ color: "rgba(255,255,255,0.9)", fontSize: 14, mb: 3 }}>
+              <Typography sx={{ color: "rgba(255,255,255,0.9)", fontSize: 14, mb: 10 }}>
                 4th floor, Abhinav centre, Chamiers Road, Chennai, Tamil Nadu
               </Typography>
               <Stack direction="row" spacing={1.5}>
