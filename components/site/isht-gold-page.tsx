@@ -18,9 +18,6 @@ import {
   Stack,
   Typography
 } from "@mui/material";
-import SharedFooter from "@/components/site/shared-footer";
-import SharedHeader from "@/components/site/shared-header";
-import { uiPresets } from "@/lib/ui-presets";
 
 const gold = "#d4af37";
 const goldDeep = "#b8941f";
@@ -96,9 +93,6 @@ const faqItems: { q: string; a: string }[] = [
 export default function IshtGoldPage() {
   return (
     <Box sx={{ bgcolor: navyDark, overflowX: "hidden" }}>
-      {/* --- Section: Site header --- */}
-      <SharedHeader />
-
       {/* --- Section: Hero --- */}
       <Box
         sx={{
@@ -205,7 +199,6 @@ export default function IshtGoldPage() {
           href="/contact"
           variant="contained"
           sx={{
-            ...uiPresets.ctaButton,
             bgcolor: gold,
             color: navyDark,
             fontWeight: 800,
@@ -441,7 +434,7 @@ export default function IshtGoldPage() {
                 href="/contact"
                 fullWidth
                 variant="contained"
-                sx={{ ...uiPresets.ctaButton, bgcolor: gold, color: navyDark, fontWeight: 800, py: 1.25, "&:hover": { bgcolor: goldDeep } }}
+                sx={{ bgcolor: gold, color: navyDark, fontWeight: 800, py: 1.25, "&:hover": { bgcolor: goldDeep } }}
               >
                 Register now
               </Button>
@@ -496,7 +489,6 @@ export default function IshtGoldPage() {
       </Box>
 
       {/* --- Section: Site footer --- */}
-      <SharedFooter />
     </Box>
   );
 }

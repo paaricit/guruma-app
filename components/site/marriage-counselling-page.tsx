@@ -10,9 +10,6 @@ import LocalFloristOutlinedIcon from "@mui/icons-material/LocalFloristOutlined";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import { Box, Button, Container, IconButton, Stack, Typography } from "@mui/material";
-import SharedFooter from "@/components/site/shared-footer";
-import SharedHeader from "@/components/site/shared-header";
-import { uiPresets } from "@/lib/ui-presets";
 
 const IMG = {
   banner: "/images/Marriage Counselling Page Photos/Marriage Counselling Banner BG.webp",
@@ -95,9 +92,6 @@ export default function MarriageCounsellingPage() {
 
   return (
     <Box sx={{ bgcolor: "#fff", overflowX: "hidden" }}>
-      {/* --- Section: Site header --- */}
-      <SharedHeader />
-
       {/* --- Section: Hero --- */}
       <Box
         sx={{
@@ -161,7 +155,6 @@ export default function MarriageCounsellingPage() {
               href="/contact"
               variant="contained"
               sx={{
-                ...uiPresets.ctaButton,
                 bgcolor: peachAccent,
                 color: "#fff",
                 fontWeight: 700,
@@ -176,7 +169,6 @@ export default function MarriageCounsellingPage() {
               href="/contact"
               variant="outlined"
               sx={{
-                ...uiPresets.ctaButton,
                 borderColor: "rgba(255,255,255,0.9)",
                 color: "#fff",
                 fontWeight: 600,
@@ -230,7 +222,6 @@ export default function MarriageCounsellingPage() {
                 href="/contact"
                 variant="contained"
                 sx={{
-                  ...uiPresets.ctaButton,
                   bgcolor: navy,
                   color: "#fff",
                   fontWeight: 700,
@@ -333,7 +324,6 @@ export default function MarriageCounsellingPage() {
                 variant="contained"
                 fullWidth
                 sx={{
-                  ...uiPresets.ctaButton,
                   bgcolor: navy,
                   color: "#fff",
                   fontWeight: 700,
@@ -494,7 +484,6 @@ export default function MarriageCounsellingPage() {
       </Box>
 
       {/* --- Section: Site footer --- */}
-      <SharedFooter />
     </Box>
   );
 }

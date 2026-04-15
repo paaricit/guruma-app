@@ -14,8 +14,6 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import SharedHeader from "@/components/site/shared-header";
-import { uiPresets } from "@/lib/ui-presets";
 
 const heroBg = "/images/Blongs Internal Page Photos/Wisdom Pages Banner BG.webp";
 const sideImage = "/images/contact/CONTACT Page Photo.webp";
@@ -61,105 +59,178 @@ const fieldSx = {
 export default function ContactPage() {
   return (
     <Box sx={{ bgcolor: "#e8f6f8", overflowX: "clip", overflowY: "visible" }}>
-      <SharedHeader />
-
       <Box
         sx={{
           position: "relative",
-          pt: { xs: 13, md: 16 },
-          pb: { xs: 10, md: 14 },
-          px: { xs: 2, md: 3 },
+          pt: { xs: 10, md: 10 },
+          pb: { xs: 14, md: 20 },
           backgroundImage: `linear-gradient(165deg, rgba(3,15,40,0.94) 0%, rgba(5,22,48,0.9) 55%, rgba(8,28,58,0.92) 100%), url('${heroBg}')`,
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}
       >
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, mt: { xs: 6, md: 6 }, mb: { xs: 6, md: 6 } }}>
+        <Container
+          maxWidth="xl"
+          disableGutters
+          sx={{
+            position: "relative",
+            zIndex: 1,
+            my: { xs: 5, md: 8 },
+            px: { xs: 2.5, sm: 3, md: 4, lg: 6, xl: 7 },
+            py: { xs: 3, md: 5 },
+            width: "100%"
+          }}
+        >
           <Box
+            component="section"
+            aria-label="Contact hero"
             sx={{
               display: "grid",
-              gridTemplateColumns: { xs: "1fr", md: "minmax(260px, 38%) 1fr" },
-              gap: { xs: 4, md: 5 },
-              alignItems: "start"
+              width: "100%",
+              /* One horizontal row: image | Contact Us + form | address (stack on xs only) */
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 0.95fr)"
+              },
+              columnGap: { xs: 0, sm: 2, md: "clamp(1.75rem, 4vw, 4rem)", lg: "clamp(2rem, 5vw, 5.5rem)" },
+              rowGap: { xs: 6, sm: 0 },
+              /* Stretch row height to match tallest column so details can sit on the bottom */
+              alignItems: "stretch"
             }}
           >
+            {/* Section 1 — Photo */}
             <Box
+              component="section"
+              aria-label="Contact imagery"
               sx={{
                 position: "relative",
-                minHeight: { xs: 320, md: 520 },
-                borderRadius: "20px",
-                overflow: "hidden",
-                boxShadow: "0 20px 50px rgba(0,0,0,0.35)"
+                width: "100%",
+                minWidth: 0
               }}
             >
-              <Image src={sideImage} alt="Meditation and stillness" fill sizes="(max-width: 900px) 100vw, 38vw" style={{ objectFit: "cover" }} />
+              <Box
+                sx={{
+                  position: "relative",
+                  width: "100%",
+                  maxWidth: { xs: "min(100%, 24.25rem)", sm: "100%" },
+                  mx: { xs: "auto", sm: 0 },
+                  aspectRatio: "387 / 619",
+                  minHeight: { xs: 280, md: 0 },
+                  borderRadius: "21.29px",
+                  overflow: "hidden",
+                  boxShadow: "0 20px 50px rgba(0,0,0,0.35)",
+                  opacity: 1
+                }}
+              >
+                <Image
+                  src={sideImage}
+                  alt="Meditation and stillness"
+                  fill
+                  sizes="(max-width: 900px) 100vw, (max-width: 1536px) 34vw, 400px"
+                  style={{ objectFit: "cover" }}
+                />
+              </Box>
             </Box>
 
-            <Box>
-              <Typography sx={{ fontFamily: "var(--font-forum), serif", color: "#fff", fontSize: { xs: 36, md: 48 }, fontWeight: 500, mb: 3 }}>
+            {/* Section 2 — Heading + form */}
+            <Box
+              component="section"
+              aria-labelledby="contact-hero-heading"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: { xs: 3, md: 4 },
+                minWidth: 0,
+                width: "100%",
+                maxWidth: { xs: "100%", sm: "min(100%, 25rem)" },
+                justifySelf: { sm: "start" },
+                pt: { sm: 0.5 }
+              }}
+            >
+              <Typography
+                id="contact-hero-heading"
+                component="h1"
+                sx={{ fontFamily: "var(--font-forum), serif", color: "#fff", fontSize: { xs: 36, md: 72 }, fontWeight: 500, mb: 0 }}
+              >
                 Contact Us
               </Typography>
-              <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr auto" }, gap: { xs: 4, sm: 5 }, alignItems: "start" }}>
-                <Stack component="form" spacing={2.5} noValidate>
-                  <TextField label="Full Name" variant="standard" fullWidth sx={fieldSx} />
-                  <TextField label="E-mail" variant="standard" type="email" fullWidth sx={fieldSx} />
-                  <TextField label="Phone / WhatsApp Number" variant="standard" fullWidth sx={fieldSx} />
-                  <TextField label="Message" variant="standard" fullWidth multiline minRows={3} sx={fieldSx} />
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{
-                      ...uiPresets.ctaButton,
-                      alignSelf: "flex-start",
-                      bgcolor: "#fff",
-                      color: "#031942",
-                      fontWeight: 700,
-                      px: 4,
-                      py: 1.25,
-                      mt: 1,
-                      "&:hover": { bgcolor: "rgba(255,255,255,0.92)" }
-                    }}
-                  >
-                    Contact Us
-                  </Button>
-                </Stack>
+              <Stack component="form" spacing={3} noValidate sx={{ width: "100%", minWidth: 0 }}>
+                <TextField label="Full Name" variant="standard" fullWidth sx={fieldSx} />
+                <TextField label="E-mail" variant="standard" type="email" fullWidth sx={fieldSx} />
+                <TextField label="Phone / WhatsApp Number" variant="standard" fullWidth sx={fieldSx} />
+                <TextField label="Message" variant="standard" fullWidth multiline minRows={3} sx={fieldSx} />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{
+                    alignSelf: "flex-start",
+                    bgcolor: "#fff",
+                    color: "#031942",
+                    fontWeight: 700,
+                    px: 4,
+                    py: 1.25,
+                    mt: 5,
+                    "&:hover": { bgcolor: "rgba(255,255,255,0.92)" }
+                  }}
+                >
+                  Contact Us
+                </Button>
+              </Stack>
+            </Box>
 
-                <Box sx={{ minWidth: { sm: 200 }, mt: { xs: 0, sm: 6 } }}>
-                  <Typography sx={{ color: "rgba(255,255,255,0.7)", fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", mb: 1.5 }}>Contact</Typography>
-                  <Typography sx={{ color: "#fff", fontWeight: 600, fontSize: 16, mb: 1 }}>+91-9123-456-789</Typography>
-                  <Typography sx={{ color: "#fff", fontSize: 15, mb: 2 }}>info@iishtgold.com</Typography>
-                  <Typography sx={{ color: "rgba(255,255,255,0.7)", fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", mb: 0.75 }}>Based in</Typography>
-                  <Typography sx={{ color: "rgba(255,255,255,0.9)", fontSize: 14, maxWidth: 220, mb: 3 }}>
-                    4th floor, Abhinav centre, Chamiers Road, Chennai, Tamil Nadu
-                  </Typography>
-                  <Stack direction="row" spacing={1.5}>
-                    <Box
-                      component={Link}
-                      href="#"
-                      aria-label="Facebook"
-                      sx={{ width: 44, height: 44, borderRadius: "50%", bgcolor: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}
-                    >
-                      <Image src="/images/contact/Facebook - Negative.png" alt="Facebook" width={24} height={24} style={{ objectFit: "contain" }} />
-                    </Box>
-                    <Box
-                      component={Link}
-                      href="#"
-                      aria-label="Instagram"
-                      sx={{ width: 44, height: 44, borderRadius: "50%", bgcolor: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}
-                    >
-                      <Image src="/images/contact/Instagram - Negative.png" alt="Instagram" width={24} height={24} style={{ objectFit: "contain" }} />
-                    </Box>
-                    <Box
-                      component={Link}
-                      href="#"
-                      aria-label="Twitter"
-                      sx={{ width: 44, height: 44, borderRadius: "50%", bgcolor: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}
-                    >
-                      <Image src="/images/contact/Twitter - Negative.png" alt="Twitter" width={24} height={24} style={{ objectFit: "contain" }} />
-                    </Box>
-                  </Stack>
+            {/* Section 3 — Details + social (bottom-aligned in the hero row on sm+) */}
+            <Box
+              component="section"
+              aria-label="Contact details"
+              sx={{
+                width: "100%",
+                minWidth: { sm: 0 },
+                maxWidth: { xs: "min(100%, 22rem)", sm: "100%" },
+                mx: { xs: "auto", sm: 0 },
+                pt: { xs: 1, sm: 0 },
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: { xs: "flex-start", sm: "flex-end" },
+                minHeight: { sm: "100%" }
+              }}
+            >
+              <Typography sx={{ color: "rgba(255,255,255,0.7)", fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", mb: 1.5 }}>
+                Contact
+              </Typography>
+              <Typography sx={{ color: "#fff", fontWeight: 600, fontSize: 16, mb: 1 }}>+91-9123-456-789</Typography>
+              <Typography sx={{ color: "#fff", fontSize: 15, mb: 2 }}>info@iishtgold.com</Typography>
+              <Typography sx={{ color: "rgba(255,255,255,0.7)", fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", mb: 0.75 }}>
+                Based in
+              </Typography>
+              <Typography sx={{ color: "rgba(255,255,255,0.9)", fontSize: 14, mb: 3 }}>
+                4th floor, Abhinav centre, Chamiers Road, Chennai, Tamil Nadu
+              </Typography>
+              <Stack direction="row" spacing={1.5}>
+                <Box
+                  component={Link}
+                  href="#"
+                  aria-label="Facebook"
+                  sx={{ width: 44, height: 44, borderRadius: "50%", bgcolor: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}
+                >
+                  <Image src="/images/contact/Facebook - Negative.png" alt="Facebook" width={24} height={24} style={{ objectFit: "contain" }} />
                 </Box>
-              </Box>
+                <Box
+                  component={Link}
+                  href="#"
+                  aria-label="Instagram"
+                  sx={{ width: 44, height: 44, borderRadius: "50%", bgcolor: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}
+                >
+                  <Image src="/images/contact/Instagram - Negative.png" alt="Instagram" width={24} height={24} style={{ objectFit: "contain" }} />
+                </Box>
+                <Box
+                  component={Link}
+                  href="#"
+                  aria-label="Twitter"
+                  sx={{ width: 44, height: 44, borderRadius: "50%", bgcolor: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}
+                >
+                  <Image src="/images/contact/Twitter - Negative.png" alt="Twitter" width={24} height={24} style={{ objectFit: "contain" }} />
+                </Box>
+              </Stack>
             </Box>
           </Box>
         </Container>

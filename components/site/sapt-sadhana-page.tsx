@@ -5,9 +5,6 @@ import Link from "next/link";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import { Box, Button, Container, Divider, Stack, Typography } from "@mui/material";
-import SharedFooter from "@/components/site/shared-footer";
-import SharedHeader from "@/components/site/shared-header";
-import { uiPresets } from "@/lib/ui-presets";
 
 const IMG = {
   banner: "/images/Sapt Sadhana Page Photos/SAPT SADHANA Banner BG.webp",
@@ -202,9 +199,6 @@ function InitiativeBlock({
 export default function SaptSadhanaPage() {
   return (
     <Box sx={{ bgcolor: "#fff", overflowX: "hidden" }}>
-      {/* Header */}
-      <SharedHeader />
-
       {/* Hero */}
       <Box
         sx={{
@@ -528,7 +522,6 @@ export default function SaptSadhanaPage() {
               href="/contact"
               variant="contained"
               sx={{
-                ...uiPresets.ctaButton,
                 bgcolor: navy,
                 color: "#fff",
                 fontWeight: 700,
@@ -544,7 +537,6 @@ export default function SaptSadhanaPage() {
               href="/contact"
               variant="outlined"
               sx={{
-                ...uiPresets.ctaButton,
                 borderColor: navy,
                 color: navy,
                 fontWeight: 700,
@@ -565,7 +557,6 @@ export default function SaptSadhanaPage() {
       </Box>
 
       {/* Footer */}
-      <SharedFooter />
     </Box>
   );
 }

@@ -1,6 +1,6 @@
-import HomePage from "@/components/site/home-page";
+import HomePage from "@/modules/home";
 
-/** Home route — layout sections are commented inside `HomePage`. */
+/** Home route — composed UI from `modules/home` (thin page). */
 export default function RootPage() {
   return <HomePage />;
 }

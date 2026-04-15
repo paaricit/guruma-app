@@ -12,9 +12,6 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VolunteerActivismOutlinedIcon from "@mui/icons-material/VolunteerActivismOutlined";
 import WavesOutlinedIcon from "@mui/icons-material/WavesOutlined";
 import { Box, Card, Container, Stack, Typography } from "@mui/material";
-import SharedFooter from "@/components/site/shared-footer";
-import SharedHeader from "@/components/site/shared-header";
-import { uiPresets } from "@/lib/ui-presets";
 
 const IMG = {
   banner: "/images/About Her Page Photos/ABOUT HER Banner.webp",
@@ -122,9 +119,6 @@ export default function AboutHerPage() {
 
   return (
     <Box sx={{ bgcolor: "#0a1628", overflowX: "hidden" }}>
-      {/* --- Section: Site header --- */}
-      <SharedHeader />
-
       {/* --- Section: Hero --- */}
       <Box
         sx={{
@@ -708,7 +702,13 @@ export default function AboutHerPage() {
           }}
         />
         <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
-          <Box sx={uiPresets.statsGrid}>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "repeat(2, minmax(0, 1fr))", sm: "repeat(2, minmax(0, 1fr))", md: "repeat(4, minmax(0, 1fr))" },
+              gap: { xs: 2.5, md: 3.5 }
+            }}
+          >
             {stats.map((stat) => (
               <Box key={stat.value} sx={{ textAlign: "center" }}>
                 <Typography
@@ -861,7 +861,6 @@ export default function AboutHerPage() {
       </Box>
 
       {/* --- Section: Site footer --- */}
-      <SharedFooter />
     </Box>
   );
 }

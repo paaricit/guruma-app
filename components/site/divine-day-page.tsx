@@ -27,9 +27,6 @@ import {
   Stack,
   Typography
 } from "@mui/material";
-import SharedFooter from "@/components/site/shared-footer";
-import SharedHeader from "@/components/site/shared-header";
-import { uiPresets } from "@/lib/ui-presets";
 
 const IMG = {
   heroOverlap: "/images/Divine day page Photos/Divine day Banner Video Operlap.webp",
@@ -179,9 +176,6 @@ export default function DivineDayPage() {
 
   return (
     <Box sx={{ bgcolor: "#0a1628", overflowX: "hidden" }}>
-      {/* --- Section: Site header --- */}
-      <SharedHeader />
-
       {/* --- Section: Hero --- */}
       <Box
         sx={{
@@ -239,7 +233,6 @@ export default function DivineDayPage() {
                 href="/contact"
                 variant="contained"
                 sx={{
-                  ...uiPresets.ctaButton,
                   bgcolor: "#e9967b",
                   color: "#1a120c",
                   fontWeight: 700,
@@ -253,7 +246,6 @@ export default function DivineDayPage() {
                 href="/contact"
                 variant="outlined"
                 sx={{
-                  ...uiPresets.ctaButton,
                   borderColor: "rgba(255,255,255,0.85)",
                   color: "#fff",
                   fontWeight: 600,
@@ -491,7 +483,6 @@ export default function DivineDayPage() {
                 href="/contact"
                 variant="contained"
                 sx={{
-                  ...uiPresets.ctaButton,
                   bgcolor: "#0a1a32",
                   color: "#fff",
                   fontWeight: 700,
@@ -658,7 +649,7 @@ export default function DivineDayPage() {
                 component={Link}
                 href="/contact"
                 variant="contained"
-                sx={{ ...uiPresets.ctaButton, bgcolor: "#0a1a32", color: "#fff", fontWeight: 700, px: 3, "&:hover": { bgcolor: "#152a48" } }}
+                sx={{ bgcolor: "#0a1a32", color: "#fff", fontWeight: 700, px: 3, "&:hover": { bgcolor: "#152a48" } }}
               >
                 Register Now
               </Button>
@@ -666,7 +657,7 @@ export default function DivineDayPage() {
                 component={Link}
                 href="/contact"
                 variant="contained"
-                sx={{ ...uiPresets.ctaButton, bgcolor: "#e9967b", color: "#fff", fontWeight: 700, px: 3, "&:hover": { bgcolor: "#d8866f" } }}
+                sx={{ bgcolor: "#e9967b", color: "#fff", fontWeight: 700, px: 3, "&:hover": { bgcolor: "#d8866f" } }}
               >
                 Special Guest
               </Button>
@@ -723,7 +714,7 @@ export default function DivineDayPage() {
                 component={Link}
                 href="/contact"
                 variant="contained"
-                sx={{ mt: 3, ...uiPresets.ctaButton, bgcolor: "#0a1a32", color: "#fff", fontWeight: 700, px: 3, py: 1.25, "&:hover": { bgcolor: "#152a48" } }}
+                sx={{ mt: 3, bgcolor: "#0a1a32", color: "#fff", fontWeight: 700, px: 3, py: 1.25, "&:hover": { bgcolor: "#152a48" } }}
               >
                 Register Now
               </Button>
@@ -887,7 +878,6 @@ export default function DivineDayPage() {
       </Box>
 
       {/* --- Section: Site footer --- */}
-      <SharedFooter />
     </Box>
   );
 }

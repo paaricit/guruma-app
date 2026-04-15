@@ -5,6 +5,7 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import Image from "next/image";
 import Link from "next/link";
 import { AppBar, Box, Button, Drawer, IconButton, Stack, Toolbar } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -34,10 +35,15 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
     <AppBar
       position="fixed"
       elevation={0}
-      sx={{
-        background:
-          "linear-gradient(0deg, rgba(2, 22, 73, 0) 23.64%, #031942 61.82%, #000 100%)"
-      }}
+      color="transparent"
+      sx={(theme) => ({
+        // `color="transparent"` stops MUI from injecting default AppBar `backgroundColor`.
+        background: {
+          // xs: theme.palette.primary.dark,
+          xs: `linear-gradient(0deg, ${alpha(theme.palette.primary.dark, 0)} 23.64%, ${theme.palette.primary.dark} 61.82%, ${theme.palette.common.black} 100%)`
+        },
+        boxShadow: "none"
+      })}
     >
       {/* --- Section: Primary toolbar (logo + nav + menu button) --- */}
       <Toolbar sx={{ minHeight: { xs: 72, md: 90 }, px: { xs: 1.5, sm: 2, md: 3 }, maxWidth: "100vw", boxSizing: "border-box" }}>
@@ -50,22 +56,31 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
           sx={{
             textDecoration: "none",
             mr: { xs: 1, md: 2 },
+            position: 'absolute',
             flexShrink: 1,
             minWidth: 0,
             maxWidth: { xs: "calc(100vw - 120px)", sm: "none" },
             // Nudge logo down without padding (padding grows the flex item and re-centers the whole toolbar).
-            transform: { xs: "translateY(28px)", md: "translateY(28px)" }
+            transform: { xs: "translateY(0px)", md: "translateY(28px)" }
           }}
         >
           <Box sx={{ position: "relative", width: { xs: 34, md: 48 }, height: { xs: 34, md: 48 }, flexShrink: 0 }}>
             <Image alt="Guru Maa logo" fill src="/images/logo.svg" style={{ objectFit: "contain" }} />
           </Box>
-          <Box sx={{ position: "relative", width: { xs: "min(120px, 32vw)", sm: 130, md: 180 }, height: { xs: 20, md: 30 }, flexShrink: 0 }}>
+          <Box
+            sx={{
+              display: { xs: "none", sm: "block" },
+              position: "relative",
+              width: { sm: 130, md: 180 },
+              height: { sm: 20, md: 30 },
+              flexShrink: 0
+            }}
+          >
             <Image alt="Guru Maa Shubha Didi" fill src="/images/logo-desc.svg" style={{ objectFit: "contain" }} />
           </Box>
         </Stack>
 
-        <Stack direction="row" spacing={0} sx={{ display: { xs: "none", lg: "flex" } }}>
+        <Stack direction="row" spacing={0} sx={{ display: { xs: "none", lg: "flex" }, justifyContent: 'center', flexGrow: 1 }}>
           {navItems.map((item) => (
             <Button
               component={Link}
@@ -76,8 +91,8 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
                 textTransform: "none",
                 fontFamily: "var(--font-montserrat), sans-serif",
                 fontWeight: 600,
-                fontSize: 15.4,
-                px: 2.2,
+                fontSize: '1.125rem',
+                px: 3,
                 minWidth: 0,
                 height: { xs: 56, md: 64 }
               }}

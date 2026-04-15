@@ -122,7 +122,7 @@ export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSa
       sx={{
         position: "relative",
         width: "100%",
-        maxWidth: 1080,
+        maxWidth: "80rem",
         mx: "auto",
         minHeight: { xs: 220, sm: 260, md: 320 },
         py: { xs: 1, md: 2 },
@@ -167,15 +167,15 @@ export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSa
           />
         </Box>
 
-        {/* Active slide — center */}
+        {/* Active slide — center (max width 45rem = 720px at 16px root) */}
         <Box
           ref={centerRef}
           sx={{
             position: "relative",
             zIndex: 4,
             flex: { xs: "1 1 auto", sm: "0 1 auto" },
-            width: { xs: "min(92vw, 400px)", sm: "min(46vw, 400px)", md: 420 },
-            maxWidth: "100%",
+            width: { xs: "min(92vw, 45rem)", sm: "min(72vw, 45rem)", md: "min(100%, 45rem)" },
+            maxWidth: "45rem",
             height: { xs: 220, sm: 240, md: 290 },
             mx: { sm: -1.5, md: -2.5 },
             borderRadius: "24px",
@@ -189,7 +189,7 @@ export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSa
             alt={`Sapt Sadhana slide ${activeIndex + 1} of ${n}`}
             fill
             src={slides[activeIndex]}
-            sizes="(max-width: 600px) 92vw, 420px"
+            sizes="(max-width: 600px) 92vw, 720px"
             style={{ objectFit: "cover" }}
             priority={activeIndex === 0}
           />
