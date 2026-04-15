@@ -14,6 +14,7 @@ import {
   TextField,
   Typography
 } from "@mui/material";
+import { SectionTopArc } from "@/component/section-top-curve";
 
 const heroBg = "/images/Blongs Internal Page Photos/Wisdom Pages Banner BG.webp";
 const sideImage = "/images/contact/CONTACT Page Photo.webp";
@@ -237,33 +238,24 @@ export default function ContactPage() {
       </Box>
 
       <Box
+        component="section"
+        aria-labelledby="contact-community-heading"
         sx={{
-          bgcolor: "#d8eef4",
+          bgcolor: "primary.light",
           position: "relative",
-          zIndex: 1,
-          pt: { xs: 7, md: 9 },
-          px: { xs: 2, md: 3 },
-          overflow: "visible"
+          zIndex: 2,
+          overflow: "visible",
+          pt: { xs: 2, md: 2.5 },
+          pb: { xs: 7, md: 9 },
+          px: { xs: 2, md: 3 }
         }}
       >
-        <Box
-          aria-hidden
-          sx={{
-            position: "absolute",
-            left: 0,
-            top: -93,
-            width: "100%",
-            height: { xs: 200, md: 260 },
-            backgroundImage: "url('/images/contact/curve-header.png')",
-            backgroundSize: "100% auto",
-            backgroundPosition: "center top",
-            backgroundRepeat: "no-repeat",
-            pointerEvents: "none",
-            zIndex: 2
-          }}
-        />
+        <SectionTopArc surface="primaryLight" />
         <Container maxWidth="lg" sx={{ position: "relative", zIndex: 3 }}>
-          <Typography sx={{ fontFamily: "var(--font-forum), serif", color: "#031942", fontSize: { xs: 28, md: 36 }, fontWeight: 600, textAlign: "center" }}>
+          <Typography
+            id="contact-community-heading"
+            sx={{ fontFamily: "var(--font-forum), serif", color: "#031942", fontSize: { xs: 28, md: 36 }, fontWeight: 600, textAlign: "center" }}
+          >
             Join the Community
           </Typography>
           <Box
@@ -314,7 +306,7 @@ export default function ContactPage() {
         </Container>
       </Box>
 
-      <Box sx={{ bgcolor: "#d8eef4", pt: { xs: "48px", md: "84px" }, pb: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
+      <Box sx={{ bgcolor: "primary.light", pt: { xs: "48px", md: "84px" }, pb: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
         <Container maxWidth="md">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", color: "#031942", fontSize: { xs: 26, md: 32 }, fontWeight: 600, textAlign: "center" }}>
             Frequently Asked Questions
