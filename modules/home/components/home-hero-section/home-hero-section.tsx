@@ -36,7 +36,7 @@ export function HomeHeroSection() {
         position: "relative",
         display: "flex",
         flexDirection: "column",
-        minHeight: { xs: "auto", md: "100vh" },
+        minHeight: { xs: "auto", md: "110vh" },
         bgcolor: { xs: "primary.dark", md: "transparent" },
         pt: { xs: "clamp(6.5rem, 14vw, 8rem)", md: "clamp(7rem, 12vw, 8.5rem)" },
         pb: { xs: 12, md: "clamp(2rem, 4vw, 3rem)" },
@@ -66,7 +66,8 @@ export function HomeHeroSection() {
             gridTemplateColumns: { xs: "1fr", md: "1fr 0.92fr" },
             alignItems: "center",
             width: "100%",
-            py: { xs: 1, md: 0 }
+            py: { xs: 1, md: 0 },
+            pb: { xs: 1, md: 10 }
           }}
         >
           <Box sx={{ maxWidth: { xs: "100%", md: "45rem" }, textAlign: "left" }}>
@@ -78,7 +79,8 @@ export function HomeHeroSection() {
               component="h1"
               sx={{
                 mt: 1.5,
-                ...homeHeroDisplayOnDarkSx(theme)
+                ...homeHeroDisplayOnDarkSx(theme),
+                lineHeight: 1.05
               }}
             >
               {homeHeroContent.displayLine1}

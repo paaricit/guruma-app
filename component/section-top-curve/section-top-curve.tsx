@@ -4,26 +4,37 @@ import Box from "@mui/material/Box";
 import { alpha, useTheme, type Theme } from "@mui/material/styles";
 
 /** Default SVG height — matches Sapt Sadhana home promo. */
-export const SECTION_TOP_ARC_HEIGHT = "clamp(4.25rem, 16vw, 11rem)" as const;
+export const SECTION_TOP_ARC_HEIGHT = "clamp(4.65rem, 17vw, 11.75rem)" as const;
 
 /** Arc fill must match the section body behind it (seam where SVG meets the box). */
 export type SectionTopArcSurface = "default" | "paper" | "primaryLight";
 
+/** Preset surface token or any valid CSS color (e.g. `#F3F2EE`, `rgb(...)`, `var(--token)`). */
+export type SectionTopArcSurfaceProp = SectionTopArcSurface | (string & {});
+
 export type SectionTopArcProps = {
   svgHeight?: string;
-  surface?: SectionTopArcSurface;
+  /** Preset (`default` / `paper` / `primaryLight`) or a CSS color string for a custom seam fill. */
+  surface?: SectionTopArcSurfaceProp;
 };
 
-function arcFillColor(theme: Theme, surface: SectionTopArcSurface) {
-  if (surface === "paper") return theme.palette.background.paper;
-  if (surface === "primaryLight") return theme.palette.primary.light;
-  return theme.palette.background.default;
+function resolveArcFill(theme: Theme, surface: SectionTopArcSurfaceProp): string {
+  switch (surface) {
+    case "paper":
+      return theme.palette.background.paper;
+    case "primaryLight":
+      return theme.palette.primary.light;
+    case "default":
+      return theme.palette.background.default;
+    default:
+      return surface;
+  }
 }
 
 /**
  * Curved top silhouette (SVG fill + stroked arc with top-only drop shadow).
  * Place inside a `position: relative` section; sits above the section via `bottom: 100%`.
- * Set `surface` to match the section seam: `default` / `paper` / `primaryLight` (mint band tops).
+ * Set `surface` to a preset (`default` / `paper` / `primaryLight`) or any CSS color string (e.g. `#F3F2EE`).
  */
 export function SectionTopArc({ svgHeight = SECTION_TOP_ARC_HEIGHT, surface = "default" }: SectionTopArcProps) {
   const theme = useTheme();
@@ -40,7 +51,7 @@ export function SectionTopArc({ svgHeight = SECTION_TOP_ARC_HEIGHT, surface = "d
         width: "100%",
         zIndex: 2,
         pointerEvents: "none",
-        color: (t) => arcFillColor(t, surface)
+        color: (t) => resolveArcFill(t, surface)
       }}
     >
       <svg
@@ -54,9 +65,9 @@ export function SectionTopArc({ svgHeight = SECTION_TOP_ARC_HEIGHT, surface = "d
           verticalAlign: "bottom"
         }}
       >
-        <path fill="currentColor" d="M0 200V108C400 0 800 0 1200 108V200H0Z" />
+        <path fill="currentColor" d="M0 200V118C400 0 800 0 1200 118V200H0Z" />
         <path
-          d="M0 108 C400 0 800 0 1200 108"
+          d="M0 118 C400 0 800 0 1200 118"
           fill="none"
           stroke={alpha(theme.palette.primary.dark, 0.04)}
           strokeWidth={3}

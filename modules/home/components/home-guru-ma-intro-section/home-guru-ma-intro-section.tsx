@@ -23,7 +23,7 @@ import { guruMaIntroContent } from "@/modules/home/content/guru-ma-intro";
 
 export function HomeGuruMaIntroSection() {
   const theme = useTheme();
-  const iconBox = theme.spacing(2.75);
+  const iconBox = theme.spacing(5);
   const mediaRadius = { xs: "1.5rem", md: "2rem" };
 
   return (
@@ -125,7 +125,7 @@ export function HomeGuruMaIntroSection() {
               {guruMaIntroContent.roles.map((item) => (
                 <Box
                   key={item.label}
-                  sx={{ display: "flex", alignItems: "center", gap: 1, color: "text.primary" }}
+                  sx={{ display: "flex", alignItems: "center", gap: 1, color: "text.primary" , mb: 3}}
                 >
                   <Box
                     sx={{

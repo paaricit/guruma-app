@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import { SaptSadhanaHomePromoSection } from "@/component/sapt-sadhana-home-promo";
+import { HomeCallbackSection } from "@/components/site/home-callback-section";
 import {
   DivineDiscoursesScheduleSection,
   HomeGuruMaIntroSection,
@@ -17,6 +18,7 @@ export default function HomePage() {
       <HomeGuruMaIntroSection />
       <HomeImpactStatsSection />
       <DivineDiscoursesScheduleSection />
+      <HomeCallbackSection />
       <HomeProgramsSection />
       <WisdomInActionSection />
       <SeekerExperiencesSection />

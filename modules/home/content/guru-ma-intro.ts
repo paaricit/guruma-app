@@ -14,7 +14,7 @@ export const guruMaIntroContent = {
     "Guru Maa Shubha Didi is a Beacon (Torchbearer) of Love & Wisdom. Her Sacred Mission is to unlock the Secret Treasures of Infinite Happiness and spread Love, Peace and Joy through Internal Fulfilment.",
   ctaLabel: "Know Her Journey",
   ctaHref: "/about-her",
-  thumbnailSrc: "/images/Home Page Photos/Home page second section Video thumbnail.webp",
+  thumbnailSrc: "/images/Home Page Photos/Home page second section Video thumbnail.png",
   thumbnailAlt: "Guru Maa session",
   roles: [
     { iconSrc: "/images/Home Page Photos/group2_icons.png", label: "A Divine Guru" },

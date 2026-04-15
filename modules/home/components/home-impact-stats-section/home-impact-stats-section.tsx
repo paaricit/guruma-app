@@ -12,7 +12,7 @@ import {
 } from "@/theme/page-section";
 import { homeImpactStats } from "@/modules/home/content/home-impact-stats";
 
-const SECTION_BG = "/images/Home Page Photos/Section-background.webp" as const;
+const SECTION_BG = "/images/Home Page Photos/Section.png" as const;
 
 export function HomeImpactStatsSection() {
   const theme = useTheme();
@@ -41,8 +41,8 @@ export function HomeImpactStatsSection() {
           position: "absolute",
           inset: 0,
           backgroundImage: `linear-gradient(${overlay}, ${overlay}), url('${SECTION_BG}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center"
+          backgroundSize: "contain",
+          backgroundPosition: "right"
         }}
       />
 
@@ -53,12 +53,14 @@ export function HomeImpactStatsSection() {
         <Box
           sx={{
             display: "grid",
+            pb: 6,
+            px: { xs: 0, lg: 4 },
             gridTemplateColumns: {
               xs: "repeat(2, minmax(0, 1fr))",
               sm: "repeat(2, minmax(0, 1fr))",
               md: "repeat(4, minmax(0, 1fr))"
             },
-            gap: { xs: 2.5, md: 3.5 }
+            gap: { xs: 2.5, md: 3.5, lg: 4 }
           }}
         >
           {homeImpactStats.map((stat) => (

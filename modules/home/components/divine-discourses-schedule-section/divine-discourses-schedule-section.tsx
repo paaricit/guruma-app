@@ -30,6 +30,18 @@ const fluidCalloutBody = "clamp(1.0625rem, 0.75vw + 0.82rem, 1.422rem)";
 /** Figma — CTA (~21px) */
 const fluidScheduleCta = "clamp(1rem, 0.55vw + 0.85rem, 1.3125rem)";
 
+/** Corner decor: `next/image` ×2 — top-right and bottom-left (same asset). */
+const CURVE_DECOR_SRC = "/images/Home Page Photos/wisdom_action.png";
+
+const curveDecorBoxSx = {
+  position: "absolute" as const,
+  zIndex: 0,
+  pointerEvents: "none" as const,
+  overflow: "hidden" as const,
+  width: '30%',
+  height: '50%'
+};
+
 function SchedulePill({ label }: { label: string }) {
   return (
     <Box
@@ -101,7 +113,7 @@ export function DivineDiscoursesScheduleSection() {
         position: "relative",
         zIndex: 2,
         isolation: "isolate",
-        bgcolor: (t) => t.palette.background.paper,
+        bgcolor: "#F3F2EE",
         mt: { xs: 1, md: 2 },
         pt: { xs: 2, md: 2.5 },
         pb: { xs: 8, md: 9 },
@@ -109,13 +121,39 @@ export function DivineDiscoursesScheduleSection() {
         borderTop: (t) => `1px solid ${t.palette.divider}`
       }}
     >
-      <SectionTopArc surface="paper" />
+      <Box aria-hidden sx={{
+        ...curveDecorBoxSx,
+        top: '-10%',
+        right: '-8%',
+        zIndex: 11
+        
+      }}>
+        <Image
+          alt=""
+          src={CURVE_DECOR_SRC}
+          fill
+          sizes="300px"
+          style={{ objectFit: "cover", objectPosition: "right top" }}
+        />
+      </Box>
+      <Box aria-hidden sx={{ ...curveDecorBoxSx,  bottom: '0%',
+        left: '-8%', zIndex: 1 }}>
+        <Image
+          alt=""
+          src={CURVE_DECOR_SRC}
+          fill
+          sizes="300px"
+          style={{ objectFit: "cover", objectPosition: "left bottom", transform: "rotate(180deg)" }}
+        />
+      </Box>
+
+      <SectionTopArc surface="#F3F2EE" />
 
       <Container
         maxWidth={pageContainerMaxWidth}
-        sx={{ position: "relative", zIndex: 3, ...pageSectionGutterSx }}
+        sx={{ position: "relative", ...pageSectionGutterSx }}
       >
-        <Box sx={{ pt: { xs: 0.5, md: 1 }, pb: { xs: 2, md: 3 } }}>
+        <Box sx={{ position: "relative", zIndex: 3, mt: { xs: 0, md: -10 }, pt: { xs: 0.5, md: 0 }, pb: { xs: 2, md: 3 } }}>
           <Typography id="divine-discourses-heading" component="h2" sx={sectionDisplayTitleSx(theme)}>
             {copy.title}
           </Typography>
@@ -146,7 +184,9 @@ export function DivineDiscoursesScheduleSection() {
             boxShadow: "none",
             p: { xs: 1.5, md: 2.25 },
             bgcolor: (t) => t.palette.background.paper,
-            overflow: "hidden"
+            overflow: "hidden",
+            position: 'relative',
+            zIndex: 39
           }}
         >
           <Box
@@ -218,7 +258,7 @@ export function DivineDiscoursesScheduleSection() {
               </Stack>
             </Box>
 
-            <Box sx={{ py: { xs: 0.5, md: 0.75 }, minWidth: 0 }}>
+            <Box sx={{ py: { xs: 0.5, md: 0.75 }, minWidth: 0, width: {xs: "100%", lg: "90%"} }}>
               <Box
                 sx={{
                   display: "grid",
@@ -337,7 +377,7 @@ export function DivineDiscoursesScheduleSection() {
                 variant="contained"
                 fullWidth
                 sx={{
-                  mt: 1.75,
+                  mt: 2.5,
                   minHeight: { xs: 52, md: 56 },
                   py: 1.25,
                   borderRadius: "0.71rem",

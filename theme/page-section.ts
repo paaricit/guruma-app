@@ -10,19 +10,19 @@ export const pageContainerMaxWidth = "xl" as const;
 
 /** Default section gutters — use on `Container` `sx` (or merge with `disableGutters` layouts). */
 export const pageSectionGutterSx = {
-  px: { xs: 2, sm: 2.5, md: 3, lg: 4 }
+  px: { xs: 2, sm: 2.5, md: 3, lg: 8 }
 } as const;
 
 /** Programs: full-bleed on xs; same gutters as `pageSectionGutterSx` from `sm` up. */
 export const pageSectionBleedGutterSx = {
-  px: { xs: 0, sm: 2.5, md: 3, lg: 4 }
+  px: { xs: 0, sm: 2.5, md: 3, lg: 8 }
 } as const;
 
 // --- Fluid scales (rem + vw) — one ladder for the whole page ---
 
 export const fluidSectionDisplayTitle = "clamp(1.875rem, 0.85rem + 3.6vw, 4.25rem)";
 
-export const fluidSectionEyebrow = "clamp(0.78rem, 0.28vw + 0.7rem, 1.0625rem)";
+export const fluidSectionEyebrow = "clamp(0.78rem, 0.28vw + 1.2rem, 1.5rem)";
 
 export const fluidSectionSublead = "clamp(0.9375rem, 0.35vw + 0.82rem, 1.35rem)";
 
@@ -60,10 +60,10 @@ export const fluidFooterFormHelper = "clamp(0.65rem, 0.28vw + 0.58rem, 0.75rem)"
 export const fluidSaptBridge = "clamp(1.0625rem, 0.75rem + 3.25vw, 4.375rem)";
 
 /** Home impact stats — large numerals (~36–70px intent), scales with viewport. */
-export const fluidImpactStatValue = "clamp(2.25rem, 1.1rem + 4.8vw, 4.375rem)";
+export const fluidImpactStatValue = "clamp(2.25rem, 1.1rem + 4.8vw, 3.375rem)";
 
 /** Home impact stats — Forum caption under rule (~16–28px intent). */
-export const fluidImpactStatLabel = "clamp(1rem, 0.65rem + 1.4vw, 1.75rem)";
+export const fluidImpactStatLabel = "clamp(1rem, 0.65rem + 1.4vw, 1.875rem)";
 
 // --- Sx factories ---
 
@@ -182,7 +182,7 @@ export const fluidGuruIntroTagline = "clamp(0.8125rem, 0.28vw + 0.72rem, 1rem)";
 export const fluidGuruIntroRole = "clamp(0.9375rem, 0.35vw + 0.82rem, 1.375rem)";
 
 /** Intro body paragraph (~14–21px intent). */
-export const fluidGuruIntroBody = "clamp(0.875rem, 0.4vw + 0.78rem, 1.3125rem)";
+export const fluidGuruIntroBody = "clamp(0.875rem, 0.4vw + 0.88rem, 1.3125rem)";
 
 /** Primary CTA on intro band. */
 export const fluidGuruIntroCta = "clamp(0.9375rem, 0.35vw + 0.84rem, 1.0625rem)";
@@ -231,7 +231,7 @@ export function guruIntroBodySx(theme: Theme) {
     fontFamily: 'var(--font-inter), system-ui, sans-serif',
     fontWeight: 400,
     fontSize: fluidGuruIntroBody,
-    lineHeight: 1.45,
+    lineHeight: 1.75,
     color: alpha(theme.palette.text.primary, 0.72),
     mt: { xs: 2, md: 2.5 }
   };
