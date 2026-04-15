@@ -13,8 +13,6 @@ export type WisdomCardItem = {
   subtitle: string;
 };
 
-export const wisdomSectionBackgroundImage = "/images/Home Page Photos/wisdom_action.png";
-
 export const wisdomStarIcon = "/images/Home Page Photos/Star 6.png";
 
 export const wisdomBadgeDotImage = "/images/Home Page Photos/Ellipse 176.png";

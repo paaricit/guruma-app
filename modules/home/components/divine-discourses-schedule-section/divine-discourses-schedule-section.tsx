@@ -22,6 +22,7 @@ import {
   divineDiscoursesCopy,
   divineDiscoursesIcons
 } from "@/modules/home/content/divine-discourses-schedule";
+import { HomeCornerCurveDecor } from "@/modules/home/components/home-corner-curve-decor";
 
 /** Figma 25:4787 — session row title (~18px) */
 const fluidScheduleHeading = "clamp(1rem, 0.38vw + 0.88rem, 1.125rem)";
@@ -29,18 +30,6 @@ const fluidScheduleHeading = "clamp(1rem, 0.38vw + 0.88rem, 1.125rem)";
 const fluidCalloutBody = "clamp(1.0625rem, 0.75vw + 0.82rem, 1.422rem)";
 /** Figma — CTA (~21px) */
 const fluidScheduleCta = "clamp(1rem, 0.55vw + 0.85rem, 1.3125rem)";
-
-/** Corner decor: `next/image` ×2 — top-right and bottom-left (same asset). */
-const CURVE_DECOR_SRC = "/images/Home Page Photos/wisdom_action.png";
-
-const curveDecorBoxSx = {
-  position: "absolute" as const,
-  zIndex: 0,
-  pointerEvents: "none" as const,
-  overflow: "hidden" as const,
-  width: '30%',
-  height: '50%'
-};
 
 function SchedulePill({ label }: { label: string }) {
   return (
@@ -121,31 +110,7 @@ export function DivineDiscoursesScheduleSection() {
         borderTop: (t) => `1px solid ${t.palette.divider}`
       }}
     >
-      <Box aria-hidden sx={{
-        ...curveDecorBoxSx,
-        top: '-10%',
-        right: '-8%',
-        zIndex: 11
-        
-      }}>
-        <Image
-          alt=""
-          src={CURVE_DECOR_SRC}
-          fill
-          sizes="300px"
-          style={{ objectFit: "cover", objectPosition: "right top" }}
-        />
-      </Box>
-      <Box aria-hidden sx={{ ...curveDecorBoxSx,  bottom: '0%',
-        left: '-8%', zIndex: 1 }}>
-        <Image
-          alt=""
-          src={CURVE_DECOR_SRC}
-          fill
-          sizes="300px"
-          style={{ objectFit: "cover", objectPosition: "left bottom", transform: "rotate(180deg)" }}
-        />
-      </Box>
+      <HomeCornerCurveDecor />
 
       <SectionTopArc surface="#F3F2EE" />
 

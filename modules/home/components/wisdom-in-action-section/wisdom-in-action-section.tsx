@@ -7,14 +7,15 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
+import { SectionTopArc } from "@/component/section-top-curve";
 import { pageContainerMaxWidth, pageSectionGutterSx, sectionDisplayTitleSx, sectionEyebrowSx } from "@/theme/page-section";
 import {
   wisdomBadgeDotImage,
   wisdomCards,
-  wisdomSectionBackgroundImage,
   wisdomStarIcon,
   type WisdomCardItem
 } from "@/modules/home/content/wisdom-in-action";
+import { HomeCornerCurveDecor } from "@/modules/home/components/home-corner-curve-decor";
 
 /** Card + image + footer corners — scales from ~16px to ~42px (2.65rem). */
 const cardRadius = "clamp(1rem, 2.75vw + 0.5rem, 2.65rem)";
@@ -53,34 +54,41 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
 
   return (
     <Box
+      component="section"
+      aria-labelledby="wisdom-in-action-heading"
       sx={{
-        py: { xs: "clamp(3.25rem, 7vw, 5.5rem)", md: "clamp(4rem, 8vw, 5.75rem)" },
         position: "relative",
-        overflow: "hidden",
-        bgcolor: theme.palette.background.paper,
-        backgroundImage: `url('${wisdomSectionBackgroundImage}')`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "right top",
-        backgroundSize: "25%"
+        zIndex: 2,
+        isolation: "isolate",
+        bgcolor: "#F3F2EE",
+        pt: { xs: 2, md: 2.5 },
+        pb: { xs: 8, md: 9 },
+        overflow: "visible",
+        borderTop: (t) => `1px solid ${t.palette.divider}`
       }}
     >
-      <Container maxWidth={pageContainerMaxWidth} sx={pageSectionGutterSx}>
-        <Typography component="h2" sx={sectionDisplayTitleSx(theme)}>
-          Wisdom in Action
-        </Typography>
-        <Typography
-          component="p"
-          sx={{
-            mt: "0.35rem",
-            ...sectionEyebrowSx(theme, { uppercase: false, fontWeight: 400 }),
-            color: alpha(theme.palette.text.primary, 0.95)
-          }}
-        >
-          We work hard to gain a trust of you.
-        </Typography>
+      {/* <HomeCornerCurveDecor /> */}
+      <Container maxWidth={pageContainerMaxWidth} sx={{ position: "relative", ...pageSectionGutterSx }}>
+        <Box sx={{ position: "relative", zIndex: 3,  pt: { xs: 0.5, md: 0, lg: 10 }, pb: { xs: 2, md: 3 } }}>
+          <Typography id="wisdom-in-action-heading" component="h2" sx={sectionDisplayTitleSx(theme)}>
+            Wisdom in Action
+          </Typography>
+          <Typography
+            component="p"
+            sx={{
+              mt: 0.4,
+              ...sectionEyebrowSx(theme, { uppercase: false, fontWeight: 400 }),
+              color: alpha(theme.palette.text.primary, 0.95)
+            }}
+          >
+            We work hard to gain a trust of you.
+          </Typography>
+        </Box>
 
         <Box
           sx={{
+            position: "relative",
+            zIndex: 3,
             mt: { xs: 3, md: "clamp(2rem, 3.5vw, 2.5rem)" },
             display: "grid",
             gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))", md: "repeat(3, minmax(0, 1fr))" },

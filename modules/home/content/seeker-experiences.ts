@@ -16,7 +16,7 @@ export type SeekerTestimonialItem = {
 };
 
 /** Earth-at-night hero (portrait); served from `public/images/…`. */
-export const seekerExperiencesSectionBg = "/images/Home Page Photos/seeker-experiences-earth-night.png";
+export const seekerExperiencesSectionBg = "/images/Home Page Photos/pink-background-with-white-background-word-love-it 2.png";
 
 export const seekerTestimonialCornerIcon = "/images/Home Page Photos/icon-orange.png";
 

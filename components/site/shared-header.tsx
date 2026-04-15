@@ -61,7 +61,7 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
             minWidth: 0,
             maxWidth: { xs: "calc(100vw - 120px)", sm: "none" },
             // Nudge logo down without padding (padding grows the flex item and re-centers the whole toolbar).
-            transform: { xs: "translateY(28px)", md: "translateY(28px)" }
+            transform: { xs: "translateY(0px)", md: "translateY(28px)" }
           }}
         >
           <Box sx={{ position: "relative", width: { xs: 34, md: 48 }, height: { xs: 34, md: 48 }, flexShrink: 0 }}>

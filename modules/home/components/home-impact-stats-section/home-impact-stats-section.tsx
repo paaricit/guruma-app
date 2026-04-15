@@ -41,7 +41,7 @@ export function HomeImpactStatsSection() {
           position: "absolute",
           inset: 0,
           backgroundImage: `linear-gradient(${overlay}, ${overlay}), url('${SECTION_BG}')`,
-          backgroundSize: "contain",
+          backgroundSize: {xs: "cover", lg: "contain"},
           backgroundPosition: "right"
         }}
       />

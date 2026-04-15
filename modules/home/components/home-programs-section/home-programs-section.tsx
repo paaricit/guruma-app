@@ -26,11 +26,11 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
       sx={{
         width: "100%",
         maxWidth: "100%",
-        pb: { xs: "clamp(3rem, 6vw, 5rem)", md: "clamp(4rem, 7vw, 5rem)" },
+        pb: { xs: "clamp(3rem, 6vw, 5rem)", md: "clamp(4rem, 7vw, 5rem)", lg: 0 },
         pt: { xs: "clamp(1.5rem, 3vw, 2rem)", md: "clamp(4rem, 7vw, 5rem)" }
       }}
     >
-      <Container maxWidth={false} disableGutters sx={{ mx: "auto", ...pageSectionBleedGutterSx }}>
+      <Container maxWidth={false} disableGutters sx={{ mx: "auto" }}>
         <Stack spacing={{ xs: 1.25, sm: 1.5 }}>
           {programs.map((row) => (
             <Box
