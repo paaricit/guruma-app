@@ -7,8 +7,67 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
-import { fluidProgramRowBody, fluidProgramRowEyebrow, fluidProgramRowTitle, pageSectionBleedGutterSx } from "@/theme/page-section";
+import { pxToRem } from "@/utils/px-to-rem";
 import { homeProgramRows, type HomeProgramRow } from "@/modules/home/content/home-programs";
+
+const sectionPb = {
+  xs: pxToRem(48),
+  sm: pxToRem(56),
+  md: pxToRem(64),
+  lg: 0
+} as const;
+
+const sectionPt = {
+  xs: pxToRem(28),
+  sm: pxToRem(32),
+  md: pxToRem(64),
+  lg: pxToRem(80)
+} as const;
+
+const programRowMinHeight = {
+  xs: "auto",
+  md: pxToRem(400),
+  lg: pxToRem(528)
+} as const;
+
+const programImageHeight = {
+  xs: pxToRem(176),
+  sm: pxToRem(208),
+  md: "auto"
+} as const;
+
+const programCopyMinHeight = {
+  md: pxToRem(400),
+  lg: pxToRem(528)
+} as const;
+
+const programCopyPy = {
+  xs: pxToRem(28),
+  sm: pxToRem(32),
+  md: pxToRem(56),
+  lg: pxToRem(80)
+} as const;
+
+const programTitleFontSize = {
+  xs: pxToRem(26),
+  sm: pxToRem(30),
+  md: pxToRem(42),
+  lg: pxToRem(54)
+} as const;
+
+const programEyebrowFontSize = {
+  xs: pxToRem(11),
+  sm: pxToRem(12),
+  md: pxToRem(14),
+  lg: pxToRem(16)
+} as const;
+
+const programBodyFontSize = {
+  xs: pxToRem(13),
+  sm: pxToRem(14),
+  md: pxToRem(17),
+  lg: pxToRem(20)
+} as const;
 
 export type HomeProgramsSectionProps = {
   programs?: readonly HomeProgramRow[];
@@ -26,8 +85,8 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
       sx={{
         width: "100%",
         maxWidth: "100%",
-        pb: { xs: "clamp(3rem, 6vw, 5rem)", md: "clamp(4rem, 7vw, 5rem)", lg: 0 },
-        pt: { xs: "clamp(1.5rem, 3vw, 2rem)", md: "clamp(4rem, 7vw, 5rem)" }
+        pb: sectionPb,
+        pt: sectionPt
       }}
     >
       <Container maxWidth={false} disableGutters sx={{ mx: "auto" }}>
@@ -39,9 +98,9 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                 position: "relative",
                 display: "flex",
                 flexDirection: "column",
-                minHeight: { xs: "auto", md: "clamp(22rem, 42vw, 33rem)", lg: "clamp(26rem, 36vw, 33rem)" },
-                borderTop: `1px solid ${borderHairline}`,
-                borderBottom: `1px solid ${borderHairline}`,
+                minHeight: programRowMinHeight,
+                borderTop: `${pxToRem(1)} solid ${borderHairline}`,
+                borderBottom: `${pxToRem(1)} solid ${borderHairline}`,
                 overflow: "hidden"
               }}
             >
@@ -50,11 +109,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                 sx={{
                   position: { xs: "relative", md: "absolute" },
                   inset: { md: 0 },
-                  height: {
-                    xs: "clamp(11rem, 56vw, 15rem)",
-                    sm: "clamp(12rem, 48vw, 17rem)",
-                    md: "auto"
-                  },
+                  height: programImageHeight,
                   width: "100%",
                   flexShrink: 0,
                   /* Mobile crop matches desktop intent: imageLeft → anchor left, else right */
@@ -83,15 +138,11 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: { md: "center" },
-                  minHeight: { md: "clamp(22rem, 42vw, 33rem)", lg: "clamp(26rem, 36vw, 33rem)" },
+                  minHeight: { xs: "auto", ...programCopyMinHeight },
                   bgcolor: { xs: theme.palette.background.paper, md: "transparent" },
-                  py: {
-                    xs: "clamp(1.75rem, 4vw, 2.5rem)",
-                    sm: "clamp(2rem, 4vw, 2.75rem)",
-                    md: "clamp(3rem, 6vw, 5rem)"
-                  },
-                  px: { xs: 2, sm: 2.5, md: "clamp(2rem, 4vw, 4.2rem)" },
-                  maxWidth: { xs: "100%", md: "48.75rem" },
+                  py: programCopyPy,
+                  px: { xs: 2, sm: 2.5, md: pxToRem(48), lg: pxToRem(67) },
+                  maxWidth: { xs: "100%", md: 'pxToRem(780)' },
                   ...(row.imageLeft ? { ml: { md: "auto" } } : {})
                 }}
               >
@@ -99,9 +150,11 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                   sx={{
                     fontFamily: "var(--font-forum), serif",
                     fontWeight: 400,
-                    fontSize: fluidProgramRowTitle,
+                    fontSize: programTitleFontSize,
                     lineHeight: 1.15,
-                    color: ink
+                    color: 'black',
+                    maxWidth: pxToRem(550),
+                    wordBreak: "break-word"
                   }}
                 >
                   {row.title}
@@ -109,7 +162,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                 <Typography
                   sx={{
                     mt: { xs: 0.75, md: 1 },
-                    fontSize: fluidProgramRowEyebrow,
+                    fontSize: programEyebrowFontSize,
                     letterSpacing: { xs: "0.1em", sm: "0.12em", md: "0.16em" },
                     fontWeight: 600,
                     textTransform: "uppercase",
@@ -124,9 +177,9 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                     mt: { xs: 1.25, md: 1.6 },
                     pt: { xs: 0.25, md: 0.75 },
                     color: subtitleMuted,
-                    fontSize: fluidProgramRowBody,
+                    fontSize: programBodyFontSize,
                     lineHeight: 1.5,
-                    maxWidth: "40rem",
+                    maxWidth: pxToRem(550),
                     wordBreak: "break-word"
                   }}
                 >
@@ -137,7 +190,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                   direction="row"
                   spacing={0}
                   sx={{
-                    mt: { xs: 1.75, md: 2 },
+                    mt: { xs: 1.75, md: 4 },
                     flexWrap: "wrap",
                     width: { xs: "100%", sm: "auto" },
                     alignItems: "center",
@@ -147,11 +200,11 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                   <Button
                     variant="contained"
                     sx={{
-                      minHeight: { xs: "2.75rem", md: "3rem" },
-                      height: { xs: "auto", md: "3rem" },
+                      minHeight: { xs: pxToRem(44), md: pxToRem(48) },
+                      height: { xs: "auto", md: pxToRem(48) },
                       px: { xs: 1, md: 3 },
-                      fontSize: { xs: "0.8125rem", md: "1rem" },
-                      borderRadius: "0.5rem",
+                      fontSize: { xs: pxToRem(13), md: pxToRem(16) },
+                      borderRadius: pxToRem(8),
                       textTransform: "none",
                       bgcolor: ctaBg,
                       flex: { xs: "1 1 0%", sm: "0 1 auto" },
@@ -167,15 +220,15 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                   <Button
                     variant="outlined"
                     sx={{
-                      minHeight: { xs: "2.75rem", md: "3rem" },
-                      height: { xs: "auto", md: "3rem" },
+                      minHeight: { xs: pxToRem(44), md: pxToRem(48) },
+                      height: { xs: "auto", md: pxToRem(48) },
                       px: { xs: 1, md: 3 },
-                      fontSize: { xs: "0.8125rem", md: "1rem" },
-                      borderRadius: "0.5rem",
+                      fontSize: { xs: pxToRem(13), md: pxToRem(16) },
+                      borderRadius: pxToRem(8),
                       textTransform: "none",
                       color: ctaBg,
                       borderColor: ctaBg,
-                      borderWidth: "1px",
+                      borderWidth: pxToRem(1),
                       flex: { xs: "1 1 0%", sm: "0 1 auto" },
                       minWidth: { xs: 0, sm: "auto" },
                       width: { sm: "auto" },

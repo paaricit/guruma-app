@@ -7,39 +7,82 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
-import { SectionTopArc } from "@/component/section-top-curve";
-import { pageContainerMaxWidth, pageSectionGutterSx, sectionDisplayTitleSx, sectionEyebrowSx } from "@/theme/page-section";
+import { pageContainerMaxWidth, pageSectionGutterSx } from "@/theme/page-section";
+import { pxToRem } from "@/utils/px-to-rem";
 import {
   wisdomBadgeDotImage,
   wisdomCards,
+  wisdomInActionSectionCurveBg,
   wisdomStarIcon,
   type WisdomCardItem
 } from "@/modules/home/content/wisdom-in-action";
-import { HomeCornerCurveDecor } from "@/modules/home/components/home-corner-curve-decor";
 
-/** Card + image + footer corners — scales from ~16px to ~42px (2.65rem). */
-const cardRadius = "clamp(1rem, 2.75vw + 0.5rem, 2.65rem)";
+const wisdomDisplayTitleFontSize = {
+  xs: pxToRem(30),
+  sm: pxToRem(36),
+  md: pxToRem(48),
+  lg: pxToRem(70)
+} as const;
+
+const wisdomEyebrowFontSize = {
+  xs: pxToRem(14),
+  sm: pxToRem(15),
+  md: pxToRem(19),
+  lg: pxToRem(22)
+} as const;
+
+/** Card + image + footer corners */
+const cardRadius = {
+  xs: pxToRem(16),
+  sm: pxToRem(20),
+  md: pxToRem(28),
+  lg: pxToRem(42)
+} as const;
 
 /** Card image block height — `fill` needs a definite block size. */
-const fluidCardImageHeight = "clamp(20rem, 28vw + 6rem, 34.56rem)";
+const cardImageHeight = {
+  xs: pxToRem(280),
+  sm: pxToRem(320),
+  md: pxToRem(420),
+  lg: pxToRem(470)
+} as const;
 
-/** Card title (Inter medium) */
-const fluidCardTitle = "clamp(1rem, 1.35vw + 0.82rem, 1.194rem)";
+const cardTitleFontSize = {
+  xs: pxToRem(16),
+  sm: pxToRem(17),
+  md: pxToRem(19)
+} as const;
 
-/** Card subtitle line */
-const fluidCardSubtitle = "clamp(0.875rem, 0.95vw + 0.72rem, 1.125rem)";
+const cardSubtitleFontSize = {
+  xs: pxToRem(14),
+  md: pxToRem(18)
+} as const;
 
-/** Rating / badge pill text */
-const fluidPillText = "clamp(0.75rem, 0.55vw + 0.62rem, 0.928rem)";
+const pillTextFontSize = {
+  xs: pxToRem(12),
+  sm: pxToRem(13),
+  md: pxToRem(15)
+} as const;
 
-/** Inset padding for card text block */
-const fluidCardBodyPadding = "clamp(1rem, 2.2vw, 1.525rem)";
+const cardBodyPadding = {
+  xs: pxToRem(16),
+  md: pxToRem(20),
+  lg: pxToRem(24)
+} as const;
 
-/** Badge stack offset from edges */
-const fluidBadgeInset = "clamp(0.85rem, 2.2vw, 1.59rem)";
+const badgeInset = {
+  xs: pxToRem(14),
+  md: pxToRem(20),
+  lg: pxToRem(25)
+} as const;
 
-/** Corner media icon box */
-const fluidCornerIcon = "clamp(2.5rem, 5.5vw, 3.6rem)";
+const cornerIconSize = {
+  xs: pxToRem(40),
+  md: pxToRem(50),
+  lg: pxToRem(58)
+} as const;
+
+const backdropBlur = `blur(${pxToRem(31.831)})`;
 
 export type WisdomInActionSectionProps = {
   cards?: readonly WisdomCardItem[];
@@ -68,16 +111,43 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
       }}
     >
       {/* <HomeCornerCurveDecor /> */}
-      <Container maxWidth={pageContainerMaxWidth} sx={{ position: "relative", ...pageSectionGutterSx }}>
+      <Container
+        maxWidth={pageContainerMaxWidth}
+        sx={{
+          position: "relative",
+          ...pageSectionGutterSx,
+          backgroundImage: `url('${wisdomInActionSectionCurveBg}')`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "top center",
+          backgroundSize: "100% auto"
+        }}
+      >
         <Box sx={{ position: "relative", zIndex: 3,  pt: { xs: 0.5, md: 0, lg: 10 }, pb: { xs: 2, md: 3 } }}>
-          <Typography id="wisdom-in-action-heading" component="h2" sx={sectionDisplayTitleSx(theme)}>
+          <Typography
+            id="wisdom-in-action-heading"
+            component="h2"
+            sx={{
+              fontFamily: 'var(--font-forum), serif',
+              fontWeight: 400,
+              fontSize: wisdomDisplayTitleFontSize,
+              lineHeight: { xs: 1.1, md: 1.2 },
+              color: theme.palette.guru.ink,
+              textAlign: "center"
+            }}
+          >
             Wisdom in Action
           </Typography>
           <Typography
             component="p"
             sx={{
               mt: 0.4,
-              ...sectionEyebrowSx(theme, { uppercase: false, fontWeight: 400 }),
+              fontFamily: 'var(--font-inter), system-ui, sans-serif',
+              fontWeight: 400,
+              fontSize: wisdomEyebrowFontSize,
+              lineHeight: 1.35,
+              letterSpacing: "0.02em",
+              textTransform: "none",
+              textAlign: "center",
               color: alpha(theme.palette.text.primary, 0.95)
             }}
           >
@@ -89,10 +159,10 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
           sx={{
             position: "relative",
             zIndex: 3,
-            mt: { xs: 3, md: "clamp(2rem, 3.5vw, 2.5rem)" },
+            mt: { xs: pxToRem(32), md: pxToRem(40) },
             display: "grid",
             gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))", md: "repeat(3, minmax(0, 1fr))" },
-            gap: { xs: "clamp(1rem, 3vw, 1.5rem)", md: "clamp(1.5rem, 2.5vw, 1.75rem)" }
+            gap: { xs: pxToRem(16), sm: pxToRem(20), md: pxToRem(24), lg: pxToRem(30) }
           }}
         >
           {cards.map((card) => (
@@ -109,7 +179,7 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                 sx={{
                   position: "relative",
                   width: "100%",
-                  height: fluidCardImageHeight,
+                  height: cardImageHeight,
                   borderTopLeftRadius: cardRadius,
                   borderTopRightRadius: cardRadius,
                   overflow: "hidden"
@@ -127,10 +197,10 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                 <Box
                   sx={{
                     position: "absolute",
-                    bottom: fluidCardBodyPadding,
-                    right: fluidCardBodyPadding,
-                    width: fluidCornerIcon,
-                    height: fluidCornerIcon
+                    bottom: cardBodyPadding,
+                    right: cardBodyPadding,
+                    width: cornerIconSize,
+                    height: cornerIconSize
                   }}
                 >
                   <Image alt="" src={card.icon} fill sizes="72px" style={{ objectFit: "contain" }} />
@@ -139,24 +209,24 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                 <Stack
                   direction="row"
                   spacing={{ xs: 0.75, sm: 1 }}
-                  sx={{ position: "absolute", top: fluidBadgeInset, left: fluidBadgeInset, flexWrap: "wrap", rowGap: 0.75 }}
+                  sx={{ position: "absolute", top: badgeInset, left: badgeInset, flexWrap: "wrap", rowGap: 0.75 }}
                 >
                   <Box
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "clamp(0.35rem, 1vw, 0.55rem)",
-                      px: "clamp(0.4rem, 1.1vw, 0.53rem)",
-                      py: "clamp(0.2rem, 0.6vw, 0.27rem)",
+                      gap: { xs: pxToRem(6), md: pxToRem(9) },
+                      px: { xs: pxToRem(6), md: pxToRem(8.5) },
+                      py: { xs: pxToRem(4), md: pxToRem(4.5) },
                       borderRadius: "4rem",
                       bgcolor: pillBg,
-                      backdropFilter: "blur(31.831px)"
+                      backdropFilter: backdropBlur
                     }}
                   >
                     <Typography
                       sx={{
                         fontFamily: 'var(--font-inter), system-ui, sans-serif',
-                        fontSize: fluidPillText,
+                        fontSize: pillTextFontSize,
                         lineHeight: 1.2,
                         color: theme.palette.text.primary
                       }}
@@ -166,8 +236,8 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                     <Box
                       sx={{
                         position: "relative",
-                        width: "clamp(0.875rem, 2vw, 1.125rem)",
-                        height: "clamp(0.875rem, 2vw, 1.125rem)",
+                        width: { xs: pxToRem(14), md: pxToRem(18) },
+                        height: { xs: pxToRem(14), md: pxToRem(18) },
                         flexShrink: 0
                       }}
                     >
@@ -178,21 +248,21 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "clamp(0.35rem, 1vw, 0.53rem)",
-                      minHeight: "clamp(1.75rem, 4vw, 2.12rem)",
-                      px: "clamp(0.55rem, 1.5vw, 0.8rem)",
-                      py: "clamp(0.2rem, 0.6vw, 0.27rem)",
+                      gap: { xs: pxToRem(6), md: pxToRem(8.5) },
+                      minHeight: { xs: pxToRem(28), md: pxToRem(34) },
+                      px: { xs: pxToRem(9), md: pxToRem(13) },
+                      py: { xs: pxToRem(4), md: pxToRem(4.5) },
                       borderRadius: "4rem",
                       bgcolor: pillBg,
-                      backdropFilter: "blur(31.831px)"
+                      backdropFilter: backdropBlur
                     }}
                   >
                     <Box
                       aria-hidden
                       sx={{
                         position: "relative",
-                        width: "clamp(0.45rem, 1vw, 0.53rem)",
-                        height: "clamp(0.45rem, 1vw, 0.53rem)",
+                        width: { xs: pxToRem(7), md: pxToRem(8.5) },
+                        height: { xs: pxToRem(7), md: pxToRem(8.5) },
                         flexShrink: 0
                       }}
                     >
@@ -201,7 +271,7 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                     <Typography
                       sx={{
                         fontFamily: 'var(--font-inter), system-ui, sans-serif',
-                        fontSize: fluidPillText,
+                        fontSize: pillTextFontSize,
                         lineHeight: 1.2,
                         color: theme.palette.text.primary
                       }}
@@ -213,9 +283,9 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
               </Box>
               <Box
                 sx={{
-                  px: fluidCardBodyPadding,
-                  py: fluidCardBodyPadding,
-                  backdropFilter: "blur(31.831px)",
+                  px: cardBodyPadding,
+                  py: cardBodyPadding,
+                  backdropFilter: backdropBlur,
                   bgcolor: alpha(theme.palette.background.paper, 0.98),
                   borderBottomLeftRadius: cardRadius,
                   borderBottomRightRadius: cardRadius
@@ -226,7 +296,7 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                     color: theme.palette.text.primary,
                     fontFamily: 'var(--font-inter), system-ui, sans-serif',
                     fontWeight: 500,
-                    fontSize: fluidCardTitle,
+                    fontSize: cardTitleFontSize,
                     lineHeight: { xs: 1.35, sm: 1.25, md: 1.2 }
                   }}
                 >
@@ -234,11 +304,11 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                 </Typography>
                 <Typography
                   sx={{
-                    mt: "clamp(0.4rem, 1.2vw, 0.75rem)",
+                    mt: { xs: pxToRem(6), md: pxToRem(12) },
                     color: theme.palette.grey[700],
                     fontFamily: 'var(--font-inter), system-ui, sans-serif',
                     fontWeight: 400,
-                    fontSize: fluidCardSubtitle,
+                    fontSize: cardSubtitleFontSize,
                     lineHeight: { xs: 1.4, md: 1.2 }
                   }}
                 >

@@ -122,7 +122,7 @@ export function sectionSubleadOnDarkSx(theme: Theme) {
 
 export function footerColumnHeadingSx(theme: Theme) {
   return {
-    fontFamily: 'var(--font-forum), serif',
+    fontFamily: 'var(--font-inter), serif',
     fontWeight: 400,
     fontSize: fluidFooterColumnHeading,
     lineHeight: 1.15,

@@ -5,14 +5,9 @@ import { useCallback, useState } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { alpha, useTheme } from "@mui/material/styles";
-import {
-  fluidSaptBridge,
-  fluidSectionBodyProminent,
-  fluidSectionDisplayTitle,
-  pageContainerMaxWidth,
-  pageSectionGutterSx
-} from "@/theme/page-section";
+import { alpha } from "@mui/material/styles";
+import { pageContainerMaxWidth, pageSectionGutterSx } from "@/theme/page-section";
+import { pxToRem } from "@/utils/px-to-rem";
 import { SectionTopArc } from "@/component/section-top-curve";
 import { SaptSadhanaCarouselControls } from "@/component/sapt-sadhana-carousel-controls";
 import { SaptSadhanaStackCarousel } from "@/components/site/sapt-sadhana-stack-carousel";
@@ -37,8 +32,36 @@ const SAPT_WAVE_ICON_HEIGHT_PX = 88.07;
 const bodyCopyMaxWidth = "65rem";
 
 const bridgeArt = {
-  minWidth: "clamp(4.5rem, 2.75rem + 6vw, 8.75rem)",
-  height: "clamp(1.75rem, 1.3rem + 1.85vw, 3rem)"
+  minWidth: { xs: pxToRem(72), md: pxToRem(140) },
+  height: { xs: pxToRem(28), md: pxToRem(48) }
+} as const;
+
+const sectionBodyProminentFontSize = {
+  xs: pxToRem(15),
+  md: pxToRem(24)
+} as const;
+
+const saptBridgeTitleFontSize = {
+  xs: pxToRem(17),
+  sm: pxToRem(26),
+  md: pxToRem(48),
+  lg: pxToRem(70)
+} as const;
+
+/** “SAPT SADHANA” — caps to ~66px on large screens */
+const saptHeadingMainFontSize = {
+  xs: pxToRem(28),
+  sm: pxToRem(40),
+  md: pxToRem(54),
+  lg: pxToRem(66)
+} as const;
+
+/** “ - Serving Beyond Self” — scales with main line */
+const saptHeadingSubFontSize = {
+  xs: pxToRem(18),
+  sm: pxToRem(24),
+  md: pxToRem(36),
+  lg: pxToRem(50)
 } as const;
 
 export type SaptSadhanaHomePromoSectionProps = {
@@ -49,7 +72,6 @@ export type SaptSadhanaHomePromoSectionProps = {
  * Home page block: Sapt Sadhana copy, stack carousel, external controls, and “Stay Connected” bridge above the footer.
  */
 export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSadhanaHomePromoSectionProps) {
-  const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
   const slideCount = slides.length;
 
@@ -67,33 +89,46 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
       sx={{
         position: "relative",
         zIndex: 2,
-        bgcolor: (t) => t.palette.background.default,
+        background: "linear-gradient(180deg, #F3F2EE 0%, #FFF 50%, #D1F1F5 100%)",
         pb: { xs: 7, md: 6 },
         overflow: "visible"
       }}
     >
-      <SectionTopArc />
+      <SectionTopArc surface="#F3F2EE" />
 
       <Container
         maxWidth={pageContainerMaxWidth}
         sx={{ position: "relative", zIndex: 3, ...pageSectionGutterSx }}
       >
-        <Box
-          sx={{
-            position: "relative",
-            mx: "auto",
-            mt: "-40px",
-            width: `min(100%, ${SAPT_WAVE_ICON_WIDTH_PX}px)`,
-            aspectRatio: `${SAPT_WAVE_ICON_WIDTH_PX} / ${SAPT_WAVE_ICON_HEIGHT_PX}`
-          }}
-        >
-          <Image
-            alt=""
-            src={SAPT_SECTION_WAVE_ICON}
-            fill
-            sizes={`(max-width: 360px) 100vw, ${Math.round(SAPT_WAVE_ICON_WIDTH_PX)}px`}
-            style={{ objectFit: "contain" }}
-          />
+        <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
+          <Box
+            sx={{
+              position: "relative",
+              width: {
+                xs: "min(100%, 11.25rem)",
+                sm: "min(100%, 14rem)",
+                md: `min(100%, ${SAPT_WAVE_ICON_WIDTH_PX}px)`
+              },
+              aspectRatio: `${SAPT_WAVE_ICON_WIDTH_PX} / ${SAPT_WAVE_ICON_HEIGHT_PX}`,
+              overflow: "visible"
+            }}
+          >
+            <Box
+              sx={{
+                position: "absolute",
+                inset: 0,
+                transform: "translateY(-49px)"
+              }}
+            >
+              <Image
+                alt=""
+                src={SAPT_SECTION_WAVE_ICON}
+                fill
+                sizes="(max-width: 600px) 180px, (max-width: 900px) 224px, 288px"
+                style={{ objectFit: "contain", objectPosition: "center" }}
+              />
+            </Box>
+          </Box>
         </Box>
 
         <Typography
@@ -102,13 +137,15 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
             mt: { xs: 1, md: 1.25 },
             textAlign: "center",
             fontFamily: "var(--font-forum), serif",
-            fontSize: fluidSectionDisplayTitle,
             fontWeight: 400,
             lineHeight: { xs: 1.1, md: 1.2 },
-            color: (t) => t.palette.guru.ink
+            // color: (t) => t.palette.guru.ink
           }}
         >
-          SAPT SADHANA - Serving Beyond Self
+          <Box component="span" sx={{ fontSize: saptHeadingMainFontSize }}>
+            SAPT SADHANA
+          </Box>
+          <Box component="span" sx={{ fontSize: saptHeadingSubFontSize }}> - Serving Beyond Self</Box>
         </Typography>
         <Typography
           component="p"
@@ -118,12 +155,13 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
             textAlign: "center",
             fontFamily: 'var(--font-inter), system-ui, sans-serif',
             color: (t) => alpha(t.palette.text.primary, 0.8),
-            fontSize: fluidSectionBodyProminent,
+            fontSize: sectionBodyProminentFontSize,
             maxWidth: bodyCopyMaxWidth,
-            lineHeight: 1.4
+            lineHeight: 1.7,
+            letterSpacing: 0.2
           }}
         >
-          <b>Sapt Sadhana</b> is our commitment to selfless service (seva), transforming spiritual wisdom into compassionate action.
+          <i><b>Sapt Sadhana</b></i> is our commitment to selfless service (seva), transforming spiritual wisdom into compassionate action.
           Through various initiatives, we serve underprivileged communities, provide education,
         </Typography>
 
@@ -169,7 +207,7 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
                 minWidth: 0,
                 color: (t) => t.palette.secondary.main,
                 fontFamily: "var(--font-forum), serif",
-                fontSize: fluidSaptBridge,
+                fontSize: saptBridgeTitleFontSize,
                 fontWeight: 400,
                 lineHeight: 1.05,
                 letterSpacing: { xs: "-0.02em", sm: "-0.01em", md: 0 },
@@ -181,7 +219,7 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
               Stay Connected
             </Typography>
 
-            <Box
+            {/* <Box
               sx={{
                 position: "relative",
                 flex: "1 1 0%",
@@ -199,7 +237,7 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
                 sizes="(max-width: 600px) 50vw, 520px"
                 style={{ objectFit: "contain", objectPosition: "center" }}
               />
-            </Box>
+            </Box> */}
           </Box>
         </Box>
       </Container>

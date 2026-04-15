@@ -22,8 +22,13 @@ import {
   footerLabelOnPrimarySx,
   pageSectionGutterSx
 } from "@/theme/page-section";
+import { pxToRem } from "@/utils/px-to-rem";
 
 const footerBackgroundSrc = "/images/footer-background.png";
+
+const footerColumnHeadingFontSize = { xs: pxToRem(24), md: pxToRem(36) };
+const footerBodyFontSize = { xs: pxToRem(15), md: pxToRem(22) };
+const footerLabelFontSize = { xs: pxToRem(16), md: pxToRem(21) };
 
 const ADDRESS =
   "4th floor, no 4, Abhinav centre Old no 19, New, off Chamiers Road, Cooperative Colony, Chennai, Tamil Nadu 600018";
@@ -62,11 +67,8 @@ export default function SiteFooter() {
         position: "relative",
         zIndex: 2,
         pt: { xs: 2.5, md: 3 },
-        pb: { xs: 2.5, md: 3.5 },
+        pb: { xs: 2.5, md: 10 },
         color: "primary.contrastText",
-        overflowX: "clip",
-        overflowY: "visible",
-        isolation: "isolate",
         backgroundImage: `url(${footerBackgroundSrc})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -91,14 +93,21 @@ export default function SiteFooter() {
           sx={{ width: "100%", alignItems: "flex-start", overflow: "visible", justifyContent: { xs: "center", md: "flex-start" } }}
         >
           <Grid size={{ xs: 12, lg: 7 }} sx={{ minWidth: 0, pt: { xs: 2, md: 4 } }}>
-            <Grid container spacing={{ xs: 3, md: 5 }} columns={12} sx={{ width: "100%" }}>
+            <Grid container spacing={{ xs: 3, md: 12 }} columns={12} sx={{ width: "100%" }}>
               <Grid size={{ xs: 12, md: 6 }} sx={{ minWidth: 0 }}>
-                <Typography component="h2" sx={(theme) => ({ ...footerColumnHeadingSx(theme) })}>
+                <Typography
+                  component="h2"
+                  sx={(theme) => ({
+                    ...footerColumnHeadingSx(theme),
+                    fontSize: footerColumnHeadingFontSize
+                  })}
+                >
                   IISHT
                 </Typography>
                 <Typography
                   sx={(theme) => ({
                     ...footerBodyOnPrimarySx(theme),
+                    fontSize: footerBodyFontSize,
                     mt: 1.2,
                     maxWidth: { sm: 420, md: "none" },
                     wordBreak: "break-word",
@@ -139,11 +148,19 @@ export default function SiteFooter() {
                   >
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
                       <PhoneInTalkOutlinedIcon />
-                      <Typography sx={(theme) => ({ ...footerLabelOnPrimarySx(theme) })}>Phone number</Typography>
+                      <Typography
+                        sx={(theme) => ({
+                          ...footerLabelOnPrimarySx(theme),
+                          fontSize: footerLabelFontSize
+                        })}
+                      >
+                        Phone number
+                      </Typography>
                     </Box>
                     <Typography
                       sx={(theme) => ({
                         ...footerBodyOnPrimarySx(theme),
+                        fontSize: footerBodyFontSize,
                         mt: 0.6,
                         wordBreak: "break-all"
                       })}
@@ -171,11 +188,19 @@ export default function SiteFooter() {
                   >
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap", mt: { xs: 0, md: 1.7 } }}>
                       <EmailOutlinedIcon />
-                      <Typography sx={(theme) => ({ ...footerLabelOnPrimarySx(theme) })}>Email</Typography>
+                      <Typography
+                        sx={(theme) => ({
+                          ...footerLabelOnPrimarySx(theme),
+                          fontSize: footerLabelFontSize
+                        })}
+                      >
+                        Email
+                      </Typography>
                     </Box>
                     <Typography
                       sx={(theme) => ({
                         ...footerBodyOnPrimarySx(theme),
+                        fontSize: footerBodyFontSize,
                         mt: 0.5,
                         wordBreak: "break-all"
                       })}
@@ -195,7 +220,13 @@ export default function SiteFooter() {
               </Grid>
 
               <Grid size={{ xs: 12, md: 6 }} sx={{ minWidth: 0 }}>
-                <Typography component="h2" sx={(theme) => ({ ...footerColumnHeadingSx(theme) })}>
+                <Typography
+                  component="h2"
+                  sx={(theme) => ({
+                    ...footerColumnHeadingSx(theme),
+                    fontSize: footerColumnHeadingFontSize
+                  })}
+                >
                   Our Services
                 </Typography>
                 <Box
@@ -217,6 +248,7 @@ export default function SiteFooter() {
                       underline="hover"
                       sx={(theme) => ({
                         ...footerBodyOnPrimarySx(theme),
+                        fontSize: footerBodyFontSize,
                         minWidth: 0
                       })}
                     >
@@ -262,7 +294,8 @@ export default function SiteFooter() {
 
           <Grid
             size={{ xs: 12, lg: 5 }}
-            display={{ xs: "none", lg: "block" }}
+            display={{ xs: "none", lg: "block"}}
+            mt={-18}
           >
             <FooterContactForm />
           </Grid>

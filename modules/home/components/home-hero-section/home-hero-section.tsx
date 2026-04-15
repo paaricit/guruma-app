@@ -36,7 +36,7 @@ export function HomeHeroSection() {
         position: "relative",
         display: "flex",
         flexDirection: "column",
-        minHeight: { xs: "auto", md: "110vh" },
+        minHeight: { xs: "auto", md: "120vh" },
         bgcolor: { xs: "primary.dark", md: "transparent" },
         pt: { xs: "clamp(6.5rem, 14vw, 8rem)", md: "clamp(7rem, 12vw, 8.5rem)" },
         pb: { xs: 12, md: "clamp(2rem, 4vw, 3rem)" },

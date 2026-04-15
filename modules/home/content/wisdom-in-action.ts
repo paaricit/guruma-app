@@ -17,6 +17,9 @@ export const wisdomStarIcon = "/images/Home Page Photos/Star 6.png";
 
 export const wisdomBadgeDotImage = "/images/Home Page Photos/Ellipse 176.png";
 
+/** Section curve art (SVG) — `public/images/home/wisdom-in-action-curve-2.svg` */
+export const wisdomInActionSectionCurveBg = "/images/home/wisdom-in-action-curve-2.svg";
+
 export const wisdomCards: readonly WisdomCardItem[] = [
   {
     title: "The art of letting go",

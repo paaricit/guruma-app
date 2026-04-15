@@ -5,3 +5,4 @@ export * from "./home-impact-stats-section";
 export * from "./seeker-experiences-section";
 export * from "./wisdom-in-action-section";
 export * from "./home-programs-section";
+export * from "./home-sapt-sadhana-promo-section";

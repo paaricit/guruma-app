@@ -89,7 +89,7 @@ export function HomeCallbackSection() {
           alignSelf: { xs: "stretch", md: "auto" },
           bgcolor: "#091a43",
           backgroundImage:
-            "linear-gradient(rgba(9,26,67,0.15), rgba(9,26,67,0.15)), url('/images/Home Page Photos/section-2.png')",
+            "linear-gradient(rgba(9,26,67,0.65), rgba(9,26,67,0.5)), url('/images/Home Page Photos/section-2.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

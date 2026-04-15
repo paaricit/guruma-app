@@ -10,13 +10,8 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
 import { SectionTopArc } from "@/component/section-top-curve";
-import {
-  fluidSectionBody,
-  pageContainerMaxWidth,
-  pageSectionGutterSx,
-  sectionDisplayTitleSx,
-  sectionEyebrowSx
-} from "@/theme/page-section";
+import { pageContainerMaxWidth, pageSectionGutterSx } from "@/theme/page-section";
+import { pxToRem } from "@/utils/px-to-rem";
 import {
   divineDiscoursesAssets,
   divineDiscoursesCopy,
@@ -24,12 +19,61 @@ import {
 } from "@/modules/home/content/divine-discourses-schedule";
 import { HomeCornerCurveDecor } from "@/modules/home/components/home-corner-curve-decor";
 
-/** Figma 25:4787 — session row title (~18px) */
-const fluidScheduleHeading = "clamp(1rem, 0.38vw + 0.88rem, 1.125rem)";
-/** Figma — callout (~22.76px), line ~32.8px */
-const fluidCalloutBody = "clamp(1.0625rem, 0.75vw + 0.82rem, 1.422rem)";
-/** Figma — CTA (~21px) */
-const fluidScheduleCta = "clamp(1rem, 0.55vw + 0.85rem, 1.3125rem)";
+const scheduleDisplayTitleFontSize = {
+  xs: pxToRem(30),
+  sm: pxToRem(36),
+  md: pxToRem(48),
+  lg: pxToRem(70)
+} as const;
+
+const scheduleEyebrowFontSize = {
+  xs: pxToRem(14),
+  sm: pxToRem(15),
+  md: pxToRem(19),
+  lg: pxToRem(24)
+} as const;
+
+/** Figma 25:4787 — session row title (~16–18px) */
+const scheduleHeadingFontSize = {
+  xs: pxToRem(16),
+  md: pxToRem(17),
+  lg: pxToRem(18)
+} as const;
+
+/** Slot lines — ~14–17px */
+const scheduleBodyFontSize = {
+  xs: pxToRem(14),
+  md: pxToRem(16),
+  lg: pxToRem(17)
+} as const;
+
+/** Live badge on hero image */
+const scheduleLiveBadgeFontSize = {
+  xs: pxToRem(13),
+  md: pxToRem(15),
+  lg: pxToRem(17)
+} as const;
+
+/** Callout body */
+const scheduleCalloutFontSize = {
+  xs: pxToRem(17),
+  sm: pxToRem(19),
+  md: pxToRem(21),
+  lg: pxToRem(23)
+} as const;
+
+const scheduleCtaFontSize = {
+  xs: pxToRem(16),
+  md: pxToRem(19),
+  lg: pxToRem(21)
+} as const;
+
+const heroImageMinHeight = {
+  xs: pxToRem(280),
+  md: pxToRem(420)
+} as const;
+
+const backdropBlurSchedule = `blur(${pxToRem(36)})`;
 
 function SchedulePill({ label }: { label: string }) {
   return (
@@ -42,10 +86,10 @@ function SchedulePill({ label }: { label: string }) {
         px: { xs: 2.25, md: 2.75 },
         py: { xs: 1, md: 1.1 },
         borderRadius: "999px",
-        bgcolor: (t) => alpha(t.palette.guru.warm, 0.14),
+        bgcolor: (t) => '#F3F2EE',
         color: (t) => alpha(t.palette.guru.warm, 0.92),
         fontFamily: 'var(--font-inter), system-ui, sans-serif',
-        fontSize: fluidScheduleHeading,
+        fontSize: scheduleHeadingFontSize,
         fontWeight: 400,
         lineHeight: 1.45,
         letterSpacing: "-0.01em"
@@ -69,7 +113,7 @@ function IconTextRow({
 }) {
   return (
     <Stack direction="row" spacing={gap} sx={{ alignItems: "center" }}>
-      <Box sx={{ position: "relative", width: iconSize, height: iconSize, flex: "0 0 auto" }}>
+      <Box sx={{ position: "relative", width: pxToRem(iconSize), height: pxToRem(iconSize), flex: "0 0 auto" }}>
         <Image alt="" fill src={iconSrc} sizes={`${iconSize}px`} style={{ objectFit: "contain" }} />
       </Box>
       {children}
@@ -107,7 +151,7 @@ export function DivineDiscoursesScheduleSection() {
         pt: { xs: 2, md: 2.5 },
         pb: { xs: 8, md: 9 },
         overflow: "visible",
-        borderTop: (t) => `1px solid ${t.palette.divider}`
+        borderTop: (t) => `${pxToRem(1)} solid ${t.palette.divider}`
       }}
     >
       <HomeCornerCurveDecor />
@@ -119,14 +163,32 @@ export function DivineDiscoursesScheduleSection() {
         sx={{ position: "relative", ...pageSectionGutterSx }}
       >
         <Box sx={{ position: "relative", zIndex: 3, mt: { xs: 0, md: -10 }, pt: { xs: 0.5, md: 0 }, pb: { xs: 2, md: 3 } }}>
-          <Typography id="divine-discourses-heading" component="h2" sx={sectionDisplayTitleSx(theme)}>
+          <Typography
+            id="divine-discourses-heading"
+            component="h2"
+            sx={{
+              fontFamily: 'var(--font-forum), serif',
+              fontWeight: 400,
+              fontSize: scheduleDisplayTitleFontSize,
+              lineHeight: { xs: 1.1, md: 1.2 },
+              color: theme.palette.guru.ink,
+              textAlign: "center"
+            }}
+          >
             {copy.title}
           </Typography>
           <Typography
             component="p"
             sx={{
               mt: 0.4,
-              ...sectionEyebrowSx(theme, { uppercase: false, fontWeight: 700 })
+              fontFamily: 'var(--font-inter), system-ui, sans-serif',
+              fontWeight: 700,
+              fontSize: scheduleEyebrowFontSize,
+              lineHeight: 1.35,
+              letterSpacing: "0.02em",
+              textTransform: "none",
+              textAlign: "center",
+              color: theme.palette.text.primary
             }}
           >
             {copy.subtitle}
@@ -134,7 +196,7 @@ export function DivineDiscoursesScheduleSection() {
 
           <Stack direction="row" spacing={3} sx={{ mt: 2, justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
             {divineDiscoursesIcons.map((src) => (
-              <Box key={src} sx={{ position: "relative", width: 80, height: 40 }}>
+              <Box key={src} sx={{ position: "relative", width: pxToRem(80), height: pxToRem(40) }}>
                 <Image alt="" fill src={src} sizes="80px" style={{ objectFit: "contain" }} />
               </Box>
             ))}
@@ -144,8 +206,8 @@ export function DivineDiscoursesScheduleSection() {
         <Card
           sx={{
             mt: 4,
-            borderRadius: "1.32rem",
-            border: `1.3px solid ${cardBorder}`,
+            borderRadius: pxToRem(21.12),
+            border: `${pxToRem(1.3)} solid ${cardBorder}`,
             boxShadow: "none",
             p: { xs: 1.5, md: 2.25 },
             bgcolor: (t) => t.palette.background.paper,
@@ -166,9 +228,9 @@ export function DivineDiscoursesScheduleSection() {
             <Box
               sx={{
                 position: "relative",
-                borderRadius: "0.625rem",
+                borderRadius: pxToRem(10),
                 overflow: "hidden",
-                minHeight: { xs: 280, md: 420 }
+                minHeight: heroImageMinHeight
               }}
             >
               <Image
@@ -184,22 +246,22 @@ export function DivineDiscoursesScheduleSection() {
                 alignItems="center"
                 sx={{
                   position: "absolute",
-                  top: 12,
-                  left: 12,
-                  maxWidth: "calc(100% - 1.5rem)",
+                  top: pxToRem(12),
+                  left: pxToRem(12),
+                  maxWidth: `calc(100% - ${pxToRem(24)})`,
                   px: 1.75,
                   py: 0.65,
                   borderRadius: "999px",
-                  backdropFilter: "blur(36px)",
+                  backdropFilter: backdropBlurSchedule,
                   bgcolor: (t) => alpha(t.palette.background.paper, 0.9),
-                  border: (t) => `1px solid ${alpha(t.palette.divider, 0.25)}`
+                  border: (t) => `${pxToRem(1)} solid ${alpha(t.palette.divider, 0.25)}`
                 }}
               >
                 <Box
                   aria-hidden
                   sx={{
-                    width: 10,
-                    height: 10,
+                    width: pxToRem(10),
+                    height: pxToRem(10),
                     borderRadius: "50%",
                     flexShrink: 0,
                     bgcolor: (t) => t.palette.error.main
@@ -210,7 +272,7 @@ export function DivineDiscoursesScheduleSection() {
                   sx={{
                     fontFamily: inter,
                     fontWeight: 400,
-                    fontSize: "clamp(0.8125rem, 0.35vw + 0.72rem, 1.05rem)",
+                    fontSize: scheduleLiveBadgeFontSize,
                     lineHeight: 1.2,
                     color: (t) => t.palette.text.primary
                   }}
@@ -223,7 +285,7 @@ export function DivineDiscoursesScheduleSection() {
               </Stack>
             </Box>
 
-            <Box sx={{ py: { xs: 0.5, md: 0.75 }, minWidth: 0, width: {xs: "100%", lg: "90%"} }}>
+            <Box sx={{ py: { xs: 0.5, md: 0.75 }, pl: { xs: 0, md: 4 }, minWidth: 0, width: {xs: "100%", lg: "90%"} }}>
               <Box
                 sx={{
                   display: "grid",
@@ -239,7 +301,7 @@ export function DivineDiscoursesScheduleSection() {
                       sx={{
                         fontFamily: inter,
                         fontWeight: 400,
-                        fontSize: fluidScheduleHeading,
+                        fontSize: scheduleHeadingFontSize,
                         lineHeight: 1.45,
                         letterSpacing: "-0.015em",
                         color: scheduleHeadingColor
@@ -248,14 +310,27 @@ export function DivineDiscoursesScheduleSection() {
                       {offline.heading}
                     </Typography>
                   </IconTextRow>
-                  <Stack spacing={0.65}>
-                    {offline.slots.map((line) => (
-                      <IconTextRow key={line} iconSrc={assets.calendarIcon} iconSize={22}>
+                  {/* One calendar icon for all offline slots; note sits under the times */}
+                  <Stack direction="row" spacing={1} sx={{ alignItems: "flex-start" }}>
+                    <Box
+                      sx={{
+                        position: "relative",
+                        width: pxToRem(22),
+                        height: pxToRem(22),
+                        flexShrink: 0,
+                        mt: pxToRem(2)
+                      }}
+                    >
+                      <Image alt="" fill src={assets.calendarIcon} sizes="22px" style={{ objectFit: "contain" }} />
+                    </Box>
+                    <Stack spacing={0.65} sx={{ minWidth: 0 }}>
+                      {offline.slots.map((line) => (
                         <Typography
+                          key={line}
                           sx={{
                             fontFamily: inter,
                             fontWeight: 400,
-                            fontSize: fluidSectionBody,
+                            fontSize: scheduleBodyFontSize,
                             lineHeight: 1.6,
                             letterSpacing: "-0.01em",
                             color: scheduleMutedColor
@@ -263,22 +338,21 @@ export function DivineDiscoursesScheduleSection() {
                         >
                           {line}
                         </Typography>
-                      </IconTextRow>
-                    ))}
+                      ))}
+                      <Typography
+                        sx={{
+                          fontFamily: inter,
+                          fontWeight: 400,
+                          fontSize: scheduleBodyFontSize,
+                          lineHeight: 1.6,
+                          color: scheduleAccentColor,
+                          mt: 0.35
+                        }}
+                      >
+                        {offline.note}
+                      </Typography>
+                    </Stack>
                   </Stack>
-                  <Typography
-                    sx={{
-                      fontFamily: inter,
-                      fontWeight: 400,
-                      fontSize: fluidSectionBody,
-                      lineHeight: 1.6,
-                      color: scheduleAccentColor,
-                      pl: { xs: 0, md: 0 },
-                      mt: -0.25
-                    }}
-                  >
-                    {offline.note}
-                  </Typography>
                 </Stack>
 
                 <Stack spacing={1.75}>
@@ -288,7 +362,7 @@ export function DivineDiscoursesScheduleSection() {
                       sx={{
                         fontFamily: inter,
                         fontWeight: 400,
-                        fontSize: fluidScheduleHeading,
+                        fontSize: scheduleHeadingFontSize,
                         lineHeight: 1.45,
                         letterSpacing: "-0.015em",
                         color: scheduleHeadingColor
@@ -297,14 +371,27 @@ export function DivineDiscoursesScheduleSection() {
                       {online.heading}
                     </Typography>
                   </IconTextRow>
-                  <Stack spacing={0.65}>
-                    {online.slots.map((line) => (
-                      <IconTextRow key={line} iconSrc={assets.calendarIcon} iconSize={22}>
+                  {/* One calendar icon; weekdays line, then time line */}
+                  <Stack direction="row" spacing={1} sx={{ alignItems: "flex-start" }}>
+                    <Box
+                      sx={{
+                        position: "relative",
+                        width: pxToRem(22),
+                        height: pxToRem(22),
+                        flexShrink: 0,
+                        mt: pxToRem(2)
+                      }}
+                    >
+                      <Image alt="" fill src={assets.calendarIcon} sizes="22px" style={{ objectFit: "contain" }} />
+                    </Box>
+                    <Stack spacing={0.65} sx={{ minWidth: 0 }}>
+                      {online.slots.map((line) => (
                         <Typography
+                          key={line}
                           sx={{
                             fontFamily: inter,
                             fontWeight: 400,
-                            fontSize: fluidSectionBody,
+                            fontSize: scheduleBodyFontSize,
                             lineHeight: 1.6,
                             letterSpacing: "-0.01em",
                             color: scheduleMutedColor
@@ -312,20 +399,20 @@ export function DivineDiscoursesScheduleSection() {
                         >
                           {line}
                         </Typography>
-                      </IconTextRow>
-                    ))}
+                      ))}
+                    </Stack>
                   </Stack>
                 </Stack>
               </Box>
 
-              <Box sx={{ mt: { xs: 2, md: 2.5 }, p: { xs: 1.75, md: 2 }, borderRadius: "10px", bgcolor: calloutBg }}>
+              <Box sx={{ mt: { xs: 2, md: 2.5 }, p: { xs: 1.75, md: 2 }, borderRadius: pxToRem(10), bgcolor: calloutBg }}>
                 <Typography
                   component="p"
                   sx={{
                     m: 0,
                     fontFamily: inter,
                     fontWeight: 400,
-                    fontSize: fluidCalloutBody,
+                    fontSize: scheduleCalloutFontSize,
                     lineHeight: 1.44,
                     letterSpacing: "-0.02em",
                     color: ink
@@ -343,13 +430,13 @@ export function DivineDiscoursesScheduleSection() {
                 fullWidth
                 sx={{
                   mt: 2.5,
-                  minHeight: { xs: 52, md: 56 },
+                  minHeight: { xs: pxToRem(52), md: pxToRem(56) },
                   py: 1.25,
-                  borderRadius: "0.71rem",
+                  borderRadius: pxToRem(11.36),
                   textTransform: "none",
                   fontFamily: inter,
                   fontWeight: 500,
-                  fontSize: fluidScheduleCta,
+                  fontSize: scheduleCtaFontSize,
                   letterSpacing: "-0.02em",
                   bgcolor: ink,
                   "&:hover": { bgcolor: alpha(ink, 0.92) }
