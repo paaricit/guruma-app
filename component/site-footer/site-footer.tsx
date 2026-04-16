@@ -26,6 +26,8 @@ import { pxToRem } from "@/utils/px-to-rem";
 
 const footerBackgroundSrc = "/images/footer-background.png";
 
+const footerVideoSrc = `/images/${encodeURIComponent("Blue Abstract Welcome Background Intro Video.mp4")}`;
+
 const footerColumnHeadingFontSize = { xs: pxToRem(24), md: pxToRem(36) };
 const footerBodyFontSize = { xs: pxToRem(15), md: pxToRem(22) };
 const footerLabelFontSize = { xs: pxToRem(16), md: pxToRem(21) };
@@ -56,31 +58,77 @@ const socialLinks = [
 
 /**
  * Global footer — MUI `Grid` (12 columns) for main vs form; nested grid for IISHT / Our Services.
- * Background: static blue abstract image.
+ * Background: looping muted video with image fallback (`prefers-reduced-motion` uses image only).
  */
 export default function SiteFooter() {
-
   return (
     <Box
       component="footer"
       sx={{
         position: "relative",
         zIndex: 2,
+        // overflow: "hidden",
         pt: { xs: 2.5, md: 3 },
         pb: { xs: 2.5, md: 10 },
-        color: "primary.contrastText",
-        backgroundImage: `url(${footerBackgroundSrc})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat"
+        color: "primary.contrastText"
       }}
     >
+      <Box
+        aria-hidden
+        sx={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          backgroundImage: `url(${footerBackgroundSrc})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          display: "none",
+          "@media (prefers-reduced-motion: reduce)": {
+            display: "block"
+          }
+        }}
+      />
+      <Box
+        component="video"
+        aria-hidden
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster={footerBackgroundSrc}
+        sx={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "center",
+          display: "block",
+          "@media (prefers-reduced-motion: reduce)": {
+            display: "none"
+          }
+        }}
+      >
+        <source src={footerVideoSrc} type="video/mp4" />
+      </Box>
+      <Box
+        aria-hidden
+        sx={(theme) => ({
+          position: "absolute",
+          inset: 0,
+          zIndex: 1,
+          bgcolor: alpha(theme.palette.primary.dark, 0.62),
+          pointerEvents: "none"
+        })}
+      />
 
       <Container
         maxWidth="xl"
         sx={{
           position: "relative",
-          zIndex: 1,
+          zIndex: 2,
           pb: 0.5,
           overflow: "visible",
           ...pageSectionGutterSx

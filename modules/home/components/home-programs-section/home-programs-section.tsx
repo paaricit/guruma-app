@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
 import { pxToRem } from "@/utils/px-to-rem";
 import { homeProgramRows, type HomeProgramRow } from "@/modules/home/content/home-programs";
+import { encodePublicPath } from "@/utils/encode-public-path";
 
 const sectionPb = {
   xs: pxToRem(48),
@@ -69,6 +70,9 @@ const programBodyFontSize = {
   lg: pxToRem(20)
 } as const;
 
+/** Vertical space between each full-bleed program row */
+const programRowGap = pxToRem(23);
+
 export type HomeProgramsSectionProps = {
   programs?: readonly HomeProgramRow[];
 };
@@ -90,7 +94,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
       }}
     >
       <Container maxWidth={false} disableGutters sx={{ mx: "auto" }}>
-        <Stack spacing={{ xs: 1.25, sm: 1.5 }}>
+        <Stack sx={{ gap: programRowGap }}>
           {programs.map((row) => (
             <Box
               key={row.title}
@@ -126,7 +130,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                   alt={row.title}
                   fill
                   sizes="(max-width: 899px) 100vw, (max-width: 1536px) 100vw, 90vw"
-                  src={row.image}
+                  src={encodePublicPath(row.image)}
                   style={{ objectFit: "cover" }}
                   priority={false}
                 />
@@ -142,7 +146,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                   bgcolor: { xs: theme.palette.background.paper, md: "transparent" },
                   py: programCopyPy,
                   px: { xs: 2, sm: 2.5, md: pxToRem(48), lg: pxToRem(67) },
-                  maxWidth: { xs: "100%", md: 'pxToRem(780)' },
+                  maxWidth: { xs: "100%", md: pxToRem(780) },
                   ...(row.imageLeft ? { ml: { md: "auto" } } : {})
                 }}
               >

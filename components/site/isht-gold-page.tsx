@@ -18,6 +18,7 @@ import {
   Stack,
   Typography
 } from "@mui/material";
+import { encodePublicPath } from "@/utils/encode-public-path";
 
 const gold = "#d4af37";
 const goldDeep = "#b8941f";
@@ -101,7 +102,7 @@ export default function IshtGoldPage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundImage: `linear-gradient(180deg, rgba(2,6,18,0.82) 0%, rgba(4,12,30,0.88) 100%), url('${heroBg}')`,
+          backgroundImage: `linear-gradient(180deg, rgba(2,6,18,0.82) 0%, rgba(4,12,30,0.88) 100%), url('${encodePublicPath(heroBg)}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           overflow: "hidden"
@@ -352,7 +353,13 @@ export default function IshtGoldPage() {
         <Container maxWidth="lg">
           <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: { xs: 3, md: 5 }, alignItems: "center" }}>
             <Box sx={{ position: "relative", minHeight: { xs: 360, md: 480 }, borderRadius: "20px", overflow: "hidden" }}>
-              <Image src={learnImage} alt="Guided meditation practice" fill sizes="(max-width: 900px) 100vw, 45vw" style={{ objectFit: "cover" }} />
+              <Image
+                src={encodePublicPath(learnImage)}
+                alt="Guided meditation practice"
+                fill
+                sizes="(max-width: 900px) 100vw, 45vw"
+                style={{ objectFit: "cover" }}
+              />
             </Box>
             <Box sx={{ bgcolor: "#fff", borderRadius: "18px", border: `2px solid rgba(212,175,55,0.35)`, p: { xs: 3, md: 4 } }}>
               <Typography sx={{ color: goldDeep, fontWeight: 800, letterSpacing: "0.12em", fontSize: 11, mb: 1 }}>WHAT WILL YOU LEARN</Typography>

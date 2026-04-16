@@ -12,7 +12,7 @@ import {
 } from "@/theme/page-section";
 import { pxToRem } from "@/utils/px-to-rem";
 
-const heroMinHeight = { md: pxToRem(680) } as const;
+const heroMinHeight = { md: pxToRem(760), lg: pxToRem(840) } as const;
 
 const heroPaddingTop = { xs: "clamp(5rem, 12vw, 6.5rem)", md: pxToRem(96) } as const;
 

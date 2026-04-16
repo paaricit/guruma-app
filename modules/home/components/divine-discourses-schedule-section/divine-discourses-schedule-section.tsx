@@ -18,6 +18,7 @@ import {
   divineDiscoursesIcons
 } from "@/modules/home/content/divine-discourses-schedule";
 import { HomeCornerCurveDecor } from "@/modules/home/components/home-corner-curve-decor";
+import { encodePublicPath } from "@/utils/encode-public-path";
 
 const scheduleDisplayTitleFontSize = {
   xs: pxToRem(30),
@@ -195,9 +196,23 @@ export function DivineDiscoursesScheduleSection() {
           </Typography>
 
           <Stack direction="row" spacing={3} sx={{ mt: 2, justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
-            {divineDiscoursesIcons.map((src) => (
-              <Box key={src} sx={{ position: "relative", width: pxToRem(80), height: pxToRem(40) }}>
-                <Image alt="" fill src={src} sizes="80px" style={{ objectFit: "contain" }} />
+            {divineDiscoursesIcons.map(({ src, widthPx, heightPx }) => (
+              <Box
+                key={src}
+                sx={{
+                  position: "relative",
+                  width: pxToRem(widthPx),
+                  height: pxToRem(heightPx),
+                  flex: "0 0 auto"
+                }}
+              >
+                <Image
+                  alt=""
+                  fill
+                  src={encodePublicPath(src)}
+                  sizes={`${Math.ceil(widthPx)}px`}
+                  style={{ objectFit: "contain" }}
+                />
               </Box>
             ))}
           </Stack>

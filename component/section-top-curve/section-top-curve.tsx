@@ -16,6 +16,7 @@ export type SectionTopArcProps = {
   svgHeight?: string;
   /** Preset (`default` / `paper` / `primaryLight`) or a CSS color string for a custom seam fill. */
   surface?: SectionTopArcSurfaceProp;
+  placement?: "top" | "bottom";
 };
 
 function resolveArcFill(theme: Theme, surface: SectionTopArcSurfaceProp): string {
@@ -36,9 +37,14 @@ function resolveArcFill(theme: Theme, surface: SectionTopArcSurfaceProp): string
  * Place inside a `position: relative` section; sits above the section via `bottom: 100%`.
  * Set `surface` to a preset (`default` / `paper` / `primaryLight`) or any CSS color string (e.g. `#F3F2EE`).
  */
-export function SectionTopArc({ svgHeight = SECTION_TOP_ARC_HEIGHT, surface = "default" }: SectionTopArcProps) {
+export function SectionTopArc({
+  svgHeight = SECTION_TOP_ARC_HEIGHT,
+  surface = "default",
+  placement = "top"
+}: SectionTopArcProps) {
   const theme = useTheme();
   const curveTopShadow = `drop-shadow(0 -10px 22px ${alpha(theme.palette.primary.dark, 0.32)})`;
+  const isBottom = placement === "bottom";
 
   return (
     <Box
@@ -47,7 +53,7 @@ export function SectionTopArc({ svgHeight = SECTION_TOP_ARC_HEIGHT, surface = "d
         position: "absolute",
         left: 0,
         right: 0,
-        bottom: "100%",
+        ...(isBottom ? { top: "100%", transform: "rotate(180deg)", transformOrigin: "center top" } : { bottom: "100%" }),
         width: "100%",
         zIndex: 2,
         pointerEvents: "none",

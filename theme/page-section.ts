@@ -219,7 +219,7 @@ export function guruIntroTaglineSx(theme: Theme) {
 export function guruIntroRoleLabelSx(theme: Theme) {
   return {
     fontFamily: 'var(--font-inter), system-ui, sans-serif',
-    fontWeight: 400,
+    fontWeight: 500,
     fontSize: fluidGuruIntroRole,
     lineHeight: 1.35,
     color: alpha(theme.palette.guru.ink, 0.88)
