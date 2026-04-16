@@ -12,13 +12,15 @@ import { Box, Card, Container, Stack, Typography, IconButton, useTheme } from "@
 import {
   HomeImpactStatsSection,
 } from "@/modules/home/components";
-import { HerJourneySection, HerTeachingsSection } from "@/modules/about-her/components";
+import {
+  AboutHerHeroSection,
+  HerJourneySection,
+  HerTeachingsSection
+} from "@/modules/about-her/components";
 import { SaptSadhanaStackCarousel } from "@/components/site/sapt-sadhana-stack-carousel";
 
 
 const IMG = {
-  banner: "/images/About Her Page Photos/ABOUT HER Banner.webp",
-  overlap: "/images/About Her Page Photos/ABOUT HER Overlap.webp",
   vision: "/images/About Her Page Photos/Vision_.webp",
   mission: "/images/About Her Page Photos/Mission_.webp"
 } as const;
@@ -97,74 +99,7 @@ export default function AboutHerPage() {
   return (
     <Box sx={{ bgcolor: "#0a1628", overflowX: "hidden" }}>
       {/* --- Section: Hero --- */}
-      <Box
-        sx={{
-          position: "relative",
-          minHeight: { xs: 520, md: 680 },
-          pt: { xs: 10, md: 12 },
-          display: "flex",
-          alignItems: "center"
-        }}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `linear-gradient(-84deg, rgba(0,0,0,0) 47%, rgba(1,32,73,0.5) 76%), url('${IMG.banner}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center"
-          }}
-        />
-        {/* <Box
-          sx={{
-            position: "absolute",
-            right: 0,
-            top: 0,
-            bottom: 0,
-            width: { xs: "52%", md: "52%" },
-            maxWidth: 820,
-            display: { xs: "none", sm: "block" }
-          }}
-        >
-          <Image
-            alt="Guru Maa Shubha Didi"
-            fill
-            priority
-            sizes="(max-width: 600px) 0px, 52vw"
-            src={IMG.overlap}
-            style={{ objectFit: "cover", objectPosition: "center top" }}
-          />
-        </Box> */}
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, py: { xs: 4, md: 6 } }}>
-          <Box sx={{ maxWidth: { xs: "100%", md: "min(755px, 52%)" } }}>
-            <Typography
-              sx={{
-                fontFamily: "var(--font-forum), serif",
-                fontSize: { xs: 40, md: 72 },
-                lineHeight: { xs: 1.05, md: 0.95 },
-                color: "#ecede5",
-                fontWeight: 400
-              }}
-            >
-              Guru Maa Shubha Didi
-            </Typography>
-            <Typography
-              sx={{
-                mt: { xs: 2, md: 2.5 },
-                fontFamily: "var(--font-inter), sans-serif",
-                fontSize: { xs: 15, md: 18 },
-                lineHeight: 1.65,
-                color: "rgba(236,237,229,0.95)",
-                maxWidth: 696
-              }}
-            >
-              Guru Maa Shubha Didi is an experience of divine logic and limitless love. A rare blend of intense devotion and sharp intellect,
-              she has spent over four decades acting as a practical torchbearer for holistic living. She doesn&apos;t just offer
-              &quot;magic&quot;—she offers Divine Logic to help souls realise their infinite nature.
-            </Typography>
-          </Box>
-        </Container>
-      </Box>
+      <AboutHerHeroSection />
 
       {/* --- Section: Her Journey (timeline + portrait) --- */}
       <HerJourneySection />

@@ -26,22 +26,22 @@ const iconByKey: Record<HerTeachingIconKey, SvgIconComponent> = {
   visibility: VisibilityOutlinedIcon
 };
 
-/** Section display — 62px */
-const sectionHeadingFontSize = pxToRem(62);
+/** Section display — scales up to 62px from `md` */
+const sectionHeadingFontSize = { xs: pxToRem(34), md: pxToRem(62) } as const;
 
-/** Item title — 25px */
-const itemTitleFontSize = pxToRem(25);
+/** Item title — scales up to 25px from `md` */
+const itemTitleFontSize = { xs: pxToRem(17), md: pxToRem(25) } as const;
 
 /** Item title → body spacing */
-const itemTitlePaddingBottom = pxToRem(8);
+const itemTitlePaddingBottom = { xs: pxToRem(6), md: pxToRem(8) } as const;
 
-/** Body copy — 18px (`guru.aboutHerTeachingsBody`) */
-const itemBodyFontSize = pxToRem(18);
+/** Body copy — scales up to 18px from `md` (`guru.aboutHerTeachingsBody`) */
+const itemBodyFontSize = { xs: pxToRem(15), md: pxToRem(18) } as const;
 
-/** Icon circle — 55px; glyph ~28px */
-const iconGlyphSize = pxToRem(28);
+/** Icon circle + glyph — scale with breakpoint */
+const iconGlyphSize = { xs: pxToRem(22), md: pxToRem(28) } as const;
 
-const iconCircleSize = pxToRem(55);
+const iconCircleSize = { xs: pxToRem(44), md: pxToRem(55) } as const;
 
 const containerMinHeight = {
   xs: pxToRem(380),
@@ -60,10 +60,10 @@ export function HerTeachingsSection() {
       aria-labelledby="her-teachings-heading"
       sx={{
         bgcolor: g.aboutHerTeachingsBand,
-        backgroundImage: `url("${herTeachingsImageSrc}")`,
-          backgroundSize: "30%",
-          backgroundPosition: { xs: "center bottom", md: "right -50px" },
-          backgroundRepeat: "no-repeat",
+        backgroundImage: { xs: "none", md: `url("${herTeachingsImageSrc}")` },
+        backgroundSize: { md: "30%" },
+        backgroundPosition: { md: "right -50px" },
+        backgroundRepeat: { md: "no-repeat" },
         py: { xs: 6, md: 10 }
       }}
     >
@@ -86,14 +86,14 @@ export function HerTeachingsSection() {
             sx={{
               fontWeight: 400,
               fontSize: sectionHeadingFontSize,
-              lineHeight: 1.15,
+              lineHeight: { xs: 1.2, md: 1.15 },
               color: g.aboutHerTeachingsTitle,
-              mb: { xs: 3, md: 4 },
+              mb: { xs: 3, md: 4 }
             }}
           >
             {herTeachingsSectionTitle}
           </Typography>
-          <Stack spacing={3}>
+          <Stack spacing={{ xs: 2.5, md: 3 }}>
             {herTeachingsItems.map(({ title, body, icon }) => {
               const Icon = iconByKey[icon];
               return (
@@ -101,7 +101,7 @@ export function HerTeachingsSection() {
                   key={title}
                   sx={{
                     display: "flex",
-                    gap: 2,
+                    gap: { xs: 1.5, md: 2 },
                     alignItems: "flex-start",
                     minWidth: 0,
                     width: { xs: "100%", md: "50%" }

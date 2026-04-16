@@ -61,8 +61,6 @@ export function HerJourneySection() {
       aria-labelledby="about-her-journey-heading"
       sx={{
         position: "relative",
-        pt: { xs: pxToRem(16), md: pxToRem(24) },
-        pb: { xs: pxToRem(16), md: pxToRem(24) }
       }}
     >
       <Box
