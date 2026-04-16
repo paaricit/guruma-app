@@ -30,6 +30,17 @@ export const palette: PaletteOptions = {
     mint: "#d1f1f5",
     ink: "#031942",
     surfaceWash: "#f2f2ee",
-    surfaceCream: "#fdfdf8"
+    surfaceCream: "#fdfdf8",
+    aboutHerTeachingsBand: "#f9f9f7",
+    aboutHerTeachingsAccent: "#f4b497",
+    aboutHerTeachingsTitle: "#2a2a2a",
+    aboutHerTeachingsBody: "#878787",
+    aboutHerTeachingsImageWell: "linear-gradient(180deg, #e8f2f8 0%, #f5f9fc 100%)",
+    pathwaySectionHeading: "#353535",
+    pathwaySectionSurface: "#f2f1ed",
+    pathwayCardTitle: "#353535",
+    pathwayCardBody: "#878787",
+    pathwayIconAccent: "#ffc19a",
+    pathwayCardBorder: "rgba(14, 123, 125, 0.15)"
   }
 };
