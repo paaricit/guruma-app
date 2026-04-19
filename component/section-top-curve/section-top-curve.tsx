@@ -17,8 +17,15 @@ export type SectionTopArcProps = {
   svgHeight?: string;
   /** Preset (`default` / `paper` / `primaryLight`) or a CSS color string for a custom seam fill. */
   surface?: SectionTopArcSurfaceProp;
+  /**
+   * `top` (default): arc along the **top** of the section (`bottom: 100%`).
+   * `bottom`: same shape **rotated 180°** so the bulge points **up** into the section (`top: 100%`) — use for a bottom edge or prefer {@link SectionBottomArc}.
+   */
   placement?: "top" | "bottom";
 };
+
+/** Props for {@link SectionBottomArc} — same as {@link SectionTopArcProps} without `placement` (always bottom / inverted). */
+export type SectionBottomArcProps = Omit<SectionTopArcProps, "placement">;
 
 function resolveArcFill(theme: Theme, surface: SectionTopArcSurfaceProp): string {
   switch (surface) {
@@ -54,7 +61,7 @@ export function SectionTopArc({
         position: "absolute",
         left: 0,
         right: 0,
-        ...(isBottom ? { top: "100%", transform: "rotate(180deg)", transformOrigin: "center top" } : { bottom: "100%" }),
+        ...(isBottom ? { top: "100%", transform: "rotate(180deg)", transformOrigin: "center top" } : { bottom: "99%" }),
         width: "100%",
         zIndex: 2,
         pointerEvents: "none",
@@ -84,4 +91,17 @@ export function SectionTopArc({
       </svg>
     </Box>
   );
+}
+
+/**
+ * Inverted section curve: same SVG as {@link SectionTopArc} with `placement="bottom"` (bulge up into the block above).
+ * Put inside a `position: relative` section; anchors at `top: 100%` with `rotate(180deg)`.
+ *
+ * @example
+ * ```tsx
+ * <SectionBottomArc surface="#D1F1F5" />
+ * ```
+ */
+export function SectionBottomArc(props: SectionBottomArcProps) {
+  return <SectionTopArc {...props} placement="bottom" />;
 }

@@ -7,6 +7,8 @@ export const homeHeroContent = {
   displayLine1: "Guru Maa",
   displayLine2: "Shubha Didi",
   bannerSrc: "/images/Home Page Photos/Home Page Banner.webp",
+  /** Cutout portrait (black / transparent) — `public/images/About Her Page Photos/about-her-hero-portrait.png`. */
+  portraitSrc: "/images/About Her Page Photos/about-her-hero-portrait.png",
   primaryCta: {
     label: "Join Divine Discourses",
     href: "/sessions"

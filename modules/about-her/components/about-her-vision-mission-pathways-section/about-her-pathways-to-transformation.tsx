@@ -17,7 +17,7 @@ import {
   aboutHerPathwaysSectionTitle,
   type AboutHerPathwayIconKey
 } from "@/modules/about-her/content/vision-mission-pathways";
-import { pxToRem } from "@/utils/px-to-rem";
+import { unitScale } from "@/utils/unit-scale";
 
 const pathwayIconByKey: Record<AboutHerPathwayIconKey, SvgIconComponent> = {
   favorite: FavoriteBorderOutlinedIcon,
@@ -28,31 +28,43 @@ const pathwayIconByKey: Record<AboutHerPathwayIconKey, SvgIconComponent> = {
   spa: SpaOutlinedIcon
 };
 
-/** Figma node `1:7478` — Forum ~71px (70.954) */
+/** Figma node `1:7478` — Forum; `xs` / `md` only (fluid via `unitScale`). */
 const pathwaysTitleFontSize = {
-  xs: pxToRem(40),
-  sm: pxToRem(52),
-  md: pxToRem(60),
-  lg: pxToRem(71)
+  xs: unitScale(40),
+  md: unitScale(71)
 } as const;
 
-/** Card title — Inter Medium 26px */
-const pathwayCardTitleFontSize = pxToRem(26);
+const pathwayCardTitleFontSize = {
+  xs: unitScale(22),
+  md: unitScale(26)
+} as const;
 
-/** Card body — Inter Regular 21px */
-const pathwayCardBodyFontSize = pxToRem(21);
+const pathwayCardBodyFontSize = {
+  xs: unitScale(18),
+  md: unitScale(21)
+} as const;
 
-/** Line height for 21px body (~34px) */
+/** Line height for ~21px body (~34px line box) */
 const pathwayCardBodyLineHeightRatio = 34 / 21;
 
-const pathwayIconTileSize = pxToRem(48);
+const pathwayCardTitleLineHeight = {
+  xs: unitScale(28),
+  md: unitScale(32)
+} as const;
 
-const pathwayIconTileRadius = pxToRem(14);
+const pathwayIconTileSize = {
+  xs: unitScale(44),
+  md: unitScale(65)
+} as const;
 
-const pathwayIconGlyphSize = pxToRem(26);
+const pathwayIconTileRadius = unitScale(14);
 
-/** Figma card radius ~20.61px */
-const cardRadius = pxToRem(21);
+const pathwayIconGlyphSize = {
+  xs: unitScale(22),
+  md: unitScale(26)
+} as const;
+
+const cardRadius = unitScale(21);
 
 /** Section art behind the pathway cards (1528×1070, from design export). */
 const pathwaysCardsBackgroundImage = "/images/about-her/pathways-section-bg.svg";
@@ -66,14 +78,13 @@ export function AboutHerPathwaysToTransformation() {
     <Container
       maxWidth={false}
       sx={{
-        backgroundImage: `url(${pathwaysCardsBackgroundImage})`,
+        backgroundImage: {lg: `url(${pathwaysCardsBackgroundImage})`, xs: 'none'},
         backgroundRepeat: "no-repeat",
         backgroundPosition: "50% 0",
         backgroundSize: "100% auto",
         px: { xs: 4, md: 14 },
         pb: { xs: 6, md: 18 },
         pt: { xs: 6, md: 10 },
-        bgcolor: g.pathwaySectionSurface
       }}>
       <Container
         maxWidth={'lg'}
@@ -89,8 +100,8 @@ export function AboutHerPathwaysToTransformation() {
             lineHeight: { xs: 1.12, md: 1.08 },
             letterSpacing: "0.006em",
             color: g.pathwaySectionHeading,
-            mb: { xs: 2.5, sm: 3, md: 4 },
-            px: { xs: 0, sm: 1 },
+            mb: { xs: 2.5, md: 4 },
+            px: { xs: 0, md: 1 },
             maxWidth: "100%"
           }}
         >
@@ -126,8 +137,10 @@ export function AboutHerPathwaysToTransformation() {
                   alignItems: "center",
                   bgcolor: theme.palette.common.white,
                   border: `1px solid ${g.pathwayCardBorder}`,
-                  boxShadow: `0 ${pxToRem(6)} ${pxToRem(24)} ${cardShadow}`,
-                  minWidth: 0
+                  boxShadow: `0 ${unitScale(6)} ${unitScale(24)} ${cardShadow}`,
+                  minWidth: 0,
+                  minHeight: unitScale(350),
+                  justifyContent: 'space-evenly'
                 }}
               >
                 <Box
@@ -171,7 +184,7 @@ export function AboutHerPathwaysToTransformation() {
                     fontFamily: 'var(--font-inter), system-ui, sans-serif',
                     fontWeight: 500,
                     fontSize: pathwayCardTitleFontSize,
-                    lineHeight: pxToRem(32),
+                    lineHeight: pathwayCardTitleLineHeight,
                     letterSpacing: "-0.022em",
                     color: g.pathwayCardTitle,
                     textAlign: "center",
@@ -190,7 +203,6 @@ export function AboutHerPathwaysToTransformation() {
                     lineHeight: pathwayCardBodyLineHeightRatio,
                     letterSpacing: "-0.025em",
                     color: g.pathwayCardBody,
-                    flexGrow: 1,
                     textAlign: "center",
                     width: "100%",
                     m: 0

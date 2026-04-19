@@ -16,7 +16,10 @@ export default function AboutHerPage() {
       <HerJourneySection />
       <AboutHerVisionMissionPathwaysSection />
       <HerTeachingsSection />
+      <Box sx={{ pt: { xs: 6, md: 10 }, bgcolor: '#fff' }}>
       <HomeImpactStatsSection />
+
+      </Box>
       <SaptSadhanaHomePromoSection />
     </Box>
   );

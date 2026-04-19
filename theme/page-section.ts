@@ -12,7 +12,7 @@ export const pageContainerMaxWidth = "lg" as const;
 
 /** Default section gutters — use on `Container` `sx` (or merge with `disableGutters` layouts). */
 export const pageSectionGutterSx = {
-  px: { xs: 2, sm: 2.5, md: 3, lg: 0 }
+  px: { xs: 4, sm: 4, md: 3, lg: 0 }
 } as const;
 
 /** Programs: full-bleed on xs; same gutters as `pageSectionGutterSx` from `sm` up. */

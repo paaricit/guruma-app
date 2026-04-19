@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -8,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
 import { homeHeroContent } from "@/modules/home/content/home-hero";
+import { encodePublicPath } from "@/utils/encode-public-path";
 import { unitScale } from "@/utils/unit-scale";
 import {
   homeHeroDisplayOnDarkSx,
@@ -153,6 +155,27 @@ export function HomeHeroSection() {
                 {homeHeroContent.secondaryCta.label}
               </Button>
             </Stack>
+          </Box>
+
+          <Box
+            sx={{
+              position: "relative",
+              display: { xs: "none", md: "block" },
+              width: "100%",
+              height: { md: unitScale(520) },
+              maxHeight: { md: "min(72vh, 640px)" },
+              alignSelf: { md: "flex-end" },
+              justifySelf: { md: "center" }
+            }}
+          >
+            <Image
+              alt="Guru Maa Shubha Didi"
+              src={encodePublicPath(homeHeroContent.portraitSrc)}
+              fill
+              priority
+              sizes="(max-width: 900px) 0px, 38vw"
+              style={{ objectFit: "contain", objectPosition: "bottom center" }}
+            />
           </Box>
         </Box>
       </Container>

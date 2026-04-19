@@ -13,49 +13,51 @@ import {
   aboutHerJourneySectionTitle,
   aboutHerJourneySteps
 } from "@/modules/about-her/content/her-journey";
-import { pxToRem } from "@/utils/px-to-rem";
+import { unitScale } from "@/utils/unit-scale";
 
-const sectionEdgePadding = { xs: pxToRem(16), md: pxToRem(24) } as const;
+const sectionEdgePadding = { xs: unitScale(16), sm: unitScale(24) } as const;
 
 const bandPadding = {
-  pt: { xs: pxToRem(20), md: pxToRem(28) },
-  pb: { xs: pxToRem(48), md: pxToRem(72) },
+  pt: { xs: unitScale(20), sm: unitScale(28) },
+  pb: { xs: unitScale(48), sm: unitScale(72) },
   px: sectionEdgePadding
 } as const;
 
-const headingFontSize = { xs: pxToRem(36), md: pxToRem(48) } as const;
+const headingFontSize = { xs: unitScale(36), sm: unitScale(48) } as const;
 
-const mobilePortraitMinHeight = pxToRem(360);
-const desktopPortraitMinHeight = pxToRem(620);
+const mobilePortraitMinHeight = { xs: unitScale(320), sm: unitScale(360) } as const;
+const desktopPortraitMinHeight = unitScale(620);
 
-const stepMarkerWidth = pxToRem(52);
-const stepMarkerHeight = pxToRem(116);
-const stepBadgeFontSize = pxToRem(16);
+const stepMarkerWidth = { xs: unitScale(48), sm: unitScale(52) } as const;
+const stepMarkerHeight = { xs: unitScale(104), sm: unitScale(116) } as const;
+const stepBadgeFontSize = { xs: unitScale(14), sm: unitScale(16) } as const;
 const stepMarkerSrc = "/images/About Her Page Photos/her journey-icon.png" as const;
 const stepRailSrc = "/images/About Her Page Photos/her-journey-icon.svg" as const;
-const stepRailWidth = { md: pxToRem(150), lg: pxToRem(168) } as const;
-const stepRailHeight = { md: pxToRem(420), lg: pxToRem(470) } as const;
-const stepNumberBubbleSize = pxToRem(52);
+const stepRailWidth = { md: unitScale(140), lg: unitScale(140) } as const;
+const stepRailHeight = { md: unitScale(420), lg: unitScale(470) } as const;
+const stepNumberBubbleSize = unitScale(52);
 
-const mobileStepTitleFontSize = pxToRem(17);
-const mobileStepBodyFontSize = pxToRem(15);
-const desktopStepTitleFontSize = pxToRem(22);
-const desktopStepBodyFontSize = pxToRem(18);
+const mobileStepTitleFontSize = { xs: unitScale(16), sm: unitScale(17) } as const;
+const mobileStepBodyFontSize = { xs: unitScale(14), sm: unitScale(15) } as const;
+const desktopStepTitleFontSize = unitScale(22);
+const desktopStepBodyFontSize = unitScale(18);
 
-const portraitRadiusMobile = pxToRem(20);
-const portraitBrMobile = pxToRem(80);
-const portraitRadiusDesktop = pxToRem(24);
-const portraitBrDesktop = pxToRem(120);
+const portraitRadiusMobile = { xs: unitScale(18), sm: unitScale(20) } as const;
+const portraitBrMobile = { xs: unitScale(72), sm: unitScale(80) } as const;
+const portraitRadiusDesktop = unitScale(24);
+const portraitBrDesktop = unitScale(120);
 
 const portraitShadow = (theme: Theme) =>
-  `0 ${pxToRem(12)} ${pxToRem(36)} ${alpha(theme.palette.primary.dark, 0.12)}`;
+  `0 ${unitScale(12)} ${unitScale(36)} ${alpha(theme.palette.primary.dark, 0.12)}`;
 
 const badgeShadow = (theme: Theme) =>
-  `0 ${pxToRem(4)} ${pxToRem(14)} ${alpha(theme.palette.guru.aboutHerTeachingsAccent, 0.45)}`;
+  `0 ${unitScale(4)} ${unitScale(14)} ${alpha(theme.palette.guru.aboutHerTeachingsAccent, 0.45)}`;
 
 export function HerJourneySection() {
   const theme = useTheme();
   const g = theme.palette.guru;
+
+  const desktopGridColumns = `minmax(${unitScale(260)}, ${unitScale(380)}) minmax(${unitScale(150)}, ${unitScale(168)}) 1fr`;
 
   return (
     <Box
@@ -63,207 +65,195 @@ export function HerJourneySection() {
       aria-labelledby="about-her-journey-heading about-her-journey-heading-desktop"
       sx={{
         position: "relative",
+        zIndex: 111
       }}
     >
       <SectionTopArc surface="#D1F1F5" />
       <Box
         sx={{
           position: "relative",
+          zIndex: 111,
           background: aboutHerJourneyBandGradient,
           ...bandPadding
         }}
       >
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Box sx={{ display: { xs: "block", md: "none" } }}>
-              <Typography
-                id="about-her-journey-heading"
-                component="h2"
-                sx={{
-                  fontFamily: "var(--font-forum), serif",
-                  fontSize: headingFontSize,
-                  color: g.aboutHerTeachingsTitle,
-                  mb: pxToRem(24),
-                  textAlign: "start"
-                }}
-              >
-                {aboutHerJourneySectionTitle}
-              </Typography>
-              <Box
-                sx={{
-                  position: "relative",
-                  width: "100%",
-                  minHeight: mobilePortraitMinHeight,
-                  mb: pxToRem(24),
-                  borderRadius: portraitRadiusMobile,
-                  borderBottomRightRadius: portraitBrMobile,
-                  overflow: "hidden",
-                  boxShadow: portraitShadow(theme)
-                }}
-              >
-                <Image
-                  alt="Her journey — portrait"
-                  fill
-                  sizes="100vw"
-                  src={aboutHerJourneyPortraitSrc}
-                  style={{ objectFit: "cover", objectPosition: "center top" }}
-                />
-              </Box>
-              {aboutHerJourneySteps.map((step) => (
-                <Box key={step.num} sx={{ mb: pxToRem(24) }}>
-                  <Box sx={{ display: "flex", gap: pxToRem(16), alignItems: "flex-start" }}>
-                    <Box
-                      sx={{
-                        width: stepMarkerWidth,
-                        height: stepMarkerHeight,
-                        position: "relative",
-                        flexShrink: 0,
-                        boxShadow: badgeShadow(theme)
-                      }}
-                    >
-                      <Image alt="" fill sizes="52px" src={stepMarkerSrc} style={{ objectFit: "contain" }} />
-                      <Typography
-                        component="span"
-                        sx={{
-                          position: "absolute",
-                          inset: 0,
-                          display: "grid",
-                          placeItems: "center",
-                          color: theme.palette.common.white,
-                          fontWeight: 700,
-                          fontSize: stepBadgeFontSize,
-                          lineHeight: 1,
-                          pb: pxToRem(2)
-                        }}
-                      >
-                        {step.num}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography
-                        component="h3"
-                        sx={{
-                          fontFamily: "var(--font-inter), sans-serif",
-                          fontWeight: 700,
-                          fontSize: mobileStepTitleFontSize,
-                          color: alpha(theme.palette.guru.ink, 0.92),
-                          mb: pxToRem(8),
-                          whiteSpace: "pre-line"
-                        }}
-                      >
-                        {step.title}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontFamily: "var(--font-inter), sans-serif",
-                          fontSize: mobileStepBodyFontSize,
-                          lineHeight: 1.55,
-                          color: alpha(theme.palette.guru.ink, 0.78)
-                        }}
-                      >
-                        {step.body}
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Box>
-              ))}
-            </Box>
+        <Box sx={{ display: "flex", flexDirection: "column", position: "relative", zIndex: 1 }}>
 
-            <Box
+          <Box sx={{ display: { xs: "block", md: "none" } }}>
+            <Typography
+              id="about-her-journey-heading"
+              component="h2"
               sx={{
-                display: { xs: "none", md: "grid" },
-                gridTemplateColumns: `minmax(${pxToRem(260)}, ${pxToRem(380)}) minmax(${pxToRem(150)}, ${pxToRem(168)}) 1fr`,
-                gridTemplateRows: "auto auto auto auto",
-                columnGap: pxToRem(16),
-                alignItems: "start"
+                fontFamily: "var(--font-forum), serif",
+                fontSize: headingFontSize,
+                color: g.aboutHerTeachingsTitle,
+                mb: unitScale(24),
+                textAlign: { xs: "center", md: "left" }
               }}
             >
-              <Box
-                sx={{
-                  gridColumn: "1",
-                  gridRow: "1 / 5",
-                  position: "relative",
-                  minHeight: desktopPortraitMinHeight,
-                  maxWidth: pxToRem(380),
-                  width: "100%",
-                  borderRadius: portraitRadiusDesktop,
-                  borderBottomRightRadius: portraitBrDesktop,
-                  overflow: "hidden",
-                  boxShadow: portraitShadow(theme)
-                }}
-              >
-                <Image
-                  alt="Her journey — portrait"
-                  fill
-                  sizes="380px"
-                  src={aboutHerJourneyPortraitSrc}
-                  style={{ objectFit: "cover", objectPosition: "center top" }}
-                />
-              </Box>
+              {aboutHerJourneySectionTitle}
+            </Typography>
 
-              <Box
-                sx={{
-                  gridColumn: "2",
-                  gridRow: "1 / 5",
-                  position: "relative",
-                  width: stepRailWidth,
-                  height: stepRailHeight,
-                  justifySelf: "center"
-                }}
-              >
-                <Image alt="" fill sizes="(max-width: 1199px) 150px, 168px" src={stepRailSrc} style={{ objectFit: "contain" }} />
-                {aboutHerJourneySteps.map((step, index) => (
+            {aboutHerJourneySteps.map((step) => (
+              <Box key={step.num} sx={{ mb: unitScale(24) }}>
+                <Box sx={{ display: "flex", gap: unitScale(16), alignItems: "flex-start" }}>
                   <Box
-                    key={`rail-${step.num}`}
                     sx={{
-                      position: "absolute",
-                      left: "50%",
-                      top:
-                        index === 0 ? "16%" : index === 1 ? "50%" : "84%",
-                      transform: "translate(-50%, -50%)",
-                      width: stepNumberBubbleSize,
-                      height: stepNumberBubbleSize,
-                      borderRadius: "50%",
-                      bgcolor: g.aboutHerTeachingsAccent,
-                      color: theme.palette.common.white,
-                      fontWeight: 700,
-                      fontSize: stepBadgeFontSize,
-                      lineHeight: 1,
-                      display: "grid",
-                      placeItems: "center",
-                      boxShadow: badgeShadow(theme)
+                      width: stepMarkerWidth,
+                      height: stepMarkerHeight,
+                      position: "relative",
+                      flexShrink: 0,
                     }}
                   >
-                    {step.num}
+                    <Typography
+                      component="span"
+                      sx={{
+                        width: stepNumberBubbleSize,
+                    height: stepNumberBubbleSize,
+                    borderRadius: "50%",
+                    bgcolor: g.aboutHerTeachingsAccent,
+                    color: theme.palette.common.white,
+                    fontWeight: 700,
+                    fontSize: stepBadgeFontSize,
+                    lineHeight: 1,
+                    display: "grid",
+                    placeItems: "center",
+                    boxShadow: badgeShadow(theme),
+                    mr: unitScale(60)
+                      }}
+                    >
+                      {step.num}
+                    </Typography>
                   </Box>
-                ))}
+                  <Box>
+                    <Typography
+                      component="h3"
+                      sx={{
+                        fontFamily: "var(--font-inter), sans-serif",
+                        fontWeight: 700,
+                        fontSize: mobileStepTitleFontSize,
+                        color: alpha(theme.palette.guru.ink, 0.92),
+                        mb: unitScale(8),
+                        whiteSpace: "pre-line"
+                      }}
+                    >
+                      {step.title}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "var(--font-inter), sans-serif",
+                        fontSize: mobileStepBodyFontSize,
+                        lineHeight: { xs: 1.52, sm: 1.55 },
+                        color: alpha(theme.palette.guru.ink, 0.78)
+                      }}
+                    >
+                      {step.body}
+                    </Typography>
+                  </Box>
+                </Box>
               </Box>
+            ))}
+          </Box>
 
-              <Typography
-                id="about-her-journey-heading-desktop"
-                component="h2"
+          <Box
+            sx={{
+              display: { xs: "none", md: "grid" },
+              gridTemplateColumns: desktopGridColumns,
+              gridTemplateRows: "auto auto auto auto",
+              columnGap: unitScale(16),
+              alignItems: "start"
+            }}
+          >
+            <Box
+              sx={{
+                gridColumn: "1",
+                gridRow: "1 / 5",
+                position: "absolute",
+                top: '-40%',
+                minHeight: desktopPortraitMinHeight,
+                maxWidth: unitScale(380),
+                left: '-2%',
+                width: "100%",
+                borderRadius: portraitRadiusDesktop,
+                borderBottomRightRadius: portraitBrDesktop,
+                overflow: "hidden",
+                boxShadow: portraitShadow(theme)
+              }}
+            >
+              <Image
+                alt="Her journey — portrait"
+                fill
+                sizes="380px"
+                src={aboutHerJourneyPortraitSrc}
+                style={{ objectFit: "cover", objectPosition: "center top" }}
+              />
+            </Box>
+
+
+
+            <Typography
+              id="about-her-journey-heading-desktop"
+              component="h2"
+              sx={{
+                gridColumn: "3",
+                gridRow: 1,
+                pb: unitScale(16),
+                fontFamily: "var(--font-forum), serif",
+                fontSize: headingFontSize,
+                color: g.aboutHerTeachingsTitle,
+                textAlign: "left",
+                ml: unitScale(130)
+              }}
+            >
+              {aboutHerJourneySectionTitle}
+            </Typography>
+
+            {aboutHerJourneySteps.map((step, index) => (
+              <Box
+                key={step.num}
                 sx={{
+                  display: "flex",
+                  alignItems: "start",
+                  gap: unitScale(16),
                   gridColumn: "3",
-                  gridRow: 1,
-                  pb: pxToRem(16),
-                  fontFamily: "var(--font-forum), serif",
-                  fontSize: headingFontSize,
-                  color: g.aboutHerTeachingsTitle,
-                  textAlign: "right"
+                  gridRow: index + 2,
+                  position: "relative",
+                  pb: index < aboutHerJourneySteps.length - 1 ? unitScale(24) : 0
                 }}
               >
-                {aboutHerJourneySectionTitle}
-              </Typography>
-
-              {aboutHerJourneySteps.map((step, index) => (
-                <Box
-                  key={step.num}
+                {/* {index === 0 && <Box
                   sx={{
-                    gridColumn: "3",
-                    gridRow: index + 2,
-                    pb: index < aboutHerJourneySteps.length - 1 ? pxToRem(24) : 0
+                    position: "absolute",
+                    left: '0%',
+                    top: '0%',
+                    width: stepRailWidth,
+                    height: stepRailHeight,
+                    justifySelf: "center"
                   }}
                 >
+                  <Image alt="" fill sizes="(max-width: 1199px) 150px, 168px" src={stepRailSrc} style={{ objectFit: "contain" }} />
+
+                </Box>} */}
+                <Box
+                  key={`rail-${step.num}`}
+                  sx={{
+                    width: stepNumberBubbleSize,
+                    height: stepNumberBubbleSize,
+                    borderRadius: "50%",
+                    bgcolor: g.aboutHerTeachingsAccent,
+                    color: theme.palette.common.white,
+                    fontWeight: 700,
+                    fontSize: stepBadgeFontSize,
+                    lineHeight: 1,
+                    display: "grid",
+                    placeItems: "center",
+                    boxShadow: badgeShadow(theme),
+                    mr: unitScale(60)
+                  }}
+                >
+                  {step.num}
+                </Box>
+                <Box>
                   <Typography
                     component="h3"
                     sx={{
@@ -271,7 +261,7 @@ export function HerJourneySection() {
                       fontWeight: 700,
                       fontSize: desktopStepTitleFontSize,
                       color: alpha(theme.palette.guru.ink, 0.92),
-                      mb: pxToRem(8),
+                      mb: unitScale(8),
                       whiteSpace: "pre-line"
                     }}
                   >
@@ -281,20 +271,19 @@ export function HerJourneySection() {
                     sx={{
                       fontFamily: "var(--font-inter), sans-serif",
                       fontSize: desktopStepBodyFontSize,
-                      lineHeight: 1.55,
+                      lineHeight: { xs: 1.52, sm: 1.55 },
                       color: alpha(theme.palette.guru.ink, 0.78),
-                      maxWidth: pxToRem(720)
+                      maxWidth: unitScale(720)
                     }}
                   >
                     {step.body}
                   </Typography>
                 </Box>
-              ))}
-            </Box>
+              </Box>
+            ))}
           </Box>
-        </Container>
+        </Box>
       </Box>
-      <SectionTopArc surface="#FFF" placement="bottom" />
     </Box>
   );
 }

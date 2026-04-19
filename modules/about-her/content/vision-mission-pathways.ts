@@ -1,7 +1,9 @@
 /** Vision / Mission photos — Figma refs `1:7208`, `1:7209` (exported to `public/`). */
 export const aboutHerVisionMissionAssets = {
-  vision: "/images/About Her Page Photos/Vision-figma-1-7208.png",
-  mission: "/images/About Her Page Photos/Mission-figma-1-7209.png"
+  vision: "/images/About Her Page Photos/Vision-img.png",
+  mission: "/images/About Her Page Photos/Mission-figma-1-7209.png",
+  /** Peach sun icon before Vision / Mission headings (40×40 artboard). */
+  visionMissionHeadingIcon: "/images/About Her Page Photos/mission-heading-icon.png"
 } as const;
 
 export const aboutHerVisionCopy = {

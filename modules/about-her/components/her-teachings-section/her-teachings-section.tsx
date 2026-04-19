@@ -17,7 +17,7 @@ import {
   type HerTeachingIconKey
 } from "@/modules/about-her/content/her-teachings";
 import { pageSectionGutterSx } from "@/theme/page-section";
-import { pxToRem } from "@/utils/px-to-rem";
+import { unitScale } from "@/utils/unit-scale";
 
 const iconByKey: Record<HerTeachingIconKey, SvgIconComponent> = {
   menuBook: MenuBookOutlinedIcon,
@@ -26,29 +26,28 @@ const iconByKey: Record<HerTeachingIconKey, SvgIconComponent> = {
   visibility: VisibilityOutlinedIcon
 };
 
-/** Section display — scales up to 62px from `md` */
-const sectionHeadingFontSize = { xs: pxToRem(34), md: pxToRem(62) } as const;
+/** Section display — `xs` / `md` (fluid via `unitScale`). */
+const sectionHeadingFontSize = { xs: unitScale(34), md: unitScale(62) } as const;
 
-/** Item title — scales up to 25px from `md` */
-const itemTitleFontSize = { xs: pxToRem(17), md: pxToRem(25) } as const;
+const itemTitleFontSize = { xs: unitScale(17), md: unitScale(25) } as const;
 
-/** Item title → body spacing */
-const itemTitlePaddingBottom = { xs: pxToRem(6), md: pxToRem(8) } as const;
+const itemTitlePaddingBottom = { xs: unitScale(6), md: unitScale(8) } as const;
 
-/** Body copy — scales up to 18px from `md` (`guru.aboutHerTeachingsBody`) */
-const itemBodyFontSize = { xs: pxToRem(15), md: pxToRem(18) } as const;
+const itemBodyFontSize = { xs: unitScale(15), md: unitScale(18) } as const;
 
-/** Icon circle + glyph — scale with breakpoint */
-const iconGlyphSize = { xs: pxToRem(22), md: pxToRem(28) } as const;
+const iconGlyphSize = { xs: unitScale(22), md: unitScale(28) } as const;
 
-const iconCircleSize = { xs: pxToRem(44), md: pxToRem(55) } as const;
+const iconCircleSize = { xs: unitScale(44), md: unitScale(55) } as const;
 
 const containerMinHeight = {
-  xs: pxToRem(380),
-  md: pxToRem(520)
+  xs: unitScale(380),
+  md: unitScale(520)
 } as const;
 
-const containerRadius = pxToRem(12);
+const containerRadius = unitScale(12);
+
+/** Horizontal pull past the right edge — was `-50px`; fluid via `unitScale`. */
+const teachingsBgPositionRight = `right calc(0px - ${unitScale(70)})`;
 
 export function HerTeachingsSection() {
   const theme = useTheme();
@@ -59,10 +58,10 @@ export function HerTeachingsSection() {
       component="section"
       aria-labelledby="her-teachings-heading"
       sx={{
-        bgcolor: g.aboutHerTeachingsBand,
+        bgcolor: '#fff',
         backgroundImage: { xs: "none", md: `url("${herTeachingsImageSrc}")` },
         backgroundSize: { md: "30%" },
-        backgroundPosition: { md: "right -50px" },
+        backgroundPosition: { md: teachingsBgPositionRight },
         backgroundRepeat: { md: "no-repeat" },
         py: { xs: 6, md: 10 }
       }}
@@ -129,7 +128,7 @@ export function HerTeachingsSection() {
                         fontFamily: 'var(--font-inter), system-ui, sans-serif',
                         fontWeight: 700,
                         fontSize: itemTitleFontSize,
-                        lineHeight: 1.35,
+                        lineHeight: { xs: 1.4, md: 1.35 },
                         color: g.aboutHerTeachingsTitle,
                         pb: itemTitlePaddingBottom
                       }}
@@ -142,7 +141,7 @@ export function HerTeachingsSection() {
                       sx={{
                         fontFamily: 'var(--font-inter), system-ui, sans-serif',
                         fontSize: itemBodyFontSize,
-                        lineHeight: 1.55,
+                        lineHeight: { xs: 1.52, md: 1.55 },
                         color: g.aboutHerTeachingsBody,
                         m: 0
                       }}

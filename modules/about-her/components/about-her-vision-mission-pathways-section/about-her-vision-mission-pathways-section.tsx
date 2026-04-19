@@ -1,7 +1,9 @@
 "use client";
 
 import Box from "@mui/material/Box";
+import type { SxProps, Theme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
 import Image from "next/image";
@@ -11,23 +13,41 @@ import {
   aboutHerVisionCopy,
   aboutHerVisionMissionAssets
 } from "@/modules/about-her/content/vision-mission-pathways";
-import { pxToRem } from "@/utils/px-to-rem";
+import { encodePublicPath } from "@/utils/encode-public-path";
+import { unitScale } from "@/utils/unit-scale";
+import { SectionBottomArc } from "@/component/section-top-curve";
+
 
 const blockHeadingFontSize = {
-  xs: pxToRem(32),
-  md: pxToRem(40)
+  xs: unitScale(32),
+  md: unitScale(40)
 } as const;
 
 const blockBodyFontSize = {
-  xs: pxToRem(16),
-  md: pxToRem(20)
+  xs: unitScale(16),
+  md: unitScale(20)
 } as const;
 
-const mediaRadius = pxToRem(24);
+const mediaRadius = unitScale(24);
 
 /** Vision / Mission photo frame — max 500×550 (Figma intent). */
-const visionMissionMediaMaxWidth = pxToRem(500);
-const visionMissionMediaMaxHeight = pxToRem(550);
+const visionMissionMediaMaxWidth = unitScale(500);
+const visionMissionMediaMaxHeight = unitScale(550);
+
+const bodyCopyMaxWidth = unitScale(560);
+
+const visionMissionHeadingIconSize = unitScale(40);
+
+const visionMissionCopyPanelSx = {
+  position: "relative" as const,
+  p: 4,
+  borderRadius: 6,
+  minWidth: 0,
+  zIndex: 11
+} as const;
+
+/** Decorative SVG behind Vision / Mission copy (`public/.../mission-background.svg`). */
+const visionMissionCopyPanelBgSvg = "/images/About Her Page Photos/mission-background.svg";
 
 const visionMissionImageFrameSx = {
   position: "relative" as const,
@@ -44,6 +64,101 @@ const visionMissionImageFrameSx = {
 const visionMissionCurveBackground =
   "/images/About Her Page Photos/curve-mission.svg";
 
+function VisionMissionCopyPanel({
+  children,
+  sx,
+  isMission
+}: {
+  children: React.ReactNode;
+  sx?: SxProps<Theme>;
+  isMission?: boolean;
+}) {
+  return (
+    <Box sx={{ ...visionMissionCopyPanelSx, ...sx }}>
+      <Box
+        aria-hidden
+        sx={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: "none",
+          borderRadius: "inherit",
+          backgroundImage: `url("${visionMissionCopyPanelBgSvg}")`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: { xs: "min(160%, 520px) auto", md: "cover" },
+          backgroundPosition: { xs: "right -12% top 20%", md: "right center" },
+          opacity: { xs: 0.32, md: 1 },
+          top: isMission ? 0 : "-100%",
+          left: isMission ? '20%' : 0,
+          width: unitScale(500),
+          height: unitScale(500),
+          display: {lg: 'block', xs: 'none'}
+
+        }}
+      />
+      <Box
+        aria-hidden
+        sx={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 1,
+          pointerEvents: "none",
+          borderRadius: "inherit",
+          background: "linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)"
+        }}
+      />
+      <Box sx={{ position: "relative", zIndex: 2 }}>{children}</Box>
+    </Box>
+  );
+}
+
+function VisionMissionHeadingWithIcon({
+  heading,
+  titleColor
+}: {
+  heading: string;
+  titleColor: string;
+}) {
+  return (
+    <Stack
+      direction="row"
+      alignItems="center"
+      spacing={{ xs: 1.25, md: 1.5 }}
+      sx={{ mb: 2 }}
+    >
+      <Box
+        aria-hidden
+        sx={{
+          position: "relative",
+          width: visionMissionHeadingIconSize,
+          height: visionMissionHeadingIconSize,
+          flexShrink: 0
+        }}
+      >
+        <Image
+          alt=""
+          src={encodePublicPath(aboutHerVisionMissionAssets.visionMissionHeadingIcon)}
+          fill
+          sizes="40px"
+          style={{ objectFit: "contain" }}
+        />
+      </Box>
+      <Typography
+        component="h2"
+        sx={{
+          fontFamily: 'var(--font-forum), ui-serif, Georgia, serif',
+          fontSize: blockHeadingFontSize,
+          color: titleColor,
+          fontWeight: 600,
+          m: 0
+        }}
+      >
+        {heading}
+      </Typography>
+    </Stack>
+  );
+}
+
 export function AboutHerVisionMissionPathwaysSection() {
   const theme = useTheme();
   const ink = theme.palette.guru.ink;
@@ -59,9 +174,9 @@ export function AboutHerVisionMissionPathwaysSection() {
       sx={{
         position: "relative",
         bgcolor: '',
-        pt: { xs: 6, md: 10 },
+        pt: { xs: 0, md: 10 },
         overflow: "hidden",
-        background: '#f2f1ed'
+        background: 'linear-gradient(180deg, #D6F1F5 0%, #FFFFFF 100%)'
 
       }}
     >
@@ -69,10 +184,10 @@ export function AboutHerVisionMissionPathwaysSection() {
         aria-hidden
         sx={{
           position: "absolute",
-          top: { xs: pxToRem(-60), md: pxToRem(-100) },
-          left: { xs: pxToRem(-40), md: pxToRem(-80) },
-          width: { xs: pxToRem(220), md: pxToRem(320) },
-          height: { xs: pxToRem(220), md: pxToRem(320) },
+          top: { xs: `calc(0px - ${unitScale(60)})`, md: `calc(0px - ${unitScale(100)})` },
+          left: { xs: `calc(0px - ${unitScale(40)})`, md: `calc(0px - ${unitScale(80)})` },
+          width: { xs: unitScale(220), md: unitScale(320) },
+          height: { xs: unitScale(220), md: unitScale(320) },
           borderRadius: "50%",
           background: `radial-gradient(circle, ${warmOrb} 0%, transparent 70%)`,
           pointerEvents: "none"
@@ -83,9 +198,9 @@ export function AboutHerVisionMissionPathwaysSection() {
         sx={{
           position: "absolute",
           bottom: { xs: "20%", md: "15%" },
-          right: { xs: pxToRem(-60), md: pxToRem(-40) },
-          width: { xs: pxToRem(200), md: pxToRem(280) },
-          height: { xs: pxToRem(200), md: pxToRem(280) },
+          right: { xs: `calc(0px - ${unitScale(60)})`, md: `calc(0px - ${unitScale(40)})` },
+          width: { xs: unitScale(200), md: unitScale(280) },
+          height: { xs: unitScale(200), md: unitScale(280) },
           borderRadius: "50%",
           background: `radial-gradient(circle, ${warmOrbSoft} 0%, transparent 70%)`,
           pointerEvents: "none"
@@ -96,7 +211,6 @@ export function AboutHerVisionMissionPathwaysSection() {
         <Box
           sx={{
             position: "relative",
-            background: '#f2f1ed'
           }}
         >
           <Box
@@ -104,81 +218,93 @@ export function AboutHerVisionMissionPathwaysSection() {
             sx={{
               position: "absolute",
               inset: 0,
-              zIndex: 0,
+              zIndex: 4,
               opacity: 0.9,
+              display: {lg: 'block', xs: 'none'},
               pointerEvents: "none",
               backgroundImage: `url("${visionMissionCurveBackground}")`,
               backgroundRepeat: "no-repeat",
-              backgroundPosition: "top",
+              backgroundPosition: "center 30%",
               backgroundSize: "100% auto"
             }}
           />
-          <Box sx={{ position: "relative", zIndex: 1 }}>
-            <Container maxWidth="lg">
+          <Box sx={{ position: "relative", zIndex: 10 }}>
             <Box
               sx={{
-                display: "grid",
-                gridTemplateColumns: { xs: "minmax(0, 1fr)", md: "minmax(0, 1fr) minmax(0, 1fr)" },
-                gap: { xs: 3, sm: 4, md: 5 },
-                alignItems: "center",
-                mb: { xs: 6, md: 8 }
+                // display: "grid",
+                // gridTemplateColumns: { xs: "minmax(0, 1fr)", md: "minmax(0, 1fr) minmax(0, 1fr)" },
+                // gap: { xs: 3, md: 5 },
+                // alignItems: "center",
+                // mb: { xs: 6, md: 8 },
+                // pb: { xs: 6, md: 8 },
+                position: 'relative'
               }}
             >
-              <Box sx={{ minWidth: 0 }}>
-                <Typography
-                  component="h2"
+              <Box sx={{ position: 'absolute', top: '-16%', left: '0', width: '100vw', height: '70%', background: '#fff' }}></Box>
+              <Container maxWidth="lg" sx={{
+                display: "grid",
+                gridTemplateColumns: { xs: "minmax(0, 1fr)", md: "minmax(0, 1fr) minmax(0, 1fr)" },
+                gap: { xs: 3, md: 5 },
+                alignItems: "center",
+                mb: { xs: 6, md: 8 },
+                pb: { xs: 6, md: 8 },
+                position: 'relative'
+              }}>
+                <VisionMissionCopyPanel>
+                  <VisionMissionHeadingWithIcon
+                    heading={aboutHerVisionCopy.heading}
+                    titleColor={alpha(ink, 0.92)}
+                  />
+                  <Typography
+                    sx={{
+                      fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                      fontSize: blockBodyFontSize,
+                      lineHeight: { xs: 1.62, md: 1.65 },
+                      color: bodyMuted,
+                      maxWidth: bodyCopyMaxWidth
+                    }}
+                  >
+                    {aboutHerVisionCopy.body}
+                  </Typography>
+                </VisionMissionCopyPanel>
+                <Box
                   sx={{
-                    fontFamily: 'var(--font-forum), ui-serif, Georgia, serif',
-                    fontSize: blockHeadingFontSize,
-                    color: alpha(ink, 0.92),
-                    fontWeight: 600,
-                    mb: 2
+                    ...visionMissionImageFrameSx,
+                    zIndex: 6,
+                    justifySelf: { xs: "center", md: "end" }
                   }}
                 >
-                  {aboutHerVisionCopy.heading}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontFamily: 'var(--font-inter), system-ui, sans-serif',
-                    fontSize: blockBodyFontSize,
-                    lineHeight: 1.65,
-                    color: bodyMuted,
-                    maxWidth: pxToRem(560)
-                  }}
-                >
-                  {aboutHerVisionCopy.body}
-                </Typography>
+                  <Image
+                    alt="Vision"
+                    fill
+                    sizes="(max-width: 900px) 100vw, 50vw"
+                    src={aboutHerVisionMissionAssets.vision}
+                    style={{ objectFit: "cover" }}
+                  />
+                </Box>
+              </Container>
+              <Box sx={{ position: 'absolute', bottom: '17%', left: 0, width: '100%', display: { xs: 'none', lg: 'block' } }}>
+                <SectionBottomArc surface="#fff" />
+
               </Box>
-              <Box
-                sx={{
-                  ...visionMissionImageFrameSx,
-                  boxShadow: `0 ${pxToRem(10)} ${pxToRem(32)} ${mediaShadow}`,
-                  justifySelf: { xs: "center", md: "end" }
-                }}
-              >
-                <Image
-                  alt="Vision"
-                  fill
-                  sizes="(max-width: 900px) 100vw, 50vw"
-                  src={aboutHerVisionMissionAssets.vision}
-                  style={{ objectFit: "cover" }}
-                />
-              </Box>
+
             </Box>
 
             <Box
+              component={Container}
+              maxWidth="lg"
               sx={{
                 display: "grid",
                 gridTemplateColumns: { xs: "minmax(0, 1fr)", md: "minmax(0, 1fr) minmax(0, 1fr)" },
-                gap: { xs: 3, sm: 4, md: 5 },
+                gap: { xs: 3, md: 5 },
                 alignItems: "center",
-                pb: { xs: 5, sm: 6, md: 9 }
+                pb: { xs: 5, md: 9 }
               }}
             >
               <Box
                 sx={{
                   ...visionMissionImageFrameSx,
-                  boxShadow: `0 ${pxToRem(10)} ${pxToRem(32)} ${mediaShadow}`,
+                  boxShadow: `0 ${unitScale(10)} ${unitScale(32)} ${mediaShadow}`,
                   order: { xs: 1, md: 1 },
                   justifySelf: { xs: "center", md: "start" }
                 }}
@@ -191,33 +317,24 @@ export function AboutHerVisionMissionPathwaysSection() {
                   style={{ objectFit: "cover" }}
                 />
               </Box>
-              <Box sx={{ order: { xs: 2, md: 2 }, minWidth: 0 }}>
-                <Typography
-                  component="h2"
-                  sx={{
-                    fontFamily: 'var(--font-forum), ui-serif, Georgia, serif',
-                    fontSize: blockHeadingFontSize,
-                    color: alpha(ink, 0.92),
-                    fontWeight: 600,
-                    mb: 2
-                  }}
-                >
-                  {aboutHerMissionCopy.heading}
-                </Typography>
+              <VisionMissionCopyPanel sx={{ order: { xs: 2, md: 2 } }} isMission={true}>
+                <VisionMissionHeadingWithIcon
+                  heading={aboutHerMissionCopy.heading}
+                  titleColor={alpha(ink, 0.92)}
+                />
                 <Typography
                   sx={{
                     fontFamily: 'var(--font-inter), system-ui, sans-serif',
                     fontSize: blockBodyFontSize,
-                    lineHeight: 1.65,
+                    lineHeight: { xs: 1.62, md: 1.65 },
                     color: bodyMuted,
-                    maxWidth: pxToRem(560)
+                    maxWidth: bodyCopyMaxWidth
                   }}
                 >
                   {aboutHerMissionCopy.body}
                 </Typography>
-              </Box>
+              </VisionMissionCopyPanel>
             </Box>
-            </Container>
           </Box>
         </Box>
 

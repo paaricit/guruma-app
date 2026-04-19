@@ -1,26 +1,45 @@
 "use client";
 
+import Image from "next/image";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
-import { aboutHerHeroBannerSrc, aboutHerHeroBody, aboutHerHeroTitle } from "@/modules/about-her/content/about-her-hero";
+import {
+  aboutHerHeroBannerSrc,
+  aboutHerHeroBody,
+  aboutHerHeroPortraitSrc,
+  aboutHerHeroTitle
+} from "@/modules/about-her/content/about-her-hero";
 import {
   homeHeroImageLayerSx,
   homeHeroMobileGradientBackdropSx,
   pageSectionGutterSx
 } from "@/theme/page-section";
-import { pxToRem } from "@/utils/px-to-rem";
+import { encodePublicPath } from "@/utils/encode-public-path";
+import { unitScale } from "@/utils/unit-scale";
 
-const heroMinHeight = { md: pxToRem(760), lg: pxToRem(840) } as const;
+const heroMinHeight = {
+  md: unitScale(760),
+  lg: unitScale(840)
+} as const;
 
-const heroPaddingTop = { xs: "clamp(5rem, 12vw, 6.5rem)", md: pxToRem(96) } as const;
+const heroPaddingTop = {
+  xs: unitScale(88),
+  md: unitScale(96)
+} as const;
 
-const titleFontSize = { xs: pxToRem(40), md: pxToRem(72) } as const;
+const titleFontSize = {
+  xs: unitScale(40),
+  md: unitScale(72)
+} as const;
 
-const bodyFontSize = { xs: pxToRem(15), md: pxToRem(18) } as const;
+const bodyFontSize = {
+  xs: unitScale(15),
+  md: unitScale(18)
+} as const;
 
-const bodyMaxWidth = pxToRem(696);
+const bodyMaxWidth = unitScale(696);
 
 export function AboutHerHeroSection() {
   const theme = useTheme();
@@ -36,12 +55,13 @@ export function AboutHerHeroSection() {
         position: "relative",
         display: "flex",
         flexDirection: "column",
-        minHeight: { xs: "auto", ...heroMinHeight },
+        minHeight: { xs: "50vh", md: "120vh" },
         bgcolor: { xs: "primary.dark", md: "transparent" },
-        pt: heroPaddingTop,
-        pb: { xs: pxToRem(40), md: 0 },
-        justifyContent: { xs: "flex-start", md: "center" },
-        overflow: "hidden"
+        // pt: heroPaddingTop,
+        pt: { xs: unitScale(80), md: 28},
+        justifyContent: { xs: "flex-start", md: "flex-start" },
+        overflow: "hidden",
+        pb: { xs: unitScale(80), md: 0 }
       }}
     >
       <Box sx={homeHeroMobileGradientBackdropSx(theme)} aria-hidden />
@@ -57,25 +77,27 @@ export function AboutHerHeroSection() {
           backgroundImage: `linear-gradient(-84deg, ${alpha(theme.palette.common.black, 0)} 47%, ${overlayBlue} 76%)`
         }}
       />
-      {/* Optional right portrait — enable when layout matches design. */}
       {/* <Box
+        aria-hidden
         sx={{
           position: "absolute",
           right: 0,
           top: 0,
           bottom: 0,
-          width: { xs: "52%", md: "52%" },
-          maxWidth: pxToRem(820),
-          display: { xs: "none", sm: "block" }
+          zIndex: 1,
+          width: { xs: "48%", md: "52%" },
+          maxWidth: { xs: unitScale(360), md: unitScale(820) },
+          display: { xs: "none", md: "block" },
+          pointerEvents: "none"
         }}
       >
         <Image
-          alt="Guru Maa Shubha Didi"
+          alt=""
+          src={encodePublicPath(aboutHerHeroPortraitSrc)}
           fill
           priority
-          sizes="(max-width: 600px) 0px, 52vw"
-          src="/images/About Her Page Photos/ABOUT HER Overlap.webp"
-          style={{ objectFit: "cover", objectPosition: "center top" }}
+          sizes="(max-width: 900px) 0px, 42vw"
+          style={{ objectFit: "contain", objectPosition: "right bottom" }}
         />
       </Box> */}
       <Container
@@ -83,11 +105,11 @@ export function AboutHerHeroSection() {
         sx={{
           position: "relative",
           zIndex: 2,
-          py: { xs: pxToRem(16), md: pxToRem(48) },
+          py: { xs: unitScale(16), md: unitScale(48) },
           ...pageSectionGutterSx
         }}
       >
-        <Box sx={{ maxWidth: { xs: "100%", md: "min(755px, 52%)" } }}>
+        <Box sx={{ maxWidth: { xs: "100%", md: `min(${unitScale(755)}, 52%)` } }}>
           <Typography
             id="about-her-hero-heading"
             component="h1"
@@ -103,10 +125,10 @@ export function AboutHerHeroSection() {
           </Typography>
           <Typography
             sx={{
-              mt: { xs: pxToRem(16), md: pxToRem(20) },
+              mt: { xs: unitScale(16), md: unitScale(20) },
               fontFamily: "var(--font-inter), sans-serif",
               fontSize: bodyFontSize,
-              lineHeight: 1.65,
+              lineHeight: { xs: 1.62, md: 1.65 },
               color: bodyColor,
               maxWidth: bodyMaxWidth
             }}
