@@ -9,8 +9,7 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { alpha, type SxProps, type Theme } from "@mui/material/styles";
-import { fluidFooterFormHelper } from "@/theme/page-section";
-import { pxToRem } from "@/utils/px-to-rem";
+import { unitScale } from "@/utils/unit-scale";
 import Image from "next/image";
 export type FooterContactFormProps = {
   /** Applied to the outer `Card` (e.g. footer overlap / z-index). */
@@ -37,7 +36,7 @@ function FieldLabel({
           display: "block",
           mb: 0.75,
           fontFamily: 'var(--font-inter), system-ui, sans-serif',
-          fontSize: pxToRem(14),
+          fontSize: unitScale(14),
           fontWeight: 600,
           color: alpha(theme.palette.primary.main, 0.9)
         }),
@@ -68,9 +67,9 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
         sx={{
           position: "relative",
           width: "100%",
-          maxWidth: "31.25rem",
-          height: { xs: 36, md: 48 },
-          minHeight: { xs: 36, md: 48 },
+          maxWidth: unitScale(500),
+          height: { xs: unitScale(36), md: unitScale(48) },
+          minHeight: { xs: unitScale(36), md: unitScale(48) },
           mb: 2
         }}
       >
@@ -78,7 +77,7 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
           alt=""
           src="/images/footer-above-icon.png"
           fill
-          sizes="(max-width: 900px) 90vw, 500px"
+          sizes="(max-width: 900px) 92vw, (max-width: 1200px) 55vw, 640px"
           style={{ objectFit: "contain", objectPosition: "center" }}
         />
       </Box>
@@ -90,11 +89,11 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
           (theme) => ({
             position: "relative",
             zIndex: 2,
-            borderRadius: "18px",
+            borderRadius: unitScale(18),
             p: { xs: 2.3, md: 2.8 },
             boxShadow: `0 12px 40px ${alpha(theme.palette.secondary.main, 0.18)}`,
             width: "100%",
-            maxWidth: "31.25rem",
+            maxWidth: unitScale(500),
             minWidth: 0,
             alignSelf: "start",
             bgcolor: alpha('#fff', 0.9)
@@ -107,7 +106,7 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
           <Box>
             <FieldLabel
               htmlFor={fid("name")}
-              sx={{ fontFamily: 'var(--font-poppins), var(--font-inter), system-ui, sans-serif' }}
+              sx={{ fontSize: unitScale(14),fontFamily: 'var(--font-poppins), var(--font-inter), system-ui, sans-serif' }}
             >
               Name
             </FieldLabel>
@@ -119,11 +118,14 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
               size="small"
               variant="outlined"
               hiddenLabel
+              InputProps={{
+                sx: { fontSize: unitScale(14), minHeight: unitScale(47) }
+              }}
             />
           </Box>
 
           <Box>
-            <FieldLabel htmlFor={fid("phone")}>Phone</FieldLabel>
+            <FieldLabel htmlFor={fid("phone")} sx={{ fontSize: unitScale(14) }}>Phone</FieldLabel>
             <TextField
               id={fid("phone")}
               name="phone"
@@ -133,20 +135,24 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
               size="small"
               variant="outlined"
               hiddenLabel
+              InputProps={{
+                sx: { fontSize: unitScale(14), minHeight: unitScale(47) }
+              }}
               helperText="We strongly recommend adding a phone number. This will help verify your account and keep it safe."
               FormHelperTextProps={{
                 sx: (theme) => ({
                   color: alpha(theme.palette.text.secondary, 0.95),
                   fontFamily: 'var(--font-inter), system-ui, sans-serif',
-                  fontSize: fluidFooterFormHelper,
-                  lineHeight: 1.35
+                  backgroundColor: 'transparent',
+                  lineHeight: 1.35,
+                  fontSize: unitScale(14), minHeight: unitScale(47)
                 })
               }}
             />
           </Box>
 
           <Box>
-            <FieldLabel htmlFor={fid("email")}>Email</FieldLabel>
+            <FieldLabel htmlFor={fid("email")} sx={{ fontSize: unitScale(14) }}>Email</FieldLabel>
             <TextField
               id={fid("email")}
               name="email"
@@ -156,11 +162,14 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
               size="small"
               variant="outlined"
               hiddenLabel
+              InputProps={{
+                sx: { fontSize: unitScale(14), minHeight: unitScale(47) }
+              }}
             />
           </Box>
 
           <Box>
-            <FieldLabel htmlFor={fid("country")}>Country</FieldLabel>
+            <FieldLabel htmlFor={fid("country")} sx={{ fontSize: unitScale(14) }} >Country</FieldLabel>
             <TextField
               id={fid("country")}
               name="country"
@@ -172,9 +181,10 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
               defaultValue=""
               SelectProps={{
                 displayEmpty: true,
+                sx: { fontSize: unitScale(14), minHeight: unitScale(47) },
                 renderValue: (value) =>
                   value === "" ? (
-                    <Typography component="span" variant="body2" sx={(theme) => ({ color: theme.palette.text.secondary })}>
+                    <Typography component="span" variant="body2" sx={(theme) => ({ color: theme.palette.text.secondary, fontSize: unitScale(14) })}>
                       Select country
                     </Typography>
                   ) : value === "IN" ? (
@@ -184,16 +194,16 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
                   )
               }}
             >
-              <MenuItem value="" disabled>
+              <MenuItem value="" disabled sx={{ fontSize: unitScale(14) }}>
                 Select country
               </MenuItem>
-              <MenuItem value="IN">India</MenuItem>
-              <MenuItem value="OTHER">Other</MenuItem>
+              <MenuItem value="IN" sx={{ fontSize: unitScale(14) }}>India</MenuItem>
+              <MenuItem value="OTHER" sx={{ fontSize: unitScale(14) }}>Other</MenuItem>
             </TextField>
           </Box>
 
           <Box>
-            <FieldLabel htmlFor={fid("topic")}>What would you like guidance on?</FieldLabel>
+            <FieldLabel htmlFor={fid("topic")} sx={{ fontSize: unitScale(14) }}>What would you like guidance on?</FieldLabel>
             <TextField
               id={fid("topic")}
               name="topic"
@@ -205,9 +215,10 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
               defaultValue=""
               SelectProps={{
                 displayEmpty: true,
+                sx: { fontSize: unitScale(14), minHeight: unitScale(47) },
                 renderValue: (value) =>
                   value === "" ? (
-                    <Typography component="span" variant="body2" sx={(theme) => ({ color: theme.palette.text.secondary })}>
+                    <Typography component="span" variant="body2" sx={(theme) => ({ color: theme.palette.text.secondary, fontSize: unitScale(14) })}>
                       Select a topic
                     </Typography>
                   ) : value === "general" ? (
@@ -217,11 +228,11 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
                   )
               }}
             >
-              <MenuItem value="" disabled>
+              <MenuItem value="" disabled sx={{ fontSize: unitScale(14) }}>
                 Select a topic
               </MenuItem>
-              <MenuItem value="general">General guidance</MenuItem>
-              <MenuItem value="programs">Programs</MenuItem>
+              <MenuItem value="general" sx={{ fontSize: unitScale(14) }}>General guidance</MenuItem>
+              <MenuItem value="programs" sx={{ fontSize: unitScale(14) }}>Programs</MenuItem>
             </TextField>
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -234,7 +245,9 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
                 py: 1.125,
                 boxShadow: "none",
                 margin: 'auto',
-
+                fontSize: unitScale(14),
+                minHeight: unitScale(47),
+                  width: unitScale(150),
                 "&:hover": { bgcolor: theme.palette.primary.dark, boxShadow: "none" }
               })}
             >

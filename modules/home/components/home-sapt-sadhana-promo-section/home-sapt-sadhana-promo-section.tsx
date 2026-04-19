@@ -4,14 +4,7 @@ import Image from "next/image";
 import { useCallback, useState } from "react";
 import { Box, Container, IconButton, Typography, useTheme } from "@mui/material";
 import { SaptSadhanaStackCarousel } from "@/components/site/sapt-sadhana-stack-carousel";
-import { pxToRem } from "@/utils/px-to-rem";
-
-const stayConnectedTitleFontSize = {
-  xs: pxToRem(26.4),
-  sm: pxToRem(36),
-  md: pxToRem(52),
-  lg: pxToRem(70.4)
-} as const;
+import { unitScale } from "@/utils/unit-scale";
 
 const saptSadhanaCarouselSlides = [
   "/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (1).webp",
@@ -91,7 +84,7 @@ export function HomeSaptSadhanaPromoSection() {
               mt: 0.5,
               textAlign: "center",
               fontFamily: "var(--font-forum), serif",
-              fontSize: pxToRem(40),
+              fontSize: unitScale(40),
               color: "#1f2f52"
             }}
           >
@@ -103,7 +96,7 @@ export function HomeSaptSadhanaPromoSection() {
               mx: "auto",
               textAlign: "center",
               color: "rgba(20,20,20,0.8)",
-              fontSize: { xs: 14, sm: 16, md: 18, lg: 22 },
+              fontSize: unitScale(22),
               maxWidth: 1040,
               lineHeight: 1.4
             }}
@@ -232,7 +225,7 @@ export function HomeSaptSadhanaPromoSection() {
                   minWidth: 0,
                   color: "#162b53",
                   fontFamily: "var(--font-forum), serif",
-                  fontSize: stayConnectedTitleFontSize,
+                  fontSize: unitScale(70),
                   lineHeight: 1.05,
                   letterSpacing: { xs: "-0.02em", md: 0 },
                   whiteSpace: "nowrap",

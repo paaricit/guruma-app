@@ -7,8 +7,8 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
-import { pageContainerMaxWidth, pageSectionGutterSx } from "@/theme/page-section";
-import { pxToRem } from "@/utils/px-to-rem";
+import { pageSectionGutterSx } from "@/theme/page-section";
+import { unitScale } from "@/utils/unit-scale";
 import {
   wisdomBadgeDotImage,
   wisdomCards,
@@ -17,72 +17,51 @@ import {
   type WisdomCardItem
 } from "@/modules/home/content/wisdom-in-action";
 
+/** 1580 tokens — `xs` / `md` only (fluid via `unitScale`). */
 const wisdomDisplayTitleFontSize = {
-  xs: pxToRem(30),
-  sm: pxToRem(36),
-  md: pxToRem(48),
-  lg: pxToRem(70)
+  xs: unitScale(44),
+  md: unitScale(70)
 } as const;
 
 const wisdomEyebrowFontSize = {
-  xs: pxToRem(14),
-  sm: pxToRem(15),
-  md: pxToRem(19),
-  lg: pxToRem(22)
+  xs: unitScale(18),
+  md: unitScale(22)
 } as const;
 
 /** Card + image + footer corners */
-const cardRadius = {
-  xs: pxToRem(16),
-  sm: pxToRem(20),
-  md: pxToRem(28),
-  lg: pxToRem(42)
-} as const;
+const cardRadius = unitScale(42);
 
 /** Card image block height — `fill` needs a definite block size. */
 const cardImageHeight = {
-  xs: pxToRem(280),
-  sm: pxToRem(320),
-  md: pxToRem(420),
-  lg: pxToRem(470)
+  xs: unitScale(280),
+  md: unitScale(470)
 } as const;
 
 const cardTitleFontSize = {
-  xs: pxToRem(16),
-  sm: pxToRem(17),
-  md: pxToRem(19)
+  xs: unitScale(16),
+  md: unitScale(19)
 } as const;
 
 const cardSubtitleFontSize = {
-  xs: pxToRem(14),
-  md: pxToRem(18)
+  xs: unitScale(15),
+  md: unitScale(18)
 } as const;
 
 const pillTextFontSize = {
-  xs: pxToRem(12),
-  sm: pxToRem(13),
-  md: pxToRem(15)
+  xs: unitScale(13),
+  md: unitScale(15)
 } as const;
 
 const cardBodyPadding = {
-  xs: pxToRem(16),
-  md: pxToRem(20),
-  lg: pxToRem(24)
+  xs: unitScale(20),
+  md: unitScale(24)
 } as const;
 
-const badgeInset = {
-  xs: pxToRem(14),
-  md: pxToRem(20),
-  lg: pxToRem(25)
-} as const;
+const badgeInset = unitScale(25);
 
-const cornerIconSize = {
-  xs: pxToRem(40),
-  md: pxToRem(50),
-  lg: pxToRem(58)
-} as const;
+const cornerIconSize = unitScale(58);
 
-const backdropBlur = `blur(${pxToRem(31.831)})`;
+const backdropBlur = `blur(${unitScale(31.831)})`;
 
 export type WisdomInActionSectionProps = {
   cards?: readonly WisdomCardItem[];
@@ -91,7 +70,8 @@ export type WisdomInActionSectionProps = {
 export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSectionProps) {
   const theme = useTheme();
 
-  const cardShadow = `0.29rem 0.29rem 0.73rem ${alpha(theme.palette.primary.main, 0.2)}`;
+  /** Was `0.29rem 0.29rem 0.73rem` @ 16px/rem */
+  const cardShadow = `${unitScale(4.64)} ${unitScale(4.64)} ${unitScale(11.68)} ${alpha(theme.palette.primary.main, 0.2)}`;
   const pillBg = alpha(theme.palette.common.white, 0.9);
   const overlayBg = alpha(theme.palette.common.black, 0.2);
 
@@ -105,24 +85,25 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
         isolation: "isolate",
         bgcolor: "#F3F2EE",
         pt: { xs: 2, md: 2.5 },
-        pb: { xs: 8, md: 9 },
+        pb: { xs: 8, md: 16 },
         overflow: "visible",
-        borderTop: (t) => `1px solid ${t.palette.divider}`
+        borderTop: (t) => `1px solid ${t.palette.divider}`,
+        backgroundImage: `url('${wisdomInActionSectionCurveBg}')`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "bottom",
+          backgroundSize: "contain"
       }}
     >
       {/* <HomeCornerCurveDecor /> */}
       <Container
-        maxWidth={pageContainerMaxWidth}
+        maxWidth={'lg'}
         sx={{
           position: "relative",
           ...pageSectionGutterSx,
-          backgroundImage: `url('${wisdomInActionSectionCurveBg}')`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "top center",
-          backgroundSize: "100% auto"
+          
         }}
       >
-        <Box sx={{ position: "relative", zIndex: 3,  pt: { xs: 0.5, md: 0, lg: 10 }, pb: { xs: 2, md: 3 } }}>
+        <Box sx={{ position: "relative", zIndex: 3, pt: { xs: 0.5, md: 0, lg: 10 }, pb: { xs: 2, md: 3 } }}>
           <Typography
             id="wisdom-in-action-heading"
             component="h2"
@@ -159,10 +140,10 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
           sx={{
             position: "relative",
             zIndex: 3,
-            mt: { xs: pxToRem(32), md: pxToRem(40) },
+            mt: { xs: unitScale(32), md: unitScale(40) },
             display: "grid",
             gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))", md: "repeat(3, minmax(0, 1fr))" },
-            gap: { xs: pxToRem(16), sm: pxToRem(20), md: pxToRem(24), lg: pxToRem(30) }
+            gap: { xs: unitScale(16), sm: unitScale(20), md: unitScale(24), lg: unitScale(30) }
           }}
         >
           {cards.map((card) => (
@@ -215,10 +196,10 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      gap: { xs: pxToRem(6), md: pxToRem(9) },
-                      px: { xs: pxToRem(6), md: pxToRem(8.5) },
-                      py: { xs: pxToRem(4), md: pxToRem(4.5) },
-                      borderRadius: "4rem",
+                      gap: { xs: unitScale(6), md: unitScale(9) },
+                      px: { xs: unitScale(6), md: unitScale(8.5) },
+                      py: { xs: unitScale(4), md: unitScale(4.5) },
+                      borderRadius: unitScale(64),
                       bgcolor: pillBg,
                       backdropFilter: backdropBlur
                     }}
@@ -236,8 +217,8 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                     <Box
                       sx={{
                         position: "relative",
-                        width: { xs: pxToRem(14), md: pxToRem(18) },
-                        height: { xs: pxToRem(14), md: pxToRem(18) },
+                        width: { xs: unitScale(14), md: unitScale(18) },
+                        height: { xs: unitScale(14), md: unitScale(18) },
                         flexShrink: 0
                       }}
                     >
@@ -248,11 +229,11 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      gap: { xs: pxToRem(6), md: pxToRem(8.5) },
-                      minHeight: { xs: pxToRem(28), md: pxToRem(34) },
-                      px: { xs: pxToRem(9), md: pxToRem(13) },
-                      py: { xs: pxToRem(4), md: pxToRem(4.5) },
-                      borderRadius: "4rem",
+                      gap: { xs: unitScale(6), md: unitScale(8.5) },
+                      minHeight: { xs: unitScale(28), md: unitScale(34) },
+                      px: { xs: unitScale(9), md: unitScale(13) },
+                      py: { xs: unitScale(4), md: unitScale(4.5) },
+                      borderRadius: unitScale(64),
                       bgcolor: pillBg,
                       backdropFilter: backdropBlur
                     }}
@@ -261,8 +242,8 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                       aria-hidden
                       sx={{
                         position: "relative",
-                        width: { xs: pxToRem(7), md: pxToRem(8.5) },
-                        height: { xs: pxToRem(7), md: pxToRem(8.5) },
+                        width: { xs: unitScale(7), md: unitScale(8.5) },
+                        height: { xs: unitScale(7), md: unitScale(8.5) },
                         flexShrink: 0
                       }}
                     >
@@ -297,14 +278,14 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                     fontFamily: 'var(--font-inter), system-ui, sans-serif',
                     fontWeight: 500,
                     fontSize: cardTitleFontSize,
-                    lineHeight: { xs: 1.35, sm: 1.25, md: 1.2 }
+                    lineHeight: { xs: 1.35, md: 1.2 }
                   }}
                 >
                   {card.title}
                 </Typography>
                 <Typography
                   sx={{
-                    mt: { xs: pxToRem(6), md: pxToRem(12) },
+                    mt: { xs: unitScale(6), md: unitScale(12) },
                     color: theme.palette.grey[700],
                     fontFamily: 'var(--font-inter), system-ui, sans-serif',
                     fontWeight: 400,

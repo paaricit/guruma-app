@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AppBar, Box, Button, Drawer, IconButton, Stack, Toolbar } from "@mui/material";
 import { alpha } from "@mui/material/styles";
+import { unitScale } from "@/utils/unit-scale";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -46,7 +47,7 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
       })}
     >
       {/* --- Section: Primary toolbar (logo + nav + menu button) --- */}
-      <Toolbar sx={{ minHeight: { xs: 72, md: 90 }, px: { xs: 1.5, sm: 2, md: 3 }, maxWidth: "100vw", boxSizing: "border-box" }}>
+      <Toolbar sx={{ minHeight: { xs: unitScale(72), md: unitScale(90) }, px: { xs: 1.5, sm: 2, md: 3 }, maxWidth: "100vw", boxSizing: "border-box" }}>
         <Stack
           direction="column"
           component={Link}
@@ -59,20 +60,20 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
             position: 'absolute',
             flexShrink: 1,
             minWidth: 0,
-            maxWidth: { xs: "calc(100vw - 120px)", sm: "none" },
+            maxWidth: { xs: `calc(100vw - ${unitScale(120)})`, sm: "none" },
             // Nudge logo down without padding (padding grows the flex item and re-centers the whole toolbar).
-            transform: { xs: "translateY(0px)", md: "translateY(28px)" }
+            transform: { xs: "translateY(0px)", md: `translateY(${unitScale(28)})` }
           }}
         >
-          <Box sx={{ position: "relative", width: { xs: 34, md: 48 }, height: { xs: 34, md: 48 }, flexShrink: 0 }}>
+          <Box sx={{ position: "relative", width: { xs: unitScale(34), md: unitScale(48) }, height: { xs: unitScale(34), md: unitScale(48) }, flexShrink: 0 }}>
             <Image alt="Guru Maa logo" fill src="/images/logo.svg" style={{ objectFit: "contain" }} />
           </Box>
           <Box
             sx={{
               display: { xs: "none", sm: "block" },
               position: "relative",
-              width: { sm: 130, md: 180 },
-              height: { sm: 20, md: 30 },
+              width: { sm: unitScale(130), md: unitScale(180) },
+              height: { sm: unitScale(20), md: unitScale(30) },
               flexShrink: 0
             }}
           >
@@ -91,10 +92,10 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
                 textTransform: "none",
                 fontFamily: "var(--font-montserrat), sans-serif",
                 fontWeight: 600,
-                fontSize: '1.125rem',
+                fontSize: { xs: unitScale(16), md: unitScale(18) },
                 px: 3,
                 minWidth: 0,
-                height: { xs: 56, md: 64 }
+                height: { xs: unitScale(56), md: unitScale(64) }
               }}
             >
               {item.label}
@@ -107,7 +108,7 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
           onClick={handleOpenMobileMenu}
           sx={{ ml: "auto", color: "#fff", display: { xs: "inline-flex", lg: "none" } }}
         >
-          <MenuRoundedIcon />
+          <MenuRoundedIcon sx={{ fontSize: { xs: unitScale(28), md: unitScale(32) } }} />
         </IconButton>
       </Toolbar>
 
@@ -117,12 +118,12 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
           sx={{
             display: { xs: "none", lg: "block" },
             position: "absolute",
-            top: 60,
+            top: unitScale(60),
             left: "50%",
             transform: "translateX(-28%)",
             bgcolor: "rgba(2, 20, 51, 0.95)",
             border: "1px solid rgba(255,255,255,0.16)",
-            minWidth: 122,
+            minWidth: unitScale(122),
             zIndex: 10
           }}
         >
@@ -131,7 +132,7 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
               key={item}
               sx={{
                 color: "#fff",
-                fontSize: 11,
+                fontSize: { xs: unitScale(10), md: unitScale(12) },
                 px: 1,
                 py: 0.8,
                 borderBottom: "1px solid rgba(255,255,255,0.1)"
@@ -150,7 +151,7 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
         onClose={handleCloseMobileMenu}
         PaperProps={{
           sx: {
-            width: { xs: "min(300px, calc(100vw - 32px))", sm: 300 },
+            width: { xs: `min(${unitScale(300)}, calc(100vw - ${unitScale(32)}))`, sm: unitScale(300) },
             maxWidth: "100vw",
             bgcolor: "rgba(2, 20, 51, 0.96)",
             color: "#fff",
@@ -172,7 +173,7 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
                 textTransform: "none",
                 fontFamily: "var(--font-montserrat), sans-serif",
                 fontWeight: 600,
-                fontSize: 16
+                fontSize: { xs: unitScale(16), md: unitScale(18) }
               }}
             >
               {item.label}

@@ -25,16 +25,7 @@ const seekerCarouselEmbedSrc = "https://www.youtube.com/embed/GErQ_J7GUEM?autopl
 
 /** Card opens in-app dialog; `embedSrc` is a YouTube embed iframe URL. */
 export const seekerVideos: readonly SeekerVideoItem[] = [
-  {
-    name: "Priya Sharma",
-    image: "/images/Home Page Photos/carousel-0.png",
-    embedSrc: seekerCarouselEmbedSrc
-  },
-  {
-    name: "Karan Paul",
-    image: "/images/Home Page Photos/carousel-1.png",
-    embedSrc: seekerCarouselEmbedSrc
-  },
+  
   {
     name: "Priya Das",
     image: "/images/Home Page Photos/carousel-2.png",
@@ -53,6 +44,16 @@ export const seekerVideos: readonly SeekerVideoItem[] = [
   {
     name: "Ananya Iyer",
     image: "/images/Home Page Photos/carousel-5.png",
+    embedSrc: seekerCarouselEmbedSrc
+  },
+  {
+    name: "Priya Sharma",
+    image: "/images/Home Page Photos/carousel-0.png",
+    embedSrc: seekerCarouselEmbedSrc
+  },
+  {
+    name: "Karan Paul",
+    image: "/images/Home Page Photos/carousel-1.png",
     embedSrc: seekerCarouselEmbedSrc
   }
 ];

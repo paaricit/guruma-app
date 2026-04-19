@@ -7,10 +7,10 @@ import { alpha, useTheme } from "@mui/material/styles";
 import {
   impactStatLabelOnDarkSx,
   impactStatValueOnDarkSx,
-  pageContainerMaxWidth,
   pageSectionGutterSx
 } from "@/theme/page-section";
 import { homeImpactStats } from "@/modules/home/content/home-impact-stats";
+import { unitScale } from "@/utils/unit-scale";
 
 const SECTION_BG = "/images/Home Page Photos/Section.png" as const;
 
@@ -25,14 +25,8 @@ export function HomeImpactStatsSection() {
       aria-label="Impact at a glance"
       sx={{
         position: "relative",
-        pb: {
-          xs: "clamp(4.75rem, 5.5vw, 4rem)",
-          md: 20
-        },
-        pt: {
-          xs: "clamp(2.75rem, 5.5vw, 4rem)",
-          md: 10
-        },
+        pb: { xs: unitScale(76), md: unitScale(160) },
+        pt: { xs: unitScale(64), md: unitScale(80) },
         overflow: "hidden"
       }}
     >
@@ -47,14 +41,14 @@ export function HomeImpactStatsSection() {
       />
 
       <Container
-        maxWidth={pageContainerMaxWidth}
-        sx={{ position: "relative", zIndex: 1, ...pageSectionGutterSx }}
+        maxWidth={'lg'}
+        sx={{ position: "relative", zIndex: 1, px: { xs: 4, lg: 0 } }}
       >
         <Box
           sx={{
             display: "grid",
             pb: 6,
-            px: { xs: 0, lg: 4 },
+            // px: { xs: 0, lg: 4 },
             gridTemplateColumns: {
               xs: "repeat(2, minmax(0, 1fr))",
               sm: "repeat(2, minmax(0, 1fr))",
@@ -65,17 +59,31 @@ export function HomeImpactStatsSection() {
         >
           {homeImpactStats.map((stat) => (
             <Box key={stat.label} sx={{ textAlign: "center" }}>
-              <Typography sx={impactStatValueOnDarkSx(theme)}>{stat.value}</Typography>
+              <Typography
+                sx={{
+                  ...impactStatValueOnDarkSx(theme),
+                  fontSize: { xs: unitScale(36), md: unitScale(54) }
+                }}
+              >
+                {stat.value}
+              </Typography>
               <Box
                 sx={{
                   width: "100%",
-                  maxWidth: 220,
+                  maxWidth: { xs: unitScale(180), md: unitScale(220) },
                   mx: "auto",
                   borderBottom: `1px solid ${ruleColor}`,
                   my: 1
                 }}
               />
-              <Typography sx={impactStatLabelOnDarkSx(theme)}>{stat.label}</Typography>
+              <Typography
+                sx={{
+                  ...impactStatLabelOnDarkSx(theme),
+                  fontSize: { xs: unitScale(22), md: unitScale(30) }
+                }}
+              >
+                {stat.label}
+              </Typography>
             </Box>
           ))}
         </Box>

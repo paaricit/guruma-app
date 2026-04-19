@@ -1,6 +1,5 @@
 "use client";
 
-import PlayArrow from "@mui/icons-material/PlayArrow";
 import Image from "next/image";
 import Link from "next/link";
 import Box from "@mui/material/Box";
@@ -10,7 +9,6 @@ import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
 import { SectionTopArc } from "@/component/section-top-curve";
 import {
-  fluidGuruIntroCta,
   guruIntroBodySx,
   guruIntroRoleLabelSx,
   guruIntroSectionBackgroundSx,
@@ -20,11 +18,11 @@ import {
   pageSectionGutterSx
 } from "@/theme/page-section";
 import { guruMaIntroContent } from "@/modules/home/content/guru-ma-intro";
+import { unitScale } from "@/utils/unit-scale";
 
 export function HomeGuruMaIntroSection() {
   const theme = useTheme();
-  const iconBox = theme.spacing(5);
-  const mediaRadius = { xs: "1.5rem", md: "2rem" };
+  const mediaRadius = { xs: unitScale(24), md: unitScale(32) };
 
   return (
     <Box
@@ -36,7 +34,7 @@ export function HomeGuruMaIntroSection() {
         zIndex: 2,
         overflow: "visible",
         pt: { xs: 1.5, md: 2 },
-        pb: { xs: "clamp(3.75rem, 7vw, 5rem)", md: "clamp(5rem, 8vw, 6.25rem)" }
+        pb: { xs: unitScale(80), md: unitScale(100) }
       }}
     >
       <SectionTopArc surface="primaryLight" />
@@ -47,14 +45,14 @@ export function HomeGuruMaIntroSection() {
       >
         <Box
           sx={{
-            p: { xs: 2.5, md: 4 },
+            py: { xs: 2.5, md: 4 },
             display: "grid",
             gridTemplateColumns: {
               xs: "1fr",
               md: "minmax(0, 2fr) minmax(0, 3fr)",
               lg: "minmax(0, 0.42fr) minmax(0, 0.58fr)"
             },
-            gap: { xs: 3, md: "clamp(2.25rem, 4.5vw, 5rem)" },
+            gap: { xs: 3, md: unitScale(80) },
             alignItems: "center"
           }}
         >
@@ -107,10 +105,23 @@ export function HomeGuruMaIntroSection() {
           </Box>
 
           <Box>
-            <Typography id="guru-ma-intro-heading" component="h2" sx={guruIntroTitleSx(theme)}>
+            <Typography
+              id="guru-ma-intro-heading"
+              component="h2"
+              sx={{
+                ...guruIntroTitleSx(theme),
+                fontSize: { xs: unitScale(42), md: unitScale(52) }
+              }}
+            >
               {guruMaIntroContent.title}
             </Typography>
-            <Typography component="p" sx={guruIntroTaglineSx(theme)}>
+            <Typography
+              component="p"
+              sx={{
+                ...guruIntroTaglineSx(theme),
+                fontSize: { xs: unitScale(14), md: unitScale(16) }
+              }}
+            >
               {guruMaIntroContent.tagline}
             </Typography>
 
@@ -130,21 +141,33 @@ export function HomeGuruMaIntroSection() {
                   <Box
                     sx={{
                       position: "relative",
-                      width: iconBox,
-                      height: iconBox,
+                      width: { xs: unitScale(36), md: unitScale(40) },
+                      height: { xs: unitScale(36), md: unitScale(40) },
                       flex: "0 0 auto"
                     }}
                   >
                     <Image alt="" fill src={item.iconSrc} style={{ objectFit: "contain" }} />
                   </Box>
-                  <Typography component="span" sx={guruIntroRoleLabelSx(theme)}>
+                  <Typography
+                    component="span"
+                    sx={{
+                      ...guruIntroRoleLabelSx(theme),
+                      fontSize: { xs: unitScale(18), md: unitScale(22) }
+                    }}
+                  >
                     {item.label}
                   </Typography>
                 </Box>
               ))}
             </Box>
 
-            <Typography component="p" sx={guruIntroBodySx(theme)}>
+            <Typography
+              component="p"
+              sx={{
+                ...guruIntroBodySx(theme),
+                fontSize: { xs: unitScale(17), md: unitScale(21) }
+              }}
+            >
               {guruMaIntroContent.body}
             </Typography>
 
@@ -157,9 +180,9 @@ export function HomeGuruMaIntroSection() {
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                minHeight: { xs: 42, md: 46 },
+                minHeight: { xs: unitScale(42), md: unitScale(46) },
                 width: { xs: "100%", sm: "auto" },
-                minWidth: { sm: 220 },
+                minWidth: { sm: unitScale(220) },
                 px: 3,
                 py: 1,
                 // borderRadius: 9999,
@@ -167,7 +190,7 @@ export function HomeGuruMaIntroSection() {
                 color: (t) => t.palette.primary.contrastText,
                 fontFamily: 'var(--font-inter), system-ui, sans-serif',
                 fontWeight: 600,
-                fontSize: fluidGuruIntroCta,
+                fontSize: { xs: unitScale(16), md: unitScale(17) },
                 textTransform: "none",
                 boxShadow: "none",
                 "&:hover": {

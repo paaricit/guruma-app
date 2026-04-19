@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import gsap from "gsap";
 import Image from "next/image";
 import { useEffect, useLayoutEffect, useRef } from "react";
+import { unitScale } from "@/utils/unit-scale";
 
 export type SaptSadhanaStackCarouselProps = {
   slides: readonly string[];
@@ -15,10 +16,10 @@ const sidePanelBaseSx = {
   display: { xs: "none", sm: "block" },
   position: "relative" as const,
   flex: { sm: "0 0 22%", md: "0 0 20%" },
-  maxWidth: { sm: 200, md: 220 },
+  maxWidth: { sm: unitScale(200), md: unitScale(220) },
   width: { sm: "22%", md: "20%" },
-  height: { sm: 200, md: 230 },
-  borderRadius: "18px",
+  height: { sm: unitScale(200), md: unitScale(230) },
+  borderRadius: unitScale(18),
   overflow: "hidden",
   cursor: "pointer",
   p: 0,
@@ -26,17 +27,17 @@ const sidePanelBaseSx = {
   zIndex: 1,
   alignSelf: "center",
   opacity: 0.58,
-  boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
-  border: "2px solid rgba(255,255,255,0.78)",
+  boxShadow: `0 ${unitScale(8)} ${unitScale(24)} rgba(0,0,0,0.15)`,
+  border: `${unitScale(2)} solid rgba(255,255,255,0.78)`,
   filter: "blur(0.45px)",
   transition: "opacity 0.35s ease, box-shadow 0.25s ease, transform 0.35s ease",
   "&:hover": {
     opacity: 0.72,
-    boxShadow: "0 12px 32px rgba(0,0,0,0.2)"
+    boxShadow: `0 ${unitScale(12)} ${unitScale(32)} rgba(0,0,0,0.2)`
   },
   "&:focus-visible": {
-    outline: "2px solid #2b46a1",
-    outlineOffset: 3
+    outline: `${unitScale(2)} solid #2b46a1`,
+    outlineOffset: unitScale(3)
   }
 };
 
@@ -122,14 +123,14 @@ export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSa
       sx={{
         position: "relative",
         width: "100%",
-        maxWidth: "80rem",
+        maxWidth: unitScale(1280),
         mx: "auto",
-        minHeight: { xs: 220, sm: 260, md: 320 },
+        minHeight: { xs: unitScale(220), sm: unitScale(260), md: unitScale(320) },
         py: { xs: 1, md: 2 },
         outline: "none",
-        perspective: "2000px",
+        perspective: unitScale(2000),
         transformStyle: "preserve-3d",
-        "&:focus-visible": { boxShadow: "0 0 0 2px rgba(43,70,161,0.35)" }
+        "&:focus-visible": { boxShadow: `0 0 0 ${unitScale(2)} rgba(43,70,161,0.35)` }
       }}
     >
       <Box
@@ -151,8 +152,8 @@ export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSa
           sx={{
             ...sidePanelBaseSx,
             transform: {
-              sm: "scale(0.82) perspective(1400px) rotateY(14deg) translateZ(-20px)",
-              md: "scale(0.84) perspective(1600px) rotateY(16deg) translateZ(-28px)"
+              sm: `scale(0.82) perspective(${unitScale(1400)}) rotateY(14deg) translateZ(calc(-1 * (${unitScale(20)})))`,
+              md: `scale(0.84) perspective(${unitScale(1600)}) rotateY(16deg) translateZ(calc(-1 * (${unitScale(28)})))`
             },
             transformOrigin: "100% 50%"
           }}
@@ -167,22 +168,26 @@ export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSa
           />
         </Box>
 
-        {/* Active slide — center (max width 45rem = 720px at 16px root) */}
+        {/* Active slide — center (720 / 800px caps at 1580 via unitScale) */}
         <Box
           ref={centerRef}
           sx={{
             position: "relative",
             zIndex: 4,
             flex: { xs: "1 1 auto", sm: "0 1 auto" },
-            width: { xs: "min(92vw, 45rem)", sm: "min(72vw, 45rem)", md: "min(100%, 50rem)" },
-            maxWidth: "50rem",
-            height: { xs: 220, sm: 240, md: 400 },
+            width: {
+              xs: `min(92vw, ${unitScale(720)})`,
+              sm: `min(72vw, ${unitScale(720)})`,
+              md: `min(100%, ${unitScale(800)})`
+            },
+            maxWidth: unitScale(800),
+            height: { xs: unitScale(220), sm: unitScale(240), md: unitScale(400) },
             mx: { sm: -1.5, md: -2.5 },
-            borderRadius: "24px",
+            borderRadius: unitScale(24),
             overflow: "hidden",
-            boxShadow: "0 28px 56px rgba(0,0,0,0.22), 0 8px 20px rgba(0,0,0,0.12)",
-            border: "3px solid rgba(255,255,255,0.95)",
-            transform: "perspective(1600px) translateZ(0)"
+            boxShadow: `0 ${unitScale(28)} ${unitScale(56)} rgba(0,0,0,0.22), 0 ${unitScale(8)} ${unitScale(20)} rgba(0,0,0,0.12)`,
+            border: `${unitScale(3)} solid rgba(255,255,255,0.95)`,
+            transform: `perspective(${unitScale(1600)}) translateZ(0)`
           }}
         >
           <Image
@@ -204,8 +209,8 @@ export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSa
           sx={{
             ...sidePanelBaseSx,
             transform: {
-              sm: "scale(0.82) perspective(1400px) rotateY(-14deg) translateZ(-20px)",
-              md: "scale(0.84) perspective(1600px) rotateY(-16deg) translateZ(-28px)"
+              sm: `scale(0.82) perspective(${unitScale(1400)}) rotateY(-14deg) translateZ(calc(-1 * (${unitScale(20)})))`,
+              md: `scale(0.84) perspective(${unitScale(1600)}) rotateY(-16deg) translateZ(calc(-1 * (${unitScale(28)})))`
             },
             transformOrigin: "0% 50%"
           }}

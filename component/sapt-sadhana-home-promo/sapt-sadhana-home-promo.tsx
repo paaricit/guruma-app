@@ -6,11 +6,11 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { alpha } from "@mui/material/styles";
-import { pageContainerMaxWidth, pageSectionGutterSx } from "@/theme/page-section";
-import { pxToRem } from "@/utils/px-to-rem";
+import { pageSectionGutterSx } from "@/theme/page-section";
 import { SectionTopArc } from "@/component/section-top-curve";
 import { SaptSadhanaCarouselControls } from "@/component/sapt-sadhana-carousel-controls";
 import { SaptSadhanaStackCarousel } from "@/components/site/sapt-sadhana-stack-carousel";
+import { unitScale } from "@/utils/unit-scale";
 
 const DEFAULT_SLIDES = [
   "/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (1).webp",
@@ -29,39 +29,36 @@ const SAPT_SECTION_WAVE_ICON = "/images/Home Page Photos/sapt -sadhana-icon.svg"
 const SAPT_WAVE_ICON_WIDTH_PX = 287.54;
 const SAPT_WAVE_ICON_HEIGHT_PX = 88.07;
 
-const bodyCopyMaxWidth = "65rem";
+/** 65rem × 16px/rem → 1040px at 1580 reference */
+const bodyCopyMaxWidth = unitScale(1040);
 
 const bridgeArt = {
-  minWidth: { xs: pxToRem(72), md: pxToRem(140) },
-  height: { xs: pxToRem(28), md: pxToRem(48) }
+  minWidth: { xs: unitScale(72), md: unitScale(140) },
+  height: { xs: unitScale(28), md: unitScale(48) }
 } as const;
 
+/** Body copy — `xs` / `md` (fluid via `unitScale`). */
 const sectionBodyProminentFontSize = {
-  xs: pxToRem(15),
-  md: pxToRem(24)
+  xs: unitScale(17),
+  md: unitScale(24)
 } as const;
 
-const saptBridgeTitleFontSize = {
-  xs: pxToRem(17),
-  sm: pxToRem(26),
-  md: pxToRem(48),
-  lg: pxToRem(70)
-} as const;
-
-/** “SAPT SADHANA” — caps to ~66px on large screens */
+/** “SAPT SADHANA” */
 const saptHeadingMainFontSize = {
-  xs: pxToRem(28),
-  sm: pxToRem(40),
-  md: pxToRem(54),
-  lg: pxToRem(66)
+  xs: unitScale(36),
+  md: unitScale(66)
 } as const;
 
-/** “ - Serving Beyond Self” — scales with main line */
+/** “ - Serving Beyond Self” */
 const saptHeadingSubFontSize = {
-  xs: pxToRem(18),
-  sm: pxToRem(24),
-  md: pxToRem(36),
-  lg: pxToRem(50)
+  xs: unitScale(26),
+  md: unitScale(50)
+} as const;
+
+/** “Stay Connected” row */
+const stayConnectedHeadingFontSize = {
+  xs: unitScale(36),
+  md: unitScale(70)
 } as const;
 
 export type SaptSadhanaHomePromoSectionProps = {
@@ -97,7 +94,7 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
       <SectionTopArc surface="#F3F2EE" />
 
       <Container
-        maxWidth={pageContainerMaxWidth}
+        maxWidth="lg"
         sx={{ position: "relative", zIndex: 3, ...pageSectionGutterSx }}
       >
         <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
@@ -106,8 +103,7 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
               position: "relative",
               width: {
                 xs: "min(100%, 11.25rem)",
-                sm: "min(100%, 14rem)",
-                md: `min(100%, ${SAPT_WAVE_ICON_WIDTH_PX}px)`
+                md: `min(100%, ${unitScale(SAPT_WAVE_ICON_WIDTH_PX)})`
               },
               aspectRatio: `${SAPT_WAVE_ICON_WIDTH_PX} / ${SAPT_WAVE_ICON_HEIGHT_PX}`,
               overflow: "visible"
@@ -157,7 +153,7 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
             color: (t) => alpha(t.palette.text.primary, 0.8),
             fontSize: sectionBodyProminentFontSize,
             maxWidth: bodyCopyMaxWidth,
-            lineHeight: 1.7,
+            lineHeight: { xs: 1.65, md: 1.7 },
             letterSpacing: 0.2
           }}
         >
@@ -194,7 +190,7 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              gap: { xs: 0.75, sm: 1.25, md: 2 },
+              gap: { xs: 0.75, md: 2 },
               flexWrap: "nowrap",
               width: "100%",
               minWidth: 0
@@ -205,12 +201,12 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
               sx={{
                 flex: "0 1 auto",
                 minWidth: 0,
-                color: (t) => t.palette.secondary.main,
+                color: (t) => '#162B53',
                 fontFamily: "var(--font-forum), serif",
-                fontSize: saptBridgeTitleFontSize,
+                fontSize: stayConnectedHeadingFontSize,
                 fontWeight: 400,
-                lineHeight: 1.05,
-                letterSpacing: { xs: "-0.02em", sm: "-0.01em", md: 0 },
+                lineHeight: { xs: 1.08, md: 1.05 },
+                letterSpacing: { xs: "-0.02em", md: 0 },
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
                 overflow: "hidden"

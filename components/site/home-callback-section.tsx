@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Alert, Box, Button, Stack, TextField, Typography } from "@mui/material";
 import type { Theme } from "@mui/material/styles";
+import { unitScale } from "@/utils/unit-scale";
 
 const callbackFieldSx = {
   "& .MuiInput-underline:before": { borderColor: "rgba(255,255,255,0.5)" },
@@ -10,8 +11,8 @@ const callbackFieldSx = {
   "& .MuiInput-underline:after": { borderColor: "#fff" },
   "& .MuiInputLabel-root": {
     color: (theme: Theme) => theme.palette.common.white,
-    fontSize: "1.5rem" /* 24px at 16px root */,
-    fontWeight: (theme: Theme) => theme.typography.fontWeightBold
+    fontSize: { xs: unitScale(20), md: unitScale(24) },
+    fontWeight: (theme: Theme) => theme.typography.fontWeightBold,
   },
   "& .MuiInputLabel-root.Mui-focused": {
     color: (theme: Theme) => theme.palette.common.white
@@ -107,7 +108,7 @@ export function HomeCallbackSection() {
             },
             alignItems: "center",
             gap: { xs: 1.8, md: 2.2 },
-            px: { xs: 2, md: 4, lg: 10 },
+            px: { xs: 2, md: 4 },
             height: "100%"
           }}
         >
@@ -126,6 +127,12 @@ export function HomeCallbackSection() {
                   [field.key]: ev.target.value
                 }))
               }
+              InputProps={{
+                sx: {
+                  fontSize: { xs: unitScale(15), md: unitScale(16) },
+                  height: { xs: unitScale(44), md: unitScale(48) }
+                }
+              }}
               fullWidth
               sx={callbackFieldSx}
               slotProps={{
@@ -143,7 +150,7 @@ export function HomeCallbackSection() {
           alignSelf: { xs: "center", md: "center" },
           px: { xs: 2, md: 4 },
           py: { xs: 0, md: 3 },
-          maxWidth: { xs: 360, md: 280 }
+          maxWidth: { xs: unitScale(360), md: unitScale(280) }
         }}
       >
         <Button
@@ -166,7 +173,7 @@ export function HomeCallbackSection() {
             component="span"
             sx={{
               fontWeight: 700,
-              fontSize: { xs: "clamp(1.5rem, 6vw, 2rem)", md: 52 },
+              fontSize: { xs: unitScale(32), md: unitScale(52) },
               lineHeight: 0.95,
               textAlign: { xs: "center", md: "left" }
             }}

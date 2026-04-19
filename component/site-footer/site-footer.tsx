@@ -1,11 +1,7 @@
 "use client";
 
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import PhoneInTalkOutlinedIcon from "@mui/icons-material/PhoneInTalkOutlined";
-import YouTube from "@mui/icons-material/YouTube";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -14,6 +10,7 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha } from "@mui/material/styles";
+import Image from "next/image";
 import NextLink from "next/link";
 import { FooterContactForm } from "@/component/footer-contact-form";
 import {
@@ -23,6 +20,7 @@ import {
   pageSectionGutterSx
 } from "@/theme/page-section";
 import { pxToRem } from "@/utils/px-to-rem";
+import { unitScale } from "@/utils/unit-scale";
 
 const footerBackgroundSrc = "/images/footer-background.png";
 
@@ -49,11 +47,12 @@ const footerServiceLinks = [
   { label: "Blogs", href: "/wisdom-blogs" }
 ] as const;
 
+/** White-on-transparent “negative” marks — same asset set as `components/site/contact-page.tsx` (Figma handoff). */
 const socialLinks = [
-  { label: "YouTube", href: "https://www.youtube.com", Icon: YouTube },
-  { label: "Facebook", href: "https://www.facebook.com", Icon: FacebookRoundedIcon },
-  { label: "LinkedIn", href: "https://www.linkedin.com", Icon: LinkedInIcon },
-  { label: "Instagram", href: "https://www.instagram.com", Icon: InstagramIcon }
+  { label: "YouTube", href: "https://www.youtube.com", src: "/images/contact/YouTube - Negative.svg" },
+  { label: "Facebook", href: "https://www.facebook.com", src: "/images/contact/Facebook - Negative.png" },
+  { label: "LinkedIn", href: "https://www.linkedin.com", src: "/images/contact/LinkedIn - Negative.svg" },
+  { label: "Instagram", href: "https://www.instagram.com", src: "/images/contact/Instagram - Negative.png" }
 ] as const;
 
 /**
@@ -69,7 +68,7 @@ export default function SiteFooter() {
         zIndex: 2,
         // overflow: "hidden",
         pt: { xs: 2.5, md: 3 },
-        pb: { xs: 2.5, md: 10 },
+        pb: { xs: 2.5, md: 16 },
         color: "primary.contrastText"
       }}
     >
@@ -113,19 +112,9 @@ export default function SiteFooter() {
       >
         <source src={footerVideoSrc} type="video/mp4" />
       </Box>
-      <Box
-        aria-hidden
-        sx={(theme) => ({
-          position: "absolute",
-          inset: 0,
-          zIndex: 1,
-          bgcolor: alpha(theme.palette.primary.dark, 0.62),
-          pointerEvents: "none"
-        })}
-      />
 
       <Container
-        maxWidth="xl"
+        maxWidth="lg"
         sx={{
           position: "relative",
           zIndex: 2,
@@ -136,18 +125,18 @@ export default function SiteFooter() {
       >
         <Grid
           container
-          spacing={{ xs: 4, md: 7 }}
+          spacing={{ xs: 4, md: 4 }}
           columns={12}
           sx={{ width: "100%", alignItems: "flex-start", overflow: "visible", justifyContent: { xs: "center", md: "flex-start" } }}
         >
           <Grid size={{ xs: 12, lg: 7 }} sx={{ minWidth: 0, pt: { xs: 2, md: 4 } }}>
-            <Grid container spacing={{ xs: 3, md: 12 }} columns={12} sx={{ width: "100%" }}>
-              <Grid size={{ xs: 12, md: 6 }} sx={{ minWidth: 0 }}>
+            <Grid container spacing={{ xs: 3, md: 4 }} columns={12} sx={{ width: "100%" }}>
+              <Grid size={{ xs: 12, md: 4.5 }} sx={{ minWidth: 0 }}>
                 <Typography
                   component="h2"
                   sx={(theme) => ({
                     ...footerColumnHeadingSx(theme),
-                    fontSize: footerColumnHeadingFontSize
+                    fontSize: unitScale(36)
                   })}
                 >
                   IISHT
@@ -155,7 +144,7 @@ export default function SiteFooter() {
                 <Typography
                   sx={(theme) => ({
                     ...footerBodyOnPrimarySx(theme),
-                    fontSize: footerBodyFontSize,
+                    fontSize: unitScale(21),
                     mt: 1.2,
                     maxWidth: { sm: 420, md: "none" },
                     wordBreak: "break-word",
@@ -199,7 +188,7 @@ export default function SiteFooter() {
                       <Typography
                         sx={(theme) => ({
                           ...footerLabelOnPrimarySx(theme),
-                          fontSize: footerLabelFontSize
+                          fontSize: unitScale(24)
                         })}
                       >
                         Phone number
@@ -208,7 +197,7 @@ export default function SiteFooter() {
                     <Typography
                       sx={(theme) => ({
                         ...footerBodyOnPrimarySx(theme),
-                        fontSize: footerBodyFontSize,
+                        fontSize: unitScale(21),
                         mt: 0.6,
                         wordBreak: "break-all"
                       })}
@@ -239,7 +228,7 @@ export default function SiteFooter() {
                       <Typography
                         sx={(theme) => ({
                           ...footerLabelOnPrimarySx(theme),
-                          fontSize: footerLabelFontSize
+                          fontSize: unitScale(24)
                         })}
                       >
                         Email
@@ -248,7 +237,7 @@ export default function SiteFooter() {
                     <Typography
                       sx={(theme) => ({
                         ...footerBodyOnPrimarySx(theme),
-                        fontSize: footerBodyFontSize,
+                        fontSize: unitScale(21),
                         mt: 0.5,
                         wordBreak: "break-all"
                       })}
@@ -267,12 +256,12 @@ export default function SiteFooter() {
                 />
               </Grid>
 
-              <Grid size={{ xs: 12, md: 6 }} sx={{ minWidth: 0 }}>
+              <Grid size={{ xs: 12, md: 7.5 }} sx={{ minWidth: 0 }}>
                 <Typography
                   component="h2"
                   sx={(theme) => ({
                     ...footerColumnHeadingSx(theme),
-                    fontSize: footerColumnHeadingFontSize
+                    fontSize: unitScale(36)
                   })}
                 >
                   Our Services
@@ -296,7 +285,7 @@ export default function SiteFooter() {
                       underline="hover"
                       sx={(theme) => ({
                         ...footerBodyOnPrimarySx(theme),
-                        fontSize: footerBodyFontSize,
+                        fontSize: unitScale(22),
                         minWidth: 0
                       })}
                     >
@@ -306,35 +295,36 @@ export default function SiteFooter() {
                 </Box>
 
                 <Stack direction="row" spacing={2} sx={{ mt: 3, flexWrap: "wrap" }}>
-                  {socialLinks.map(({ label, href, Icon }) => {
-                    const isInstagram = label === "Instagram";
-                    const isYouTube = label === "YouTube";
-                    return (
-                      <IconButton
-                        key={label}
-                        component="a"
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={label}
-                        sx={(theme) => ({
-                          width: { xs: isInstagram ? 38 : 40, md: isInstagram ? 44 : 46 },
-                          height: { xs: isInstagram ? 38 : 40, md: isInstagram ? 44 : 46 },
-                          borderRadius: isInstagram ? "6px" : isYouTube ? "10px" : "50%",
-                          bgcolor: isInstagram ? "transparent" : "common.white",
-                          border: isInstagram ? `2px solid ${theme.palette.common.white}` : "none",
-                          color: isInstagram ? "common.white" : "secondary.main",
-                          "&:hover": {
-                            bgcolor: isInstagram
-                              ? alpha(theme.palette.common.white, 0.08)
-                              : alpha(theme.palette.common.white, 0.9)
-                          }
-                        })}
+                  {socialLinks.map(({ label, href, src }) => (
+                    <IconButton
+                      key={label}
+                      component="a"
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      sx={(theme) => ({
+                        width: { xs: unitScale(40), md: unitScale(70) },
+                        height: { xs: unitScale(40), md: unitScale(70) },
+                        borderRadius: "50%",
+                        bgcolor: alpha(theme.palette.common.white, 0.12),
+                        p: 0,
+                        "&:hover": {
+                          bgcolor: alpha(theme.palette.common.white, 0.2)
+                        }
+                      })}
+                    >
+                      <Box
+                        sx={{
+                          position: "relative",
+                          width: { xs: unitScale(22), md: unitScale(35) },
+                          height: { xs: unitScale(22), md: unitScale(35) }
+                        }}
                       >
-                        <Icon sx={{ fontSize: { xs: isInstagram ? 20 : 22, md: isInstagram ? 22 : 24 } }} />
-                      </IconButton>
-                    );
-                  })}
+                        <Image src={src} alt="" fill sizes="24px" style={{ objectFit: "contain" }} />
+                      </Box>
+                    </IconButton>
+                  ))}
                 </Stack>
               </Grid>
             </Grid>

@@ -2,9 +2,10 @@
 
 import Box from "@mui/material/Box";
 import { alpha, useTheme, type Theme } from "@mui/material/styles";
+import { unitScale } from "@/utils/unit-scale";
 
-/** Default SVG height — matches Sapt Sadhana home promo (min = narrow / mobile). */
-export const SECTION_TOP_ARC_HEIGHT = "clamp(5.65rem, 17vw, 11.75rem)" as const;
+/** Default SVG height — was `clamp(5.65rem, 17vw, 11.75rem)` @ 16px/rem; middle stays `17vw`. */
+export const SECTION_TOP_ARC_HEIGHT = `clamp(${unitScale(90.4)}, 17vw, ${unitScale(188)})`;
 
 /** Arc fill must match the section body behind it (seam where SVG meets the box). */
 export type SectionTopArcSurface = "default" | "paper" | "primaryLight";
@@ -43,7 +44,7 @@ export function SectionTopArc({
   placement = "top"
 }: SectionTopArcProps) {
   const theme = useTheme();
-  const curveTopShadow = `drop-shadow(0 -10px 22px ${alpha(theme.palette.primary.dark, 0.32)})`;
+  const curveTopShadow = `drop-shadow(0 calc(-1 * (${unitScale(10)})) ${unitScale(22)} ${alpha(theme.palette.primary.dark, 0.32)})`;
   const isBottom = placement === "bottom";
 
   return (

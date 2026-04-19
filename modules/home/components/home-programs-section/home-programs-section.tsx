@@ -7,71 +7,74 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
-import { pxToRem } from "@/utils/px-to-rem";
+import { unitScale } from "@/utils/unit-scale";
 import { homeProgramRows, type HomeProgramRow } from "@/modules/home/content/home-programs";
 import { encodePublicPath } from "@/utils/encode-public-path";
 
 const sectionPb = {
-  xs: pxToRem(48),
-  sm: pxToRem(56),
-  md: pxToRem(64),
+  xs: unitScale(48),
+  sm: unitScale(56),
+  md: unitScale(64),
   lg: 0
 } as const;
 
 const sectionPt = {
-  xs: pxToRem(28),
-  sm: pxToRem(32),
-  md: pxToRem(64),
-  lg: pxToRem(80)
+  xs: unitScale(28),
+  sm: unitScale(32),
+  md: unitScale(64),
+  lg: unitScale(80)
 } as const;
 
 const programRowMinHeight = {
   xs: "auto",
-  md: pxToRem(400),
-  lg: pxToRem(528)
+  md: unitScale(400),
+  lg: unitScale(528)
 } as const;
 
 const programImageHeight = {
-  xs: pxToRem(176),
-  sm: pxToRem(208),
+  xs: unitScale(176),
+  sm: unitScale(208),
   md: "auto"
 } as const;
 
 const programCopyMinHeight = {
-  md: pxToRem(400),
-  lg: pxToRem(528)
+  md: unitScale(400),
+  lg: unitScale(528)
 } as const;
 
 const programCopyPy = {
-  xs: pxToRem(28),
-  sm: pxToRem(32),
-  md: pxToRem(56),
-  lg: pxToRem(80)
+  xs: unitScale(38),
+  sm: unitScale(32),
+  md: unitScale(56),
+  lg: unitScale(80)
 } as const;
 
 const programTitleFontSize = {
-  xs: pxToRem(26),
-  sm: pxToRem(30),
-  md: pxToRem(42),
-  lg: pxToRem(54)
+  xs: unitScale(36),
+  md: unitScale(54)
 } as const;
 
 const programEyebrowFontSize = {
-  xs: pxToRem(11),
-  sm: pxToRem(12),
-  md: pxToRem(14),
-  lg: pxToRem(16)
+  xs: unitScale(14),
+  md: unitScale(16)
 } as const;
 
 const programBodyFontSize = {
-  xs: pxToRem(13),
-  sm: pxToRem(14),
-  md: pxToRem(17),
-  lg: pxToRem(20)
+  xs: unitScale(18),
+  md: unitScale(20)
 } as const;
 
 /** Vertical space between each full-bleed program row */
-const programRowGap = pxToRem(23);
+const programRowGap = unitScale(23);
+
+/** Shared CTA sizing (module scope so `unitScale` resolves once; avoids stale HMR refs). */
+const programCtaButtonSizing = {
+  minHeight: { xs: unitScale(44), md: unitScale(48) },
+  height: { xs: "auto" as const, md: unitScale(48) },
+  px: { xs: 1, md: 3 },
+  fontSize: { xs: unitScale(13), md: unitScale(16) },
+  borderRadius: unitScale(8)
+} as const;
 
 export type HomeProgramsSectionProps = {
   programs?: readonly HomeProgramRow[];
@@ -103,8 +106,8 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                 display: "flex",
                 flexDirection: "column",
                 minHeight: programRowMinHeight,
-                borderTop: `${pxToRem(1)} solid ${borderHairline}`,
-                borderBottom: `${pxToRem(1)} solid ${borderHairline}`,
+                borderTop: `${unitScale(1)} solid ${borderHairline}`,
+                borderBottom: `${unitScale(1)} solid ${borderHairline}`,
                 overflow: "hidden"
               }}
             >
@@ -145,8 +148,8 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                   minHeight: { xs: "auto", ...programCopyMinHeight },
                   bgcolor: { xs: theme.palette.background.paper, md: "transparent" },
                   py: programCopyPy,
-                  px: { xs: 2, sm: 2.5, md: pxToRem(48), lg: pxToRem(67) },
-                  maxWidth: { xs: "100%", md: pxToRem(780) },
+                  px: { xs: 2, sm: 2.5, md: unitScale(48), lg: unitScale(67) },
+                  maxWidth: { xs: "100%", md: unitScale(780) },
                   ...(row.imageLeft ? { ml: { md: "auto" } } : {})
                 }}
               >
@@ -157,7 +160,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                     fontSize: programTitleFontSize,
                     lineHeight: 1.15,
                     color: 'black',
-                    maxWidth: pxToRem(550),
+                    maxWidth: unitScale(550),
                     wordBreak: "break-word"
                   }}
                 >
@@ -167,7 +170,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                   sx={{
                     mt: { xs: 0.75, md: 1 },
                     fontSize: programEyebrowFontSize,
-                    letterSpacing: { xs: "0.1em", sm: "0.12em", md: "0.16em" },
+                    letterSpacing: { xs: "0.1em", md: "0.16em" },
                     fontWeight: 600,
                     textTransform: "uppercase",
                     color: ink,
@@ -183,7 +186,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                     color: subtitleMuted,
                     fontSize: programBodyFontSize,
                     lineHeight: 1.5,
-                    maxWidth: pxToRem(550),
+                    maxWidth: unitScale(550),
                     wordBreak: "break-word"
                   }}
                 >
@@ -204,11 +207,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                   <Button
                     variant="contained"
                     sx={{
-                      minHeight: { xs: pxToRem(44), md: pxToRem(48) },
-                      height: { xs: "auto", md: pxToRem(48) },
-                      px: { xs: 1, md: 3 },
-                      fontSize: { xs: pxToRem(13), md: pxToRem(16) },
-                      borderRadius: pxToRem(8),
+                      ...programCtaButtonSizing,
                       textTransform: "none",
                       bgcolor: ctaBg,
                       flex: { xs: "1 1 0%", sm: "0 1 auto" },
@@ -224,15 +223,11 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                   <Button
                     variant="outlined"
                     sx={{
-                      minHeight: { xs: pxToRem(44), md: pxToRem(48) },
-                      height: { xs: "auto", md: pxToRem(48) },
-                      px: { xs: 1, md: 3 },
-                      fontSize: { xs: pxToRem(13), md: pxToRem(16) },
-                      borderRadius: pxToRem(8),
+                      ...programCtaButtonSizing,
                       textTransform: "none",
                       color: ctaBg,
                       borderColor: ctaBg,
-                      borderWidth: pxToRem(1),
+                      borderWidth: unitScale(1),
                       flex: { xs: "1 1 0%", sm: "0 1 auto" },
                       minWidth: { xs: 0, sm: "auto" },
                       width: { sm: "auto" },

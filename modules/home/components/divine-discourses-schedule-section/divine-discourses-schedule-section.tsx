@@ -10,8 +10,8 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
 import { SectionTopArc } from "@/component/section-top-curve";
-import { pageContainerMaxWidth, pageSectionGutterSx } from "@/theme/page-section";
-import { pxToRem } from "@/utils/px-to-rem";
+import { pageSectionGutterSx } from "@/theme/page-section";
+import { unitScale } from "@/utils/unit-scale";
 import {
   divineDiscoursesAssets,
   divineDiscoursesCopy,
@@ -20,61 +20,52 @@ import {
 import { HomeCornerCurveDecor } from "@/modules/home/components/home-corner-curve-decor";
 import { encodePublicPath } from "@/utils/encode-public-path";
 
+/** Fluid type — `xs` / `md` only (sm/lg caps folded into `md`). */
 const scheduleDisplayTitleFontSize = {
-  xs: pxToRem(30),
-  sm: pxToRem(36),
-  md: pxToRem(48),
-  lg: pxToRem(70)
+  xs: unitScale(30),
+  md: unitScale(70)
 } as const;
 
 const scheduleEyebrowFontSize = {
-  xs: pxToRem(14),
-  sm: pxToRem(15),
-  md: pxToRem(19),
-  lg: pxToRem(24)
+  xs: unitScale(14),
+  md: unitScale(24)
 } as const;
 
-/** Figma 25:4787 — session row title (~16–18px) */
+/** Figma 25:4787 — session row title */
 const scheduleHeadingFontSize = {
-  xs: pxToRem(16),
-  md: pxToRem(17),
-  lg: pxToRem(18)
+  xs: unitScale(16),
+  md: unitScale(18)
 } as const;
 
-/** Slot lines — ~14–17px */
+/** Slot lines */
 const scheduleBodyFontSize = {
-  xs: pxToRem(14),
-  md: pxToRem(16),
-  lg: pxToRem(17)
+  xs: unitScale(14),
+  md: unitScale(17)
 } as const;
 
 /** Live badge on hero image */
 const scheduleLiveBadgeFontSize = {
-  xs: pxToRem(13),
-  md: pxToRem(15),
-  lg: pxToRem(17)
+  xs: unitScale(13),
+  md: unitScale(17)
 } as const;
 
 /** Callout body */
 const scheduleCalloutFontSize = {
-  xs: pxToRem(17),
-  sm: pxToRem(19),
-  md: pxToRem(21),
-  lg: pxToRem(23)
+  xs: unitScale(17),
+  md: unitScale(23)
 } as const;
 
 const scheduleCtaFontSize = {
-  xs: pxToRem(16),
-  md: pxToRem(19),
-  lg: pxToRem(21)
+  xs: unitScale(16),
+  md: unitScale(21)
 } as const;
 
 const heroImageMinHeight = {
-  xs: pxToRem(280),
-  md: pxToRem(420)
+  xs: unitScale(280),
+  md: unitScale(420)
 } as const;
 
-const backdropBlurSchedule = `blur(${pxToRem(36)})`;
+const backdropBlurSchedule = `blur(${unitScale(36)})`;
 
 function SchedulePill({ label }: { label: string }) {
   return (
@@ -88,7 +79,7 @@ function SchedulePill({ label }: { label: string }) {
         py: { xs: 1, md: 1.1 },
         borderRadius: "999px",
         bgcolor: (t) => '#F3F2EE',
-        color: (t) => alpha(t.palette.guru.warm, 0.92),
+        color: (t) => 'black',
         fontFamily: 'var(--font-inter), system-ui, sans-serif',
         fontSize: scheduleHeadingFontSize,
         fontWeight: 400,
@@ -114,7 +105,14 @@ function IconTextRow({
 }) {
   return (
     <Stack direction="row" spacing={gap} sx={{ alignItems: "center" }}>
-      <Box sx={{ position: "relative", width: pxToRem(iconSize), height: pxToRem(iconSize), flex: "0 0 auto" }}>
+      <Box
+        sx={{
+          position: "relative",
+          width: { xs: unitScale(Math.max(14, iconSize - 4)), md: unitScale(iconSize) },
+          height: { xs: unitScale(Math.max(14, iconSize - 4)), md: unitScale(iconSize) },
+          flex: "0 0 auto"
+        }}
+      >
         <Image alt="" fill src={iconSrc} sizes={`${iconSize}px`} style={{ objectFit: "contain" }} />
       </Box>
       {children}
@@ -152,7 +150,7 @@ export function DivineDiscoursesScheduleSection() {
         pt: { xs: 2, md: 2.5 },
         pb: { xs: 8, md: 9 },
         overflow: "visible",
-        borderTop: (t) => `${pxToRem(1)} solid ${t.palette.divider}`
+        borderTop: (t) => `${unitScale(1)} solid ${t.palette.divider}`
       }}
     >
       <HomeCornerCurveDecor />
@@ -160,7 +158,7 @@ export function DivineDiscoursesScheduleSection() {
       <SectionTopArc surface="#F3F2EE" />
 
       <Container
-        maxWidth={pageContainerMaxWidth}
+        maxWidth={'lg'}
         sx={{ position: "relative", ...pageSectionGutterSx }}
       >
         <Box sx={{ position: "relative", zIndex: 3, mt: { xs: 0, md: -10 }, pt: { xs: 0.5, md: 0 }, pb: { xs: 2, md: 3 } }}>
@@ -201,8 +199,14 @@ export function DivineDiscoursesScheduleSection() {
                 key={src}
                 sx={{
                   position: "relative",
-                  width: pxToRem(widthPx),
-                  height: pxToRem(heightPx),
+                  width: {
+                    xs: unitScale(Math.max(24, Math.round(widthPx * 0.82))),
+                    md: unitScale(widthPx)
+                  },
+                  height: {
+                    xs: unitScale(Math.max(24, Math.round(heightPx * 0.82))),
+                    md: unitScale(heightPx)
+                  },
                   flex: "0 0 auto"
                 }}
               >
@@ -221,13 +225,13 @@ export function DivineDiscoursesScheduleSection() {
         <Card
           sx={{
             mt: 4,
-            borderRadius: pxToRem(21.12),
-            border: `${pxToRem(1.3)} solid ${cardBorder}`,
+            borderRadius: unitScale(21.12),
+            border: `${unitScale(1.3)} solid ${cardBorder}`,
             boxShadow: "none",
             p: { xs: 1.5, md: 2.25 },
-            bgcolor: (t) => t.palette.background.paper,
+            background: "linear-gradient(180deg, #D1F1F5 0%, #FCFCF6 100%)",
             overflow: "hidden",
-            position: 'relative',
+            position: "relative",
             zIndex: 39
           }}
         >
@@ -243,7 +247,7 @@ export function DivineDiscoursesScheduleSection() {
             <Box
               sx={{
                 position: "relative",
-                borderRadius: pxToRem(10),
+                borderRadius: unitScale(10),
                 overflow: "hidden",
                 minHeight: heroImageMinHeight
               }}
@@ -261,22 +265,22 @@ export function DivineDiscoursesScheduleSection() {
                 alignItems="center"
                 sx={{
                   position: "absolute",
-                  top: pxToRem(12),
-                  left: pxToRem(12),
-                  maxWidth: `calc(100% - ${pxToRem(24)})`,
+                  top: unitScale(12),
+                  left: unitScale(12),
+                  maxWidth: `calc(100% - ${unitScale(24)})`,
                   px: 1.75,
                   py: 0.65,
                   borderRadius: "999px",
                   backdropFilter: backdropBlurSchedule,
                   bgcolor: (t) => alpha(t.palette.background.paper, 0.9),
-                  border: (t) => `${pxToRem(1)} solid ${alpha(t.palette.divider, 0.25)}`
+                  border: (t) => `${unitScale(1)} solid ${alpha(t.palette.divider, 0.25)}`
                 }}
               >
                 <Box
                   aria-hidden
                   sx={{
-                    width: pxToRem(10),
-                    height: pxToRem(10),
+                    width: { xs: unitScale(8), md: unitScale(10) },
+                    height: { xs: unitScale(8), md: unitScale(10) },
                     borderRadius: "50%",
                     flexShrink: 0,
                     bgcolor: (t) => t.palette.error.main
@@ -330,10 +334,10 @@ export function DivineDiscoursesScheduleSection() {
                     <Box
                       sx={{
                         position: "relative",
-                        width: pxToRem(22),
-                        height: pxToRem(22),
+                        width: { xs: unitScale(20), md: unitScale(22) },
+                        height: { xs: unitScale(20), md: unitScale(22) },
                         flexShrink: 0,
-                        mt: pxToRem(2)
+                        mt: unitScale(2)
                       }}
                     >
                       <Image alt="" fill src={assets.calendarIcon} sizes="22px" style={{ objectFit: "contain" }} />
@@ -391,10 +395,10 @@ export function DivineDiscoursesScheduleSection() {
                     <Box
                       sx={{
                         position: "relative",
-                        width: pxToRem(22),
-                        height: pxToRem(22),
+                        width: { xs: unitScale(20), md: unitScale(22) },
+                        height: { xs: unitScale(20), md: unitScale(22) },
                         flexShrink: 0,
-                        mt: pxToRem(2)
+                        mt: unitScale(2)
                       }}
                     >
                       <Image alt="" fill src={assets.calendarIcon} sizes="22px" style={{ objectFit: "contain" }} />
@@ -420,7 +424,7 @@ export function DivineDiscoursesScheduleSection() {
                 </Stack>
               </Box>
 
-              <Box sx={{ mt: { xs: 2, md: 2.5 }, p: { xs: 1.75, md: 2 }, borderRadius: pxToRem(10), bgcolor: calloutBg }}>
+              <Box sx={{ mt: { xs: 2, md: 2.5 }, p: { xs: 1.75, md: 2 }, borderRadius: unitScale(10), bgcolor: '#FFFFFFB2' }}>
                 <Typography
                   component="p"
                   sx={{
@@ -445,9 +449,9 @@ export function DivineDiscoursesScheduleSection() {
                 fullWidth
                 sx={{
                   mt: 2.5,
-                  minHeight: { xs: pxToRem(52), md: pxToRem(56) },
+                  minHeight: { xs: unitScale(52), md: unitScale(56) },
                   py: 1.25,
-                  borderRadius: pxToRem(11.36),
+                  borderRadius: unitScale(11.36),
                   textTransform: "none",
                   fontFamily: inter,
                   fontWeight: 500,

@@ -8,8 +8,8 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
 import { homeHeroContent } from "@/modules/home/content/home-hero";
+import { unitScale } from "@/utils/unit-scale";
 import {
-  fluidHomeHeroCta,
   homeHeroDisplayOnDarkSx,
   homeHeroGradientWashSx,
   homeHeroImageLayerSx,
@@ -38,8 +38,8 @@ export function HomeHeroSection() {
         flexDirection: "column",
         minHeight: { xs: "auto", md: "120vh" },
         bgcolor: { xs: "primary.dark", md: "transparent" },
-        pt: { xs: "clamp(6.5rem, 14vw, 8rem)", md: "clamp(7rem, 12vw, 8.5rem)" },
-        pb: { xs: 12, md: "clamp(2rem, 4vw, 3rem)" },
+        pt: { xs: unitScale(128), md: unitScale(136) },
+        pb: { xs: 12, md: unitScale(48) },
         overflow: "hidden"
       }}
     >
@@ -70,8 +70,14 @@ export function HomeHeroSection() {
             pb: { xs: 1, md: 10 }
           }}
         >
-          <Box sx={{ maxWidth: { xs: "100%", md: "45rem" }, textAlign: "left" }}>
-            <Typography component="p" sx={homeHeroLeadOnDarkSx(theme)}>
+          <Box sx={{ maxWidth: { xs: "100%", md: unitScale(720) }, textAlign: "left" }}>
+            <Typography
+              component="p"
+              sx={{
+                ...homeHeroLeadOnDarkSx(theme),
+                fontSize: { xs: unitScale(30), md: unitScale(38) }
+              }}
+            >
               {homeHeroContent.lead}
             </Typography>
             <Typography
@@ -80,7 +86,8 @@ export function HomeHeroSection() {
               sx={{
                 mt: 1.5,
                 ...homeHeroDisplayOnDarkSx(theme),
-                lineHeight: 1.05
+                lineHeight: 1.05,
+                fontSize: { xs: unitScale(52), md: unitScale(95) }
               }}
             >
               {homeHeroContent.displayLine1}
@@ -98,14 +105,14 @@ export function HomeHeroSection() {
                 href={homeHeroContent.primaryCta.href}
                 variant="contained"
                 sx={{
-                  minHeight: { xs: 44, md: 52 },
+                  minHeight: { xs: unitScale(44), md: unitScale(52) },
                   px: { xs: 2.5, md: 3 },
-                  borderRadius: `${ctaRadius}px`,
+                  borderRadius: unitScale(ctaRadius),
                   bgcolor: heroSurface,
                   color: ink,
                   fontFamily: 'var(--font-inter), system-ui, sans-serif',
                   fontWeight: 500,
-                  fontSize: fluidHomeHeroCta,
+                  fontSize: { xs: unitScale(16), md: unitScale(18) },
                   textTransform: "none",
                   boxShadow: "none",
                   width: { xs: "100%", sm: "auto" },
@@ -124,15 +131,15 @@ export function HomeHeroSection() {
                 href={homeHeroContent.secondaryCta.href}
                 variant="outlined"
                 sx={{
-                  minHeight: { xs: 44, md: 52 },
+                  minHeight: { xs: unitScale(44), md: unitScale(52) },
                   px: { xs: 2.5, md: 3 },
-                  borderRadius: `${ctaRadius}px`,
+                  borderRadius: unitScale(ctaRadius),
                   borderColor: "transparent",
                   color: heroSurface,
                   bgcolor: glassFill,
                   fontFamily: 'var(--font-inter), system-ui, sans-serif',
                   fontWeight: 500,
-                  fontSize: fluidHomeHeroCta,
+                  fontSize: { xs: unitScale(16), md: unitScale(18) },
                   textTransform: "none",
                   width: { xs: "100%", sm: "auto" },
                   whiteSpace: { xs: "normal", sm: "nowrap" },

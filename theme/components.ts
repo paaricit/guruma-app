@@ -1,6 +1,10 @@
 import type { Components, Theme } from "@mui/material/styles";
 import { alpha } from "@mui/material/styles";
 import { GurumaSelectChevron } from "@/component/footer-contact-form/select-chevron";
+import { unitScale } from "@/utils/unit-scale";
+
+/** Figma frame 1580: lg content width 1280; scales with viewport (`unitScale` floor, no cap). */
+const containerMaxWidthLg = unitScale(1280);
 
 /**
  * Cross-component defaults. Keep thin; grow per component as screens migrate to `theme/`.
@@ -103,6 +107,13 @@ export const components: Components<Theme> = {
     defaultProps: {
       variant: "outlined",
       size: "small"
+    }
+  },
+  MuiContainer: {
+    styleOverrides: {
+      maxWidthLg: {
+        maxWidth: `${containerMaxWidthLg} !important`,
+      }
     }
   }
 };

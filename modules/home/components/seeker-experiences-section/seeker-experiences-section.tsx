@@ -15,8 +15,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { alpha, useTheme } from "@mui/material/styles";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { pageContainerMaxWidth, pageSectionGutterSx } from "@/theme/page-section";
-import { pxToRem } from "@/utils/px-to-rem";
+import { pageSectionGutterSx } from "@/theme/page-section";
+import { unitScale } from "@/utils/unit-scale";
 import {
   seekerExperiencesSectionBg,
   seekerTestimonialCornerIcon,
@@ -26,31 +26,30 @@ import {
   type SeekerVideoItem
 } from "@/modules/home/content/seeker-experiences";
 
+/** 1580 tokens — `xs` / `md` only (fluid via `unitScale`). */
 const seekerDisplayTitleFontSize = {
-  xs: pxToRem(30),
-  sm: pxToRem(40),
-  md: pxToRem(48),
-  lg: pxToRem(48)
+  xs: unitScale(32),
+  md: unitScale(48)
 } as const;
 
 const seekerSubleadFontSize = {
-  xs: pxToRem(15),
-  md: pxToRem(22)
+  xs: unitScale(18),
+  md: unitScale(22)
 } as const;
 
 const seekerTestimonialQuoteFontSize = {
-  xs: pxToRem(16),
-  md: pxToRem(20)
+  xs: unitScale(16),
+  md: unitScale(20)
 } as const;
 
 const seekerTestimonialAuthorFontSize = {
-  xs: pxToRem(16),
-  md: pxToRem(20)
+  xs: unitScale(17),
+  md: unitScale(20)
 } as const;
 
 const seekerTestimonialLocationFontSize = {
-  xs: pxToRem(14),
-  md: pxToRem(16.8)
+  xs: unitScale(14),
+  md: unitScale(16.8)
 } as const;
 
 export type SeekerExperiencesSectionProps = {
@@ -92,7 +91,7 @@ export function SeekerExperiencesSection({
     <Box
       sx={{
         position: "relative",
-        minHeight: "100rem",
+        minHeight: unitScale(1440),
         py: { xs: 8, md: 10 },
         color: theme.palette.common.white,
         backgroundImage: `url('${seekerExperiencesSectionBg}')`,
@@ -101,7 +100,7 @@ export function SeekerExperiencesSection({
         backgroundPosition: "top"
       }}
     >
-      <Container sx={{ position: "relative", zIndex: 1, ...pageSectionGutterSx }} maxWidth={pageContainerMaxWidth}>
+      <Container sx={{ position: "relative", zIndex: 1, ...pageSectionGutterSx }} maxWidth={'lg'}>
         <Typography
           component="h2"
           sx={{
@@ -164,9 +163,9 @@ export function SeekerExperiencesSection({
                     aria-label={`Play video: ${video.name}`}
                     sx={{
                       position: "relative",
-                      borderRadius: pxToRem(8),
+                      borderRadius: unitScale(8),
                       overflow: "hidden",
-                      minHeight: { xs: pxToRem(220), md: pxToRem(300) },
+                      minHeight: { xs: unitScale(220), md: unitScale(300) },
                       width: "100%",
                       maxWidth: "100%",
                       height: "100%",
@@ -176,8 +175,8 @@ export function SeekerExperiencesSection({
                       textAlign: "left",
                       display: "block",
                       "&:focus-visible": {
-                        outline: `${pxToRem(2)} solid ${theme.palette.common.white}`,
-                        outlineOffset: pxToRem(2)
+                        outline: `${unitScale(2)} solid ${theme.palette.common.white}`,
+                        outlineOffset: unitScale(2)
                       }
                     }}
                   >
@@ -205,7 +204,7 @@ export function SeekerExperiencesSection({
                         left: 10,
                         color: alpha(theme.palette.common.white, 0.96),
                         fontFamily: 'var(--font-inter), system-ui, sans-serif',
-                        fontSize: { xs: pxToRem(13), md: pxToRem(24) },
+                        fontSize: { xs: unitScale(13), md: unitScale(24) },
                         fontWeight: 600,
                         pointerEvents: "none"
                       }}
@@ -260,8 +259,8 @@ export function SeekerExperiencesSection({
                 color: onLight,
                 border: `1px solid ${alpha(theme.palette.common.white, 0.35)}`,
                 bgcolor: alpha(theme.palette.common.black, 0.2),
-                width: { xs: pxToRem(48), md: pxToRem(52) },
-                height: { xs: pxToRem(48), md: pxToRem(52) },
+                width: { xs: unitScale(48), md: unitScale(52) },
+                height: { xs: unitScale(48), md: unitScale(52) },
                 "&:hover": { bgcolor: alpha(theme.palette.common.black, 0.35) },
                 "&.Mui-disabled": {
                   color: alpha(theme.palette.common.white, 0.35),
@@ -269,7 +268,7 @@ export function SeekerExperiencesSection({
                 }
               }}
             >
-              <ChevronLeftRoundedIcon sx={{ fontSize: { xs: pxToRem(28), md: pxToRem(30) } }} />
+              <ChevronLeftRoundedIcon sx={{ fontSize: { xs: unitScale(28), md: unitScale(30) } }} />
             </IconButton>
             <IconButton
               type="button"
@@ -280,8 +279,8 @@ export function SeekerExperiencesSection({
                 color: onLight,
                 border: `1px solid ${alpha(theme.palette.common.white, 0.35)}`,
                 bgcolor: alpha(theme.palette.common.black, 0.2),
-                width: { xs: pxToRem(48), md: pxToRem(52) },
-                height: { xs: pxToRem(48), md: pxToRem(52) },
+                width: { xs: unitScale(48), md: unitScale(52) },
+                height: { xs: unitScale(48), md: unitScale(52) },
                 "&:hover": { bgcolor: alpha(theme.palette.common.black, 0.35) },
                 "&.Mui-disabled": {
                   color: alpha(theme.palette.common.white, 0.35),
@@ -289,7 +288,7 @@ export function SeekerExperiencesSection({
                 }
               }}
             >
-              <ChevronRightRoundedIcon sx={{ fontSize: { xs: pxToRem(28), md: pxToRem(30) } }} />
+              <ChevronRightRoundedIcon sx={{ fontSize: { xs: unitScale(28), md: unitScale(30) } }} />
             </IconButton>
           </Stack>
           </Box>
@@ -314,8 +313,8 @@ export function SeekerExperiencesSection({
               onClick={closeVideo}
               sx={{
                 position: "absolute",
-                top: pxToRem(8),
-                right: pxToRem(8),
+                top: unitScale(8),
+                right: unitScale(8),
                 zIndex: 2,
                 color: theme.palette.common.white,
                 bgcolor: alpha(theme.palette.common.black, 0.5),
@@ -367,7 +366,7 @@ export function SeekerExperiencesSection({
             fontFamily: 'var(--font-inter), system-ui, sans-serif',
             fontWeight: 400,
             fontSize: seekerSubleadFontSize,
-            lineHeight: 1.45,
+            lineHeight: { xs: 1.5, md: 1.45 },
             textAlign: "center",
             color: onLightMuted,
             mx: "auto",
@@ -393,14 +392,14 @@ export function SeekerExperiencesSection({
             <Card
               key={item.name}
               sx={{
-                borderRadius: "1.2rem",
+                borderRadius: unitScale(19.2),
                 boxShadow: "none",
                 border: `1px solid ${alpha(theme.palette.text.secondary, 0.15)}`,
                 bgcolor: theme.palette.background.paper,
                 color: theme.palette.text.primary,
                 position: "relative",
                 overflow: "visible",
-                minHeight: { xs: pxToRem(220), md: pxToRem(340) },
+                minHeight: { xs: unitScale(220), md: unitScale(340) },
                 mb: 3,
                 pt: 1.5
               }}
@@ -408,10 +407,13 @@ export function SeekerExperiencesSection({
               <Box
                 sx={{
                   position: "absolute",
-                  top: { xs: pxToRem(-18), md: pxToRem(-22) },
-                  left: { xs: pxToRem(18), md: pxToRem(22) },
-                  width: { xs: pxToRem(44), md: pxToRem(52) },
-                  height: { xs: pxToRem(44), md: pxToRem(52) },
+                  top: {
+                    xs: `calc(-1 * (${unitScale(18)}))`,
+                    md: `calc(-1 * (${unitScale(22)}))`
+                  },
+                  left: { xs: unitScale(18), md: unitScale(22) },
+                  width: { xs: unitScale(44), md: unitScale(52) },
+                  height: { xs: unitScale(44), md: unitScale(52) },
                   zIndex: 2,
                   pointerEvents: "none"
                 }}
@@ -434,7 +436,7 @@ export function SeekerExperiencesSection({
                     fontStyle: "italic",
                     fontWeight: 400,
                     fontSize: seekerTestimonialQuoteFontSize,
-                    lineHeight: 1.65,
+                    lineHeight: { xs: 1.6, md: 1.65 },
                     mt: 2,
                     mb: 2,
                     color: alpha(theme.palette.text.primary, 0.82)
@@ -444,8 +446,8 @@ export function SeekerExperiencesSection({
                 </Typography>
                 <Box
                   sx={{
-                    mt: "1.8125rem",
-                    pt: "1.29rem",
+                    mt: unitScale(29),
+                    pt: unitScale(20.64),
                     borderTop: `1px solid ${alpha(theme.palette.text.secondary, 0.15)}`,
                     display: "flex",
                     flexDirection: "column",

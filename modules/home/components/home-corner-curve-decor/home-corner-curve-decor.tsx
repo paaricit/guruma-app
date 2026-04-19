@@ -25,7 +25,7 @@ export function HomeCornerCurveDecor() {
         aria-hidden
         sx={{
           ...curveDecorBoxSx,
-          top: "-10%",
+          top: "-0%",
           right: "-8%",
           zIndex: 11
         }}
@@ -42,7 +42,7 @@ export function HomeCornerCurveDecor() {
         aria-hidden
         sx={{
           ...curveDecorBoxSx,
-          bottom: "0%",
+          bottom: "-8%",
           left: "-8%",
           zIndex: 1
         }}

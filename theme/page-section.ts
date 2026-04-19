@@ -1,16 +1,18 @@
 import type { Theme } from "@mui/material/styles";
 import { alpha } from "@mui/material/styles";
+import { unitScale } from "@/utils/unit-scale";
 
 /**
  * Marketing home (and matching footer): shared fluid type + horizontal gutters.
  * Forum = display headings; Inter = subheads and body.
+ * Fluid type uses `unitScale(px@1580)` (vw + auto floor) instead of `clamp(rem, vw, rem)`.
  */
 
-export const pageContainerMaxWidth = "xl" as const;
+export const pageContainerMaxWidth = "lg" as const;
 
 /** Default section gutters — use on `Container` `sx` (or merge with `disableGutters` layouts). */
 export const pageSectionGutterSx = {
-  px: { xs: 2, sm: 2.5, md: 3, lg: 8 }
+  px: { xs: 2, sm: 2.5, md: 3, lg: 0 }
 } as const;
 
 /** Programs: full-bleed on xs; same gutters as `pageSectionGutterSx` from `sm` up. */
@@ -18,52 +20,52 @@ export const pageSectionBleedGutterSx = {
   px: { xs: 0, sm: 2.5, md: 3, lg: 8 }
 } as const;
 
-// --- Fluid scales (rem + vw) — one ladder for the whole page ---
+// --- Fluid scales (`unitScale` @ 1580 — former clamp max @ 16px/rem) ---
 
-export const fluidSectionDisplayTitle = "clamp(1.875rem, 0.85rem + 3.6vw, 4.25rem)";
+export const fluidSectionDisplayTitle = unitScale(68);
 
-export const fluidSectionEyebrow = "clamp(0.78rem, 0.28vw + 1.2rem, 1.5rem)";
+export const fluidSectionEyebrow = unitScale(24);
 
-export const fluidSectionSublead = "clamp(0.9375rem, 0.35vw + 0.82rem, 1.35rem)";
+export const fluidSectionSublead = unitScale(21.6);
 
-export const fluidSectionBody = "clamp(0.875rem, 0.32vw + 0.78rem, 1.0625rem)";
+export const fluidSectionBody = unitScale(17);
 
-export const fluidSectionBodyProminent = "clamp(0.9375rem, 0.55vw + 0.78rem, 1.25rem)";
+export const fluidSectionBodyProminent = unitScale(20);
 
 /** Program row titles (slightly tighter cap than section H2). */
-export const fluidProgramRowTitle = "clamp(1.625rem, 2.8vw + 0.85rem, 3.35rem)";
+export const fluidProgramRowTitle = unitScale(53.6);
 
-export const fluidProgramRowEyebrow = "clamp(0.6875rem, 0.38vw + 0.58rem, 1rem)";
+export const fluidProgramRowEyebrow = unitScale(16);
 
-export const fluidProgramRowBody = "clamp(0.8125rem, 1vw + 0.58rem, 1.2rem)";
+export const fluidProgramRowBody = unitScale(19.2);
 
-export const fluidSectionPromoLead = "clamp(0.875rem, 1vw + 0.65rem, 1.75rem)";
+export const fluidSectionPromoLead = unitScale(28);
 
-export const fluidTestimonialQuote = "clamp(1rem, 0.45vw + 0.85rem, 1.2rem)";
+export const fluidTestimonialQuote = unitScale(19.2);
 
-export const fluidTestimonialAuthor = "clamp(1rem, 0.38vw + 0.88rem, 1.25rem)";
+export const fluidTestimonialAuthor = unitScale(20);
 
-export const fluidTestimonialLocation = "clamp(0.875rem, 0.3vw + 0.78rem, 1.05rem)";
+export const fluidTestimonialLocation = unitScale(16.8);
 
 /** Footer column headings (Forum) — scales down on small screens. */
-export const fluidFooterColumnHeading = "clamp(1.5rem, 0.95rem + 2.2vw, 2.5rem)";
+export const fluidFooterColumnHeading = unitScale(40);
 
 /** Footer body / nav links (Inter). */
-export const fluidFooterBody = "clamp(0.9375rem, 0.38vw + 0.8rem, 1.25rem)";
+export const fluidFooterBody = unitScale(20);
 
-export const fluidFooterLabel = "clamp(1rem, 0.45vw + 0.85rem, 1.3125rem)";
+export const fluidFooterLabel = unitScale(21);
 
 /** Footer contact card helper / microcopy */
-export const fluidFooterFormHelper = "clamp(0.65rem, 0.28vw + 0.58rem, 0.75rem)";
+export const fluidFooterFormHelper = unitScale(12);
 
 /** Sapt “Stay Connected” bridge — keeps larger expressive cap. */
-export const fluidSaptBridge = "clamp(1.0625rem, 0.75rem + 3.25vw, 4.375rem)";
+export const fluidSaptBridge = unitScale(70);
 
-/** Home impact stats — large numerals (~36–70px intent), scales with viewport. */
-export const fluidImpactStatValue = "clamp(2.25rem, 1.1rem + 4.8vw, 3.375rem)";
+/** Home impact stats — large numerals; token = former clamp max (3.375rem). */
+export const fluidImpactStatValue = unitScale(54);
 
-/** Home impact stats — Forum caption under rule (~16–28px intent). */
-export const fluidImpactStatLabel = "clamp(1rem, 0.65rem + 1.4vw, 1.875rem)";
+/** Home impact stats — Forum caption under rule; token = former clamp max (1.875rem). */
+export const fluidImpactStatLabel = unitScale(30);
 
 // --- Sx factories ---
 
@@ -136,7 +138,7 @@ export function footerBodyOnPrimarySx(theme: Theme) {
     fontWeight: 400,
     fontSize: fluidFooterBody,
     lineHeight: 1.45,
-    color: alpha(theme.palette.primary.contrastText, 0.95)
+    color: alpha(theme.palette.primary.contrastText, 0.75)
   };
 }
 
@@ -172,20 +174,20 @@ export function impactStatLabelOnDarkSx(theme: Theme) {
 
 // --- Home: Guru Maa intro (video + roles) — fluid type, theme colors ---
 
-/** Forum display name (~30–52px intent). */
-export const fluidGuruIntroTitle = "clamp(1.875rem, 1rem + 3.2vw, 3.25rem)";
+/** Forum display name — former clamp max 3.25rem. */
+export const fluidGuruIntroTitle = unitScale(52);
 
-/** Inter tagline under name (uppercase ~14–16px intent). */
-export const fluidGuruIntroTagline = "clamp(0.8125rem, 0.28vw + 0.72rem, 1rem)";
+/** Inter tagline under name (uppercase). */
+export const fluidGuruIntroTagline = unitScale(16);
 
-/** Role row label beside icon (~15–22px intent). */
-export const fluidGuruIntroRole = "clamp(0.9375rem, 0.35vw + 0.82rem, 1.375rem)";
+/** Role row label beside icon. */
+export const fluidGuruIntroRole = unitScale(22);
 
-/** Intro body paragraph (~14–21px intent). */
-export const fluidGuruIntroBody = "clamp(0.875rem, 0.4vw + 0.88rem, 1.3125rem)";
+/** Intro body paragraph. */
+export const fluidGuruIntroBody = unitScale(21);
 
 /** Primary CTA on intro band. */
-export const fluidGuruIntroCta = "clamp(0.9375rem, 0.35vw + 0.84rem, 1.0625rem)";
+export const fluidGuruIntroCta = unitScale(17);
 
 export function guruIntroSectionBackgroundSx(theme: Theme) {
   return {
@@ -239,14 +241,14 @@ export function guruIntroBodySx(theme: Theme) {
 
 // --- Home: Hero (banner + lead + display + CTAs) — fluid type, theme colors ---
 
-/** Inter lead above the Forum name (~16–38px intent). */
-export const fluidHomeHeroLead = "clamp(1rem, 0.52rem + 2.15vw, 2.375rem)";
+/** Inter lead above the Forum name — former clamp max 2.375rem. */
+export const fluidHomeHeroLead = unitScale(38);
 
-/** Forum hero display (~44–95px intent). */
-export const fluidHomeHeroDisplay = "clamp(2.6875rem, 1.2rem + 7.25vw, 5.9375rem)";
+/** Forum hero display — former clamp max 5.9375rem. */
+export const fluidHomeHeroDisplay = unitScale(95);
 
-/** Hero CTA labels. */
-export const fluidHomeHeroCta = "clamp(0.9375rem, 0.38vw + 0.82rem, 1.125rem)";
+/** Hero CTA labels — former clamp max 1.125rem. */
+export const fluidHomeHeroCta = unitScale(18);
 
 export function homeHeroLeadOnDarkSx(theme: Theme) {
   return {
@@ -255,7 +257,7 @@ export function homeHeroLeadOnDarkSx(theme: Theme) {
     fontSize: fluidHomeHeroLead,
     lineHeight: { xs: 1.4, md: 1.37 },
     color: alpha(theme.palette.common.white, 0.94),
-    maxWidth: "32.5rem"
+    maxWidth: unitScale(520)
   };
 }
 
