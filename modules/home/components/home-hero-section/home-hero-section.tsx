@@ -157,7 +157,7 @@ export function HomeHeroSection() {
             </Stack>
           </Box>
 
-          <Box
+          {/* <Box
             sx={{
               position: "relative",
               display: { xs: "none", md: "block" },
@@ -176,7 +176,7 @@ export function HomeHeroSection() {
               sizes="(max-width: 900px) 0px, 38vw"
               style={{ objectFit: "contain", objectPosition: "bottom center" }}
             />
-          </Box>
+          </Box> */}
         </Box>
       </Container>
     </Box>
