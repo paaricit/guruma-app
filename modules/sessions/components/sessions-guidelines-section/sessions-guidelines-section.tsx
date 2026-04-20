@@ -18,9 +18,11 @@ import {
 import { unitScale } from "@/utils/unit-scale";
 import { SessionsGuidelinesModal } from "./sessions-guidelines-modal";
 
+/** Rounded rectangle — not a full pill (`9999`). */
+const guidelinesCtaBorderRadius = unitScale(12);
+
 export function SessionsGuidelinesSection() {
   const theme = useTheme();
-  const btnRadius = Number(theme.shape.borderRadius) * 1.25;
   const ink = theme.palette.primary.dark;
 
   /** Variant kept until dialog exit animation finishes (see modal `onExited`). */
@@ -63,10 +65,19 @@ export function SessionsGuidelinesSection() {
             backgroundImage: { lg: `url(${sessionsScheduleSpiralDecorImage})`, xs: "none" },
             ...sessionsScheduleSpiralDecorSx,
             px: sessionsScheduleSpiralWrapPx,
-            pb: {xs: unitScale(32), sm: unitScale(40), md: unitScale(240)}
+            pb: { xs: unitScale(40), sm: unitScale(48), md: unitScale(240) }
           }}
         >
-          <Container maxWidth="md" sx={{ position: "relative", zIndex: 1, pt: sessionsSectionPySm, pb: { xs: unitScale(32), sm: unitScale(40), md: 6 }, ...pageSectionGutterSx }}>
+          <Container
+            maxWidth="md"
+            sx={{
+              position: "relative",
+              zIndex: 1,
+              pt: sessionsSectionPySm,
+              pb: { xs: unitScale(44), sm: unitScale(48), md: 6 },
+              ...pageSectionGutterSx
+            }}
+          >
             <Typography
               component="h2"
               sx={{
@@ -95,11 +106,14 @@ export function SessionsGuidelinesSection() {
               direction={{ xs: "column", sm: "row" }}
               spacing={2}
               justifyContent="center"
-              alignItems="center"
+              alignItems={{ xs: "stretch", sm: "center" }}
               sx={{
                 position: "relative",
                 zIndex: 2,
-                mb: { xs: unitScale(28), sm: unitScale(32), md: 5 }
+                mb: { xs: unitScale(36), sm: unitScale(36), md: 5 },
+                maxWidth: { xs: unitScale(400), sm: "none" },
+                mx: { xs: "auto", sm: "unset" },
+                width: { xs: "100%", sm: "auto" }
               }}
             >
               <Button
@@ -114,7 +128,10 @@ export function SessionsGuidelinesSection() {
                   fontWeight: 700,
                   letterSpacing: "0.06em",
                   fontSize: sessionsFluidBody,
-                  borderRadius: btnRadius,
+                  borderRadius: guidelinesCtaBorderRadius,
+                  width: { xs: "100%", sm: "auto" },
+                  minHeight: { xs: unitScale(48), sm: "unset" },
+                  boxSizing: "border-box",
                   "&:hover": { bgcolor: alpha(ink, 0.88) }
                 }}
               >
@@ -132,8 +149,11 @@ export function SessionsGuidelinesSection() {
                   fontWeight: 700,
                   letterSpacing: "0.06em",
                   fontSize: sessionsFluidBody,
-                  borderRadius: btnRadius,
+                  borderRadius: guidelinesCtaBorderRadius,
                   borderWidth: 2,
+                  width: { xs: "100%", sm: "auto" },
+                  minHeight: { xs: unitScale(48), sm: "unset" },
+                  boxSizing: "border-box",
                   "&:hover": {
                     borderWidth: 2,
                     borderColor: ink,

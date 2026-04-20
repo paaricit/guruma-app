@@ -166,49 +166,55 @@ export function SessionsFaqSection() {
         </Box>
       </Container>
       <Box
+        sx={{
+          mt: { xs: 4, md: 6 },
+          pt: { xs: 2, md: 3 },
+          position: "relative",
+          zIndex: 1,
+          width: 1,
+          maxWidth: unitScale(1280),
+          mx: "auto",
+          ...pageSectionGutterSx
+        }}
+      >
+        <Box
           sx={{
-            mt: { xs: 4, md: 6 },
-            pt: { xs: 2, md: 3 },
-            position: "relative",
-            zIndex: 1,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: { xs: "center", md: "space-between" },
+            gap: { xs: 1, md: 2 },
+            flexWrap: { xs: "wrap", md: "nowrap" },
             width: "100%",
-            maxWidth: unitScale(1280),
-            margin: "0 auto",
+            minWidth: 0
           }}
-          
         >
-          <Box
+          <Typography
+            component="p"
             sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: { xs: 0.75, md: 2 },
-              flexWrap: "nowrap",
-              width: "100%",
-              minWidth: 0
+              flex: { xs: "1 1 100%", md: "0 1 auto" },
+              minWidth: 0,
+              color: theme.palette.primary.dark,
+              fontFamily: "var(--font-forum), serif",
+              fontSize: {
+                xs: unitScale(32),
+                sm: unitScale(40),
+                md: unitScale(52),
+                lg: unitScale(62)
+              },
+              fontWeight: 400,
+              lineHeight: { xs: 1.1, sm: 1.08, md: 1.05 },
+              letterSpacing: { xs: "-0.02em", md: 0 },
+              textAlign: { xs: "center", md: "left" },
+              whiteSpace: { xs: "normal", md: "nowrap" },
+              textOverflow: { md: "ellipsis" },
+              overflow: { md: "hidden" }
             }}
           >
-            <Typography
-              component="p"
-              sx={{
-                flex: "0 1 auto",
-                minWidth: 0,
-                color: (t) => '#162B53',
-                fontFamily: "var(--font-forum), serif",
-                fontSize: unitScale(70),
-                fontWeight: 400,
-                lineHeight: { xs: 1.08, md: 1.05 },
-                letterSpacing: { xs: "-0.02em", md: 0 },
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-                overflow: "hidden"
-              }}
-            >
-              Stay Connected
-            </Typography>
+            Stay Connected
+          </Typography>
 
-            {/* <Box
+          {/* <Box
               sx={{
                 position: "relative",
                 flex: "1 1 0%",
@@ -227,8 +233,8 @@ export function SessionsFaqSection() {
                 style={{ objectFit: "contain", objectPosition: "center" }}
               />
             </Box> */}
-          </Box>
         </Box>
+      </Box>
     </Box>
   );
 }

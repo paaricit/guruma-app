@@ -56,7 +56,7 @@ export function SessionsHowToJoinSection() {
         minHeight: { xs: 'auto', md: unitScale(1000) },
         pt: { xs: unitScale(32), sm: unitScale(40), md: unitScale(48) },
         px: 0,
-        pb: { xs: unitScale(32), sm: unitScale(40), md: unitScale(80) }
+        pb: { xs: unitScale(52), sm: unitScale(44), md: unitScale(80) }
       }}
     >
       <Box
@@ -217,18 +217,30 @@ export function SessionsHowToJoinSection() {
             </Box>
           ))}
         </Box>
-        <Box sx={{ display: "flex", justifyContent: "center", mt: { xs: unitScale(32), sm: unitScale(36), md: 5 } }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: { xs: unitScale(48), sm: unitScale(40), md: 5 },
+            mb: { xs: unitScale(20), sm: unitScale(12), md: 2 },
+            width: 1,
+            px: { xs: 1, sm: 0 }
+          }}
+        >
           <Button
             component={Link}
             href={howToJoinCtaHref}
             variant="contained"
             sx={{
               bgcolor: "#fff",
-              color: "#031942",
+              color: theme.palette.primary.dark,
               textTransform: "none",
               fontWeight: 600,
-              minHeight: unitScale(77.263),
-              minWidth: unitScale(256.65),
+              minHeight: { xs: unitScale(52), sm: unitScale(64), md: unitScale(77.263) },
+              minWidth: { xs: "unset", sm: unitScale(220), md: unitScale(256.65) },
+              width: { xs: "100%", sm: "auto" },
+              maxWidth: { xs: unitScale(340), sm: "none" },
+              boxSizing: "border-box",
               px: { xs: unitScale(20), sm: unitScale(24), md: unitScale(28) },
               py: { xs: unitScale(14), sm: unitScale(16), md: unitScale(18) },
               borderRadius: unitScale(11.613),

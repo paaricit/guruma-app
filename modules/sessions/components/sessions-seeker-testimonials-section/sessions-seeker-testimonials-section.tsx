@@ -61,7 +61,8 @@ export function SessionsSeekerTestimonialsSection() {
             fontSize: sessionsFluidSectionHeading,
             color: "#2a2a2a",
             textAlign: "center",
-            mt: '-10rem'
+            /* Positive margin only — large negative values pulled this heading under Guidelines buttons on xs. */
+            mt: { xs: unitScale(8), sm: unitScale(10), md: 2 }
           }}
         >
           Experiences from Seekers
