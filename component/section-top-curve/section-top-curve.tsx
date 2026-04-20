@@ -27,6 +27,16 @@ export type SectionTopArcProps = {
 /** Props for {@link SectionBottomArc} — same as {@link SectionTopArcProps} without `placement` (always bottom / inverted). */
 export type SectionBottomArcProps = Omit<SectionTopArcProps, "placement">;
 
+/** Props for {@link SectionTopUShapedArc} — top “U” / valley curve (no `placement`). */
+export type SectionTopUShapedArcProps = Omit<SectionTopArcProps, "placement"> & {
+  /**
+   * Fill **inside the U** (below the curved boundary). SVG pixels **above** that boundary stay transparent
+   * so the previous section shows through (e.g. starfield).
+   * @default "#ffffff"
+   */
+  cupFill?: string;
+};
+
 function resolveArcFill(theme: Theme, surface: SectionTopArcSurfaceProp): string {
   switch (surface) {
     case "paper":
@@ -104,4 +114,73 @@ export function SectionTopArc({
  */
 export function SectionBottomArc(props: SectionBottomArcProps) {
   return <SectionTopArc {...props} placement="bottom" />;
+}
+
+/**
+ * **U-shaped** curve along the **top** of a section (sides high, center dips — symmetric valley).
+ * Same viewBox scale, stroke weight, and {@link SECTION_TOP_ARC_HEIGHT} defaults as {@link SectionTopArc} / {@link SectionBottomArc}.
+ *
+ * Place as the first child inside a `position: "relative"` section and reserve top space, e.g.
+ * `pt: SECTION_TOP_ARC_HEIGHT` (or your chosen `svgHeight`), with `overflow: "visible"` if the curve should overlap the section above.
+ *
+ * @example
+ * ```tsx
+ * <Box sx={{ position: "relative", pt: SECTION_TOP_ARC_HEIGHT, bgcolor: "background.paper" }}>
+ *   <SectionTopUShapedArc cupFill="#fff" />
+ *   …
+ * </Box>
+ * ```
+ */
+export function SectionTopUShapedArc({
+  svgHeight = SECTION_TOP_ARC_HEIGHT,
+  surface = "default",
+  cupFill = "#ffffff"
+}: SectionTopUShapedArcProps) {
+  const theme = useTheme();
+  const curveShadow = `drop-shadow(0 ${unitScale(10)} ${unitScale(22)} ${alpha(theme.palette.primary.dark, 0.32)})`;
+  const rimColor =
+    typeof surface === "string" && surface !== "default" && surface !== "paper" && surface !== "primaryLight"
+      ? alpha(surface, 0.35)
+      : alpha(theme.palette.primary.dark, 0.06);
+
+  return (
+    <Box
+      aria-hidden
+      sx={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        width: "100%",
+        zIndex: 2,
+        pointerEvents: "none"
+      }}
+    >
+      <svg
+        viewBox="0 0 1200 200"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{
+          display: "block",
+          width: "100%",
+          height: svgHeight,
+          verticalAlign: "top"
+        }}
+      >
+        {/*
+          Symmetric “U” / valley: quadratic so left → right dips once (center lowest).
+          t=0.5 lies at (600,118) with control (600,236). Only the region below the curve is filled — transparent above shows the section *behind* this block (overlap How to Join + transparent parent).
+        */}
+        <path fill={cupFill} d="M0 0 Q600 236 1200 0 L1200 200 L0 200 Z" />
+        <path
+          d="M0 0 Q600 236 1200 0"
+          fill="none"
+          stroke={rimColor}
+          strokeWidth={3}
+          strokeLinecap="round"
+          style={{ filter: curveShadow }}
+        />
+      </svg>
+    </Box>
+  );
 }

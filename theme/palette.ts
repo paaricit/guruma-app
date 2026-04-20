@@ -41,6 +41,8 @@ export const palette: PaletteOptions = {
     pathwayCardTitle: "#353535",
     pathwayCardBody: "#878787",
     pathwayIconAccent: "#ffc19a",
-    pathwayCardBorder: "rgba(14, 123, 125, 0.15)"
+    pathwayCardBorder: "rgba(14, 123, 125, 0.15)",
+    /** Sessions FAQ band floor (Figma `1:7953`). */
+    sessionsFaqSurface: "#f7fbfc"
   }
 };

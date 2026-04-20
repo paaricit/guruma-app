@@ -34,6 +34,8 @@ declare module "@mui/material/styles" {
       pathwayIconAccent: string;
       /** Pathway card border (Figma `rgba(14,123,125,0.15)`). */
       pathwayCardBorder: string;
+      /** Sessions — FAQ section wash behind accordions. */
+      sessionsFaqSurface: string;
     };
   }
 
@@ -55,6 +57,7 @@ declare module "@mui/material/styles" {
       pathwayCardBody?: string;
       pathwayIconAccent?: string;
       pathwayCardBorder?: string;
+      sessionsFaqSurface?: string;
     };
   }
 }

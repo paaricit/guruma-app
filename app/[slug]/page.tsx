@@ -5,7 +5,6 @@ import ContactPage from "@/components/site/contact-page";
 import IshtGoldPage from "@/components/site/isht-gold-page";
 import MarriageCounsellingPage from "@/components/site/marriage-counselling-page";
 import SaptSadhanaPage from "@/components/site/sapt-sadhana-page";
-import SessionsPage from "@/components/site/sessions-page";
 import ImageFullPage from "@/components/site/image-full-page";
 import SitePage from "@/components/site/site-page";
 import { routeFromSlug, sitePages } from "@/lib/site-pages";
@@ -38,10 +37,6 @@ export default async function DynamicPage({ params }: DynamicPageProps) {
 
   if (route === "about-her") {
     return <AboutHerPage />;
-  }
-
-  if (route === "sessions") {
-    return <SessionsPage />;
   }
 
   if (route === "divine-day") {

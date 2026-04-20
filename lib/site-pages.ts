@@ -121,7 +121,7 @@ export const sitePages: Record<SiteRoute, SitePageContent> = {
     hero: {
       eyebrow: "Free for All Seekers",
       title: "SESSIONS (FREE LIVE SPIRITUAL SESSIONS)",
-      description: "Join live and interactive sessions online and offline with no additional cost.",
+      description: "All Are Welcome. Completely free live spiritual sessions online and offline.",
       image: "/images/SESSIONS (FREE LIVE SPIRITUAL SESSIONS) Photos/SESSIONS (FREE LIVE SPIRITUAL SESSIONS) Banner.webp",
       primaryCta: "Register for Next Session",
       secondaryCta: "View Session Format"
