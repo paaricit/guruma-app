@@ -48,7 +48,7 @@ export function DivineDayWhySection() {
 
   return (
     <Box sx={{
-      py: { xs: unitScale(56), md: unitScale(96) }, overflow: "hidden", position: "relative", background: "linear-gradient(180deg, #D1F1F5 0%, #F3F3EF 100%)"
+      py: { xs: unitScale(56), md: unitScale(96) }, position: "relative", background: "linear-gradient(180deg, #D1F1F5 0%, #F3F3EF 100%)"
     }}>
       <SectionSoftWaveCap fill="#D1F1F5" height={unitScale(130)} />
 
@@ -94,7 +94,10 @@ export function DivineDayWhySection() {
           </Box>
         </Stack>
       </Container>
-      <SectionSoftWaveCap fill="#D1F1F5" height={unitScale(130)} mirror placement="bottom" />
+      <Box sx={{ position: "absolute", top: `110%`, left: 0, right: 0, zIndex: 1 }}>
+        <SectionSoftWaveCap fill="#F3F3EF" height={unitScale(130)} mirror placement="bottom" />
+
+      </Box>
 
     </Box>
   );

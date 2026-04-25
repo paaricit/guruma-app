@@ -2,4 +2,4 @@ export {
   SeekerExperiencesSection,
   type SeekerExperiencesSectionProps,
   type SeekerExperiencesSectionSurface
-} from "@/component/seeker-experiences-section";
+} from "./seeker-experiences-section";

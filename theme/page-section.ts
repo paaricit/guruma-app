@@ -21,6 +21,12 @@ const palettePaper = (palette.background as { paper?: string } | undefined)?.pap
 export const sessionsSeekerTestimonialsFaqBandGradient =
   `linear-gradient(180deg, ${paletteMint} 0%, ${palettePaper} 100%)` as const;
 
+/**
+ * Our Programs internal programme hero — scrim over the photo (clear top → deep navy at bottom).
+ */
+export const ourProgramsProgramHeroOverlayGradient =
+  "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000F2A 100%)" as const;
+
 /** Default section gutters — use on `Container` `sx` (or merge with `disableGutters` layouts). */
 export const pageSectionGutterSx = {
   px: { xs: 4, sm: 4, md: 3, lg: 0 }
