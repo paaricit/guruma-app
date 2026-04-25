@@ -52,7 +52,7 @@ export const siteNavItems: NavItem[] = [
   { label: "Events", href: "/events" },
   { label: "Divine Day", href: "/divine-day" },
   { label: "Delhi", href: "/delhi" },
-  { label: "Programs", href: "/meditation-program" },
+  { label: "Programs", href: "/our-programs" },
   { label: "Wisdom", href: "/wisdom-videos" },
   { label: "Sapt Sadhana", href: "/sapt-sadhana" },
   { label: "Contact", href: "/contact" }

@@ -40,7 +40,7 @@ const footerServiceLinks = [
   { label: "About Her", href: "/about-her" },
   { label: "Sessions", href: "/sessions" },
   { label: "Events", href: "/events" },
-  { label: "Our Programs", href: "/meditation-program" },
+  { label: "Our Programs", href: "/our-programs" },
   { label: "Wisdom", href: "/wisdom-videos" },
   { label: "Sapt Sadhana", href: "/sapt-sadhana" },
   { label: "Courses", href: "/isht-gold" },
