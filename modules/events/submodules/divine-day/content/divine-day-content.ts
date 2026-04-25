@@ -19,7 +19,10 @@ export const divineDayImages = {
   posterBand: "/images/Divine day page Photos/Group 1410521824.webp",
   experienceSpiralBg: "/images/Divine day page Photos/exp.svg",
   experienceTopPortrait: "/images/Divine day page Photos/img1.svg",
-  experienceBottomPortrait: "/images/Divine day page Photos/img2.svg"
+  experienceBottomPortrait: "/images/Divine day page Photos/img2.svg",
+  whyLotus: "/images/Divine day page Photos/why-lotus.svg",
+  whyImageTop: "/images/Divine day page Photos/why-img-1.svg",
+  whyImageBottom: "/images/Divine day page Photos/why-img-2.svg"
 } as const;
 
 /** Legacy list — superseded on the module page by `divineDayWhoShouldAttendCopy`; kept for reuse / migration. */

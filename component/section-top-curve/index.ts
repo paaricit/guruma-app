@@ -8,3 +8,5 @@ export {
   type SectionTopArcSurfaceProp,
   type SectionTopUShapedArcProps
 } from "./section-top-curve";
+
+export { SectionSoftWaveCap, type SectionSoftWaveCapProps } from "./section-soft-wave-cap";
