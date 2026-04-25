@@ -6,7 +6,9 @@ import {
   DivineDayExperienceSection,
   DivineDayFaqSection,
   DivineDayHeroSection,
-  DivineDayTestimonialsSection,
+  DivineDayPosterSection,
+  DivineDayProgramsSection,
+  DivineDaySeekerExperiencesSection,
   DivineDayWhoShouldAttendSection,
   DivineDayWhySection
 } from "./components";
@@ -27,11 +29,13 @@ export default function DivineDayPage() {
         />
       </Box>
       <DivineDayWhySection />
-      <DivineDayExperienceSection />
+      {/* <DivineDayExperienceSection /> */}
       <DivineDayAboutSection />
-      <DivineDayEventHighlightSection />
+      {/* <DivineDayEventHighlightSection /> */}
+      <DivineDayPosterSection />
       <DivineDayWhoShouldAttendSection />
-      <DivineDayTestimonialsSection />
+      <DivineDaySeekerExperiencesSection />
+      <DivineDayProgramsSection />
       <DivineDayFaqSection />
     </Box>
   );

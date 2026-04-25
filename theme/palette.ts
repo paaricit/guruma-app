@@ -43,6 +43,7 @@ export const palette: PaletteOptions = {
     pathwayIconAccent: "#ffc19a",
     pathwayCardBorder: "rgba(14, 123, 125, 0.15)",
     /** Sessions FAQ band floor (Figma `1:7953`). */
-    sessionsFaqSurface: "#f7fbfc"
+    sessionsFaqSurface: "#f7fbfc",
+    coral: "#E9967B"
   }
 };

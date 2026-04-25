@@ -36,6 +36,8 @@ declare module "@mui/material/styles" {
       pathwayCardBorder: string;
       /** Sessions — FAQ section wash behind accordions. */
       sessionsFaqSurface: string;
+      /** Marketing / CTA coral accent (e.g. seeker section headings on light surface). */
+      coral: string;
     };
   }
 
@@ -58,6 +60,7 @@ declare module "@mui/material/styles" {
       pathwayIconAccent?: string;
       pathwayCardBorder?: string;
       sessionsFaqSurface?: string;
+      coral?: string;
     };
   }
 }

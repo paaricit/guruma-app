@@ -1,4 +1,4 @@
-import type SvgIcon from "@mui/icons-material/SvgIcon";
+import type SvgIcon from "@mui/material/SvgIcon";
 import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import LocalFloristOutlinedIcon from "@mui/icons-material/LocalFloristOutlined";
@@ -7,14 +7,22 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 
 export const divineDayImages = {
+  /** Poster band BG: pathway / 2026 (left), solid black panel (right) — `divine-day-poster-section-bg.png`. */
+  posterSectionBg: "/images/Divine day page Photos/DD-section-BG.webp",
   heroOverlap: "/images/Divine day page Photos/Divine day Banner Video Operlap.webp",
   comePeace: "/images/Divine day page Photos/Come Experience the Peace You Have Been Seeking.webp",
   givePause: "/images/Divine day page Photos/Give yourself this pause..webp",
   whyEvent: "/images/Divine day page Photos/Why this event.webp",
   whoOverlap: "/images/Divine day page Photos/Who should attend Overlap.webp",
-  posterBand: "/images/Divine day page Photos/Group 1410521824.webp"
+  /** Lotus watermark for “Who should attend” cream band. */
+  whoSectionLotus: "/images/Divine day page Photos/divine-day-who-section-lotus.png",
+  posterBand: "/images/Divine day page Photos/Group 1410521824.webp",
+  experienceSpiralBg: "/images/Divine day page Photos/exp.svg",
+  experienceTopPortrait: "/images/Divine day page Photos/img1.svg",
+  experienceBottomPortrait: "/images/Divine day page Photos/img2.svg"
 } as const;
 
+/** Legacy list — superseded on the module page by `divineDayWhoShouldAttendCopy`; kept for reuse / migration. */
 export const whoShouldAttend = [
   "YOU FEEL MENTALLY OR EMOTIONALLY EXHAUSTED",
   "YOU HAVE BEEN LONGING FOR PEACE",
@@ -22,6 +30,21 @@ export const whoShouldAttend = [
   "YOU ARE SEEKING CLARITY, STRENGTH, OR INNER HEALING",
   "YOU SIMPLY WISH TO SPEND TIME IN A SPIRITUALLY UPLIFTING ENVIRONMENT"
 ] as const;
+
+/** “Who should attend” band — headline, body, CTA, note (matches Figma-style layout). */
+export const divineDayWhoShouldAttendCopy = {
+  headline: "DIVINE DAY IS MORE THAN AN EVENT—IT IS AN EXPERIENCE, A REVELATION, A SACRED HOMECOMING.",
+  bodyLead:
+    "It is a doorway to infinite love. It is a glimpse into the transformation that awaits. It is a trailer to the unlimited happiness that life has in store for you.",
+  bodyEmphasisLines: [
+    "Come, immerse yourself in this ocean of Divine Grace.",
+    "Come, celebrate, elevate, and experience the joy of being truly alive.",
+    "Join us and let your soul shine!"
+  ],
+  note: "No prior meditation experience is needed. All are welcome.",
+  ctaLabel: "Register Free",
+  ctaHref: "/contact"
+} as const;
 
 export const faqItems = [
   { q: "Is the event free?", a: "Yes. Entry is free for this annual gathering." },

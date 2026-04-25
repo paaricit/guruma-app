@@ -92,8 +92,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
       sx={{
         width: "100%",
         maxWidth: "100%",
-        pb: sectionPb,
-        pt: sectionPt
+        pb: sectionPb
       }}
     >
       <Container maxWidth={false} disableGutters sx={{ mx: "auto" }}>
@@ -206,6 +205,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                 >
                   <Button
                     variant="contained"
+                    href={row.primaryCtaHref}
                     sx={{
                       ...programCtaButtonSizing,
                       textTransform: "none",
@@ -222,6 +222,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                   </Button>
                   <Button
                     variant="outlined"
+                    href={row.secondaryCtaHref}
                     sx={{
                       ...programCtaButtonSizing,
                       textTransform: "none",

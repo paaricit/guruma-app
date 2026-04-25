@@ -52,16 +52,25 @@ const seekerTestimonialLocationFontSize = {
   md: unitScale(16.8)
 } as const;
 
+export type SeekerExperiencesSectionSurface = "default" | "plain";
+
 export type SeekerExperiencesSectionProps = {
   videos?: readonly SeekerVideoItem[];
   testimonials?: readonly SeekerTestimonialItem[];
+  /**
+   * `plain`: no background image; coral headings (`guru.coral`); title case via `capitalize`;
+   * testimonial cards use `primary.light` mint wash (Divine Day).
+   */
+  surface?: SeekerExperiencesSectionSurface;
 };
 
 export function SeekerExperiencesSection({
   videos = seekerVideos,
-  testimonials = seekerTestimonials
+  testimonials = seekerTestimonials,
+  surface = "default"
 }: SeekerExperiencesSectionProps) {
   const theme = useTheme();
+  const isPlain = surface === "plain";
   const mdUp = useMediaQuery(theme.breakpoints.up("md"), { defaultMatches: false });
   const visibleCount = mdUp ? 3 : 1;
   const maxSlide = Math.max(0, videos.length - visibleCount);
@@ -86,18 +95,53 @@ export function SeekerExperiencesSection({
 
   const onLight = alpha(theme.palette.common.white, 0.92);
   const onLightMuted = alpha(theme.palette.common.white, 0.9);
+  const plainSublead = alpha(theme.palette.text.primary, 0.68);
+  const headingColor = isPlain ? theme.palette.guru.coral : alpha(theme.palette.common.white, 0.96);
+  const subleadColor = isPlain ? plainSublead : onLightMuted;
+
+  const coral = theme.palette.guru.coral;
+  const carouselNavIconSx = isPlain
+    ? {
+        color: theme.palette.common.white,
+        border: `1px solid ${alpha(coral, 0.55)}`,
+        bgcolor: coral,
+        width: { xs: unitScale(48), md: unitScale(52) },
+        height: { xs: unitScale(48), md: unitScale(52) },
+        "&:hover": { bgcolor: alpha(coral, 0.88) },
+        "&.Mui-disabled": {
+          color: alpha(theme.palette.common.white, 0.55),
+          borderColor: alpha(coral, 0.35),
+          bgcolor: alpha(coral, 0.45)
+        }
+      }
+    : {
+        color: onLight,
+        border: `1px solid ${alpha(theme.palette.common.white, 0.35)}`,
+        bgcolor: alpha(theme.palette.common.black, 0.2),
+        width: { xs: unitScale(48), md: unitScale(52) },
+        height: { xs: unitScale(48), md: unitScale(52) },
+        "&:hover": { bgcolor: alpha(theme.palette.common.black, 0.35) },
+        "&.Mui-disabled": {
+          color: alpha(theme.palette.common.white, 0.35),
+          borderColor: alpha(theme.palette.common.white, 0.12)
+        }
+      };
 
   return (
     <Box
       sx={{
         position: "relative",
-        minHeight: unitScale(1440),
+        minHeight: isPlain ? "auto" : unitScale(1440),
         py: { xs: 8, md: 10 },
-        color: theme.palette.common.white,
-        backgroundImage: `url('${seekerExperiencesSectionBg}')`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "top"
+        color: isPlain ? theme.palette.text.primary : theme.palette.common.white,
+        ...(isPlain
+          ? { bgcolor: theme.palette.background.paper }
+          : {
+              backgroundImage: `url('${seekerExperiencesSectionBg}')`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "top"
+            })
       }}
     >
       <Container sx={{ position: "relative", zIndex: 1, ...pageSectionGutterSx }} maxWidth={'lg'}>
@@ -108,8 +152,9 @@ export function SeekerExperiencesSection({
             fontWeight: 400,
             fontSize: seekerDisplayTitleFontSize,
             lineHeight: { xs: 1.1, md: 1.2 },
-            color: alpha(theme.palette.common.white, 0.96),
+            color: headingColor,
             textAlign: "center",
+            textTransform: isPlain ? "capitalize" : "none",
             mb: { xs: 2.5, md: 3.5 }
           }}
         >
@@ -135,69 +180,69 @@ export function SeekerExperiencesSection({
             }}
           >
             <Box sx={{ width: "100%", maxWidth: "100%", minWidth: 0, overflow: "hidden" }}>
-            <Box
-              sx={{
-                display: "flex",
-                width: `calc(100% * ${videos.length} / ${visibleCount})`,
-                transform: `translateX(calc(-${slideIndex} * 100% / ${videos.length}))`,
-                transition: theme.transitions.create("transform", { duration: 360, easing: theme.transitions.easing.easeOut }),
-                alignItems: "stretch"
-              }}
-            >
-              {videos.map((video) => (
-                <Box
-                  key={video.name}
-                  sx={{
-                    flex: `0 0 calc(100% / ${videos.length})`,
-                    width: "100%",
-                    maxWidth: "100%",
-                    minWidth: 0,
-                    px: { xs: 0.75, md: 1.1 },
-                    boxSizing: "border-box"
-                  }}
-                >
+              <Box
+                sx={{
+                  display: "flex",
+                  width: `calc(100% * ${videos.length} / ${visibleCount})`,
+                  transform: `translateX(calc(-${slideIndex} * 100% / ${videos.length}))`,
+                  transition: theme.transitions.create("transform", { duration: 360, easing: theme.transitions.easing.easeOut }),
+                  alignItems: "stretch"
+                }}
+              >
+                {videos.map((video) => (
                   <Box
-                    component="button"
-                    type="button"
-                    onClick={() => openVideo(video.embedSrc)}
-                    aria-label={`Play video: ${video.name}`}
+                    key={video.name}
                     sx={{
-                      position: "relative",
-                      borderRadius: unitScale(8),
-                      overflow: "hidden",
-                      minHeight: { xs: unitScale(220), md: unitScale(300) },
+                      flex: `0 0 calc(100% / ${videos.length})`,
                       width: "100%",
                       maxWidth: "100%",
-                      height: "100%",
-                      p: 0,
-                      border: "none",
-                      cursor: "pointer",
-                      textAlign: "left",
-                      display: "block",
-                      "&:focus-visible": {
-                        outline: `${unitScale(2)} solid ${theme.palette.common.white}`,
-                        outlineOffset: unitScale(2)
-                      }
+                      minWidth: 0,
+                      px: { xs: 0.75, md: 1.1 },
+                      boxSizing: "border-box"
                     }}
                   >
-                    <Image
-                      alt=""
-                      fill
-                      src={video.image}
-                      sizes={mdUp ? "33vw" : "100vw"}
-                      style={{ objectFit: "cover" }}
-                      aria-hidden
-                    />
                     <Box
+                      component="button"
+                      type="button"
+                      onClick={() => openVideo(video.embedSrc)}
+                      aria-label={`Play video: ${video.name}`}
                       sx={{
-                        position: "absolute",
-                        inset: 0,
-                        background: (t) =>
-                          `linear-gradient(180deg, ${alpha(t.palette.common.black, 0.35)} 0%, transparent 40%, ${alpha(t.palette.common.black, 0.45)} 100%)`,
-                        pointerEvents: "none"
+                        position: "relative",
+                        borderRadius: unitScale(8),
+                        overflow: "hidden",
+                        minHeight: { xs: unitScale(220), md: unitScale(300) },
+                        width: "100%",
+                        maxWidth: "100%",
+                        height: "100%",
+                        p: 0,
+                        border: "none",
+                        cursor: "pointer",
+                        textAlign: "left",
+                        display: "block",
+                        "&:focus-visible": {
+                          outline: `${unitScale(2)} solid ${isPlain ? theme.palette.guru.coral : theme.palette.common.white}`,
+                          outlineOffset: unitScale(2)
+                        }
                       }}
-                    />
-                    {/* <Typography
+                    >
+                      <Image
+                        alt=""
+                        fill
+                        src={video.image}
+                        sizes={mdUp ? "33vw" : "100vw"}
+                        style={{ objectFit: "cover" }}
+                        aria-hidden
+                      />
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          inset: 0,
+                          background: (t) =>
+                            `linear-gradient(180deg, ${alpha(t.palette.common.black, 0.35)} 0%, transparent 40%, ${alpha(t.palette.common.black, 0.45)} 100%)`,
+                          pointerEvents: "none"
+                        }}
+                      />
+                      {/* <Typography
                       sx={{
                         position: "absolute",
                         top: 8,
@@ -211,7 +256,7 @@ export function SeekerExperiencesSection({
                     >
                       {video.name}
                     </Typography> */}
-                    {/* <Box
+                      {/* <Box
                       sx={{
                         position: "absolute",
                         inset: 0,
@@ -237,60 +282,38 @@ export function SeekerExperiencesSection({
                         ▶
                       </Box>
                     </Box> */}
+                    </Box>
                   </Box>
-                </Box>
-              ))}
+                ))}
+              </Box>
             </Box>
-          </Box>
 
-          <Stack
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-            spacing={{ xs: 2, md: 3 }}
-            sx={{ mt: { xs: 0.5, md: 0 }, width: "100%", maxWidth: "100%" }}
-          >
-            <IconButton
-              type="button"
-              aria-label="Previous seeker videos"
-              onClick={() => setSlideIndex((i) => Math.max(0, i - 1))}
-              disabled={slideIndex <= 0}
-              sx={{
-                color: onLight,
-                border: `1px solid ${alpha(theme.palette.common.white, 0.35)}`,
-                bgcolor: alpha(theme.palette.common.black, 0.2),
-                width: { xs: unitScale(48), md: unitScale(52) },
-                height: { xs: unitScale(48), md: unitScale(52) },
-                "&:hover": { bgcolor: alpha(theme.palette.common.black, 0.35) },
-                "&.Mui-disabled": {
-                  color: alpha(theme.palette.common.white, 0.35),
-                  borderColor: alpha(theme.palette.common.white, 0.12)
-                }
-              }}
+            <Stack
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              spacing={{ xs: 2, md: 3 }}
+              sx={{ mt: { xs: 0.5, md: 0 }, width: "100%", maxWidth: "100%" }}
             >
-              <ChevronLeftRoundedIcon sx={{ fontSize: { xs: unitScale(28), md: unitScale(30) } }} />
-            </IconButton>
-            <IconButton
-              type="button"
-              aria-label="Next seeker videos"
-              onClick={() => setSlideIndex((i) => Math.min(maxSlide, i + 1))}
-              disabled={slideIndex >= maxSlide}
-              sx={{
-                color: onLight,
-                border: `1px solid ${alpha(theme.palette.common.white, 0.35)}`,
-                bgcolor: alpha(theme.palette.common.black, 0.2),
-                width: { xs: unitScale(48), md: unitScale(52) },
-                height: { xs: unitScale(48), md: unitScale(52) },
-                "&:hover": { bgcolor: alpha(theme.palette.common.black, 0.35) },
-                "&.Mui-disabled": {
-                  color: alpha(theme.palette.common.white, 0.35),
-                  borderColor: alpha(theme.palette.common.white, 0.12)
-                }
-              }}
-            >
-              <ChevronRightRoundedIcon sx={{ fontSize: { xs: unitScale(28), md: unitScale(30) } }} />
-            </IconButton>
-          </Stack>
+              <IconButton
+                type="button"
+                aria-label="Previous seeker videos"
+                onClick={() => setSlideIndex((i) => Math.max(0, i - 1))}
+                disabled={slideIndex <= 0}
+                sx={carouselNavIconSx}
+              >
+                <ChevronLeftRoundedIcon sx={{ fontSize: { xs: unitScale(28), md: unitScale(30) } }} />
+              </IconButton>
+              <IconButton
+                type="button"
+                aria-label="Next seeker videos"
+                onClick={() => setSlideIndex((i) => Math.min(maxSlide, i + 1))}
+                disabled={slideIndex >= maxSlide}
+                sx={carouselNavIconSx}
+              >
+                <ChevronRightRoundedIcon sx={{ fontSize: { xs: unitScale(28), md: unitScale(30) } }} />
+              </IconButton>
+            </Stack>
           </Box>
         </Box>
 
@@ -354,8 +377,9 @@ export function SeekerExperiencesSection({
             fontWeight: 400,
             fontSize: seekerDisplayTitleFontSize,
             lineHeight: { xs: 1.1, md: 1.2 },
-            color: alpha(theme.palette.common.white, 0.96),
-            textAlign: "center"
+            color: headingColor,
+            textAlign: "center",
+            textTransform: isPlain ? "capitalize" : "none"
           }}
         >
           Hear what our global community has to say
@@ -368,7 +392,7 @@ export function SeekerExperiencesSection({
             fontSize: seekerSubleadFontSize,
             lineHeight: { xs: 1.5, md: 1.45 },
             textAlign: "center",
-            color: onLightMuted,
+            color: subleadColor,
             mx: "auto",
             mt: 2,
             mb: 4,
@@ -395,7 +419,7 @@ export function SeekerExperiencesSection({
                 borderRadius: unitScale(19.2),
                 boxShadow: "none",
                 border: `1px solid ${alpha(theme.palette.text.secondary, 0.15)}`,
-                bgcolor: theme.palette.background.paper,
+                bgcolor: isPlain ? theme.palette.primary.light : theme.palette.background.paper,
                 color: theme.palette.text.primary,
                 position: "relative",
                 overflow: "visible",

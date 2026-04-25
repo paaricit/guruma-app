@@ -11,6 +11,10 @@ export type HomeProgramRow = {
   image: string;
   /** When true, text column aligns to the end on large screens (image visually on the left). */
   imageLeft: boolean;
+  /** When set, primary CTA renders as a link (e.g. Divine Day register). */
+  primaryCtaHref?: string;
+  /** When set, secondary CTA renders as a link. */
+  secondaryCtaHref?: string;
 };
 
 export const homeProgramRows: readonly HomeProgramRow[] = [
