@@ -52,7 +52,9 @@ export function DivineDayAboutSection() {
     <Box
       component="section"
       sx={{
-        py: { xs: unitScale(56), md: unitScale(72) },
+        pt: { xs: unitScale(56), md: unitScale(172) },
+        pb: { xs: unitScale(56), md: unitScale(72) },
+
       }}
     >
       <Container maxWidth={false} sx={{ ...pageSectionGutterSx, position: "relative" }}>

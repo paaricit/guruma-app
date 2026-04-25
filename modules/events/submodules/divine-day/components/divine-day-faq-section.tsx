@@ -41,7 +41,7 @@ export function DivineDayFaqSection() {
         pb: unitScale(70)
       }}
     >
-      <Container maxWidth={sessionsFaqContainerMaxWidth} sx={{ ...pageSectionGutterSx }}>
+      <Container maxWidth={'lg'} sx={{ ...pageSectionGutterSx }}>
         <Typography
           id={FAQ_SECTION_HEADING_ID}
           component="h2"
@@ -163,7 +163,48 @@ export function DivineDayFaqSection() {
             </Accordion>
           ))}
         </Box>
+        <Box
+          sx={{
+            mt: { xs: 4, md: 6 },
+            pt: { xs: 2, md: 3 },
+            position: "relative",
+            zIndex: 1,
+            width: "100%",
+            minWidth: 0
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: { xs: 0.75, sm: 1.25, md: 2 },
+              flexWrap: "nowrap",
+              width: "100%",
+              minWidth: 0
+            }}
+          >
+            <Typography
+              sx={{
+                flex: "0 1 auto",
+                minWidth: 0,
+                color: "#162b53",
+                fontFamily: "var(--font-forum), serif",
+                fontSize: unitScale(70),
+                lineHeight: 1.05,
+                letterSpacing: { xs: "-0.02em", md: 0 },
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                overflow: "hidden"
+              }}
+            >
+              Stay Connected
+            </Typography>
+          </Box>
+        </Box>
       </Container>
+
     </Box>
   );
 }

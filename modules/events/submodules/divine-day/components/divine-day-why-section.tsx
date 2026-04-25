@@ -94,6 +94,8 @@ export function DivineDayWhySection() {
           </Box>
         </Stack>
       </Container>
+      <SectionSoftWaveCap fill="#D1F1F5" height={unitScale(130)} mirror placement="bottom" />
+
     </Box>
   );
 }

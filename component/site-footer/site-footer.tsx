@@ -332,9 +332,10 @@ export default function SiteFooter() {
 
           <Grid
             size={{ xs: 12, lg: 5 }}
-            display={{ xs: "none", lg: "block"}}
+            display={{ xs: "none", lg: "block" }}
             mt={-18}
           >
+
             <FooterContactForm />
           </Grid>
         </Grid>
