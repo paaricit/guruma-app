@@ -1,10 +1,20 @@
 "use client";
 
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import Image from "next/image";
 import Link from "next/link";
-import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
-import { Box, Button, Container, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Dialog,
+  DialogContent,
+  IconButton,
+  Typography
+} from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
+import { useCallback, useState } from "react";
 import { SectionTopArc } from "@/component/section-top-curve";
 import { sessionsDivineDiscoursesContent } from "@/modules/sessions/content/sessions-divine-discourses";
 import { sessionsImages } from "@/modules/sessions/content/sessions-images";
@@ -31,6 +41,76 @@ const divineVideoRadius = {
   md: unitScale(50)
 } as const;
 
+function SessionsDivineDiscoursesVideoDialog({
+  open,
+  embedSrc,
+  onClose
+}: {
+  open: boolean;
+  embedSrc: string | null;
+  onClose: () => void;
+}) {
+  const theme = useTheme();
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="md"
+      fullWidth
+      aria-label="Divine Discourses video"
+      slotProps={{
+        paper: {
+          sx: { bgcolor: theme.palette.grey[900], maxHeight: "92vh" }
+        },
+        backdrop: {
+          sx: {
+            bgcolor: alpha(theme.palette.common.black, 0.78)
+          }
+        }
+      }}
+    >
+      <DialogContent sx={{ p: 0, position: "relative" }}>
+        <IconButton
+          type="button"
+          aria-label="Close video"
+          onClick={onClose}
+          sx={{
+            position: "absolute",
+            top: unitScale(8),
+            right: unitScale(8),
+            zIndex: 2,
+            color: theme.palette.common.white,
+            bgcolor: alpha(theme.palette.common.black, 0.5),
+            "&:hover": { bgcolor: alpha(theme.palette.common.black, 0.7) }
+          }}
+        >
+          <CloseRoundedIcon />
+        </IconButton>
+        {embedSrc ? (
+          <Box sx={{ position: "relative", width: "100%", pt: "56.25%" }}>
+            <Box
+              component="iframe"
+              key={embedSrc}
+              title="YouTube video player"
+              src={embedSrc}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+              sx={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                border: "none"
+              }}
+            />
+          </Box>
+        ) : null}
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 export function SessionsDivineDiscoursesSection() {
   const theme = useTheme();
   const thumbSrc = encodePublicPath(sessionsImages.videoThumb);
@@ -38,6 +118,18 @@ export function SessionsDivineDiscoursesSection() {
   const bandTop = theme.palette.primary.light;
   const bodyInk = alpha(theme.palette.text.primary, 0.82);
   const cardShadow = alpha(theme.palette.primary.dark, 0.12);
+  const [videoOpen, setVideoOpen] = useState(false);
+  const [embedSrc, setEmbedSrc] = useState<string | null>(null);
+
+  const openVideo = useCallback(() => {
+    setEmbedSrc(sessionsDivineDiscoursesContent.videoEmbedSrc);
+    setVideoOpen(true);
+  }, []);
+
+  const closeVideo = useCallback(() => {
+    setVideoOpen(false);
+    setEmbedSrc(null);
+  }, []);
 
   return (
     <Box
@@ -155,7 +247,9 @@ export function SessionsDivineDiscoursesSection() {
               }}
             >
               <IconButton
-                aria-label="Play video"
+                type="button"
+                aria-label="Play Divine Discourses video"
+                onClick={openVideo}
                 sx={{
                   width: sessionsFluidPlayButton,
                   height: sessionsFluidPlayButton,
@@ -170,6 +264,8 @@ export function SessionsDivineDiscoursesSection() {
             </Box>
           </Box>
         </Box>
+
+        <SessionsDivineDiscoursesVideoDialog open={videoOpen} embedSrc={embedSrc} onClose={closeVideo} />
       </Container>
     </Box>
   );

@@ -26,7 +26,7 @@ export default function DivineDayPage() {
       <DivineDayWhoShouldAttendSection />
       <DivineDaySeekerExperiencesSection />
       <DivineDayProgramsSection />
-      <DivineDayFaqSection />
+      {/* <DivineDayFaqSection /> */}
     </Box>
   );
 }

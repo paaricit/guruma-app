@@ -5,7 +5,7 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
 import { pageContainerMaxWidth, pageSectionGutterSx } from "@/theme/page-section";
 import { unitScale } from "@/utils/unit-scale";
-import { divineDayImages } from "../content/divine-day-content";
+import { divineDayImages, divineDayRegisterWhatsappHref } from "../content/divine-day-content";
 
 const heroBackgroundFallbackSrc = "/images/footer-background.png";
 const heroBackgroundVideoSrc = `/images/${encodeURIComponent("Blue Abstract Welcome Background Intro Video.mp4")}`;
@@ -82,8 +82,26 @@ export function DivineDayHeroSection() {
             An Evening of Meditation, Wisdom, and Inner Calm with Guru Maa Shubha Didi
           </Typography>
           <Stack direction={{ xs: "column", sm: "row" }} spacing={unitScale(12)} sx={{ mt: { xs: unitScale(24), md: unitScale(40) } }}>
-            <Button href="/contact" variant="contained" sx={{ minHeight: { xs: unitScale(44), md: unitScale(52) }, px: { xs: unitScale(20), md: unitScale(28) }, borderRadius: unitScale(ctaRadius), bgcolor: "#e9967b", color: "#1a120c", fontWeight: 700, fontSize: { xs: unitScale(16), md: unitScale(18) }, textTransform: "none" }}>Register Free</Button>
-            <Button href="/contact" variant="outlined" sx={{ minHeight: { xs: unitScale(44), md: unitScale(52) }, px: { xs: unitScale(20), md: unitScale(28) }, borderRadius: unitScale(ctaRadius), borderColor: alpha(theme.palette.common.white, 0.85), color: "#fff", fontWeight: 600, fontSize: { xs: unitScale(16), md: unitScale(18) }, textTransform: "none" }}>Reserve My Spot</Button>
+            <Button
+              component="a"
+              href={divineDayRegisterWhatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="contained"
+              sx={{
+                minHeight: { xs: unitScale(44), md: unitScale(52) },
+                px: { xs: unitScale(20), md: unitScale(28) },
+                borderRadius: unitScale(ctaRadius),
+                bgcolor: "#e9967b",
+                color: "#1a120c",
+                fontWeight: 700,
+                fontSize: { xs: unitScale(16), md: unitScale(18) },
+                textTransform: "none"
+              }}
+            >
+              Register Free
+            </Button>
+            {/* <Button href="/contact" variant="outlined" sx={{ minHeight: { xs: unitScale(44), md: unitScale(52) }, px: { xs: unitScale(20), md: unitScale(28) }, borderRadius: unitScale(ctaRadius), borderColor: alpha(theme.palette.common.white, 0.85), color: "#fff", fontWeight: 600, fontSize: { xs: unitScale(16), md: unitScale(18) }, textTransform: "none" }}>Reserve My Spot</Button> */}
           </Stack>
         </Box>
       </Container>

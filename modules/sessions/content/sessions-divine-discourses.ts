@@ -5,5 +5,7 @@ export const sessionsDivineDiscoursesContent = {
   primaryCta: {
     label: "Connect with Us",
     href: "/contact" as const
-  }
+  },
+  /** Preview tile opens this YouTube embed in a dialog */
+  videoEmbedSrc: "https://www.youtube.com/embed/lQxvJ4V1hvQ?si=qU9XrJs_Yx3ds0FR&autoplay=1"
 } as const;

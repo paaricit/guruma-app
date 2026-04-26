@@ -136,7 +136,10 @@ export function DivineDayWhoShouldAttendSection() {
 
             <Box>
               <Button
+                component="a"
                 href={copy.ctaHref}
+                target="_blank"
+                rel="noopener noreferrer"
                 variant="contained"
                 sx={(theme) => ({
                   mt: { xs: unitScale(4), md: unitScale(8) },

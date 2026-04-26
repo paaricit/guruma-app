@@ -11,6 +11,8 @@ export const spiritualRetreatsOverviewContent: ProgramMintOverviewContent = {
   smallLotusIcon: `${deco}/small-lotus-icon.svg`,
   whatToExpectIcon: `${deco}/what-to-expect.svg`,
   introHeading: "Join Us for an Immersive Journey",
+  introSectionVideoEmbedSrc:
+    "https://www.youtube.com/embed/fgAk9dqQJgs?si=ZhC7EwDUsa7_8vIb&autoplay=1",
   introBody:
     "Where you truly transform from within. A tired, overworked mind leads to stress, anxiety, and burnout. This is why a spiritual retreat is essential. It does not just offer rest - it shifts your entire experience of life. Through deep inner work, you return home as a completely renewed version of yourself.",
   primaryCtaLabel: "Connect with Us",

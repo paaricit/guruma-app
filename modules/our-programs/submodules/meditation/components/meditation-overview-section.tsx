@@ -1,12 +1,18 @@
 "use client";
 
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { alpha } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
+import { useCallback, useState } from "react";
 import { SectionSoftWaveCap } from "@/component/section-top-curve";
 import { meditationOverviewContent } from "@/modules/our-programs/content/meditation-overview";
 import { pageSectionGutterSx } from "@/theme/page-section";
@@ -15,9 +21,96 @@ import { unitScale } from "@/utils/unit-scale";
 
 const cardHeadingFontSize = unitScale(24);
 const cardBodyFontSize = unitScale(20);
+const introPlayButtonSize = unitScale(72);
+const introPlayIconSize = unitScale(44);
+
+function MeditationIntroVideoDialog({
+  open,
+  embedSrc,
+  onClose
+}: {
+  open: boolean;
+  embedSrc: string | null;
+  onClose: () => void;
+}) {
+  const theme = useTheme();
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="md"
+      fullWidth
+      aria-label="Meditation overview video"
+      slotProps={{
+        paper: {
+          sx: { bgcolor: theme.palette.grey[900], maxHeight: "92vh" }
+        },
+        backdrop: {
+          sx: {
+            bgcolor: alpha(theme.palette.common.black, 0.78)
+          }
+        }
+      }}
+    >
+      <DialogContent sx={{ p: 0, position: "relative" }}>
+        <IconButton
+          type="button"
+          aria-label="Close video"
+          onClick={onClose}
+          sx={{
+            position: "absolute",
+            top: unitScale(8),
+            right: unitScale(8),
+            zIndex: 2,
+            color: theme.palette.common.white,
+            bgcolor: alpha(theme.palette.common.black, 0.5),
+            "&:hover": { bgcolor: alpha(theme.palette.common.black, 0.7) }
+          }}
+        >
+          <CloseRoundedIcon />
+        </IconButton>
+        {embedSrc ? (
+          <Box sx={{ position: "relative", width: "100%", pt: "56.25%" }}>
+            <Box
+              component="iframe"
+              key={embedSrc}
+              title="YouTube video player"
+              src={embedSrc}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+              sx={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                border: "none"
+              }}
+            />
+          </Box>
+        ) : null}
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 export function MeditationOverviewSection() {
+  const theme = useTheme();
   const c = meditationOverviewContent;
+  const [introVideoOpen, setIntroVideoOpen] = useState(false);
+  const [introEmbedSrc, setIntroEmbedSrc] = useState<string | null>(null);
+  const introVideoSrc = c.introSectionVideoEmbedSrc;
+
+  const openIntroVideo = useCallback(() => {
+    if (!introVideoSrc) return;
+    setIntroEmbedSrc(introVideoSrc);
+    setIntroVideoOpen(true);
+  }, [introVideoSrc]);
+
+  const closeIntroVideo = useCallback(() => {
+    setIntroVideoOpen(false);
+    setIntroEmbedSrc(null);
+  }, []);
   const lotusBg = encodePublicPath(c.lotusBg);
   const spiralBg = encodePublicPath(c.spiralBg);
   const smallLotusIcon = encodePublicPath(c.smallLotusIcon);
@@ -162,6 +255,34 @@ export function MeditationOverviewSection() {
                 sizes="(max-width: 900px) 100vw, 45vw"
                 style={{ objectFit: "cover" }}
               />
+              {introVideoSrc ? (
+                <Box
+                  sx={{
+                    position: "absolute",
+                    inset: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: `linear-gradient(180deg, ${alpha(theme.palette.common.black, 0.08)} 0%, ${alpha(theme.palette.common.black, 0.28)} 100%)`
+                  }}
+                >
+                  <IconButton
+                    type="button"
+                    aria-label="Play meditation overview video"
+                    onClick={openIntroVideo}
+                    sx={{
+                      width: introPlayButtonSize,
+                      height: introPlayButtonSize,
+                      bgcolor: alpha(theme.palette.common.white, 0.9),
+                      color: theme.palette.primary.dark,
+                      borderRadius: "50%",
+                      "&:hover": { bgcolor: alpha(theme.palette.common.white, 0.98) }
+                    }}
+                  >
+                    <PlayArrowRoundedIcon sx={{ fontSize: introPlayIconSize }} />
+                  </IconButton>
+                </Box>
+              ) : null}
             </Box>
           </Box>
 
@@ -259,6 +380,14 @@ export function MeditationOverviewSection() {
       <Box sx={{ position: "absolute", top: "108%", left: 0, right: 0, zIndex: 1 }}>
         <SectionSoftWaveCap fill="#D1F1F5" height={unitScale(130)} mirror placement="bottom" />
       </Box>
+
+      {introVideoSrc ? (
+        <MeditationIntroVideoDialog
+          open={introVideoOpen}
+          embedSrc={introEmbedSrc}
+          onClose={closeIntroVideo}
+        />
+      ) : null}
     </Box>
   );
 }

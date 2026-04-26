@@ -67,9 +67,9 @@ export function OurProgramCard({ program }: OurProgramCardProps) {
       </Box>
 
       <Stack spacing={unitScale(12)} sx={{ px: unitScale(40), py: unitScale(40) }}>
-        <Typography sx={{ textTransform: "uppercase", letterSpacing: "0.08em", color: "guru.coral", fontSize: unitScale(16), fontWeight: 700 }}>
+        {/* <Typography sx={{ textTransform: "uppercase", letterSpacing: "0.08em", color: "guru.coral", fontSize: unitScale(16), fontWeight: 700 }}>
           {program.whoItsFor}
-        </Typography>
+        </Typography> */}
         <Typography sx={{ color: "text.secondary", fontSize: unitScale(19), lineHeight: 1.6, minHeight: { md: unitScale(110) } }}>
           {program.description}
         </Typography>

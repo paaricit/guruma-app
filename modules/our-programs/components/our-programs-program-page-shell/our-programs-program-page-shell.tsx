@@ -22,6 +22,10 @@ export type OurProgramsProgramPageShellProps = {
   photoGallerySlides?: readonly string[];
   photoGalleryHeading?: string;
   positionY?: "top" | "bottom";
+  /** When true, skips `OurProgramsPhotoGallerySection` (e.g. marriage counselling route). */
+  omitPhotoGallery?: boolean;
+  /** When true, hides “How to Enrol” in `OurProgramsSeekerExperiencesSection` (e.g. meditation route). */
+  omitSeekerHowToEnrol?: boolean;
 };
 
 /**
@@ -36,7 +40,9 @@ export function OurProgramsProgramPageShell(props: OurProgramsProgramPageShellPr
     seekerTestimonialsHeading,
     seekerTestimonialsDescription,
     photoGallerySlides,
-    photoGalleryHeading
+    photoGalleryHeading,
+    omitPhotoGallery = false,
+    omitSeekerHowToEnrol = false
   } = props;
 
   return (
@@ -50,12 +56,15 @@ export function OurProgramsProgramPageShell(props: OurProgramsProgramPageShellPr
         </Box>
       ) : null}
 
-      <OurProgramsPhotoGallerySection slides={photoGallerySlides} heading={photoGalleryHeading} />
+      {!omitPhotoGallery ? (
+        <OurProgramsPhotoGallerySection slides={photoGallerySlides} heading={photoGalleryHeading} />
+      ) : null}
 
       <OurProgramsSeekerExperiencesSection
         videoStripHeading={seekerVideoStripHeading}
         testimonialsBlockHeading={seekerTestimonialsHeading}
         testimonialsDescription={seekerTestimonialsDescription}
+        omitHowToEnrol={omitSeekerHowToEnrol}
       />
     </Box>
   );

@@ -39,5 +39,5 @@ export const personalCounsellingOverviewContent: ProgramMintOverviewContent = {
     "these sessions are designed to work miracles for you."
   ],
   isThisForYouClosing: "You deserve abundance, not pain.",
-  secondaryCtaLabel: "Schedule Your Session (Online or Offline)"
+  secondaryCtaLabel: "Get Connected"
 };

@@ -10,6 +10,8 @@ export type SaptSadhanaStackCarouselProps = {
   slides: readonly string[];
   activeIndex: number;
   onStep: (delta: 1 | -1) => void;
+  /** Passed to `next/image` `style.objectPosition` with `objectFit: "cover"`. */
+  coverImageObjectPosition?: string;
 };
 
 const sidePanelBaseSx = {
@@ -45,7 +47,14 @@ const sidePanelBaseSx = {
  * Cover-flow style carousel: large center card, smaller faded side previews (3D tilt).
  * Matches common “stacked / cover flow” reference layouts; keeps wheel + keyboard from before.
  */
-export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSadhanaStackCarouselProps) {
+const defaultCoverImageObjectPosition = "center top";
+
+export function SaptSadhanaStackCarousel({
+  slides,
+  activeIndex,
+  onStep,
+  coverImageObjectPosition = defaultCoverImageObjectPosition
+}: SaptSadhanaStackCarouselProps) {
   const galleryRef = useRef<HTMLDivElement>(null);
   const centerRef = useRef<HTMLDivElement>(null);
   const skipCenterIntro = useRef(true);
@@ -163,7 +172,7 @@ export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSa
             fill
             src={slides[prevIdx]}
             sizes="220px"
-            style={{ objectFit: "cover", objectPosition: "center top" }}
+            style={{ objectFit: "cover", objectPosition: coverImageObjectPosition }}
             aria-hidden
           />
         </Box>
@@ -195,7 +204,7 @@ export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSa
             fill
             src={slides[activeIndex]}
             sizes="(max-width: 600px) 92vw, 720px"
-            style={{ objectFit: "cover", objectPosition: "center top" }}
+            style={{ objectFit: "cover", objectPosition: coverImageObjectPosition }}
             priority={activeIndex === 0}
           />
         </Box>
@@ -220,7 +229,7 @@ export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSa
             fill
             src={slides[nextIdx]}
             sizes="220px"
-            style={{ objectFit: "cover", objectPosition: "center top" }}
+            style={{ objectFit: "cover", objectPosition: coverImageObjectPosition }}
             aria-hidden
           />
         </Box>

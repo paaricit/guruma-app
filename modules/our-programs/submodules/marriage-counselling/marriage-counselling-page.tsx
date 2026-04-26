@@ -6,7 +6,7 @@ import { MarriageCounsellingOverviewSection } from "./components";
 
 export default function OurProgramsMarriageCounsellingPage() {
   return (
-    <OurProgramsProgramPageShell hero={marriageCounsellingProgramHero}>
+    <OurProgramsProgramPageShell hero={marriageCounsellingProgramHero} omitPhotoGallery>
       <MarriageCounsellingOverviewSection />
     </OurProgramsProgramPageShell>
   );

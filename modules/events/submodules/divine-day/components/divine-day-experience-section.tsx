@@ -1,7 +1,7 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import { pageContainerMaxWidth, pageSectionGutterSx } from "@/theme/page-section";
 import { unitScale } from "@/utils/unit-scale";
-import { experiences } from "../content/divine-day-content";
+import { divineDayRegisterWhatsappHref, experiences } from "../content/divine-day-content";
 
 const peachTitleSx = {
   fontFamily: "var(--font-forum), serif",
@@ -27,7 +27,23 @@ export function DivineDayExperienceSection() {
             </Box>
           ))}
         </Box>
-        <Button href="/contact" variant="contained" sx={{ minHeight: { xs: unitScale(44), md: unitScale(52) }, borderRadius: unitScale(12), bgcolor: "#0a1a32", color: "#fff", fontWeight: 700, px: { xs: unitScale(20), md: unitScale(24) }, py: { xs: unitScale(10), md: unitScale(12) }, fontSize: { xs: unitScale(16), md: unitScale(18) } }}>
+        <Button
+          component="a"
+          href={divineDayRegisterWhatsappHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="contained"
+          sx={{
+            minHeight: { xs: unitScale(44), md: unitScale(52) },
+            borderRadius: unitScale(12),
+            bgcolor: "#0a1a32",
+            color: "#fff",
+            fontWeight: 700,
+            px: { xs: unitScale(20), md: unitScale(24) },
+            py: { xs: unitScale(10), md: unitScale(12) },
+            fontSize: { xs: unitScale(16), md: unitScale(18) }
+          }}
+        >
           Register Free
         </Button>
       </Container>

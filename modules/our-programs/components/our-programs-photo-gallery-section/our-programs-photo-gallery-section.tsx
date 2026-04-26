@@ -80,7 +80,12 @@ export function OurProgramsPhotoGallerySection({
         </Typography>
 
         <Box sx={{ mt: 3.5 }}>
-          <SaptSadhanaStackCarousel slides={slides} activeIndex={activeIndex} onStep={onStep} />
+          <SaptSadhanaStackCarousel
+            slides={slides}
+            activeIndex={activeIndex}
+            onStep={onStep}
+            coverImageObjectPosition="center center"
+          />
         </Box>
 
         <SaptSadhanaCarouselControls

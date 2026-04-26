@@ -6,6 +6,10 @@ import SelfImprovementOutlinedIcon from "@mui/icons-material/SelfImprovementOutl
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 
+/** WhatsApp deep link — Divine Day registration (“Register Free” CTAs). */
+export const divineDayRegisterWhatsappHref =
+  "https://wa.me/15559167583?text=Hari+Aum+I+want+a+pass+for+Divine+Day+2026" as const;
+
 export const divineDayImages = {
   /** Poster band BG: pathway / 2026 (left), solid black panel (right) — `divine-day-poster-section-bg.png`. */
   posterSectionBg: "/images/Divine day page Photos/DD-section-BG.webp",
@@ -46,7 +50,7 @@ export const divineDayWhoShouldAttendCopy = {
   ],
   note: "No prior meditation experience is needed. All are welcome.",
   ctaLabel: "Register Free",
-  ctaHref: "/contact"
+  ctaHref: divineDayRegisterWhatsappHref
 } as const;
 
 export const faqItems = [

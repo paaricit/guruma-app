@@ -15,6 +15,8 @@ export type ProgramMintOverviewContent = {
   whatToExpectIcon: string;
   introHeading: string;
   introBody: string;
+  /** When set, intro hero image shows a play control that opens this YouTube embed in a dialog. */
+  introSectionVideoEmbedSrc?: string;
   primaryCtaLabel: string;
   whatToExpectRows: readonly ProgramMintOverviewExpectRow[];
   isThisForYouRows: readonly string[];

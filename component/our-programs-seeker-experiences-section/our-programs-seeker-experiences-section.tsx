@@ -21,7 +21,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { alpha, useTheme, type SxProps, type Theme } from "@mui/material/styles";
 import Image from "next/image";
 import { useEffect, useId, useState } from "react";
-import { SectionTopArc } from "@/component/section-top-curve";
+import { SECTION_TOP_ARC_HEIGHT, SectionTopArc } from "@/component/section-top-curve";
 import {
   ourProgramsSeekerExperiencesSectionBg,
   ourProgramsSeekerTestimonialCornerIcon,
@@ -67,7 +67,11 @@ export type OurProgramsSeekerExperiencesSectionProps = {
   videoStripHeading?: string;
   testimonialsBlockHeading?: string;
   testimonialsDescription?: string;
+  /** When true, hides the “How to Enrol” block (e.g. Meditation program page). */
+  omitHowToEnrol?: boolean;
 };
+
+const howToEnrolSectionDomId = "our-programs-how-to-enrol";
 
 function ProgramsSeekerVideoCarousel({
   videos,
@@ -399,12 +403,12 @@ const DEFAULT_VIDEO_HEADING = "Experiences from Seekers";
 export function OurProgramsSeekerExperiencesSection({
   videos = ourProgramsSeekerVideos,
   surface = "default",
-  videoStripHeading = DEFAULT_VIDEO_HEADING
+  videoStripHeading = DEFAULT_VIDEO_HEADING,
+  omitHowToEnrol = false
 }: OurProgramsSeekerExperiencesSectionProps) {
   const theme = useTheme();
   const isPlain = surface === "plain";
   const videoHeadingId = useId();
-  const testimonialsHeadingId = useId();
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [activeEmbedSrc, setActiveEmbedSrc] = useState<string | null>(null);
@@ -413,6 +417,8 @@ export function OurProgramsSeekerExperiencesSection({
   const headingColor = isPlain ? theme.palette.guru.coral : alpha(theme.palette.common.white, 0.96);
 
   const coral = theme.palette.guru.coral;
+  /** Without the tall default `minHeight`, the bottom mint arc would overlap the video strip. */
+  const reserveBottomForArc = isPlain || omitHowToEnrol;
   const carouselNavIconSx = isPlain
     ? {
       color: theme.palette.common.white,
@@ -459,8 +465,14 @@ export function OurProgramsSeekerExperiencesSection({
         overflow: "visible",
         width: isPlain ? 1 : undefined,
         maxWidth: isPlain ? "100%" : undefined,
-        minHeight: isPlain ? "auto" : unitScale(1440),
-        py: { xs: 8, md: 10 },
+        minHeight: isPlain || omitHowToEnrol ? "auto" : unitScale(1440),
+        pt: omitHowToEnrol ? { xs: 7, md: 8 } : { xs: 8, md: 10 },
+        pb: reserveBottomForArc
+          ? {
+              xs: `calc(${SECTION_TOP_ARC_HEIGHT} + ${unitScale(50)} + ${unitScale(28)})`,
+              md: `calc(${SECTION_TOP_ARC_HEIGHT} + ${unitScale(50)} + ${unitScale(36)})`
+            }
+          : { xs: 8, md: 10 },
         color: isPlain ? theme.palette.text.primary : theme.palette.common.white,
         ...(isPlain
           ? {
@@ -479,117 +491,119 @@ export function OurProgramsSeekerExperiencesSection({
 
       <Container sx={{ position: "relative", zIndex: 1, ...pageSectionGutterSx }} maxWidth="lg">
 
-        <Box aria-labelledby={testimonialsHeadingId} sx={{ mt: { xs: 7, md: 0 }, pb: 4 }}>
-          <Typography
-            id={testimonialsHeadingId}
-            component="h3"
-            sx={{
-              fontFamily: 'var(--font-forum), serif',
-              fontWeight: 400,
-              fontSize: { xs: unitScale(48), md: unitScale(70) },
-              lineHeight: { xs: 1.1, md: 1.2 },
-              color: alpha(theme.palette.common.white, 0.96),
-              textAlign: "center",
-              textTransform: "none",
-              mt: 0
-            }}
-          >
-            How to Enrol
-          </Typography>
-          <Typography
-            component="p"
-            sx={{
-              fontFamily: 'var(--font-inter), system-ui, sans-serif',
-              fontWeight: 400,
-              fontSize: { xs: unitScale(20), md: unitScale(24) },
-              lineHeight: { xs: 1.5, md: 1.45 },
-              textAlign: "center",
-              color: alpha(theme.palette.common.white, 0.9),
-              mx: "auto",
-              mt: 1.5,
-              mb: { xs: 3, md: 4.5 }
-            }}
-          >
-            Begin your transformation journey in three simple steps
-          </Typography>
+        {!omitHowToEnrol ? (
+          <Box aria-labelledby={howToEnrolSectionDomId} sx={{ mt: { xs: 7, md: 0 }, pb: 4 }}>
+            <Typography
+              id={howToEnrolSectionDomId}
+              component="h3"
+              sx={{
+                fontFamily: 'var(--font-forum), serif',
+                fontWeight: 400,
+                fontSize: { xs: unitScale(48), md: unitScale(70) },
+                lineHeight: { xs: 1.1, md: 1.2 },
+                color: alpha(theme.palette.common.white, 0.96),
+                textAlign: "center",
+                textTransform: "none",
+                mt: 0
+              }}
+            >
+              How to Enrol
+            </Typography>
+            <Typography
+              component="p"
+              sx={{
+                fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                fontWeight: 400,
+                fontSize: { xs: unitScale(20), md: unitScale(24) },
+                lineHeight: { xs: 1.5, md: 1.45 },
+                textAlign: "center",
+                color: alpha(theme.palette.common.white, 0.9),
+                mx: "auto",
+                mt: 1.5,
+                mb: { xs: 3, md: 4.5 }
+              }}
+            >
+              Begin your transformation journey in three simple steps
+            </Typography>
 
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: { xs: "1fr", md: "repeat(3, minmax(0, 1fr))" },
-              gap: { xs: 2, md: 2.5 }
-            }}
-          >
-            {[
-              {
-                number: "1",
-                title: "Choose Your Program",
-                body: "Review the programs above and select the one that resonates with your needs and goals."
-              },
-              {
-                number: "2",
-                title: "Submit Your Enquiry",
-                body: "Fill out the form below or contact us directly via WhatsApp or phone for personalized guidance."
-              },
-              {
-                number: "3",
-                title: "Begin Your Journey",
-                body: "We'll schedule an initial consultation to understand your needs and create a personalized plan."
-              }
-            ].map((step) => (
-              <Card
-                key={step.number}
-                sx={{
-                  borderRadius: unitScale(18),
-                  p: { xs: 2.5, md: 3 },
-                  bgcolor: alpha(theme.palette.common.white, 0.98),
-                  boxShadow: `0 ${unitScale(10)} ${unitScale(24)} ${alpha(theme.palette.common.black, 0.2)}`
-                }}
-              >
-                <Box
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: { xs: "1fr", md: "repeat(3, minmax(0, 1fr))" },
+                gap: { xs: 2, md: 2.5 }
+              }}
+            >
+              {[
+                {
+                  number: "1",
+                  title: "Choose Your Program",
+                  body: "Review the programs above and select the one that resonates with your needs and goals."
+                },
+                {
+                  number: "2",
+                  title: "Submit Your Enquiry",
+                  body: "Fill out the form below or contact us directly via WhatsApp or phone for personalized guidance."
+                },
+                {
+                  number: "3",
+                  title: "Begin Your Journey",
+                  body: "We'll schedule an initial consultation to understand your needs and create a personalized plan."
+                }
+              ].map((step) => (
+                <Card
+                  key={step.number}
                   sx={{
-                    width: unitScale(64),
-                    height: unitScale(64),
-                    borderRadius: "50%",
-                    bgcolor: "#E89A83",
-                    color: theme.palette.common.white,
-                    display: "grid",
-                    placeItems: "center",
-                    fontFamily: 'var(--font-inter), system-ui, sans-serif',
-                    fontWeight: 700,
-                    fontSize: unitScale(34),
-                    mb: 2
+                    borderRadius: unitScale(18),
+                    p: { xs: 2.5, md: 3 },
+                    bgcolor: alpha(theme.palette.common.white, 0.98),
+                    boxShadow: `0 ${unitScale(10)} ${unitScale(24)} ${alpha(theme.palette.common.black, 0.2)}`
                   }}
                 >
-                  {step.number}
-                </Box>
-                <Typography
-                  sx={{
-                    fontFamily: 'var(--font-inter), system-ui, sans-serif',
-                    fontWeight: 700,
-                    fontSize: unitScale(27),
-                    color: "#2D4A53",
-                    lineHeight: 1.25
-                  }}
-                >
-                  {step.title}
-                </Typography>
-                <Typography
-                  sx={{
-                    mt: 1.3,
-                    fontFamily: 'var(--font-inter), system-ui, sans-serif',
-                    fontWeight: 400,
-                    fontSize: unitScale(18),
-                    lineHeight: 1.5,
-                    color: alpha("#2D4A53", 0.9)
-                  }}
-                >
-                  {step.body}
-                </Typography>
-              </Card>
-            ))}
+                  <Box
+                    sx={{
+                      width: unitScale(64),
+                      height: unitScale(64),
+                      borderRadius: "50%",
+                      bgcolor: "#E89A83",
+                      color: theme.palette.common.white,
+                      display: "grid",
+                      placeItems: "center",
+                      fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                      fontWeight: 700,
+                      fontSize: unitScale(34),
+                      mb: 2
+                    }}
+                  >
+                    {step.number}
+                  </Box>
+                  <Typography
+                    sx={{
+                      fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                      fontWeight: 700,
+                      fontSize: unitScale(27),
+                      color: "#2D4A53",
+                      lineHeight: 1.25
+                    }}
+                  >
+                    {step.title}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      mt: 1.3,
+                      fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                      fontWeight: 400,
+                      fontSize: unitScale(18),
+                      lineHeight: 1.5,
+                      color: alpha("#2D4A53", 0.9)
+                    }}
+                  >
+                    {step.body}
+                  </Typography>
+                </Card>
+              ))}
+            </Box>
           </Box>
-        </Box>
+        ) : null}
 
         <Typography
           id={videoHeadingId}
@@ -603,7 +617,7 @@ export function OurProgramsSeekerExperiencesSection({
             textAlign: "center",
             textTransform: isPlain ? "capitalize" : "none",
             mb: { xs: 2.5, md: 3.5 },
-            mt: { xs: 7, md: 10 }
+            mt: omitHowToEnrol ? { xs: 3, md: 4 } : { xs: 7, md: 10 }
           }}
         >
           {videoStripHeading}

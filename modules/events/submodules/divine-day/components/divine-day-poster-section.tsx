@@ -278,7 +278,10 @@ export function DivineDayPosterSection() {
                 sx={{ width: "100%" }}
               >
                 <Button
+                  component="a"
                   href={c.primaryCta.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   variant="contained"
                   sx={{
                     ...pillSizing,
@@ -316,7 +319,10 @@ export function DivineDayPosterSection() {
               sx={{ width: "100%", display: { xs: "flex", md: "none" } }}
             >
               <Button
+                component="a"
                 href={c.primaryCta.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 variant="contained"
                 sx={{
                   ...pillSizing,

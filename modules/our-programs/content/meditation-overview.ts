@@ -11,6 +11,8 @@ export const meditationOverviewContent: ProgramMintOverviewContent = {
   smallLotusIcon: `${deco}/small-lotus-icon.svg`,
   whatToExpectIcon: `${deco}/what-to-expect.svg`,
   introHeading: "Unveil Your Soul's Boundless Treasure",
+  introSectionVideoEmbedSrc:
+    "https://www.youtube.com/embed/Pe6oEMTnia8?si=FmVqDxoShFw2x6Td&autoplay=1",
   introBody:
     "Our soul's riches are often shrouded by layers of karmic dust accumulated over lifetimes, leaving us vulnerable to life's challenges. Through guided practice, Guru Maa Shubha Didi helps you identify and purify these layers. By unlocking the eternal wealth of steadiness, intuitive wisdom, and pure love, you move toward your ultimate calling: Self-Realization.",
   primaryCtaLabel: "Connect with Us",
