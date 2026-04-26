@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * @deprecated `/sapt-sadhana` is implemented in `modules/sapt-sadhana` + `app/sapt-sadhana/page.tsx`.
+ * This file is retained only as a migration reference; do not wire new routes to it.
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";

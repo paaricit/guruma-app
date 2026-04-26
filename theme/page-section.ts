@@ -21,6 +21,10 @@ const palettePaper = (palette.background as { paper?: string } | undefined)?.pap
 export const sessionsSeekerTestimonialsFaqBandGradient =
   `linear-gradient(180deg, ${paletteMint} 0%, ${palettePaper} 100%)` as const;
 
+/** `/sapt-sadhana` testimonials band — white → warm paper → mint (design spec). */
+export const saptSadhanaTestimonialsBandGradient =
+  "linear-gradient(180deg, #FFFFFF 17.77%, #F2F1ED 46.54%, #D1F1F5 75.31%)" as const;
+
 /**
  * Our Programs internal programme hero — scrim over the photo (clear top → deep navy at bottom).
  */
