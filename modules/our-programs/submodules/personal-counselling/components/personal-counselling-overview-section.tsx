@@ -35,7 +35,9 @@ export function PersonalCounsellingOverviewSection() {
         background: "linear-gradient(180deg, #F3F3EF 0%, #D1F1F5 100%)"
       }}
     >
-      <SectionSoftWaveCap fill="#F3F3EF" height={unitScale(130)} bottom="100%" />
+      <Box aria-hidden sx={{ display: { xs: "none", lg: "block" }, lineHeight: 0 }}>
+        <SectionSoftWaveCap fill="#F3F3EF" height={unitScale(130)} bottom="100%" />
+      </Box>
 
       <Box
         aria-hidden
@@ -171,7 +173,8 @@ export function PersonalCounsellingOverviewSection() {
                 display: "grid",
                 gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
                 gap: { xs: 2.25, md: 3 },
-                mt: { xs: unitScale(10), md: `${unitScale(200)} !important` }
+                alignItems: "start",
+                mt: { xs: unitScale(10), md: unitScale(28) }
               }}
               component={Container}
               maxWidth="lg"
@@ -215,13 +218,11 @@ export function PersonalCounsellingOverviewSection() {
 
               <Box
                 sx={{
-                  background: "linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)",
+                  bgcolor: "background.paper",
                   borderRadius: unitScale(12),
                   p: { xs: 2.2, md: 2.8 },
-                  position: "absolute",
-                  width: { xs: "100%", md: "40%" },
-                  right: 0,
-                  top: "35%"
+                  minWidth: 0,
+                  boxShadow: (t) => `0 ${unitScale(6)} ${unitScale(24)} ${alpha(t.palette.primary.dark, 0.1)}`
                 }}
               >
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1.2, mb: 1 }}>
@@ -274,7 +275,7 @@ export function PersonalCounsellingOverviewSection() {
         </Stack>
       </Container>
 
-      <Box sx={{ position: "absolute", top: "108%", left: 0, right: 0, zIndex: 1 }}>
+      <Box sx={{ position: "absolute", top: "108%", left: 0, right: 0, zIndex: 1, display: { xs: "none", lg: "block" } }}>
         <SectionSoftWaveCap fill="#D1F1F5" height={unitScale(130)} mirror placement="bottom" />
       </Box>
     </Box>

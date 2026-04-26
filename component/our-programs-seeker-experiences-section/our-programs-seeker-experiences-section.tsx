@@ -474,8 +474,9 @@ export function OurProgramsSeekerExperiencesSection({
         pt: omitHowToEnrol ? { xs: 7, md: 8 } : { xs: 8, md: 10 },
         pb: reserveBottomForArc
           ? {
-              xs: `calc(${SECTION_TOP_ARC_HEIGHT} + ${unitScale(50)} + ${unitScale(28)})`,
-              md: `calc(${SECTION_TOP_ARC_HEIGHT} + ${unitScale(50)} + ${unitScale(36)})`
+              xs: unitScale(32),
+              md: unitScale(40),
+              lg: `calc(${SECTION_TOP_ARC_HEIGHT} + ${unitScale(50)} + ${unitScale(36)})`
             }
           : { xs: 8, md: 10 },
         color: isPlain ? theme.palette.text.primary : theme.palette.common.white,
@@ -641,9 +642,21 @@ export function OurProgramsSeekerExperiencesSection({
 
 
       </Container>
-      <Box sx={{ position: "absolute", bgcolor: "#D1F1F5", bottom: 0, left: 0, right: 0, zIndex: 1, height: unitScale(50) }}>
-        <SectionTopArc surface="#D1F1F5" />
-
+      <Box
+        sx={{
+          position: "absolute",
+          bgcolor: "#D1F1F5",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1,
+          height: { xs: unitScale(20), lg: unitScale(50) },
+          lineHeight: 0
+        }}
+      >
+        <Box sx={{ display: { xs: "none", lg: "block" } }}>
+          <SectionTopArc surface="#D1F1F5" />
+        </Box>
       </Box>
 
     </Box>

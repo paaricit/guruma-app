@@ -25,20 +25,21 @@ export function DivineDayWhoShouldAttendSection() {
       sx={(t) => ({
         position: "relative",
         bgcolor: t.palette.guru.surfaceCream,
-        pb: { xs: unitScale(56), md: unitScale(88) }
+        pb: { xs: unitScale(56), lg: unitScale(88) }
       })}
     >
       <Box
         aria-hidden
         sx={{
+          display: { xs: "none", lg: "block" },
           width: "100vw",
           maxWidth: "100vw",
           ml: "calc(50% - 50vw)",
           lineHeight: 0,
           position: "absolute",
-          bottom: '100%',
+          bottom: "100%",
           left: 0,
-          zIndex: 1,
+          zIndex: 1
         }}
       >
         <SectionWaveDivider fill={surfaceCream} orientation="up" />
@@ -58,16 +59,16 @@ export function DivineDayWhoShouldAttendSection() {
         sx={{
           position: "absolute",
           /* `unitScale` requires positive atDesign — use px for small negative offsets */
-          left: { xs: "-8px", md: unitScale(12) },
-          bottom: { xs: "-12px", md: unitScale(8) },
-          width: { xs: unitScale(180), sm: unitScale(220), md: unitScale(280) },
-          height: { xs: unitScale(180), sm: unitScale(220), md: unitScale(280) },
+          left: { xs: "-8px", lg: unitScale(12) },
+          bottom: { xs: "-12px", lg: unitScale(8) },
+          width: { xs: unitScale(180), sm: unitScale(220), lg: unitScale(280) },
+          height: { xs: unitScale(180), sm: unitScale(220), lg: unitScale(280) },
           zIndex: 0,
-          opacity: { xs: 0.42, md: 0.5 },
+          opacity: { xs: 0.42, lg: 0.5 },
           pointerEvents: "none"
         }}
       >
-        <Image alt="" src={lotusSrc} fill sizes="(max-width: 900px) 200px, 280px" style={{ objectFit: "contain", objectPosition: "left bottom" }} />
+        <Image alt="" src={lotusSrc} fill sizes="(max-width: 1199px) 200px, 280px" style={{ objectFit: "contain", objectPosition: "left bottom" }} />
       </Box>
 
       <Container
@@ -76,27 +77,27 @@ export function DivineDayWhoShouldAttendSection() {
           position: "relative",
           zIndex: 1,
           ...pageSectionGutterSx,
-          pt: { xs: unitScale(48), md: unitScale(72) }
+          pt: { xs: unitScale(48), lg: unitScale(72) }
         }}
       >
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.5fr) minmax(0, 0.5fr)" },
-            gap: { xs: unitScale(28), md: unitScale(48) },
+            gridTemplateColumns: { xs: "1fr", lg: "minmax(0, 1.5fr) minmax(0, 0.5fr)" },
+            gap: { xs: unitScale(28), lg: unitScale(48) },
             alignItems: "stretch"
           }}
         >
-          <Stack spacing={{ xs: unitScale(20), md: unitScale(24) }} sx={{ order: { xs: 2, md: 1 }, minWidth: 0 }}>
+          <Stack spacing={{ xs: unitScale(20), lg: unitScale(24) }} sx={{ order: { xs: 2, lg: 1 }, minWidth: 0 }}>
             <Typography
               id={WHO_HEADING_ID}
               component="h2"
               sx={(theme) => ({
                 fontFamily: "var(--font-forum), serif",
                 fontWeight: 600,
-                fontSize: { xs: unitScale(18), sm: unitScale(22), md: unitScale(35) },
+                fontSize: { xs: unitScale(18), sm: unitScale(22), lg: unitScale(35) },
                 lineHeight: 1.25,
-                letterSpacing: { xs: "0.04em", md: "0.06em" },
+                letterSpacing: { xs: "0.04em", lg: "0.06em" },
                 textTransform: "uppercase",
                 color: theme.palette.guru.aboutHerTeachingsAccent,
                 // maxWidth: unitScale(640)
@@ -108,7 +109,7 @@ export function DivineDayWhoShouldAttendSection() {
             <Typography
               sx={(theme) => ({
                 fontFamily: "var(--font-inter), system-ui, sans-serif",
-                fontSize: { xs: unitScale(15), md: unitScale(20) },
+                fontSize: { xs: unitScale(15), lg: unitScale(20) },
                 lineHeight: 1.65,
                 color: alpha(theme.palette.text.primary, 0.62),
                 maxWidth: '80%'
@@ -123,7 +124,7 @@ export function DivineDayWhoShouldAttendSection() {
                   key={line}
                   sx={(theme) => ({
                     fontFamily: "var(--font-inter), system-ui, sans-serif",
-                    fontSize: { xs: unitScale(15), md: unitScale(24) },
+                    fontSize: { xs: unitScale(15), lg: unitScale(24) },
                     fontWeight: 700,
                     fontStyle: "italic",
                     color: theme.palette.text.primary
@@ -142,14 +143,14 @@ export function DivineDayWhoShouldAttendSection() {
                 rel="noopener noreferrer"
                 variant="contained"
                 sx={(theme) => ({
-                  mt: { xs: unitScale(4), md: unitScale(8) },
-                  minHeight: { xs: unitScale(48), md: unitScale(52) },
-                  px: { xs: unitScale(22), md: unitScale(28) },
-                  py: { xs: unitScale(10), md: unitScale(12) },
+                  mt: { xs: unitScale(4), lg: unitScale(8) },
+                  minHeight: { xs: unitScale(48), lg: unitScale(52) },
+                  px: { xs: unitScale(22), lg: unitScale(28) },
+                  py: { xs: unitScale(10), lg: unitScale(12) },
                   borderRadius: unitScale(12),
                   textTransform: "none",
                   fontWeight: 700,
-                  fontSize: { xs: unitScale(15), md: unitScale(17) },
+                  fontSize: { xs: unitScale(15), lg: unitScale(17) },
                   bgcolor: theme.palette.primary.dark,
                   color: theme.palette.common.white,
                   boxShadow: "none",
@@ -162,8 +163,8 @@ export function DivineDayWhoShouldAttendSection() {
 
             <Box
               sx={(theme) => ({
-                mt: { xs: unitScale(8), md: `${unitScale(46)} !important` },
-                p: { xs: unitScale(16), md: unitScale(20) },
+                mt: { xs: unitScale(8), lg: `${unitScale(46)} !important` },
+                p: { xs: unitScale(16), lg: unitScale(20) },
                 maxWidth: unitScale(520),
                 borderRadius: unitScale(14),
                 bgcolor: theme.palette.background.paper,
@@ -175,7 +176,7 @@ export function DivineDayWhoShouldAttendSection() {
                 sx={(theme) => ({
                   fontFamily: "var(--font-inter), system-ui, sans-serif",
                   fontWeight: 700,
-                  fontSize: { xs: unitScale(14), md: unitScale(28) },
+                  fontSize: { xs: unitScale(14), lg: unitScale(28) },
                   lineHeight: 1.5,
                   color: theme.palette.text.primary
                 })}
@@ -190,27 +191,27 @@ export function DivineDayWhoShouldAttendSection() {
       </Container>
       <Box
         sx={{
-          order: { xs: 1, md: 2 },
           width: { xs: "100%", lg: unitScale(550) },
-          minHeight: { xs: unitScale(280), md: unitScale(420), lg: unitScale(800) },
+          minHeight: { xs: unitScale(280), lg: unitScale(420), xl: unitScale(800) },
           alignSelf: "stretch",
           display: "flex",
-          position: "absolute",
-          right: 0,
-          top: "-50%",
-          justifyContent: { xs: "center", md: "flex-end" },
-          zIndex: 10,
+          /* Mobile / tablet: in-flow so the portrait does not overlap copy; lg+: overlay at right as before */
+          position: { xs: "static", lg: "absolute" },
+          right: { xs: "auto", lg: 0 },
+          top: { xs: "auto", lg: "-50%" },
+          justifyContent: { xs: "center", lg: "flex-end" },
+          zIndex: { xs: 1, lg: 10 }
         }}
       >
         <Box
           sx={(theme) => ({
             position: "relative",
             width: "100%",
-            maxWidth: { xs: unitScale(360), md: "100%" },
-            minHeight: { xs: unitScale(280), md: unitScale(420), lg: unitScale(840) },
+            maxWidth: { xs: unitScale(360), lg: "100%" },
+            minHeight: { xs: unitScale(280), lg: unitScale(420), xl: unitScale(840) },
             borderTop: "none",
             borderRight: "none",
-            p: { xs: unitScale(3), md: unitScale(4) },
+            p: { xs: unitScale(3), lg: unitScale(4) },
             boxSizing: "border-box"
           })}
         >
@@ -219,8 +220,8 @@ export function DivineDayWhoShouldAttendSection() {
               position: "relative",
               width: "100%",
               height: "100%",
-              minHeight: { xs: unitScale(260), md: unitScale(400) },
-              borderBottomLeftRadius: { xs: unitScale(40), md: unitScale(64) },
+              minHeight: { xs: unitScale(260), lg: unitScale(400) },
+              borderBottomLeftRadius: unitScale(64),
               overflow: "hidden",
             }}
           >
@@ -228,7 +229,7 @@ export function DivineDayWhoShouldAttendSection() {
               src={imgSrc}
               alt="Guru Maa Shubha Didi"
               fill
-              sizes="(max-width: 900px) 90vw, 42vw"
+              sizes="(max-width: 1199px) 90vw, 42vw"
               style={{ objectFit: "contain", objectPosition: "center bottom" }}
             />
           </Box>

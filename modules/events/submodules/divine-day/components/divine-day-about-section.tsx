@@ -52,8 +52,8 @@ export function DivineDayAboutSection() {
     <Box
       component="section"
       sx={{
-        pt: { xs: unitScale(56), md: unitScale(172) },
-        pb: { xs: unitScale(56), md: unitScale(72) },
+        pt: { xs: unitScale(56), lg: unitScale(172) },
+        pb: { xs: unitScale(56), lg: unitScale(72) },
 
       }}
     >
@@ -62,22 +62,32 @@ export function DivineDayAboutSection() {
           sx={{
             zIndex: 2,
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "minmax(0, 0.24fr) minmax(0, 0.76fr)" },
-            gap: { xs: unitScale(24), md: unitScale(28) },
-            alignItems: "center",
-            mb: { xs: unitScale(40), md: unitScale(200) }
+            gridTemplateColumns: { xs: "1fr", lg: "minmax(0, 0.24fr) minmax(0, 0.76fr)" },
+            gap: { xs: unitScale(24), lg: unitScale(28) },
+            alignItems: { xs: "stretch", lg: "center" },
+            mb: { xs: unitScale(40), lg: unitScale(200) }
           }}
           component={Container}
           maxWidth={pageContainerMaxWidth}
         >
-          <Box sx={{ position: "absolute", left: 0, top: "-10%", width: "100%", maxWidth: { xs: unitScale(320), md: unitScale(360) }, zIndex: 10 }}>
+          <Box
+            sx={{
+              display: { xs: "none", lg: "block" },
+              position: "absolute",
+              left: 0,
+              top: "-10%",
+              width: "100%",
+              maxWidth: { lg: unitScale(360) },
+              zIndex: 10
+            }}
+          >
             <Box sx={{ position: "relative", width: "100%", aspectRatio: "438 / 817" }}>
-              <Image src={topPortraitSrc} alt="Guru Maa portrait" fill sizes="(max-width: 900px) 320px, 360px" style={{ objectFit: "contain", objectPosition: "left top" }} />
+              <Image src={topPortraitSrc} alt="Guru Maa portrait" fill sizes="(max-width: 1199px) 320px, 360px" style={{ objectFit: "contain", objectPosition: "left top" }} />
             </Box>
           </Box>
-          <Box></Box>
+          <Box sx={{ display: { xs: "none", lg: "block" } }} />
 
-          <Box sx={{ minWidth: 0, pt: { xs: unitScale(4), md: unitScale(18) } }}>
+          <Box sx={{ minWidth: 0, pt: { xs: unitScale(4), lg: unitScale(18) } }}>
             <Typography
               sx={{
                 fontFamily: "var(--font-forum), serif",
@@ -86,7 +96,7 @@ export function DivineDayAboutSection() {
                 letterSpacing: "0.03em",
                 fontWeight: 500,
                 fontSize: unitScale(40),
-                mb: { xs: unitScale(18), md: unitScale(24) }
+                mb: { xs: unitScale(18), lg: unitScale(24) }
               }}
             >
               What You Will Experience
@@ -95,8 +105,8 @@ export function DivineDayAboutSection() {
             <Box
               sx={{
                 display: "grid",
-                gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-                gap: { xs: unitScale(14), md: unitScale(18) }
+                gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
+                gap: { xs: unitScale(14), lg: unitScale(18) }
               }}
             >
               {experienceItems.map(({ title, body, iconSrc }) => (
@@ -143,12 +153,12 @@ export function DivineDayAboutSection() {
         <Box
           aria-hidden
           sx={{
+            display: { xs: "none", lg: "block" },
             position: "absolute",
-            width: '100%',
-            height: '100%',
-            top: '10%',
+            width: "100%",
+            height: "100%",
+            top: "10%",
             left: 0,
-            // inset: { xs: `${unitScale(210)} 0 ${unitScale(200)} 0`, md: `${unitScale(250)} ${unitScale(10)} ${unitScale(210)} ${unitScale(10)}` },
             zIndex: 1,
             opacity: 0.88,
             pointerEvents: "none"
@@ -159,18 +169,18 @@ export function DivineDayAboutSection() {
 
         <Box
           sx={{
-            mt: { xs: unitScale(64), md: unitScale(120) },
+            mt: { xs: unitScale(64), lg: unitScale(120) },
             position: "relative",
             zIndex: 2,
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "minmax(0, 0.56fr) minmax(0, 0.44fr)" },
-            gap: { xs: unitScale(28), md: unitScale(32) },
-            alignItems: "center"
+            gridTemplateColumns: { xs: "1fr", lg: "minmax(0, 0.56fr) minmax(0, 0.44fr)" },
+            gap: { xs: unitScale(28), lg: unitScale(32) },
+            alignItems: { xs: "stretch", lg: "center" }
           }}
           component={Container}
           maxWidth={pageContainerMaxWidth}
         >
-          <Box sx={{ maxWidth: { xs: "100%", md: unitScale(620) } }}>
+          <Box sx={{ maxWidth: { xs: "100%", lg: unitScale(620) } }}>
             <Typography
               sx={{
                 fontFamily: "var(--font-forum), serif",
@@ -188,7 +198,7 @@ export function DivineDayAboutSection() {
             </Typography>
             <Typography
               sx={{
-                mt: { xs: unitScale(12), md: unitScale(16) },
+                mt: { xs: unitScale(12), lg: unitScale(16) },
                 color: "text.disabled",
                 fontFamily: "var(--font-inter), system-ui, sans-serif",
                 lineHeight: 1.62,
@@ -202,9 +212,9 @@ export function DivineDayAboutSection() {
             </Typography>
           </Box>
 
-          <Box sx={{ width: "100%", maxWidth: { xs: unitScale(360), md: unitScale(460) }, ml: { xs: 0, md: "auto" } }}>
+          <Box sx={{ width: "100%", maxWidth: { xs: unitScale(360), lg: unitScale(460) }, ml: { xs: 0, lg: "auto" } }}>
             <Box sx={{ position: "relative", width: "100%", aspectRatio: "567 / 758" }}>
-              <Image src={bottomPortraitSrc} alt="Guru Maa in meditation" fill sizes="(max-width: 900px) 360px, 460px" style={{ objectFit: "contain", objectPosition: "right bottom" }} />
+              <Image src={bottomPortraitSrc} alt="Guru Maa in meditation" fill sizes="(max-width: 1199px) 360px, 460px" style={{ objectFit: "contain", objectPosition: "right bottom" }} />
             </Box>
           </Box>
         </Box>

@@ -52,7 +52,9 @@ export function OurProgramsSeekerTestimonialsSection() {
         pb: 0
       }}
     >
-      <SectionTopArc surface={theme.palette.primary.light} />
+      <Box aria-hidden sx={{ display: { xs: "none", lg: "block" }, lineHeight: 0 }}>
+        <SectionTopArc surface={theme.palette.primary.light} />
+      </Box>
       <Container maxWidth={pageContainerMaxWidth} sx={{ position: "relative", zIndex: 3, ...pageSectionGutterSx, pb: 10 }}>
         <Typography
           id={OUR_PROGRAMS_SEEKER_TESTIMONIALS_HEADING_ID}

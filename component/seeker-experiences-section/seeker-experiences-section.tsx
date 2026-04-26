@@ -65,24 +65,32 @@ export type SeekerExperiencesSectionProps = {
   /** Shown below the video strip (same visual level as original first block). */
   testimonialsBlockHeading?: string;
   testimonialsDescription?: string;
+  /**
+   * When true, video strip shows one tile until `lg` (tablet matches phone); testimonial grid
+   * uses two columns from `lg` and three from `xl`. Used on Divine Day `/events` only.
+   */
+  stackLayoutUntilLg?: boolean;
 };
 
 function SeekerVideoCarousel({
   videos,
   isPlain,
   carouselNavIconSx,
-  onPlay
+  onPlay,
+  stackLayoutUntilLg = false
 }: {
   videos: readonly SeekerVideoItem[];
   isPlain: boolean;
   carouselNavIconSx: SxProps<Theme>;
   onPlay: (embedSrc: string) => void;
+  /** Divine Day: square video tiles below `lg`. */
+  stackLayoutUntilLg?: boolean;
 }) {
   const theme = useTheme();
   const mdUp = useMediaQuery(theme.breakpoints.up("md"), { defaultMatches: false });
   const lgUp = useMediaQuery(theme.breakpoints.up("lg"), { defaultMatches: false });
-  /** Two tiles on tablet (`md`–`lg`); three on large desktops so thumbnails stay legible. */
-  const visibleCount = lgUp ? 3 : mdUp ? 2 : 1;
+  /** Default: two tiles on `md`–`lg`, three on `lg+`. With `stackLayoutUntilLg`: one tile until `lg`, then three (Divine Day tablet = phone). */
+  const visibleCount = stackLayoutUntilLg ? (lgUp ? 3 : 1) : lgUp ? 3 : mdUp ? 2 : 1;
   const maxSlide = Math.max(0, videos.length - visibleCount);
   const [slideIndex, setSlideIndex] = useState(0);
 
@@ -276,23 +284,33 @@ function VideoEmbedDialog({
 
 function SeekerTestimonialCards({
   testimonials,
-  isPlain
+  isPlain,
+  stackLayoutUntilLg = false
 }: {
   testimonials: readonly SeekerTestimonialItem[];
   isPlain: boolean;
+  stackLayoutUntilLg?: boolean;
 }) {
   const theme = useTheme();
+  const testimonialGridColumns = stackLayoutUntilLg
+    ? {
+        xs: "1fr",
+        lg: "repeat(2, minmax(0, 1fr))",
+        xl: "repeat(3, minmax(0, 1fr))"
+      }
+    : {
+        xs: "1fr",
+        md: "repeat(2, minmax(0, 1fr))",
+        lg: "repeat(3, minmax(0, 1fr))"
+      };
+  const testimonialGridGap = stackLayoutUntilLg ? { xs: 2.2, lg: 3 } : { xs: 2.2, md: 3 };
   return (
     <Box
       sx={{
-        mt: { xs: 3, md: 3.5 },
+        mt: stackLayoutUntilLg ? { xs: 3, lg: 3.5 } : { xs: 3, md: 3.5 },
         display: "grid",
-        gridTemplateColumns: {
-          xs: "1fr",
-          md: "repeat(2, minmax(0, 1fr))",
-          lg: "repeat(3, minmax(0, 1fr))"
-        },
-        gap: { xs: 2.2, md: 3 },
+        gridTemplateColumns: testimonialGridColumns,
+        gap: testimonialGridGap,
         overflow: "visible",
         pb: 12
       }}
@@ -308,7 +326,9 @@ function SeekerTestimonialCards({
             color: theme.palette.text.primary,
             position: "relative",
             overflow: "visible",
-            minHeight: { xs: unitScale(220), md: unitScale(340) },
+            minHeight: stackLayoutUntilLg
+              ? { xs: unitScale(220), lg: unitScale(340) }
+              : { xs: unitScale(220), md: unitScale(340) },
             mb: 3,
             pt: 1.5
           }}
@@ -402,7 +422,8 @@ export function SeekerExperiencesSection({
   surface = "default",
   videoStripHeading = DEFAULT_VIDEO_HEADING,
   testimonialsBlockHeading = DEFAULT_TESTIMONIALS_HEADING,
-  testimonialsDescription = DEFAULT_TESTIMONIALS_DESCRIPTION
+  testimonialsDescription = DEFAULT_TESTIMONIALS_DESCRIPTION,
+  stackLayoutUntilLg = false
 }: SeekerExperiencesSectionProps) {
   const theme = useTheme();
   const isPlain = surface === "plain";
@@ -419,6 +440,12 @@ export function SeekerExperiencesSection({
   const subleadColor = isPlain ? plainSublead : onLightMuted;
 
   const coral = theme.palette.guru.coral;
+  const videoStripTitleFontSize = stackLayoutUntilLg
+    ? { xs: unitScale(32), lg: unitScale(48) }
+    : seekerDisplayTitleFontSize;
+  const testimonialsSubleadFontSize = stackLayoutUntilLg
+    ? { xs: unitScale(18), lg: unitScale(22) }
+    : seekerSubleadFontSize;
   const carouselNavIconSx = isPlain
     ? {
       color: theme.palette.common.white,
@@ -466,7 +493,7 @@ export function SeekerExperiencesSection({
         width: isPlain ? 1 : undefined,
         maxWidth: isPlain ? "100%" : undefined,
         minHeight: isPlain ? "auto" : unitScale(1440),
-        py: { xs: 8, md: 10 },
+        py: stackLayoutUntilLg ? { xs: 8, lg: 10 } : { xs: 8, md: 10 },
         color: isPlain ? theme.palette.text.primary : theme.palette.common.white,
         ...(isPlain
           ? {
@@ -489,12 +516,12 @@ export function SeekerExperiencesSection({
           sx={{
             fontFamily: 'var(--font-forum), serif',
             fontWeight: 400,
-            fontSize: seekerDisplayTitleFontSize,
-            lineHeight: { xs: 1.1, md: 1.2 },
+            fontSize: videoStripTitleFontSize,
+            lineHeight: stackLayoutUntilLg ? { xs: 1.1, lg: 1.2 } : { xs: 1.1, md: 1.2 },
             color: headingColor,
             textAlign: "center",
             textTransform: isPlain ? "capitalize" : "none",
-            mb: { xs: 2.5, md: 3.5 }
+            mb: stackLayoutUntilLg ? { xs: 2.5, lg: 3.5 } : { xs: 2.5, md: 3.5 }
           }}
         >
           {videoStripHeading}
@@ -506,6 +533,7 @@ export function SeekerExperiencesSection({
             isPlain={isPlain}
             carouselNavIconSx={carouselNavIconSx}
             onPlay={openVideo}
+            stackLayoutUntilLg={stackLayoutUntilLg}
           />
         </Box>
 
@@ -515,11 +543,11 @@ export function SeekerExperiencesSection({
           id={testimonialsHeadingId}
           component="h3"
           sx={{
-            mt: { xs: 7, md: 8.5 },
+            mt: stackLayoutUntilLg ? { xs: 7, lg: 8.5 } : { xs: 7, md: 8.5 },
             fontFamily: 'var(--font-forum), serif',
             fontWeight: 400,
-            fontSize: seekerDisplayTitleFontSize,
-            lineHeight: { xs: 1.1, md: 1.2 },
+            fontSize: videoStripTitleFontSize,
+            lineHeight: stackLayoutUntilLg ? { xs: 1.1, lg: 1.2 } : { xs: 1.1, md: 1.2 },
             color: headingColor,
             textAlign: "center",
             textTransform: isPlain ? "capitalize" : "none"
@@ -532,8 +560,8 @@ export function SeekerExperiencesSection({
           sx={{
             fontFamily: 'var(--font-inter), system-ui, sans-serif',
             fontWeight: 400,
-            fontSize: seekerSubleadFontSize,
-            lineHeight: { xs: 1.5, md: 1.45 },
+            fontSize: testimonialsSubleadFontSize,
+            lineHeight: stackLayoutUntilLg ? { xs: 1.5, lg: 1.45 } : { xs: 1.5, md: 1.45 },
             textAlign: "center",
             color: subleadColor,
             mx: "auto",
@@ -546,7 +574,11 @@ export function SeekerExperiencesSection({
         </Typography>
 
         <Box aria-labelledby={testimonialsHeadingId}>
-          <SeekerTestimonialCards testimonials={testimonials} isPlain={isPlain} />
+          <SeekerTestimonialCards
+            testimonials={testimonials}
+            isPlain={isPlain}
+            stackLayoutUntilLg={stackLayoutUntilLg}
+          />
         </Box>
       </Container>
     </Box>
