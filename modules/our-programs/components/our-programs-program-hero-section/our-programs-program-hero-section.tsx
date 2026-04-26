@@ -31,13 +31,14 @@ const heroSubheadingFontSize = {
 
 export type OurProgramsProgramHeroSectionProps = {
   hero: OurProgramsProgramHero;
+  positionY?: "top" | "bottom";
 };
 
 /**
  * Full-bleed programme hero: background image, Forum headline (~75px @ md+), `bar.svg` divider
  * (same asset as main Our Programs intro), then Inter subhead (~24px @ md+).
  */
-export function OurProgramsProgramHeroSection({ hero }: OurProgramsProgramHeroSectionProps) {
+export function OurProgramsProgramHeroSection({ hero, positionY }: OurProgramsProgramHeroSectionProps) {
   const theme = useTheme();
   const imageSrc = encodePublicPath(hero.imageSrc);
   const dividerSrc = encodePublicPath(DIVIDER_BAR);
@@ -61,7 +62,7 @@ export function OurProgramsProgramHeroSection({ hero }: OurProgramsProgramHeroSe
         fill
         priority
         sizes="100vw"
-        style={{ objectFit: "cover", objectPosition: "center center" }}
+        style={{ objectFit: "cover", objectPosition: `center ${positionY ?? 'center'}` }}
       />
       <Box
         aria-hidden

@@ -21,24 +21,27 @@ export type OurProgramsProgramPageShellProps = {
   /** Optional image URLs for the Photo Gallery carousel (defaults in `our-programs-photo-gallery` content). */
   photoGallerySlides?: readonly string[];
   photoGalleryHeading?: string;
+  positionY?: "top" | "bottom";
 };
 
 /**
  * Shared scaffold for internal Our Programs routes: full-bleed hero, optional custom section,
  * photo gallery, then `OurProgramsSeekerExperiencesSection`.
  */
-export function OurProgramsProgramPageShell({
-  hero,
-  children,
-  seekerVideoStripHeading,
-  seekerTestimonialsHeading,
-  seekerTestimonialsDescription,
-  photoGallerySlides,
-  photoGalleryHeading
-}: OurProgramsProgramPageShellProps) {
+export function OurProgramsProgramPageShell(props: OurProgramsProgramPageShellProps) {
+  const {
+    hero,
+    children,
+    seekerVideoStripHeading,
+    seekerTestimonialsHeading,
+    seekerTestimonialsDescription,
+    photoGallerySlides,
+    photoGalleryHeading
+  } = props;
+
   return (
     <Box component="main" sx={{ bgcolor: "background.default" }}>
-      <OurProgramsProgramHeroSection hero={hero} />
+      <OurProgramsProgramHeroSection hero={hero} positionY={props.positionY} />
 
       {children ? (
         <Box sx={{ py: { xs: unitScale(24), md: unitScale(32) } }}>

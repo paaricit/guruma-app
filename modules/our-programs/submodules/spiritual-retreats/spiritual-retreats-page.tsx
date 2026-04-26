@@ -6,7 +6,7 @@ import { SpiritualRetreatsOverviewSection } from "./components";
 
 export default function OurProgramsSpiritualRetreatsPage() {
   return (
-    <OurProgramsProgramPageShell hero={spiritualRetreatsProgramHero}>
+    <OurProgramsProgramPageShell hero={spiritualRetreatsProgramHero} positionY='top'>
       <SpiritualRetreatsOverviewSection />
     </OurProgramsProgramPageShell>
   );

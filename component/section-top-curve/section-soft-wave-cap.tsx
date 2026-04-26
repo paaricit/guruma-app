@@ -9,6 +9,7 @@ export type SectionSoftWaveCapProps = {
   placement?: "top" | "bottom";
   /** Mirror the curve horizontally (left-right). */
   mirror?: boolean;
+  bottom?: string;
 };
 
 /**
@@ -20,7 +21,8 @@ export function SectionSoftWaveCap({
   fill = "#D1F1F5",
   height = unitScale(92),
   placement = "top",
-  mirror = false
+  mirror = false,
+  bottom = "98%"
 }: SectionSoftWaveCapProps) {
   const isBottom = placement === "bottom";
   const transform = `translateX(-50%) ${isBottom ? "rotate(180deg) " : ""}${mirror ? "scaleX(-1)" : ""}`.trim();
@@ -33,7 +35,7 @@ export function SectionSoftWaveCap({
         left: "50%",
         transform,
         transformOrigin: isBottom ? "center top" : "center bottom",
-        ...(isBottom ? { top: "100%" } : { bottom: "98%" }),
+        ...(isBottom ? { top: "100%" } : { bottom: bottom }),
         width: "100vw",
         lineHeight: 0,
         pointerEvents: "none",

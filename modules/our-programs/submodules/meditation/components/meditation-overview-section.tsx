@@ -35,7 +35,7 @@ export function MeditationOverviewSection() {
         background: "linear-gradient(180deg, #F3F3EF 0%, #D1F1F5 100%)"
       }}
     >
-      <SectionSoftWaveCap fill="#F3F3EF" height={unitScale(130)} />
+      <SectionSoftWaveCap fill="#F3F3EF" height={unitScale(130)} bottom="100%" />
 
       <Box
         aria-hidden
@@ -256,7 +256,7 @@ export function MeditationOverviewSection() {
         </Stack>
       </Container>
 
-      <Box sx={{ position: "absolute", top: "110%", left: 0, right: 0, zIndex: 1 }}>
+      <Box sx={{ position: "absolute", top: "108%", left: 0, right: 0, zIndex: 1 }}>
         <SectionSoftWaveCap fill="#D1F1F5" height={unitScale(130)} mirror placement="bottom" />
       </Box>
     </Box>
