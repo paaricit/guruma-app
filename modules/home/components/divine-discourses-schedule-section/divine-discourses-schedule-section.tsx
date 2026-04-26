@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -256,7 +257,7 @@ export function DivineDiscoursesScheduleSection() {
                 alt="Divine discourse session preview"
                 fill
                 src={assets.heroImage}
-                sizes="(max-width: 900px) 100vw, 38vw"
+                sizes="(max-width: 767px) 100vw, 38vw"
                 style={{ objectFit: "cover", objectPosition: "center center" }}
               />
               <Stack
@@ -304,7 +305,7 @@ export function DivineDiscoursesScheduleSection() {
               </Stack>
             </Box>
 
-            <Box sx={{ py: { xs: 0.5, md: 0.75 }, pl: { xs: 0, md: 4 }, minWidth: 0, width: {xs: "100%", lg: "90%"} }}>
+            <Box sx={{ py: { xs: 0.5, md: 0.75 }, pl: { xs: 0, md: 4 }, minWidth: 0, width: { xs: "100%", lg: "90%" } }}>
               <Box
                 sx={{
                   display: "grid",
@@ -445,6 +446,8 @@ export function DivineDiscoursesScheduleSection() {
               </Box>
 
               <Button
+                component={Link}
+                href={copy.ctaHref}
                 variant="contained"
                 fullWidth
                 sx={{

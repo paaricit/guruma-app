@@ -31,25 +31,29 @@ const pathwayIconByKey: Record<AboutHerPathwayIconKey, SvgIconComponent> = {
 /** Figma node `1:7478` — Forum; `xs` / `md` only (fluid via `unitScale`). */
 const pathwaysTitleFontSize = {
   xs: unitScale(40),
-  md: unitScale(71)
+  md: unitScale(52),
+  lg: unitScale(71)
 } as const;
 
 const pathwayCardTitleFontSize = {
   xs: unitScale(22),
-  md: unitScale(26)
+  md: unitScale(24),
+  lg: unitScale(26)
 } as const;
 
 const pathwayCardBodyFontSize = {
   xs: unitScale(18),
-  md: unitScale(21)
+  md: unitScale(19),
+  lg: unitScale(21)
 } as const;
 
-/** Line height for ~21px body (~34px line box) */
+/** Line height tuned to `pathwayCardBodyFontSize` lg cap (~21px body). */
 const pathwayCardBodyLineHeightRatio = 34 / 21;
 
 const pathwayCardTitleLineHeight = {
   xs: unitScale(28),
-  md: unitScale(32)
+  md: unitScale(30),
+  lg: unitScale(32)
 } as const;
 
 const pathwayIconTileSize = {
@@ -82,9 +86,9 @@ export function AboutHerPathwaysToTransformation() {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "50% 0",
         backgroundSize: "100% auto",
-        px: { xs: 4, md: 14 },
-        pb: { xs: 6, md: 18 },
-        pt: { xs: 6, md: 10 },
+        px: { xs: 2, md: 3, lg: 7 },
+        pb: { xs: 6, md: 10, lg: 18 },
+        pt: { xs: 6, md: 8, lg: 10 },
       }}>
       <Container
         maxWidth={'lg'}
@@ -130,7 +134,7 @@ export function AboutHerPathwaysToTransformation() {
                 elevation={0}
                 sx={{
                   borderRadius: cardRadius,
-                  p: "2rem",
+                  p: { xs: 2, md: 2.25, lg: "2rem" },
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
@@ -139,8 +143,8 @@ export function AboutHerPathwaysToTransformation() {
                   border: `1px solid ${g.pathwayCardBorder}`,
                   boxShadow: `0 ${unitScale(6)} ${unitScale(24)} ${cardShadow}`,
                   minWidth: 0,
-                  minHeight: unitScale(350),
-                  justifyContent: 'space-evenly'
+                  minHeight: { xs: unitScale(300), md: unitScale(320), lg: unitScale(350) },
+                  justifyContent: "space-evenly"
                 }}
               >
                 <Box

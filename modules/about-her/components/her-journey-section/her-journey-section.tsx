@@ -15,7 +15,7 @@ import {
 } from "@/modules/about-her/content/her-journey";
 import { unitScale } from "@/utils/unit-scale";
 
-const sectionEdgePadding = { xs: unitScale(16), sm: unitScale(24) } as const;
+const sectionEdgePadding = { xs: unitScale(16), sm: unitScale(24), md: unitScale(28), lg: unitScale(24) } as const;
 
 const bandPadding = {
   pt: { xs: unitScale(20), sm: unitScale(28) },
@@ -23,7 +23,7 @@ const bandPadding = {
   px: sectionEdgePadding
 } as const;
 
-const headingFontSize = { xs: unitScale(36), sm: unitScale(48) } as const;
+const headingFontSize = { xs: unitScale(36), sm: unitScale(42), md: unitScale(44), lg: unitScale(48) } as const;
 
 const mobilePortraitMinHeight = { xs: unitScale(320), sm: unitScale(360) } as const;
 const desktopPortraitMinHeight = unitScale(620);
@@ -37,8 +37,8 @@ const stepRailWidth = { md: unitScale(140), lg: unitScale(140) } as const;
 const stepRailHeight = { md: unitScale(420), lg: unitScale(470) } as const;
 const stepNumberBubbleSize = unitScale(52);
 
-const mobileStepTitleFontSize = { xs: unitScale(16), sm: unitScale(17) } as const;
-const mobileStepBodyFontSize = { xs: unitScale(14), sm: unitScale(15) } as const;
+const mobileStepTitleFontSize = { xs: unitScale(16), sm: unitScale(17), md: unitScale(18) } as const;
+const mobileStepBodyFontSize = { xs: unitScale(14), sm: unitScale(15), md: unitScale(16) } as const;
 const desktopStepTitleFontSize = unitScale(22);
 const desktopStepBodyFontSize = unitScale(18);
 
@@ -88,7 +88,7 @@ export function HerJourneySection() {
                 fontSize: headingFontSize,
                 color: g.aboutHerTeachingsTitle,
                 mb: unitScale(24),
-                textAlign: { xs: "center", md: "left" }
+                textAlign: { xs: "center", sm: "left" }
               }}
             >
               {aboutHerJourneySectionTitle}
@@ -157,7 +157,7 @@ export function HerJourneySection() {
 
           <Box
             sx={{
-              display: { xs: "none", md: "grid" },
+              display: { xs: "none", lg: "grid" },
               gridTemplateColumns: desktopGridColumns,
               gridTemplateRows: "auto auto auto auto",
               columnGap: unitScale(16),

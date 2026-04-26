@@ -169,7 +169,7 @@ export function WisdomInActionSection({ cards = wisdomCards }: WisdomInActionSec
                 <Image
                   alt={card.title}
                   fill
-                  sizes="(max-width: 900px) 100vw, 33vw"
+                  sizes="(max-width: 767px) 100vw, 33vw"
                   src={card.image}
                   style={{ objectFit: "cover" }}
                 />

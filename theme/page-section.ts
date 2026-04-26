@@ -313,7 +313,11 @@ export function homeHeroImageLayerSx(theme: Theme, bannerSrc: string) {
     backgroundImage: `url('${bannerSrc}')`,
     backgroundRepeat: "no-repeat" as const,
     backgroundSize: "cover" as const,
-    backgroundPosition: "center center" as const
+    /* Tablet: nudge focal point so the figure reads beside the copy without crowding the left edge. */
+    backgroundPosition: {
+      md: "56% center",
+      lg: "center center"
+    } as const
   };
 }
 
@@ -495,7 +499,7 @@ export const sessionsFaqDetailsPb = {
 } as const;
 
 /** Max width for FAQ copy column (readable measure on large screens). */
-export const sessionsFaqContainerMaxWidth = "md" as const;
+export const sessionsFaqContainerMaxWidth = "lg" as const;
 
 /** Schedule card title (~1.1rem / 1.35rem). */
 export const sessionsFluidCardTitle = {
@@ -591,7 +595,7 @@ export const sessionsWhatHappensArcSurface = "#D9F3F7" as const;
 export const sessionsSectionPyTight = {
   xs: unitScale(24),
   sm: unitScale(28),
-  md: unitScale(36)
+  md: 0
 } as const;
 
 export const sessionsSectionPySm = {
@@ -622,7 +626,7 @@ export const sessionsFaqSectionPy = {
 export const sessionsSectionPyLg = {
   xs: unitScale(48),
   sm: unitScale(64),
-  md: unitScale(90)
+  md: 0
 } as const;
 
 export const sessionsSectionPyBand = {

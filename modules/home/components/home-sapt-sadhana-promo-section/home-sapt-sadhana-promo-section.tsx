@@ -74,7 +74,7 @@ export function HomeSaptSadhanaPromoSection() {
                 src={saptSadhanaWaveIcon}
                 alt=""
                 fill
-                sizes="(max-width: 900px) 120px, 160px"
+                sizes="(max-width: 767px) 120px, 160px"
                 style={{ objectFit: "contain" }}
               />
             </Box>

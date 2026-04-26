@@ -131,7 +131,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                 <Image
                   alt={row.title}
                   fill
-                  sizes="(max-width: 899px) 100vw, (max-width: 1536px) 100vw, 90vw"
+                  sizes="(max-width: 767px) 100vw, (max-width: 1536px) 100vw, 90vw"
                   src={encodePublicPath(row.image)}
                   style={{ objectFit: "cover" }}
                   priority={false}

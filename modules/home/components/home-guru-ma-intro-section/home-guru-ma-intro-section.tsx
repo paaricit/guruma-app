@@ -171,7 +171,7 @@ export function HomeGuruMaIntroSection() {
               <Image
                 alt={guruMaIntroContent.thumbnailAlt}
                 fill
-                sizes="(max-width: 899px) 100vw, 42vw"
+                sizes="(max-width: 767px) 100vw, 42vw"
                 src={guruMaIntroContent.thumbnailSrc}
                 style={{ objectFit: "contain" }}
               />

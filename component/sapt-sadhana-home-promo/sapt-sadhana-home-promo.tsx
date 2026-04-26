@@ -123,7 +123,7 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
                 alt=""
                 src={SAPT_SECTION_WAVE_ICON}
                 fill
-                sizes="(max-width: 600px) 180px, (max-width: 900px) 224px, 288px"
+                sizes="(max-width: 600px) 180px, (max-width: 767px) 224px, 288px"
                 style={{ objectFit: "contain", objectPosition: "center" }}
               />
             </Box>

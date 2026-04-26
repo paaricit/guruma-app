@@ -17,10 +17,10 @@ export type SaptSadhanaStackCarouselProps = {
 const sidePanelBaseSx = {
   display: { xs: "none", sm: "block" },
   position: "relative" as const,
-  flex: { sm: "0 0 22%", md: "0 0 20%" },
-  maxWidth: { sm: unitScale(200), md: unitScale(220) },
-  width: { sm: "22%", md: "20%" },
-  height: { sm: unitScale(200), md: unitScale(230) },
+  flex: { sm: "0 0 22%", md: "0 0 14%", lg: "0 0 20%" },
+  maxWidth: { sm: unitScale(200), md: unitScale(160), lg: unitScale(220) },
+  width: { sm: "22%", md: "14%", lg: "20%" },
+  height: { sm: unitScale(200), md: unitScale(240), lg: unitScale(230) },
   borderRadius: unitScale(18),
   overflow: "hidden",
   cursor: "pointer",
@@ -132,10 +132,10 @@ export function SaptSadhanaStackCarousel({
       sx={{
         position: "relative",
         width: "100%",
-        maxWidth: unitScale(1280),
+        maxWidth: { xs: unitScale(1280), md: "min(100%, 1120px)", lg: unitScale(1280) },
         mx: "auto",
-        minHeight: { xs: unitScale(220), sm: unitScale(260), md: unitScale(320) },
-        py: { xs: 1, md: 2 },
+        minHeight: { xs: unitScale(220), sm: unitScale(260), md: unitScale(360), lg: unitScale(320) },
+        py: { xs: 1, md: 1.5, lg: 2 },
         outline: "none",
         perspective: unitScale(2000),
         transformStyle: "preserve-3d",
@@ -187,11 +187,12 @@ export function SaptSadhanaStackCarousel({
             width: {
               xs: `min(92vw, ${unitScale(720)})`,
               sm: `min(72vw, ${unitScale(720)})`,
-              md: `min(100%, ${unitScale(800)})`
+              md: `min(94vw, ${unitScale(920)})`,
+              lg: `min(100%, ${unitScale(800)})`
             },
-            maxWidth: unitScale(800),
-            height: { xs: unitScale(220), sm: unitScale(240), md: unitScale(400) },
-            mx: { sm: -1.5, md: -2.5 },
+            maxWidth: { xs: unitScale(800), md: unitScale(920), lg: unitScale(800) },
+            height: { xs: unitScale(220), sm: unitScale(240), md: unitScale(380), lg: unitScale(400) },
+            mx: { sm: -1.5, md: -1, lg: -2.5 },
             borderRadius: unitScale(24),
             overflow: "hidden",
             boxShadow: `0 ${unitScale(28)} ${unitScale(56)} rgba(0,0,0,0.22), 0 ${unitScale(8)} ${unitScale(20)} rgba(0,0,0,0.12)`,
@@ -203,7 +204,7 @@ export function SaptSadhanaStackCarousel({
             alt={`Sapt Sadhana slide ${activeIndex + 1} of ${n}`}
             fill
             src={slides[activeIndex]}
-            sizes="(max-width: 600px) 92vw, 720px"
+            sizes="(max-width: 600px) 92vw, (max-width: 1199px) 90vw, 720px"
             style={{ objectFit: "cover", objectPosition: coverImageObjectPosition }}
             priority={activeIndex === 0}
           />

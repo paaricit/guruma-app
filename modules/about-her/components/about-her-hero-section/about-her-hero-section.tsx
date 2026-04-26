@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -8,7 +7,6 @@ import { alpha, useTheme } from "@mui/material/styles";
 import {
   aboutHerHeroBannerSrc,
   aboutHerHeroBody,
-  aboutHerHeroPortraitSrc,
   aboutHerHeroTitle
 } from "@/modules/about-her/content/about-her-hero";
 import {
@@ -16,27 +14,18 @@ import {
   homeHeroMobileGradientBackdropSx,
   pageSectionGutterSx
 } from "@/theme/page-section";
-import { encodePublicPath } from "@/utils/encode-public-path";
 import { unitScale } from "@/utils/unit-scale";
-
-const heroMinHeight = {
-  md: unitScale(760),
-  lg: unitScale(840)
-} as const;
-
-const heroPaddingTop = {
-  xs: unitScale(88),
-  md: unitScale(96)
-} as const;
 
 const titleFontSize = {
   xs: unitScale(40),
-  md: unitScale(72)
+  md: unitScale(52),
+  lg: unitScale(72)
 } as const;
 
 const bodyFontSize = {
   xs: unitScale(15),
-  md: unitScale(18)
+  md: unitScale(17),
+  lg: unitScale(18)
 } as const;
 
 const bodyMaxWidth = unitScale(696);
@@ -44,8 +33,9 @@ const bodyMaxWidth = unitScale(696);
 export function AboutHerHeroSection() {
   const theme = useTheme();
   const overlayBlue = alpha(theme.palette.primary.dark, 0.5);
-  const titleColor = "#ecede5";
-  const bodyColor = alpha("#ecede5", 0.95);
+  const titleColor = alpha(theme.palette.common.white, 0.98);
+  const bodyColor = alpha(theme.palette.common.white, 0.9);
+  const heroTextShadow = `0 ${unitScale(2)} ${unitScale(32)} ${alpha(theme.palette.common.black, 0.42)}`;
 
   return (
     <Box
@@ -55,17 +45,30 @@ export function AboutHerHeroSection() {
         position: "relative",
         display: "flex",
         flexDirection: "column",
-        minHeight: { xs: "50vh", md: "120vh" },
+        minHeight: { xs: "min(88dvh, 760px)", md: "min(100dvh, 880px)", lg: "120vh" },
         bgcolor: { xs: "primary.dark", md: "transparent" },
-        // pt: heroPaddingTop,
-        pt: { xs: unitScale(80), md: 28},
-        justifyContent: { xs: "flex-start", md: "flex-start" },
+        /* `lg+`: unchanged desktop offset. `<lg` (phone / tablet): tighter top so copy sits higher under the header. */
+        pt: { xs: unitScale(52), md: unitScale(44), lg: unitScale(96) },
+        justifyContent: "center",
         overflow: "hidden",
-        pb: { xs: unitScale(80), md: 0 }
+        pb: { xs: unitScale(32), md: unitScale(48), lg: 0 }
       }}
     >
       <Box sx={homeHeroMobileGradientBackdropSx(theme)} aria-hidden />
-      <Box sx={homeHeroImageLayerSx(theme, aboutHerHeroBannerSrc)} aria-hidden />
+      <Box
+        aria-hidden
+        sx={[
+          homeHeroImageLayerSx(theme, aboutHerHeroBannerSrc),
+          {
+            /* Pull focal point left on tablet so the figure is not clipped off the right edge. */
+            backgroundSize: { md: "115% auto", lg: "cover" },
+            backgroundPosition: {
+              md: "30% 22%",
+              lg: "50% center"
+            }
+          }
+        ]}
+      />
       <Box
         aria-hidden
         sx={{
@@ -74,7 +77,10 @@ export function AboutHerHeroSection() {
           zIndex: 1,
           pointerEvents: "none",
           display: { xs: "none", md: "block" },
-          backgroundImage: `linear-gradient(-84deg, ${alpha(theme.palette.common.black, 0)} 47%, ${overlayBlue} 76%)`
+          backgroundImage: {
+            md: `linear-gradient(-84deg, ${alpha(theme.palette.common.black, 0)} 38%, ${overlayBlue} 82%)`,
+            lg: `linear-gradient(-84deg, ${alpha(theme.palette.common.black, 0)} 47%, ${overlayBlue} 76%)`
+          }
         }}
       />
       {/* <Box
@@ -105,32 +111,48 @@ export function AboutHerHeroSection() {
         sx={{
           position: "relative",
           zIndex: 2,
-          py: { xs: unitScale(16), md: unitScale(48) },
-          ...pageSectionGutterSx
+          flex: { xs: 1, md: 1, lg: "unset" },
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: { xs: "center", md: "center", lg: "flex-start" },
+          minHeight: { xs: 0, md: 0, lg: "unset" },
+          py: { xs: unitScale(10), md: unitScale(16), lg: unitScale(48) },
+          ...pageSectionGutterSx,
+          pb: { xs: unitScale(10), md: unitScale(16), lg: unitScale(188) }
         }}
       >
-        <Box sx={{ maxWidth: { xs: "100%", md: `min(${unitScale(755)}, 52%)` } }}>
+        <Box
+          sx={{
+            maxWidth: { xs: "100%", md: `min(${unitScale(640)}, 92%)`, lg: `min(${unitScale(755)}, 52%)` },
+            mt: { xs: -2, md: -2.5, lg: 0 }
+          }}
+        >
           <Typography
             id="about-her-hero-heading"
             component="h1"
             sx={{
               fontFamily: "var(--font-forum), serif",
               fontSize: titleFontSize,
-              lineHeight: { xs: 1.05, md: 0.95 },
+              lineHeight: { xs: 1.08, md: 1.05, lg: 0.96 },
               color: titleColor,
-              fontWeight: 400
+              fontWeight: 400,
+              letterSpacing: { xs: "-0.02em", md: "-0.012em", lg: 0 },
+              textWrap: { md: "balance" },
+              textShadow: heroTextShadow
             }}
           >
             {aboutHerHeroTitle}
           </Typography>
           <Typography
             sx={{
-              mt: { xs: unitScale(16), md: unitScale(20) },
-              fontFamily: "var(--font-inter), sans-serif",
+              mt: { xs: unitScale(16), md: unitScale(22) },
+              fontFamily: "var(--font-inter), system-ui, sans-serif",
               fontSize: bodyFontSize,
-              lineHeight: { xs: 1.62, md: 1.65 },
+              lineHeight: { xs: 1.62, md: 1.68, lg: 1.65 },
+              letterSpacing: { md: "0.01em" },
               color: bodyColor,
-              maxWidth: bodyMaxWidth
+              maxWidth: bodyMaxWidth,
+              textShadow: heroTextShadow
             }}
           >
             {aboutHerHeroBody}

@@ -86,7 +86,8 @@ function ProgramsSeekerVideoCarousel({
 }) {
   const theme = useTheme();
   const mdUp = useMediaQuery(theme.breakpoints.up("md"), { defaultMatches: false });
-  const visibleCount = mdUp ? 3 : 1;
+  const lgUp = useMediaQuery(theme.breakpoints.up("lg"), { defaultMatches: false });
+  const visibleCount = lgUp ? 3 : mdUp ? 2 : 1;
   const maxSlide = Math.max(0, videos.length - visibleCount);
   const [slideIndex, setSlideIndex] = useState(0);
 
@@ -163,7 +164,7 @@ function ProgramsSeekerVideoCarousel({
                     alt=""
                     fill
                     src={encodePublicPath(video.image)}
-                    sizes={mdUp ? "33vw" : "100vw"}
+                    sizes={lgUp ? "33vw" : mdUp ? "50vw" : "100vw"}
                     style={{ objectFit: "cover" }}
                     aria-hidden
                   />
@@ -291,7 +292,11 @@ function ProgramsSeekerTestimonialCards({
       sx={{
         mt: { xs: 3, md: 3.5 },
         display: "grid",
-        gridTemplateColumns: { xs: "1fr", md: "repeat(3, minmax(0, 1fr))" },
+        gridTemplateColumns: {
+          xs: "1fr",
+          md: "repeat(2, minmax(0, 1fr))",
+          lg: "repeat(3, minmax(0, 1fr))"
+        },
         gap: { xs: 2.2, md: 3 },
         overflow: "visible",
         pb: 12

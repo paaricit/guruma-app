@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -9,7 +8,6 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
 import { homeHeroContent } from "@/modules/home/content/home-hero";
-import { encodePublicPath } from "@/utils/encode-public-path";
 import { unitScale } from "@/utils/unit-scale";
 import {
   homeHeroDisplayOnDarkSx,
@@ -29,6 +27,7 @@ export function HomeHeroSection() {
   const heroSurfaceHover = alpha(theme.palette.common.white, 0.9);
   const glassFill = alpha(theme.palette.common.white, 0.2);
   const glassFillHover = alpha(theme.palette.common.white, 0.26);
+  const heroTextShadow = `0 ${unitScale(2)} ${unitScale(32)} ${alpha(theme.palette.common.black, 0.4)}`;
 
   return (
     <Box
@@ -38,9 +37,9 @@ export function HomeHeroSection() {
         position: "relative",
         display: "flex",
         flexDirection: "column",
-        minHeight: { xs: "auto", md: "120vh" },
+        minHeight: { xs: "auto", md: "min(100dvh, 880px)", lg: "120vh" },
         bgcolor: { xs: "primary.dark", md: "transparent" },
-        pt: { xs: unitScale(128), md: unitScale(136) },
+        pt: { xs: unitScale(120), md: unitScale(80), lg: unitScale(128) },
         pb: { xs: 12, md: unitScale(48) },
         overflow: "hidden"
       }}
@@ -65,19 +64,29 @@ export function HomeHeroSection() {
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "1fr 0.92fr" },
-            alignItems: "center",
+            /* One column: no right-column portrait yet; a 2-col grid reserved empty space on tablet. */
+            gridTemplateColumns: "1fr",
+            alignItems: { xs: "stretch", md: "center" },
             width: "100%",
             py: { xs: 1, md: 0 },
-            pb: { xs: 1, md: 10 }
+            pb: { xs: 1, md: 6, lg: 10 }
           }}
         >
-          <Box sx={{ maxWidth: { xs: "100%", md: unitScale(720) }, textAlign: "left" }}>
+          <Box
+            sx={{
+              maxWidth: { xs: "100%", md: unitScale(560), lg: unitScale(640), xl: unitScale(720) },
+              textAlign: "left",
+              justifySelf: { md: "start" }
+            }}
+          >
             <Typography
               component="p"
               sx={{
                 ...homeHeroLeadOnDarkSx(theme),
-                fontSize: { xs: unitScale(30), md: unitScale(38) }
+                fontSize: { xs: unitScale(30), md: unitScale(34), lg: unitScale(38) },
+                maxWidth: { xs: "100%", sm: unitScale(540), md: unitScale(600) },
+                letterSpacing: "0.01em",
+                textShadow: heroTextShadow
               }}
             >
               {homeHeroContent.lead}
@@ -86,10 +95,13 @@ export function HomeHeroSection() {
               id="home-hero-heading"
               component="h1"
               sx={{
-                mt: 1.5,
+                mt: { xs: 1.5, md: 1.75 },
                 ...homeHeroDisplayOnDarkSx(theme),
-                lineHeight: 1.05,
-                fontSize: { xs: unitScale(52), md: unitScale(95) }
+                lineHeight: { xs: 1.08, md: 1.04, lg: 1.02 },
+                fontSize: { xs: unitScale(52), md: unitScale(76), lg: unitScale(95) },
+                letterSpacing: { xs: "-0.02em", md: "-0.015em", lg: 0 },
+                textWrap: { md: "balance" },
+                textShadow: heroTextShadow
               }}
             >
               {homeHeroContent.displayLine1}

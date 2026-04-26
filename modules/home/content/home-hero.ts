@@ -3,7 +3,7 @@
  */
 
 export const homeHeroContent = {
-  lead: "Happiness, Freedom & Peace Gets Unlocked with",
+  lead: "Happiness, Freedom & Peace — unlocked with",
   displayLine1: "Guru Maa",
   displayLine2: "Shubha Didi",
   bannerSrc: "/images/Home Page Photos/Home Page Banner.webp",

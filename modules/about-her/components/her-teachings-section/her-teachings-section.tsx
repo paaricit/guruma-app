@@ -27,13 +27,13 @@ const iconByKey: Record<HerTeachingIconKey, SvgIconComponent> = {
 };
 
 /** Section display — `xs` / `md` (fluid via `unitScale`). */
-const sectionHeadingFontSize = { xs: unitScale(34), md: unitScale(62) } as const;
+const sectionHeadingFontSize = { xs: unitScale(34), md: unitScale(48), lg: unitScale(62) } as const;
 
-const itemTitleFontSize = { xs: unitScale(17), md: unitScale(25) } as const;
+const itemTitleFontSize = { xs: unitScale(17), md: unitScale(22), lg: unitScale(25) } as const;
 
 const itemTitlePaddingBottom = { xs: unitScale(6), md: unitScale(8) } as const;
 
-const itemBodyFontSize = { xs: unitScale(15), md: unitScale(18) } as const;
+const itemBodyFontSize = { xs: unitScale(15), md: unitScale(16), lg: unitScale(18) } as const;
 
 const iconGlyphSize = { xs: unitScale(22), md: unitScale(28) } as const;
 
@@ -59,11 +59,11 @@ export function HerTeachingsSection() {
       aria-labelledby="her-teachings-heading"
       sx={{
         bgcolor: '#fff',
-        backgroundImage: { xs: "none", md: `url("${herTeachingsImageSrc}")` },
-        backgroundSize: { md: "30%" },
-        backgroundPosition: { md: teachingsBgPositionRight },
-        backgroundRepeat: { md: "no-repeat" },
-        py: { xs: 6, md: 10 }
+        backgroundImage: { xs: "none", lg: `url("${herTeachingsImageSrc}")` },
+        backgroundSize: { lg: "30%" },
+        backgroundPosition: { lg: teachingsBgPositionRight },
+        backgroundRepeat: { lg: "no-repeat" },
+        py: { xs: 6, md: 8, lg: 10 }
       }}
     >
       <Container
@@ -103,7 +103,7 @@ export function HerTeachingsSection() {
                     gap: { xs: 1.5, md: 2 },
                     alignItems: "flex-start",
                     minWidth: 0,
-                    width: { xs: "100%", md: "50%" }
+                    width: { xs: "100%", md: "100%", lg: "50%" }
                   }}
                 >
                   <Box

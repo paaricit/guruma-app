@@ -20,12 +20,14 @@ import { SectionBottomArc } from "@/component/section-top-curve";
 
 const blockHeadingFontSize = {
   xs: unitScale(32),
-  md: unitScale(40)
+  md: unitScale(36),
+  lg: unitScale(40)
 } as const;
 
 const blockBodyFontSize = {
   xs: unitScale(16),
-  md: unitScale(20)
+  md: unitScale(18),
+  lg: unitScale(20)
 } as const;
 
 const mediaRadius = unitScale(24);
@@ -38,12 +40,17 @@ const bodyCopyMaxWidth = unitScale(560);
 
 const visionMissionHeadingIconSize = unitScale(40);
 
+/** Stacked breakpoints (`xs`–`lg`): match mobile-like centered band on tablet; `lg+` two-column uses start alignment. */
 const visionMissionCopyPanelSx = {
   position: "relative" as const,
-  p: 4,
+  p: { xs: 2, sm: 3, md: 3.5, lg: 4 },
   borderRadius: 6,
   minWidth: 0,
-  zIndex: 11
+  zIndex: 11,
+  width: "100%",
+  maxWidth: { xs: "100%", md: unitScale(680), lg: "100%" },
+  mx: { xs: 0, md: "auto", lg: 0 },
+  textAlign: { xs: "left", md: "center", lg: "left" }
 } as const;
 
 /** Decorative SVG behind Vision / Mission copy (`public/.../mission-background.svg`). */
@@ -124,7 +131,11 @@ function VisionMissionHeadingWithIcon({
       direction="row"
       alignItems="center"
       spacing={{ xs: 1.25, md: 1.5 }}
-      sx={{ mb: 2 }}
+      sx={{
+        mb: 2,
+        width: "100%",
+        justifyContent: { xs: "flex-start", md: "center", lg: "flex-start" }
+      }}
     >
       <Box
         aria-hidden
@@ -241,15 +252,23 @@ export function AboutHerVisionMissionPathwaysSection() {
               }}
             >
               <Box sx={{ position: 'absolute', top: '-16%', left: '0', width: '100vw', height: '70%', background: '#fff' }}></Box>
-              <Container maxWidth="lg" sx={{
-                display: "grid",
-                gridTemplateColumns: { xs: "minmax(0, 1fr)", md: "minmax(0, 1fr) minmax(0, 1fr)" },
-                gap: { xs: 3, md: 5 },
-                alignItems: "center",
-                mb: { xs: 6, md: 8 },
-                pb: { xs: 6, md: 8 },
-                position: 'relative'
-              }}>
+              <Container
+                maxWidth="lg"
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: {
+                    xs: "minmax(0, 1fr)",
+                    md: "minmax(0, 1fr)",
+                    lg: "minmax(0, 1fr) minmax(0, 1fr)"
+                  },
+                  gap: { xs: 3, md: 4, lg: 5 },
+                  alignItems: "center",
+                  justifyItems: { xs: "stretch", md: "center", lg: "stretch" },
+                  mb: { xs: 6, md: 8, lg: 8 },
+                  pb: { xs: 6, md: 9, lg: 10 },
+                  position: "relative"
+                }}
+              >
                 <VisionMissionCopyPanel>
                   <VisionMissionHeadingWithIcon
                     heading={aboutHerVisionCopy.heading}
@@ -261,7 +280,9 @@ export function AboutHerVisionMissionPathwaysSection() {
                       fontSize: blockBodyFontSize,
                       lineHeight: { xs: 1.62, md: 1.65 },
                       color: bodyMuted,
-                      maxWidth: bodyCopyMaxWidth
+                      maxWidth: bodyCopyMaxWidth,
+                      mx: { xs: 0, md: "auto", lg: 0 },
+                      textAlign: { xs: "left", md: "center", lg: "left" }
                     }}
                   >
                     {aboutHerVisionCopy.body}
@@ -271,13 +292,13 @@ export function AboutHerVisionMissionPathwaysSection() {
                   sx={{
                     ...visionMissionImageFrameSx,
                     zIndex: 6,
-                    justifySelf: { xs: "center", md: "end" }
+                    justifySelf: { xs: "center", md: "center", lg: "end" }
                   }}
                 >
                   <Image
                     alt="Vision"
                     fill
-                    sizes="(max-width: 900px) 100vw, 50vw"
+                    sizes="(max-width: 1199px) 100vw, 50vw"
                     src={aboutHerVisionMissionAssets.vision}
                     style={{ objectFit: "cover" }}
                   />
@@ -295,10 +316,16 @@ export function AboutHerVisionMissionPathwaysSection() {
               maxWidth="lg"
               sx={{
                 display: "grid",
-                gridTemplateColumns: { xs: "minmax(0, 1fr)", md: "minmax(0, 1fr) minmax(0, 1fr)" },
-                gap: { xs: 3, md: 5 },
+                gridTemplateColumns: {
+                  xs: "minmax(0, 1fr)",
+                  md: "minmax(0, 1fr)",
+                  lg: "minmax(0, 1fr) minmax(0, 1fr)"
+                },
+                gap: { xs: 3, md: 4, lg: 5 },
                 alignItems: "center",
-                pb: { xs: 5, md: 9 }
+                justifyItems: { xs: "stretch", md: "center", lg: "stretch" },
+                pt: { xs: 0, md: 2, lg: 0 },
+                pb: { xs: 5, md: 7, lg: 9 }
               }}
             >
               <Box
@@ -306,14 +333,14 @@ export function AboutHerVisionMissionPathwaysSection() {
                   ...visionMissionImageFrameSx,
                   boxShadow: `0 ${unitScale(10)} ${unitScale(32)} ${mediaShadow}`,
                   order: { xs: 1, md: 1 },
-                  justifySelf: { xs: "center", md: "start" }
+                  justifySelf: { xs: "center", md: "center", lg: "start" }
                 }}
               >
                 <Image
                   alt="Mission"
                   fill
-                  sizes="(max-width: 900px) 100vw, 50vw"
-                  src={aboutHerVisionMissionAssets.mission}
+                    sizes="(max-width: 1199px) 100vw, 50vw"
+                    src={aboutHerVisionMissionAssets.mission}
                   style={{ objectFit: "cover" }}
                 />
               </Box>
@@ -328,7 +355,9 @@ export function AboutHerVisionMissionPathwaysSection() {
                     fontSize: blockBodyFontSize,
                     lineHeight: { xs: 1.62, md: 1.65 },
                     color: bodyMuted,
-                    maxWidth: bodyCopyMaxWidth
+                    maxWidth: bodyCopyMaxWidth,
+                    mx: { xs: 0, md: "auto", lg: 0 },
+                    textAlign: { xs: "left", md: "center", lg: "left" }
                   }}
                 >
                   {aboutHerMissionCopy.body}

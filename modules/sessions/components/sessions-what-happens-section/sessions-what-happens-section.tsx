@@ -86,7 +86,7 @@ export function SessionsWhatHappensSection() {
               lineHeight: { xs: 1.12, sm: 1.08, md: 1.05 },
               color: theme.palette.text.secondary,
               textAlign: "center",
-              mb: { xs: unitScale(24), sm: unitScale(28), md: unitScale(32) }
+              mb: { xs: unitScale(24), sm: unitScale(28), md: unitScale(72) }
             }}
           >
             What Happens in a Session
@@ -96,7 +96,7 @@ export function SessionsWhatHappensSection() {
               maxWidth: {
                 xs: "100%",
                 sm: "100%",
-                md: `calc((100% - ${sessionsGridGapMd.md}) / 2)`
+                md: `calc((100% - ${sessionsGridGapMd.md}) / 1.5)`
               },
               pb: { xs: 0, sm: sessionsMediaMinHeightSessionPhoto.sm, md: 0 }
             }}
