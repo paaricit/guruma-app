@@ -25,7 +25,6 @@ import { SectionTopArc } from "@/component/section-top-curve";
 import {
   ourProgramsSeekerExperiencesSectionBg,
   ourProgramsSeekerTestimonialCornerIcon,
-  ourProgramsSeekerTestimonials,
   ourProgramsSeekerVideos,
   type OurProgramsSeekerTestimonialItem,
   type OurProgramsSeekerVideoItem
@@ -396,16 +395,11 @@ function ProgramsSeekerTestimonialCards({
 }
 
 const DEFAULT_VIDEO_HEADING = "Experiences from Seekers";
-const DEFAULT_TESTIMONIALS_HEADING = "Hear what our global community has to say";
-const DEFAULT_TESTIMONIALS_DESCRIPTION = "Hear from those whose lives have been transformed by these sessions";
 
 export function OurProgramsSeekerExperiencesSection({
   videos = ourProgramsSeekerVideos,
-  testimonials = ourProgramsSeekerTestimonials,
   surface = "default",
-  videoStripHeading = DEFAULT_VIDEO_HEADING,
-  testimonialsBlockHeading = DEFAULT_TESTIMONIALS_HEADING,
-  testimonialsDescription = DEFAULT_TESTIMONIALS_DESCRIPTION
+  videoStripHeading = DEFAULT_VIDEO_HEADING
 }: OurProgramsSeekerExperiencesSectionProps) {
   const theme = useTheme();
   const isPlain = surface === "plain";
@@ -416,10 +410,7 @@ export function OurProgramsSeekerExperiencesSection({
   const [activeEmbedSrc, setActiveEmbedSrc] = useState<string | null>(null);
 
   const onLight = alpha(theme.palette.common.white, 0.92);
-  const onLightMuted = alpha(theme.palette.common.white, 0.9);
-  const plainSublead = alpha(theme.palette.text.primary, 0.68);
   const headingColor = isPlain ? theme.palette.guru.coral : alpha(theme.palette.common.white, 0.96);
-  const subleadColor = isPlain ? plainSublead : onLightMuted;
 
   const coral = theme.palette.guru.coral;
   const carouselNavIconSx = isPlain
@@ -487,6 +478,119 @@ export function OurProgramsSeekerExperiencesSection({
     >
 
       <Container sx={{ position: "relative", zIndex: 1, ...pageSectionGutterSx }} maxWidth="lg">
+
+        <Box aria-labelledby={testimonialsHeadingId} sx={{ mt: { xs: 7, md: 0 }, pb: 4 }}>
+          <Typography
+            id={testimonialsHeadingId}
+            component="h3"
+            sx={{
+              fontFamily: 'var(--font-forum), serif',
+              fontWeight: 400,
+              fontSize: { xs: unitScale(48), md: unitScale(70) },
+              lineHeight: { xs: 1.1, md: 1.2 },
+              color: alpha(theme.palette.common.white, 0.96),
+              textAlign: "center",
+              textTransform: "none",
+              mt: 0
+            }}
+          >
+            How to Enrol
+          </Typography>
+          <Typography
+            component="p"
+            sx={{
+              fontFamily: 'var(--font-inter), system-ui, sans-serif',
+              fontWeight: 400,
+              fontSize: { xs: unitScale(20), md: unitScale(24) },
+              lineHeight: { xs: 1.5, md: 1.45 },
+              textAlign: "center",
+              color: alpha(theme.palette.common.white, 0.9),
+              mx: "auto",
+              mt: 1.5,
+              mb: { xs: 3, md: 4.5 }
+            }}
+          >
+            Begin your transformation journey in three simple steps
+          </Typography>
+
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", md: "repeat(3, minmax(0, 1fr))" },
+              gap: { xs: 2, md: 2.5 }
+            }}
+          >
+            {[
+              {
+                number: "1",
+                title: "Choose Your Program",
+                body: "Review the programs above and select the one that resonates with your needs and goals."
+              },
+              {
+                number: "2",
+                title: "Submit Your Enquiry",
+                body: "Fill out the form below or contact us directly via WhatsApp or phone for personalized guidance."
+              },
+              {
+                number: "3",
+                title: "Begin Your Journey",
+                body: "We'll schedule an initial consultation to understand your needs and create a personalized plan."
+              }
+            ].map((step) => (
+              <Card
+                key={step.number}
+                sx={{
+                  borderRadius: unitScale(18),
+                  p: { xs: 2.5, md: 3 },
+                  bgcolor: alpha(theme.palette.common.white, 0.98),
+                  boxShadow: `0 ${unitScale(10)} ${unitScale(24)} ${alpha(theme.palette.common.black, 0.2)}`
+                }}
+              >
+                <Box
+                  sx={{
+                    width: unitScale(64),
+                    height: unitScale(64),
+                    borderRadius: "50%",
+                    bgcolor: "#E89A83",
+                    color: theme.palette.common.white,
+                    display: "grid",
+                    placeItems: "center",
+                    fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                    fontWeight: 700,
+                    fontSize: unitScale(34),
+                    mb: 2
+                  }}
+                >
+                  {step.number}
+                </Box>
+                <Typography
+                  sx={{
+                    fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                    fontWeight: 700,
+                    fontSize: unitScale(27),
+                    color: "#2D4A53",
+                    lineHeight: 1.25
+                  }}
+                >
+                  {step.title}
+                </Typography>
+                <Typography
+                  sx={{
+                    mt: 1.3,
+                    fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                    fontWeight: 400,
+                    fontSize: unitScale(18),
+                    lineHeight: 1.5,
+                    color: alpha("#2D4A53", 0.9)
+                  }}
+                >
+                  {step.body}
+                </Typography>
+              </Card>
+            ))}
+          </Box>
+        </Box>
+
         <Typography
           id={videoHeadingId}
           component="h2"
@@ -498,7 +602,8 @@ export function OurProgramsSeekerExperiencesSection({
             color: headingColor,
             textAlign: "center",
             textTransform: isPlain ? "capitalize" : "none",
-            mb: { xs: 2.5, md: 3.5 }
+            mb: { xs: 2.5, md: 3.5 },
+            mt: { xs: 7, md: 10 }
           }}
         >
           {videoStripHeading}
@@ -515,43 +620,7 @@ export function OurProgramsSeekerExperiencesSection({
 
         <ProgramsVideoEmbedDialog open={dialogOpen} embedSrc={activeEmbedSrc} onClose={closeVideo} />
 
-        <Typography
-          id={testimonialsHeadingId}
-          component="h3"
-          sx={{
-            mt: { xs: 7, md: 8.5 },
-            fontFamily: 'var(--font-forum), serif',
-            fontWeight: 400,
-            fontSize: displayTitleFontSize,
-            lineHeight: { xs: 1.1, md: 1.2 },
-            color: headingColor,
-            textAlign: "center",
-            textTransform: isPlain ? "capitalize" : "none"
-          }}
-        >
-          {testimonialsBlockHeading}
-        </Typography>
-        <Typography
-          component="p"
-          sx={{
-            fontFamily: 'var(--font-inter), system-ui, sans-serif',
-            fontWeight: 400,
-            fontSize: subleadFontSize,
-            lineHeight: { xs: 1.5, md: 1.45 },
-            textAlign: "center",
-            color: subleadColor,
-            mx: "auto",
-            mt: 2,
-            mb: 4,
-            pb: 4
-          }}
-        >
-          {testimonialsDescription}
-        </Typography>
 
-        <Box aria-labelledby={testimonialsHeadingId}>
-          <ProgramsSeekerTestimonialCards testimonials={testimonials} isPlain={isPlain} />
-        </Box>
       </Container>
       <Box sx={{ position: "absolute", bgcolor: "#D1F1F5", bottom: 0, left: 0, right: 0, zIndex: 1, height: unitScale(50) }}>
         <SectionTopArc surface="#D1F1F5" />
