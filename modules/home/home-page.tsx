@@ -20,7 +20,7 @@ export default function HomePage() {
       <DivineDiscoursesScheduleSection />
       <HomeCallbackSection />
       <HomeProgramsSection />
-      <WisdomInActionSection />
+      {/* <WisdomInActionSection /> */}
       <SeekerExperiencesSection />
       <SaptSadhanaHomePromoSection />
     </Box>

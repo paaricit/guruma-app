@@ -27,6 +27,6 @@ export const ourProgramsTestimonialSlides = [
 
 export const ourProgramsSeekerImpactStats = [
   ["5L+", "Lives Touched"],
-  ["50+", "Countries"],
+  ["7+", "Countries"],
   ["1000+", "Sessions"]
 ] as const;

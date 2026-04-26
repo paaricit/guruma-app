@@ -163,7 +163,7 @@ export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSa
             fill
             src={slides[prevIdx]}
             sizes="220px"
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "cover", objectPosition: "center top" }}
             aria-hidden
           />
         </Box>
@@ -195,7 +195,7 @@ export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSa
             fill
             src={slides[activeIndex]}
             sizes="(max-width: 600px) 92vw, 720px"
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "cover", objectPosition: "center top" }}
             priority={activeIndex === 0}
           />
         </Box>
@@ -220,7 +220,7 @@ export function SaptSadhanaStackCarousel({ slides, activeIndex, onStep }: SaptSa
             fill
             src={slides[nextIdx]}
             sizes="220px"
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "cover", objectPosition: "center top" }}
             aria-hidden
           />
         </Box>

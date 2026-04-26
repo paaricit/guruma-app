@@ -33,8 +33,8 @@ const footerLabelFontSize = { xs: pxToRem(16), md: pxToRem(21) };
 const ADDRESS =
   "4th floor, no 4, Abhinav centre Old no 19, New, off Chamiers Road, Cooperative Colony, Chennai, Tamil Nadu 600018";
 
-const PHONE = "+91-9123-456-789";
-const EMAIL = "info@iishtgold.com";
+const PHONE = "+91-9840539686";
+const EMAIL = "vinita@iisht.in";
 
 const footerServiceLinks = [
   { label: "About Her", href: "/about-her" },
@@ -49,7 +49,6 @@ const footerServiceLinks = [
 const socialLinks = [
   { label: "YouTube", href: "https://www.youtube.com", src: "/images/contact/YouTube - Negative.svg" },
   { label: "Facebook", href: "https://www.facebook.com", src: "/images/contact/Facebook - Negative.png" },
-  { label: "LinkedIn", href: "https://www.linkedin.com", src: "/images/contact/LinkedIn - Negative.svg" },
   { label: "Instagram", href: "https://www.instagram.com", src: "/images/contact/Instagram - Negative.png" }
 ] as const;
 
@@ -134,15 +133,33 @@ export default function SiteFooter() {
                   component="h2"
                   sx={(theme) => ({
                     ...footerColumnHeadingSx(theme),
-                    fontSize: unitScale(36)
+                    fontSize: unitScale(24),
+                    lineHeight: 1.2
                   })}
                 >
-                  IISHT
+                  <Box component="span" sx={{ display: "block", lineHeight: 1.52 }}>
+                    Meditation and Inner Healing Studio
+                  </Box>
+                  <Box
+                    component="span"
+                    sx={(theme) => ({
+                      display: "block",
+                      mt: 0.85,
+                      fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                      fontWeight: 500,
+                      fontSize: { xs: unitScale(15), md: unitScale(17) },
+                      lineHeight: 1.35,
+                      letterSpacing: "0.02em",
+                      color: alpha(theme.palette.primary.contrastText, 0.88)
+                    })}
+                  >
+                    — by Guru Maa Shubha Didi
+                  </Box>
                 </Typography>
                 <Typography
                   sx={(theme) => ({
                     ...footerBodyOnPrimarySx(theme),
-                    fontSize: unitScale(21),
+                    fontSize: unitScale(16),
                     mt: 1.2,
                     maxWidth: { sm: 420, md: "none" },
                     wordBreak: "break-word",

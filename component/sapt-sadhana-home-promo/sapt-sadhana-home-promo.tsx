@@ -12,12 +12,15 @@ import { SaptSadhanaCarouselControls } from "@/component/sapt-sadhana-carousel-c
 import { SaptSadhanaStackCarousel } from "@/components/site/sapt-sadhana-stack-carousel";
 import { unitScale } from "@/utils/unit-scale";
 
-const DEFAULT_SLIDES = [
-  "/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (1).webp",
-  "/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (2).webp",
-  "/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (3).webp",
-  "/images/Home Page Photos/SAPT SADHANA - Serving Beyond Self (4).webp"
-] as const;
+/**
+ * Carousel images from `public/images/sapt-sadhana-carousel/` (copied from your Sapt Sadhana asset folder).
+ * Canon `.CR3` raw files are omitted — they are not displayable in the browser; convert to JPEG/WebP to add.
+ */
+const SAPT_SADHANA_CAROUSEL_SLIDE_COUNT = 11;
+const DEFAULT_SLIDES: readonly string[] = Array.from(
+  { length: SAPT_SADHANA_CAROUSEL_SLIDE_COUNT },
+  (_, i) => `/images/sapt-sadhana-carousel/slide-${String(i + 1).padStart(2, "0")}.jpg`
+);
 
 const ARROW_LEFT = "/images/Home Page Photos/Arrow Left-poiint.png";
 const ARROW_RIGHT = "/images/Home Page Photos/Arrow Right-point.png";

@@ -16,6 +16,9 @@ export const guruMaIntroContent = {
   ctaHref: "/about-her",
   thumbnailSrc: "/images/Home Page Photos/Home page second section Video thumbnail-1.svg",
   thumbnailAlt: "Guru Maa session",
+  /** YouTube embed opened when the thumbnail is clicked */
+  introVideoEmbedSrc:
+    "https://www.youtube.com/embed/nrI3FKfI6Yw?si=uYvw8Ezbvxg_O2dr&autoplay=1",
   roles: [
     { iconSrc: "/images/Home Page Photos/group2_icons.png", label: "A Divine Guru" },
     { iconSrc: "/images/Home Page Photos/group2_icons1.png", label: "A Spiritual Guide" },

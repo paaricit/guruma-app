@@ -39,7 +39,7 @@ const saptSadhanaWaveIcon = "/images/Home Page Photos/sapt -sadhana-icon.png";
 const stats = [
   { value: "30+", label: "Years Divine Connect & Guidance" },
   { value: "5L+", label: "Beautiful Lives Touched" },
-  { value: "50+", label: "Countries, our Yogis Divine Abode" },
+  { value: "7+", label: "Countries, our Yogis Divine Abode" },
   { value: "10,000+", label: "Transformative Discourses & Workshops" }
 ];
 
@@ -289,7 +289,7 @@ export default function AboutHerPage() {
       <HerTeachingsSection />
 
       <HomeImpactStatsSection />
-      
+
 
       {/* --- Section: Sapt Sadhana promo (+ footer overlap; keep overflow visible) --- */}
       <Box

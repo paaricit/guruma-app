@@ -203,7 +203,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                     gap: { xs: 1, sm: 1.2 }
                   }}
                 >
-                  <Button
+                  {/* <Button
                     variant="contained"
                     href={row.primaryCtaHref}
                     sx={{
@@ -219,8 +219,8 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                     }}
                   >
                     {row.primaryCta}
-                  </Button>
-                  <Button
+                  </Button> */}
+                  {row.secondaryCta && <Button
                     variant="outlined"
                     href={row.secondaryCtaHref}
                     sx={{
@@ -241,7 +241,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                     }}
                   >
                     {row.secondaryCta}
-                  </Button>
+                  </Button>}
                 </Stack>
               </Box>
             </Box>

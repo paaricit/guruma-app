@@ -60,18 +60,21 @@ export const seekerVideos: readonly SeekerVideoItem[] = [
 
 export const seekerTestimonials: readonly SeekerTestimonialItem[] = [
   {
-    quote: "These events transformed my spiritual journey. The guidance is profoundly yet accessible to everyone.",
-    name: "Priya Sharma",
-    location: "Mumbai India"
+    quote:
+      "Sessions with Didi have helped me become more flexible and have increased my stress taking capacity. I'm now able to take each day as it comes and make the best out of it. I'm also able to confidently share my ideas with my colleagues and work in the most productive way which has only helped me thrive in the corporate world.",
+    name: "Sayoni Mukherjee",
+    location: "Bangalore"
   },
   {
-    quote: "I joined with no prior experience. The welcoming atmosphere and Guru Maa's wisdom have brought much peace into my life.",
-    name: "David Chen",
-    location: "Singapore"
+    quote:
+      "Guru Maa has not only gifted me mental stability but also the perfect balance of work and life. She has helped me channel my energies in the right and productive manner. Didi has truly brought about a lifestyle change showing me the best of both the spiritual and material world. All in all, giving my flight its perfect wings.",
+    name: "Karan Paul",
+    location: "Chennai"
   },
   {
-    quote: "Guru Maa Shubha Didi's words gave me clarity at the right time. It was not just motivation, it was a deeply practical experience.",
-    name: "Sarah Mitchell",
-    location: "London, UK"
+    quote:
+      "Mental health and inner peace play a pivotal role in ensuring that we are able to give our best at work. The workshops by Internal Insight have helped me maintain stability and harmony in an ever-changing work environment. I am now able to strike the perfect work-life balance. Shubha Didi's words have the power to mould the way you think towards a much more qualitative and productive direction.",
+    name: "Mohit Sanwal",
+    location: "Finland"
   }
 ];

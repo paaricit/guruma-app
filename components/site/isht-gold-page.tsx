@@ -32,7 +32,7 @@ const learnImage = "/images/Home Page Photos/Guided Meditation  BG.webp";
 const globalStats = [
   { value: "30+", label: "Years Divine Counsel & Guidance" },
   { value: "5L+", label: "Beautiful Lives Touched" },
-  { value: "50+", label: "Countries, our Yogis Divine Abode" },
+  { value: "7+", label: "Countries, our Yogis Divine Abode" },
   { value: "10,000+", label: "Transformative Sessions & Workshops" }
 ] as const;
 

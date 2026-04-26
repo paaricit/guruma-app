@@ -39,7 +39,7 @@ const seekerSubleadFontSize = {
 
 const seekerTestimonialQuoteFontSize = {
   xs: unitScale(16),
-  md: unitScale(20)
+  md: unitScale(18)
 } as const;
 
 const seekerTestimonialAuthorFontSize = {
@@ -415,30 +415,30 @@ export function SeekerExperiencesSection({
   const coral = theme.palette.guru.coral;
   const carouselNavIconSx = isPlain
     ? {
-        color: theme.palette.common.white,
-        border: `1px solid ${alpha(coral, 0.55)}`,
-        bgcolor: coral,
-        width: { xs: unitScale(48), md: unitScale(52) },
-        height: { xs: unitScale(48), md: unitScale(52) },
-        "&:hover": { bgcolor: alpha(coral, 0.88) },
-        "&.Mui-disabled": {
-          color: alpha(theme.palette.common.white, 0.55),
-          borderColor: alpha(coral, 0.35),
-          bgcolor: alpha(coral, 0.45)
-        }
+      color: theme.palette.common.white,
+      border: `1px solid ${alpha(coral, 0.55)}`,
+      bgcolor: coral,
+      width: { xs: unitScale(48), md: unitScale(52) },
+      height: { xs: unitScale(48), md: unitScale(52) },
+      "&:hover": { bgcolor: alpha(coral, 0.88) },
+      "&.Mui-disabled": {
+        color: alpha(theme.palette.common.white, 0.55),
+        borderColor: alpha(coral, 0.35),
+        bgcolor: alpha(coral, 0.45)
       }
+    }
     : {
-        color: onLight,
-        border: `1px solid ${alpha(theme.palette.common.white, 0.35)}`,
-        bgcolor: alpha(theme.palette.common.black, 0.2),
-        width: { xs: unitScale(48), md: unitScale(52) },
-        height: { xs: unitScale(48), md: unitScale(52) },
-        "&:hover": { bgcolor: alpha(theme.palette.common.black, 0.35) },
-        "&.Mui-disabled": {
-          color: alpha(theme.palette.common.white, 0.35),
-          borderColor: alpha(theme.palette.common.white, 0.12)
-        }
-      };
+      color: onLight,
+      border: `1px solid ${alpha(theme.palette.common.white, 0.35)}`,
+      bgcolor: alpha(theme.palette.common.black, 0.2),
+      width: { xs: unitScale(48), md: unitScale(52) },
+      height: { xs: unitScale(48), md: unitScale(52) },
+      "&:hover": { bgcolor: alpha(theme.palette.common.black, 0.35) },
+      "&.Mui-disabled": {
+        color: alpha(theme.palette.common.white, 0.35),
+        borderColor: alpha(theme.palette.common.white, 0.12)
+      }
+    };
 
   function openVideo(embedSrc: string) {
     setActiveEmbedSrc(embedSrc);
@@ -464,16 +464,16 @@ export function SeekerExperiencesSection({
         color: isPlain ? theme.palette.text.primary : theme.palette.common.white,
         ...(isPlain
           ? {
-              background: sessionsSeekerTestimonialsFaqBandGradient,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "100% 100%"
-            }
+            background: sessionsSeekerTestimonialsFaqBandGradient,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "100% 100%"
+          }
           : {
-              backgroundImage: `url("${encodePublicPath(seekerExperiencesSectionBg)}")`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "top"
-            })
+            backgroundImage: `url("${encodePublicPath(seekerExperiencesSectionBg)}")`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "top"
+          })
       }}
     >
       <Container sx={{ position: "relative", zIndex: 1, ...pageSectionGutterSx }} maxWidth="lg">

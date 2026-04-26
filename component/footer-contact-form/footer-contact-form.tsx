@@ -106,7 +106,7 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
           <Box>
             <FieldLabel
               htmlFor={fid("name")}
-              sx={{ fontSize: unitScale(14),fontFamily: 'var(--font-poppins), var(--font-inter), system-ui, sans-serif' }}
+              sx={{ fontSize: unitScale(14), fontFamily: 'var(--font-poppins), var(--font-inter), system-ui, sans-serif' }}
             >
               Name
             </FieldLabel>
@@ -201,40 +201,6 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
               <MenuItem value="OTHER" sx={{ fontSize: unitScale(14) }}>Other</MenuItem>
             </TextField>
           </Box>
-
-          <Box>
-            <FieldLabel htmlFor={fid("topic")} sx={{ fontSize: unitScale(14) }}>What would you like guidance on?</FieldLabel>
-            <TextField
-              id={fid("topic")}
-              name="topic"
-              fullWidth
-              size="small"
-              variant="outlined"
-              hiddenLabel
-              select
-              defaultValue=""
-              SelectProps={{
-                displayEmpty: true,
-                sx: { fontSize: unitScale(14), minHeight: unitScale(47) },
-                renderValue: (value) =>
-                  value === "" ? (
-                    <Typography component="span" variant="body2" sx={(theme) => ({ color: theme.palette.text.secondary, fontSize: unitScale(14) })}>
-                      Select a topic
-                    </Typography>
-                  ) : value === "general" ? (
-                    "General guidance"
-                  ) : (
-                    "Programs"
-                  )
-              }}
-            >
-              <MenuItem value="" disabled sx={{ fontSize: unitScale(14) }}>
-                Select a topic
-              </MenuItem>
-              <MenuItem value="general" sx={{ fontSize: unitScale(14) }}>General guidance</MenuItem>
-              <MenuItem value="programs" sx={{ fontSize: unitScale(14) }}>Programs</MenuItem>
-            </TextField>
-          </Box>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button
               type="submit"
@@ -247,7 +213,7 @@ export default function FooterContactForm({ sx, onSubmit }: FooterContactFormPro
                 margin: 'auto',
                 fontSize: unitScale(14),
                 minHeight: unitScale(47),
-                  width: unitScale(150),
+                width: unitScale(150),
                 "&:hover": { bgcolor: theme.palette.primary.dark, boxShadow: "none" }
               })}
             >

@@ -1,12 +1,17 @@
 "use client";
 
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import Image from "next/image";
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
+import { useCallback, useState } from "react";
 import { SectionTopArc } from "@/component/section-top-curve";
 import {
   guruIntroBodySx,
@@ -20,9 +25,91 @@ import {
 import { guruMaIntroContent } from "@/modules/home/content/guru-ma-intro";
 import { unitScale } from "@/utils/unit-scale";
 
+function GuruMaIntroVideoDialog({
+  open,
+  embedSrc,
+  onClose
+}: {
+  open: boolean;
+  embedSrc: string | null;
+  onClose: () => void;
+}) {
+  const theme = useTheme();
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="md"
+      fullWidth
+      aria-label="Guru Maa introduction video"
+      slotProps={{
+        paper: {
+          sx: { bgcolor: theme.palette.grey[900], maxHeight: "92vh" }
+        },
+        backdrop: {
+          sx: {
+            bgcolor: alpha(theme.palette.common.black, 0.78)
+          }
+        }
+      }}
+    >
+      <DialogContent sx={{ p: 0, position: "relative" }}>
+        <IconButton
+          type="button"
+          aria-label="Close video"
+          onClick={onClose}
+          sx={{
+            position: "absolute",
+            top: unitScale(8),
+            right: unitScale(8),
+            zIndex: 2,
+            color: theme.palette.common.white,
+            bgcolor: alpha(theme.palette.common.black, 0.5),
+            "&:hover": { bgcolor: alpha(theme.palette.common.black, 0.7) }
+          }}
+        >
+          <CloseRoundedIcon />
+        </IconButton>
+        {embedSrc ? (
+          <Box sx={{ position: "relative", width: "100%", pt: "56.25%" }}>
+            <Box
+              component="iframe"
+              key={embedSrc}
+              title="YouTube video player"
+              src={embedSrc}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+              sx={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                border: "none"
+              }}
+            />
+          </Box>
+        ) : null}
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 export function HomeGuruMaIntroSection() {
   const theme = useTheme();
   const mediaRadius = { xs: unitScale(24), md: unitScale(32) };
+  const [videoOpen, setVideoOpen] = useState(false);
+  const [embedSrc, setEmbedSrc] = useState<string | null>(null);
+
+  const openVideo = useCallback(() => {
+    setEmbedSrc(guruMaIntroContent.introVideoEmbedSrc);
+    setVideoOpen(true);
+  }, []);
+
+  const closeVideo = useCallback(() => {
+    setVideoOpen(false);
+    setEmbedSrc(null);
+  }, []);
 
   return (
     <Box
@@ -57,12 +144,27 @@ export function HomeGuruMaIntroSection() {
           }}
         >
           <Box
+            component="button"
+            type="button"
+            onClick={openVideo}
+            aria-label="Play Guru Maa introduction video"
             sx={{
               position: "relative",
               borderRadius: mediaRadius,
               overflow: "hidden",
-              // border: (t) => `2px solid ${alpha(t.palette.common.white, 0.92)}`,
-              // boxShadow: (t) => `0 1rem 2.5rem ${alpha(t.palette.primary.dark, 0.14)}`
+              cursor: "pointer",
+              border: "none",
+              p: 0,
+              m: 0,
+              width: "100%",
+              bgcolor: "transparent",
+              textAlign: "left",
+              font: "inherit",
+              color: "inherit",
+              "&:focus-visible": {
+                outline: `3px solid ${alpha(theme.palette.primary.main, 0.85)}`,
+                outlineOffset: unitScale(4)
+              }
             }}
           >
             <Box sx={{ position: "relative", width: "100%", aspectRatio: "1 / 1", minHeight: 0 }}>
@@ -203,6 +305,8 @@ export function HomeGuruMaIntroSection() {
             </Button>
           </Box>
         </Box>
+
+        <GuruMaIntroVideoDialog open={videoOpen} embedSrc={embedSrc} onClose={closeVideo} />
       </Container>
     </Box>
   );

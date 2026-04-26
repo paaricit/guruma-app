@@ -128,7 +128,7 @@ export function HomeHeroSection() {
               >
                 {homeHeroContent.primaryCta.label}
               </Button>
-              <Button
+              {/* <Button
                 component={Link}
                 href={homeHeroContent.secondaryCta.href}
                 variant="outlined"
@@ -153,7 +153,7 @@ export function HomeHeroSection() {
                 }}
               >
                 {homeHeroContent.secondaryCta.label}
-              </Button>
+              </Button> */}
             </Stack>
           </Box>
 
