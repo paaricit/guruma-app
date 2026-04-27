@@ -15,6 +15,7 @@ const navItems = [
   { label: "Events", href: "/events" },
   { label: "Our Programs", href: "/our-programs" },
   { label: "Sapt Sadhana", href: "/sapt-sadhana" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" }
 ];
 

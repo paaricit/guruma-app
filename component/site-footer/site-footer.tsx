@@ -42,7 +42,7 @@ const footerServiceLinks = [
   { label: "Events", href: "/events" },
   { label: "Our Programs", href: "/our-programs" },
   { label: "Sapt Sadhana", href: "/sapt-sadhana" },
-  { label: "Blogs", href: "/wisdom-blogs" }
+  { label: "Blogs", href: "/blog" }
 ] as const;
 
 /** White-on-transparent “negative” marks — same asset set as `components/site/contact-page.tsx` (Figma handoff). */

@@ -15,6 +15,6 @@ export const homeHeroContent = {
   },
   secondaryCta: {
     label: "Knowledge Shala : Explore",
-    href: "/wisdom-blogs"
+    href: "/blog"
   }
 } as const;
