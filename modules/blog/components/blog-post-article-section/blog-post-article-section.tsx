@@ -149,7 +149,12 @@ export function BlogPostArticleSection({ post }: { post: BlogPost }) {
       <Box
         sx={{
           position: "relative",
-          background: "linear-gradient(180deg, #D1F1F5 0%, #F7F7F5 100%)",
+          backgroundColor: "#D1F1F5",
+          backgroundImage:
+            "linear-gradient(180deg, rgba(209, 241, 245, 0.92) 0%, rgba(247, 247, 245, 0.92) 100%), url('/images/blog/internal-bg-spiral.svg')",
+          backgroundRepeat: "no-repeat, no-repeat",
+          backgroundPosition: "center center, center center",
+          backgroundSize: "cover, contain",
           pt: { xs: unitScale(24), md: unitScale(32) },
           pb: { xs: unitScale(24), md: unitScale(36) }
         }}

@@ -151,11 +151,13 @@ export function BlogListSection({ posts }: { posts: readonly BlogPost[] }) {
       aria-labelledby="blog-list-heading"
       sx={{
         position: "relative",
-        bgcolor: '#F7F7F5',
+        bgcolor: "#F7F7F5",
         pt: { xs: unitScale(8), md: unitScale(12) },
         pb: { xs: unitScale(48), md: unitScale(72) },
-        backgroundImage: `radial-gradient(${alpha(theme.palette.guru.warm, 0.12)} 1px, transparent 1px)`,
-        backgroundSize: `${unitScale(14)} ${unitScale(14)}`
+        backgroundImage: "url('/images/blog/listing-bg-spiral.png')",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "right center",
+        backgroundSize: { xs: "75%", md: "52%" }
       }}
     >
       <SectionTopArc surface="#F7F7F5" bottom="100%" />
