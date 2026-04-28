@@ -14,6 +14,7 @@ import { unitScale } from "@/utils/unit-scale";
 export type OurProgramsProgramPageShellProps = {
   hero: OurProgramsProgramHero;
   children?: ReactNode;
+  beforeSeekerSection?: ReactNode;
   /** Optional overrides passed through to `OurProgramsSeekerExperiencesSection`. */
   seekerVideoStripHeading?: string;
   seekerTestimonialsHeading?: string;
@@ -36,6 +37,7 @@ export function OurProgramsProgramPageShell(props: OurProgramsProgramPageShellPr
   const {
     hero,
     children,
+    beforeSeekerSection,
     seekerVideoStripHeading,
     seekerTestimonialsHeading,
     seekerTestimonialsDescription,
@@ -59,6 +61,8 @@ export function OurProgramsProgramPageShell(props: OurProgramsProgramPageShellPr
       {!omitPhotoGallery ? (
         <OurProgramsPhotoGallerySection slides={photoGallerySlides} heading={photoGalleryHeading} />
       ) : null}
+
+      {beforeSeekerSection}
 
       <OurProgramsSeekerExperiencesSection
         videoStripHeading={seekerVideoStripHeading}

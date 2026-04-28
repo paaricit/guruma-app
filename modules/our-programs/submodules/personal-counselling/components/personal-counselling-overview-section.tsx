@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -16,7 +17,7 @@ import { unitScale } from "@/utils/unit-scale";
 const cardHeadingFontSize = unitScale(24);
 const cardBodyFontSize = unitScale(20);
 
-export function PersonalCounsellingOverviewSection() {
+export function PersonalCounsellingOverviewSection({ children }: { children?: ReactNode }) {
   const c = personalCounsellingOverviewContent;
   const lotusBg = encodePublicPath(c.lotusBg);
   const spiralBg = encodePublicPath(c.spiralBg);
@@ -32,11 +33,11 @@ export function PersonalCounsellingOverviewSection() {
         position: "relative",
         overflow: "visible",
         py: { xs: 5, md: 7 },
-        background: "linear-gradient(180deg, #F3F3EF 0%, #D1F1F5 100%)"
+        background: "linear-gradient(0deg, #F3F3EF 0%, #D1F1F5 100%)"
       }}
     >
       <Box aria-hidden sx={{ display: { xs: "none", lg: "block" }, lineHeight: 0 }}>
-        <SectionSoftWaveCap fill="#F3F3EF" height={unitScale(130)} bottom="100%" />
+        <SectionSoftWaveCap fill="#D1F1F5" height={unitScale(130)} bottom="100%" />
       </Box>
 
       <Box
@@ -222,7 +223,14 @@ export function PersonalCounsellingOverviewSection() {
                   borderRadius: unitScale(12),
                   p: { xs: 2.2, md: 2.8 },
                   minWidth: 0,
-                  boxShadow: (t) => `0 ${unitScale(6)} ${unitScale(24)} ${alpha(t.palette.primary.dark, 0.1)}`
+                  boxShadow: (t) => `0 ${unitScale(6)} ${unitScale(24)} ${alpha(t.palette.primary.dark, 0.1)}`,
+                  position: { xs: 'relative', md: 'absolute' },
+                  right: '0',
+                  width: { xs: '100%', md: '40%' },
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)'
+
                 }}
               >
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1.2, mb: 1 }}>
@@ -273,11 +281,12 @@ export function PersonalCounsellingOverviewSection() {
             </Box>
           </Box>
         </Stack>
+        {children ? <Box sx={{ mt: { xs: unitScale(22), md: unitScale(30) } }}>{children}</Box> : null}
       </Container>
 
-      <Box sx={{ position: "absolute", top: "108%", left: 0, right: 0, zIndex: 1, display: { xs: "none", lg: "block" } }}>
+      {/* <Box sx={{ position: "absolute", top: "108%", left: 0, right: 0, zIndex: 1, display: { xs: "none", lg: "block" } }}>
         <SectionSoftWaveCap fill="#D1F1F5" height={unitScale(130)} mirror placement="bottom" />
-      </Box>
+      </Box> */}
     </Box>
   );
 }
