@@ -80,6 +80,8 @@ export function OurProgramsProgramHeroSection({ hero, positionY }: OurProgramsPr
           zIndex: 1,
           ...pageSectionGutterSx,
           py: { xs: unitScale(48), md: unitScale(72) },
+          mt: { xs: unitScale(40), md: 0 },
+
           textAlign: "center"
         }}
       >
@@ -91,7 +93,7 @@ export function OurProgramsProgramHeroSection({ hero, positionY }: OurProgramsPr
               fontWeight: 400,
               fontSize: heroHeadingFontSize,
               lineHeight: { xs: 1.1, md: 1.08 },
-              color: theme.palette.common.white
+              color: theme.palette.common.white,
             }}
           >
             {hero.heading}

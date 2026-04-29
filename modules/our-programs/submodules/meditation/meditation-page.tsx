@@ -1,6 +1,7 @@
 "use client";
 
 import { OurProgramsProgramPageShell } from "../../components";
+import { meditationPhotoGalleryMobileTabletSlides } from "../../content/meditation-photo-gallery-mobile-slides";
 import { meditationPhotoGallerySlides } from "../../content/meditation-photo-gallery-slides";
 import { meditationProgramsProgramHero } from "../../content/our-programs-program-heroes";
 import { MeditationOverviewSection } from "./components";
@@ -11,6 +12,7 @@ export default function OurProgramsMeditationPage() {
       hero={meditationProgramsProgramHero}
       omitSeekerHowToEnrol
       photoGallerySlides={meditationPhotoGallerySlides}
+      photoGalleryMobileTabletSlides={meditationPhotoGalleryMobileTabletSlides}
     >
       <MeditationOverviewSection />
     </OurProgramsProgramPageShell>

@@ -103,8 +103,8 @@ export function HomeHeroSection() {
               component="p"
               sx={{
                 ...homeHeroLeadOnDarkSx(theme),
-                fontSize: { xs: unitScale(30), md: unitScale(34), lg: unitScale(38) },
-                maxWidth: { xs: "100%", sm: unitScale(540), md: unitScale(600) },
+                fontSize: { xs: unitScale(20), md: unitScale(34), lg: unitScale(38) },
+                maxWidth: { xs: "55%", sm: unitScale(540), md: unitScale(600) },
                 letterSpacing: "0.01em",
                 textShadow: heroTextShadow
               }}
@@ -149,7 +149,7 @@ export function HomeHeroSection() {
                   fontSize: { xs: unitScale(16), md: unitScale(18) },
                   textTransform: "none",
                   boxShadow: "none",
-                  width: { xs: "100%", sm: "auto" },
+                  width: { xs: "50%", sm: "auto" },
                   whiteSpace: { xs: "normal", sm: "nowrap" },
                   textAlign: "center",
                   "&:hover": {

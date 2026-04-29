@@ -120,7 +120,7 @@ export function SaptSadhanaHomePromoSection({
         background: "linear-gradient(180deg, #F3F2EE 0%, #FFF 50%, #D1F1F5 100%)",
         pb: { xs: 7, md: 6 },
         overflow: "visible",
-        my: { xs: -2, md: 0 }
+        mt: { xs: -4, md: 0 }
       }}
     >
       <SectionTopArc surface="#F3F2EE" />
@@ -145,7 +145,7 @@ export function SaptSadhanaHomePromoSection({
               sx={{
                 position: "absolute",
                 inset: 0,
-                transform: "translateY(-49px)"
+                transform: {xs: "translateY(-29px)", md: "translateY(-49px)"}
               }}
             >
               <Image

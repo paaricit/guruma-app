@@ -21,6 +21,8 @@ export type OurProgramsProgramPageShellProps = {
   seekerTestimonialsDescription?: string;
   /** Optional image URLs for the Photo Gallery carousel (defaults in `our-programs-photo-gallery` content). */
   photoGallerySlides?: readonly string[];
+  /** Optional PNG (or other) frames for gallery below `lg`; desktop uses `photoGallerySlides`. */
+  photoGalleryMobileTabletSlides?: readonly string[];
   photoGalleryHeading?: string;
   positionY?: "top" | "bottom";
   /** When true, skips `OurProgramsPhotoGallerySection` (e.g. marriage counselling route). */
@@ -42,6 +44,7 @@ export function OurProgramsProgramPageShell(props: OurProgramsProgramPageShellPr
     seekerTestimonialsHeading,
     seekerTestimonialsDescription,
     photoGallerySlides,
+    photoGalleryMobileTabletSlides,
     photoGalleryHeading,
     omitPhotoGallery = false,
     omitSeekerHowToEnrol = false
@@ -59,7 +62,11 @@ export function OurProgramsProgramPageShell(props: OurProgramsProgramPageShellPr
       ) : null}
 
       {!omitPhotoGallery ? (
-        <OurProgramsPhotoGallerySection slides={photoGallerySlides} heading={photoGalleryHeading} />
+        <OurProgramsPhotoGallerySection
+          slides={photoGallerySlides}
+          mobileTabletSlides={photoGalleryMobileTabletSlides}
+          heading={photoGalleryHeading}
+        />
       ) : null}
 
       {beforeSeekerSection}

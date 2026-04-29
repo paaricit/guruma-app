@@ -43,7 +43,7 @@ const visionMissionHeadingIconSize = unitScale(40);
 /** Stacked breakpoints (`xs`–`lg`): match mobile-like centered band on tablet; `lg+` two-column uses start alignment. */
 const visionMissionCopyPanelSx = {
   position: "relative" as const,
-  p: { xs: 2, sm: 3, md: 3.5, lg: 4 },
+  p: { xs: 3, sm: 3, md: 3.5, lg: 4 },
   borderRadius: 6,
   minWidth: 0,
   zIndex: 11,

@@ -105,7 +105,10 @@ export function OurProgramsMintOverviewSection({ content, children }: OurProgram
               gap: { xs: 3, md: 4 },
               justifyContent: "space-between",
               alignItems: "center",
-              mx: "auto !important"
+              mx: "auto !important",
+              '@media (max-width: 767px)': {
+                px: `0 !important`
+              },
             }}
             component={Container}
             maxWidth="lg"
@@ -120,7 +123,7 @@ export function OurProgramsMintOverviewSection({ content, children }: OurProgram
                     fontFamily: "var(--font-inter), system-ui, sans-serif",
                     fontWeight: 700,
                     color: "text.primary",
-                    fontSize: unitScale(23),
+                    fontSize: {xs: unitScale(20), md: unitScale(23)},
                     textTransform: "uppercase"
                   }}
                 >
@@ -185,7 +188,10 @@ export function OurProgramsMintOverviewSection({ content, children }: OurProgram
                 gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
                 gap: { xs: 2.25, md: 3 },
                 alignItems: "start",
-                mt: { xs: unitScale(10), md: unitScale(28) }
+                mt: { xs: unitScale(10), md: unitScale(28) },
+                '@media (max-width: 767px)': {
+                  px: `0 !important`
+                },
               }}
               component={Container}
               maxWidth="lg"

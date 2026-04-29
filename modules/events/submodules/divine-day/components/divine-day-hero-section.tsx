@@ -122,7 +122,7 @@ export function DivineDayHeroSection() {
         />
       </Box>
       <Container maxWidth={pageContainerMaxWidth} sx={{ position: "relative", zIndex: 2, py: { xs: unitScale(16), lg: unitScale(20) }, ...pageSectionGutterSx }}>
-        <Box sx={{ maxWidth: { xs: "60%", lg: "70%" } }}>
+        <Box sx={{ maxWidth: { xs: "55%", lg: "70%" } }}>
           <Typography
             id="divine-day-hero-heading"
             component="h1"

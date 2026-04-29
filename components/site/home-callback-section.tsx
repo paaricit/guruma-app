@@ -166,7 +166,9 @@ export function HomeCallbackSection() {
             justifyContent: { xs: "center", md: "flex-start" },
             width: "100%",
             "&:hover": { bgcolor: "transparent", boxShadow: "none", opacity: 0.85 },
-            "&.Mui-disabled": { color: "rgba(3,25,66,0.45)" }
+            "&.Mui-disabled": { color: "rgba(3,25,66,0.45)" },
+            pt: { xs: unitScale(10), md: 0 },
+            pb: { xs: unitScale(20), md: 0 },
           }}
         >
           <Typography

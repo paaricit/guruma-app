@@ -70,7 +70,9 @@ export function MarriageCounsellingPlansSection({
         py: { xs: unitScale(24), sm: unitScale(32), md: unitScale(44) }
       }}
     >
-      <Container maxWidth={pageContainerMaxWidth} sx={pageSectionGutterSx}>
+      <Container maxWidth={pageContainerMaxWidth} sx={{...pageSectionGutterSx, '@media (max-width: 767px)': {
+        px: `0 !important`
+      },}}>
         <Typography
           variant="h2"
           sx={{

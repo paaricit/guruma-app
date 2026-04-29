@@ -20,7 +20,7 @@ import { encodePublicPath } from "@/utils/encode-public-path";
 import { unitScale } from "@/utils/unit-scale";
 
 const titleFontSize = {
-  xs: unitScale(40),
+  xs: unitScale(44),
   md: unitScale(52),
   lg: unitScale(72)
 } as const;
@@ -144,7 +144,7 @@ export function AboutHerHeroSection() {
       >
         <Box
           sx={{
-            maxWidth: { xs: "100%", md: `min(${unitScale(640)}, 92%)`, lg: `min(${unitScale(755)}, 52%)` },
+            maxWidth: { xs: "59%", md: `min(${unitScale(640)}, 92%)`, lg: `min(${unitScale(755)}, 52%)` },
             mt: { xs: -2, md: -2.5, lg: 0 }
           }}
         >

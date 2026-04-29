@@ -319,7 +319,7 @@ export function homeHeroMobileBannerOverlaySx(theme: Theme) {
     zIndex: 1,
     display: { xs: "block", md: "none" },
     pointerEvents: "none" as const,
-    background: `linear-gradient(90deg, ${alpha(ink, 0.9)} 0%, ${alpha(ink, 0.52)} 44%, ${alpha(ink, 0.14)} 100%)`
+    // background: `linear-gradient(90deg, ${alpha(ink, 0.9)} 0%, ${alpha(ink, 0.52)} 44%, ${alpha(ink, 0.14)} 100%)`
   };
 }
 
