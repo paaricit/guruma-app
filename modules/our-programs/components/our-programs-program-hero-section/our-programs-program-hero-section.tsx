@@ -49,7 +49,7 @@ export function OurProgramsProgramHeroSection({ hero, positionY }: OurProgramsPr
         position: "relative",
         width: 1,
         maxWidth: "100%",
-        minHeight: unitScale(720),
+        minHeight:{ xs: unitScale(420), md: unitScale(720) },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -62,7 +62,7 @@ export function OurProgramsProgramHeroSection({ hero, positionY }: OurProgramsPr
         fill
         priority
         sizes="100vw"
-        style={{ objectFit: "cover", objectPosition: `center ${positionY ?? 'center'}` }}
+        style={{ objectFit: "cover", objectPosition: `center ${positionY ?? "center"}` }}
       />
       <Box
         aria-hidden

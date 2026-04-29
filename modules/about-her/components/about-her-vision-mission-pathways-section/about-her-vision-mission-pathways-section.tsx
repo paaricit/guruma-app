@@ -266,7 +266,7 @@ export function AboutHerVisionMissionPathwaysSection() {
                   justifyItems: { xs: "stretch", md: "center", lg: "stretch" },
                   mb: { xs: 6, md: 8, lg: 8 },
                   pb: { xs: 6, md: 9, lg: 10 },
-                  position: "relative"
+                  position: "relative",
                 }}
               >
                 <VisionMissionCopyPanel>

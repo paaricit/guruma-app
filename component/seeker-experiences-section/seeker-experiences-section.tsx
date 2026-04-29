@@ -148,7 +148,7 @@ function SeekerVideoCarousel({
                     position: "relative",
                     borderRadius: unitScale(8),
                     overflow: "hidden",
-                    minHeight: { xs: unitScale(220), md: unitScale(300) },
+                    minHeight: { xs: unitScale(260), md: unitScale(300) },
                     width: "100%",
                     maxWidth: "100%",
                     height: "100%",

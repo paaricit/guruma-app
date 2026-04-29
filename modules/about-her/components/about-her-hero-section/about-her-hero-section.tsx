@@ -1,19 +1,22 @@
 "use client";
 
+import Image from "next/image";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
 import {
   aboutHerHeroBannerSrc,
+  aboutHerHeroBannerSrcMobile,
   aboutHerHeroBody,
   aboutHerHeroTitle
 } from "@/modules/about-her/content/about-her-hero";
 import {
   homeHeroImageLayerSx,
-  homeHeroMobileGradientBackdropSx,
+  homeHeroMobileBannerOverlaySx,
   pageSectionGutterSx
 } from "@/theme/page-section";
+import { encodePublicPath } from "@/utils/encode-public-path";
 import { unitScale } from "@/utils/unit-scale";
 
 const titleFontSize = {
@@ -45,7 +48,7 @@ export function AboutHerHeroSection() {
         position: "relative",
         display: "flex",
         flexDirection: "column",
-        minHeight: { xs: "min(88dvh, 760px)", md: "min(100dvh, 880px)", lg: "120vh" },
+        minHeight: { xs: "min(55dvh, 760px)", md: "min(100dvh, 880px)", lg: "120vh" },
         bgcolor: { xs: "primary.dark", md: "transparent" },
         /* `lg+`: unchanged desktop offset. `<lg` (phone / tablet): tighter top so copy sits higher under the header. */
         pt: { xs: unitScale(52), md: unitScale(44), lg: unitScale(96) },
@@ -54,7 +57,25 @@ export function AboutHerHeroSection() {
         pb: { xs: unitScale(32), md: unitScale(48), lg: 0 }
       }}
     >
-      <Box sx={homeHeroMobileGradientBackdropSx(theme)} aria-hidden />
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          display: { xs: "block", md: "none" }
+        }}
+        aria-hidden
+      >
+        <Image
+          src={encodePublicPath(aboutHerHeroBannerSrcMobile)}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "right center" }}
+        />
+      </Box>
+      <Box sx={homeHeroMobileBannerOverlaySx(theme)} aria-hidden />
       <Box
         aria-hidden
         sx={[

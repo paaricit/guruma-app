@@ -52,7 +52,7 @@ export function OurProgramsProgramPageShell(props: OurProgramsProgramPageShellPr
       <OurProgramsProgramHeroSection hero={hero} positionY={props.positionY} />
 
       {children ? (
-        <Box sx={{ py: { xs: unitScale(24), md: unitScale(32) } }}>
+        <Box sx={{ py: { xs: 0, md: unitScale(32) } }}>
           <Stack spacing={unitScale(10)}>{children}</Stack>
 
         </Box>

@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
-import { pageContainerMaxWidth, pageSectionGutterSx } from "@/theme/page-section";
+import { homeHeroMobileBannerOverlaySx, pageContainerMaxWidth, pageSectionGutterSx } from "@/theme/page-section";
+import { encodePublicPath } from "@/utils/encode-public-path";
 import { unitScale } from "@/utils/unit-scale";
 import { divineDayImages, divineDayRegisterWhatsappHref } from "../content/divine-day-content";
 
@@ -29,6 +30,25 @@ export function DivineDayHeroSection() {
       }}
     >
       <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          display: { xs: "block", md: "none" }
+        }}
+        aria-hidden
+      >
+        <Image
+          src={encodePublicPath(divineDayImages.heroBannerMobile)}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "right center" }}
+        />
+      </Box>
+      <Box sx={homeHeroMobileBannerOverlaySx(theme)} aria-hidden />
+      <Box
         aria-hidden
         sx={{
           position: "absolute",
@@ -40,7 +60,7 @@ export function DivineDayHeroSection() {
           backgroundRepeat: "no-repeat",
           display: "none",
           "@media (prefers-reduced-motion: reduce)": {
-            display: "block"
+            display: { xs: "none", md: "block" }
           }
         }}
       />
@@ -60,7 +80,7 @@ export function DivineDayHeroSection() {
           height: "100%",
           objectFit: "cover",
           objectPosition: "center",
-          display: "block",
+          display: { xs: "none", md: "block" },
           "@media (prefers-reduced-motion: reduce)": {
             display: "none"
           }
@@ -68,12 +88,41 @@ export function DivineDayHeroSection() {
       >
         <source src={heroBackgroundVideoSrc} type="video/mp4" />
       </Box>
-      <Box sx={{ position: "absolute", inset: 0, background: `linear-gradient(105deg, ${alpha(theme.palette.primary.dark, 0.92)} 0%, ${alpha(theme.palette.primary.dark, 0.5)} 48%, ${alpha(theme.palette.primary.dark, 0.15)} 100%)` }} />
-      <Box sx={{ position: "absolute", right: 0, top: 0, bottom: 0, width: { xs: "100%", lg: "50%" }, maxWidth: unitScale(820), opacity: { xs: 0.3, lg: 1 } }}>
-        <Image alt="Guru Maa at Divine Day" fill priority src={divineDayImages.heroOverlap} sizes="(max-width: 1199px) 100vw, 50vw" style={{ objectFit: "cover", objectPosition: "center top" }} />
+      <Box
+        aria-hidden
+        sx={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 1,
+          pointerEvents: "none",
+          display: { xs: "none", md: "block" },
+          background: `linear-gradient(105deg, ${alpha(theme.palette.primary.dark, 0.92)} 0%, ${alpha(theme.palette.primary.dark, 0.5)} 48%, ${alpha(theme.palette.primary.dark, 0.15)} 100%)`
+        }}
+      />
+      <Box
+        sx={{
+          position: "absolute",
+          right: 0,
+          top: 0,
+          bottom: 0,
+          zIndex: 1,
+          width: { md: "100%", lg: "50%" },
+          maxWidth: unitScale(820),
+          opacity: { md: 0.3, lg: 1 },
+          display: { xs: "none", md: "block" }
+        }}
+      >
+        <Image
+          alt="Guru Maa at Divine Day"
+          fill
+          priority
+          src={divineDayImages.heroOverlap}
+          sizes="(max-width: 1199px) 100vw, 50vw"
+          style={{ objectFit: "cover", objectPosition: "center top" }}
+        />
       </Box>
-      <Container maxWidth={pageContainerMaxWidth} sx={{ position: "relative", zIndex: 1, py: { xs: unitScale(16), lg: unitScale(20) }, ...pageSectionGutterSx }}>
-        <Box sx={{ maxWidth: { xs: "100%", lg: "70%" } }}>
+      <Container maxWidth={pageContainerMaxWidth} sx={{ position: "relative", zIndex: 2, py: { xs: unitScale(16), lg: unitScale(20) }, ...pageSectionGutterSx }}>
+        <Box sx={{ maxWidth: { xs: "60%", lg: "70%" } }}>
           <Typography
             id="divine-day-hero-heading"
             component="h1"

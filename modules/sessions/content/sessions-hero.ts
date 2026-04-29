@@ -3,6 +3,7 @@ import { sessionsImages } from "./sessions-images";
 /** Figma node `1:8378` — Sessions hero banner copy + asset. */
 export const sessionsHeroContent = {
   bannerSrc: sessionsImages.banner,
+  bannerSrcMobile: sessionsImages.bannerMobile,
   badgeLabel: "FREE for All Seekers",
   title: "Live Sessions",
   /** Two spaces after the period per approved frame. */

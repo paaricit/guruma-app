@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -14,10 +15,11 @@ import {
   homeHeroGradientWashSx,
   homeHeroImageLayerSx,
   homeHeroLeadOnDarkSx,
-  homeHeroMobileGradientBackdropSx,
+  homeHeroMobileBannerOverlaySx,
   pageContainerMaxWidth,
   pageSectionGutterSx
 } from "@/theme/page-section";
+import { encodePublicPath } from "@/utils/encode-public-path";
 
 export function HomeHeroSection() {
   const theme = useTheme();
@@ -44,7 +46,25 @@ export function HomeHeroSection() {
         overflow: "hidden"
       }}
     >
-      <Box sx={homeHeroMobileGradientBackdropSx(theme)} aria-hidden />
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          display: { xs: "block", md: "none" }
+        }}
+        aria-hidden
+      >
+        <Image
+          src={encodePublicPath(homeHeroContent.bannerSrcMobile)}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "right center" }}
+        />
+      </Box>
+      <Box sx={homeHeroMobileBannerOverlaySx(theme)} aria-hidden />
       <Box sx={homeHeroImageLayerSx(theme, homeHeroContent.bannerSrc)} aria-hidden />
       <Box sx={homeHeroGradientWashSx(theme)} display={{ xs: "none", md: "block" }} aria-hidden />
 

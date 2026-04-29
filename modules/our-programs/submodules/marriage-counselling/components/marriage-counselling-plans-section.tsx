@@ -10,7 +10,7 @@ import { alpha } from "@mui/material/styles";
 import { pageContainerMaxWidth, pageSectionGutterSx } from "@/theme/page-section";
 import { unitScale } from "@/utils/unit-scale";
 
-type PlanCard = {
+export type PlanCard = {
   title: string;
   subtitle: string;
   features: string[];
@@ -18,7 +18,7 @@ type PlanCard = {
   featured?: boolean;
 };
 
-const plans: PlanCard[] = [
+const defaultPlans: PlanCard[] = [
   {
     title: "3 Months",
     subtitle: "Marriage Mentoring Program",
@@ -48,16 +48,36 @@ const plans: PlanCard[] = [
   }
 ];
 
-export function MarriageCounsellingPlansSection() {
+type MarriageCounsellingPlansSectionProps = {
+  plans?: PlanCard[];
+  ariaLabel?: string;
+};
+
+export function MarriageCounsellingPlansSection({
+  plans = defaultPlans,
+  ariaLabel = "Marriage mentoring plans"
+}: MarriageCounsellingPlansSectionProps) {
   return (
     <Box
       component="section"
-      aria-label="Marriage mentoring plans"
+      aria-label={ariaLabel}
       sx={{
         py: { xs: unitScale(24), sm: unitScale(32), md: unitScale(44) }
       }}
     >
       <Container maxWidth={pageContainerMaxWidth} sx={pageSectionGutterSx}>
+        <Typography
+          variant="h2"
+          sx={{
+            mb: { xs: unitScale(18), md: unitScale(48) },
+            fontSize: { xs: unitScale(36), md: unitScale(65) },
+            lineHeight: 1,
+            color: "#1F2328",
+            textAlign: "center"
+          }}
+        >
+          Choose Your Journey
+        </Typography>
         <Box
           sx={{
             display: "grid",
@@ -72,8 +92,8 @@ export function MarriageCounsellingPlansSection() {
                 position: "relative",
                 borderRadius: unitScale(22),
                 bgcolor: plan.featured ? "#D1F1F5" : "#F3F3F3",
-                p: { xs: unitScale(18), sm: unitScale(20), md: unitScale(24) },
-                minHeight: { lg: unitScale(430) },
+                p: { xs: unitScale(20), sm: unitScale(22), md: unitScale(26) },
+                minHeight: { lg: unitScale(450) },
                 display: "flex",
                 flexDirection: "column",
                 mb: { xs: unitScale(26), md: 0 },
@@ -115,9 +135,9 @@ export function MarriageCounsellingPlansSection() {
               </Typography>
               <Box sx={{ borderTop: `1px solid ${alpha("#1F2328", 0.24)}`, mb: 2.2 }} />
 
-              <Stack spacing={2} sx={{ mb: 3.5 }}>
+              <Stack spacing={2.2} sx={{ mb: 4 }}>
                 {plan.features.map((feature) => (
-                  <Stack key={feature} direction="row" spacing={1.3} alignItems="flex-start">
+                  <Stack key={feature} direction="row" spacing={1.3} alignItems="flex-start" sx={{ mb: unitScale(8) }}>
                     <Box
                       sx={{
                         width: unitScale(22),

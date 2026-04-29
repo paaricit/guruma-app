@@ -156,7 +156,8 @@ export function BlogPostArticleSection({ post }: { post: BlogPost }) {
           backgroundPosition: "center center, center center",
           backgroundSize: "cover, contain",
           pt: { xs: unitScale(24), md: unitScale(32) },
-          pb: { xs: unitScale(24), md: unitScale(36) }
+          pb: { xs: unitScale(24), md: unitScale(36) },
+          my: { xs: -4, md: 0 }
         }}
       >
         <SectionTopArc surface="#D1F1F5" />
