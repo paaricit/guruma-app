@@ -1,6 +1,7 @@
 "use client";
 
 import { OurProgramsProgramPageShell } from "../../components";
+import { personalCounsellingPhotoGalleryMobileTabletSlides } from "../../content/personal-counselling-photo-gallery-mobile-slides";
 import { personalCounsellingPhotoGallerySlides } from "../../content/personal-counselling-photo-gallery-slides";
 import { personalCounsellingProgramHero } from "../../content/our-programs-program-heroes";
 import { PersonalCounsellingOverviewSection } from "./components";
@@ -51,6 +52,7 @@ export default function OurProgramsPersonalCounsellingPage() {
     <OurProgramsProgramPageShell
       hero={personalCounsellingProgramHero}
       photoGallerySlides={personalCounsellingPhotoGallerySlides}
+      photoGalleryMobileTabletSlides={personalCounsellingPhotoGalleryMobileTabletSlides}
       omitSeekerHowToEnrol
     >
       <PersonalCounsellingOverviewSection>
