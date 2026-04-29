@@ -306,7 +306,17 @@ export default function ContactPage() {
         </Container>
       </Box>
 
-      <Box sx={{ bgcolor: "primary.light", pt: { xs: "48px", md: "84px" }, pb: { xs: 8, md: 10 }, px: { xs: 2, md: 3 } }}>
+      <Box
+        sx={(theme) => ({
+          bgcolor: "primary.light",
+          pt: { xs: "48px", md: "84px" },
+          pb: {
+            xs: `calc(${theme.spacing(8)} + env(safe-area-inset-bottom, 0px))`,
+            md: `calc(${theme.spacing(10)} + env(safe-area-inset-bottom, 0px))`
+          },
+          px: { xs: 2, md: 3 }
+        })}
+      >
         <Container maxWidth="md">
           <Typography sx={{ fontFamily: "var(--font-forum), serif", color: "#031942", fontSize: { xs: 26, md: 32 }, fontWeight: 600, textAlign: "center" }}>
             Frequently Asked Questions
