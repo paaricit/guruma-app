@@ -14,6 +14,8 @@ export type PlanCard = {
   title: string;
   subtitle: string;
   features: string[];
+  /** Razorpay (or other) checkout URL for this plan */
+  ctaHref: string;
   tag?: string;
   featured?: boolean;
 };
@@ -22,6 +24,7 @@ const defaultPlans: PlanCard[] = [
   {
     title: "3 Months",
     subtitle: "Marriage Mentoring Program",
+    ctaHref: "https://rzp.io/rzp/yKM4ZGUx",
     features: [
       "6 exclusive sessions with Guru Maa Shubha Didi as a couple (60 minutes per session)",
       "3 exclusive sessions with Guru Maa Shubha Didi for each individual (30 minutes per session)"
@@ -30,6 +33,7 @@ const defaultPlans: PlanCard[] = [
   {
     title: "6 Months",
     subtitle: "Marriage Mentoring Program",
+    ctaHref: "https://rzp.io/rzp/eAxjuzO",
     features: [
       "12 exclusive sessions with Guru Maa Shubha Didi as a couple (60 minutes per session)",
       "6 exclusive sessions with Guru Maa Shubha Didi for each individual (30 minutes per session)"
@@ -40,6 +44,7 @@ const defaultPlans: PlanCard[] = [
   {
     title: "1 Year",
     subtitle: "Marriage Mentoring Program",
+    ctaHref: "https://rzp.io/rzp/FA2BEgB",
     features: [
       "24 exclusive sessions with Guru Maa Shubha Didi as a couple (60 minutes per session)",
       "12 exclusive sessions with Guru Maa Shubha Didi for each individual (30 minutes per session)"
@@ -160,6 +165,10 @@ export function MarriageCounsellingPlansSection({
               </Stack>
 
               <Button
+                component="a"
+                href={plan.ctaHref}
+                target="_blank"
+                rel="noopener noreferrer"
                 variant="contained"
                 sx={{
                   mt: "auto",

@@ -11,6 +11,7 @@ const personalCounsellingPlans: PlanCard[] = [
   {
     title: "7 Sessions",
     subtitle: "Personal Counselling Program",
+    ctaHref: "https://rzp.io/rzp/t5mjiN9J",
     features: [
       "Online",
       "One-on-one sessions",
@@ -21,6 +22,7 @@ const personalCounsellingPlans: PlanCard[] = [
   {
     title: "10 Sessions",
     subtitle: "Personal Counselling Program",
+    ctaHref: "https://rzp.io/rzp/izbchhQ",
     features: [
       "Online",
       "One-on-one sessions",
@@ -33,6 +35,7 @@ const personalCounsellingPlans: PlanCard[] = [
   {
     title: "Exclusive",
     subtitle: "Personal Counselling Program",
+    ctaHref: "https://rzp.io/rzp/qh5VGYdp",
     features: [
       "Online / Offline flexibility",
       "Exclusive personal counselling",

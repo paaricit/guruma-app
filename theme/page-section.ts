@@ -307,6 +307,22 @@ export function homeHeroMobileGradientBackdropSx(theme: Theme) {
   };
 }
 
+/**
+ * Left-weighted wash over the mobile hero photo (viewports below theme `md`, 768px — widths 0–767px).
+ * Keeps headline legible when the portrait sits on the right.
+ */
+export function homeHeroMobileBannerOverlaySx(theme: Theme) {
+  const ink = theme.palette.primary.dark;
+  return {
+    position: "absolute" as const,
+    inset: 0,
+    zIndex: 1,
+    display: { xs: "block", md: "none" },
+    pointerEvents: "none" as const,
+    background: `linear-gradient(90deg, ${alpha(ink, 0.9)} 0%, ${alpha(ink, 0.52)} 44%, ${alpha(ink, 0.14)} 100%)`
+  };
+}
+
 /** Hero photo — desktop only (`md+`): cover + center under wash. */
 export function homeHeroImageLayerSx(theme: Theme, bannerSrc: string) {
   return {
@@ -666,8 +682,8 @@ export const sessionsCurveHeightLarge = {
 
 /** Video / image tile min heights (Figma ~590px tall frame @ desktop). */
 export const sessionsMediaMinHeightVideo = {
-  xs: unitScale(260),
-  sm: unitScale(300),
+  xs: unitScale(380),
+  sm: unitScale(380),
   md: unitScale(560)
 } as const;
 
