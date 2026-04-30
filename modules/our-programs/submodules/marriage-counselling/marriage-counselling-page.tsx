@@ -2,6 +2,7 @@
 
 import { OurProgramsProgramPageShell } from "../../components";
 import { marriageCounsellingProgramHero } from "../../content/our-programs-program-heroes";
+import { seekerVideos } from "@/modules/home/content/seeker-experiences";
 import { MarriageCounsellingOverviewSection, MarriageCounsellingPlansSection } from "./components";
 
 export default function OurProgramsMarriageCounsellingPage() {
@@ -10,6 +11,7 @@ export default function OurProgramsMarriageCounsellingPage() {
       hero={marriageCounsellingProgramHero}
       omitPhotoGallery
       omitSeekerHowToEnrol
+      seekerVideos={seekerVideos}
     >
       <MarriageCounsellingOverviewSection>
         <MarriageCounsellingPlansSection />

@@ -5,6 +5,9 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import { OurProgramsSeekerExperiencesSection } from "@/component/our-programs-seeker-experiences-section";
+import type {
+  OurProgramsSeekerVideoItem
+} from "@/modules/our-programs/content/our-programs-seeker-experiences";
 import type { OurProgramsProgramHero } from "../../content/our-programs-program-heroes";
 import { OurProgramsPhotoGallerySection } from "../our-programs-photo-gallery-section";
 import { OurProgramsProgramHeroSection } from "../our-programs-program-hero-section";
@@ -16,6 +19,7 @@ export type OurProgramsProgramPageShellProps = {
   children?: ReactNode;
   beforeSeekerSection?: ReactNode;
   /** Optional overrides passed through to `OurProgramsSeekerExperiencesSection`. */
+  seekerVideos?: readonly OurProgramsSeekerVideoItem[];
   seekerVideoStripHeading?: string;
   seekerTestimonialsHeading?: string;
   seekerTestimonialsDescription?: string;
@@ -40,6 +44,7 @@ export function OurProgramsProgramPageShell(props: OurProgramsProgramPageShellPr
     hero,
     children,
     beforeSeekerSection,
+    seekerVideos,
     seekerVideoStripHeading,
     seekerTestimonialsHeading,
     seekerTestimonialsDescription,
@@ -72,6 +77,7 @@ export function OurProgramsProgramPageShell(props: OurProgramsProgramPageShellPr
       {beforeSeekerSection}
 
       <OurProgramsSeekerExperiencesSection
+        videos={seekerVideos}
         videoStripHeading={seekerVideoStripHeading}
         testimonialsBlockHeading={seekerTestimonialsHeading}
         testimonialsDescription={seekerTestimonialsDescription}

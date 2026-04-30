@@ -1,5 +1,6 @@
 "use client";
 
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -180,6 +181,44 @@ function SeekerVideoCarousel({
                       pointerEvents: "none"
                     }}
                   />
+                  {video.playCueOverlay ? (
+                    <Box
+                      aria-hidden
+                      sx={{
+                        position: "absolute",
+                        inset: 0,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        pointerEvents: "none",
+                        zIndex: 1
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: { xs: unitScale(52), md: unitScale(60) },
+                          height: { xs: unitScale(52), md: unitScale(60) },
+                          borderRadius: "50%",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          bgcolor: alpha(theme.palette.common.white, 0.92),
+                          color: theme.palette.primary.main,
+                          border: (t) =>
+                            `2px solid ${alpha(isPlain ? t.palette.guru.coral : t.palette.common.white, 0.5)}`,
+                          boxShadow: (t) =>
+                            `0 ${unitScale(4)} ${unitScale(20)} ${alpha(t.palette.common.black, 0.28)}`
+                        }}
+                      >
+                        <PlayArrowRoundedIcon
+                          sx={{
+                            fontSize: { xs: unitScale(32), md: unitScale(36) },
+                            ml: 0.25
+                          }}
+                        />
+                      </Box>
+                    </Box>
+                  ) : null}
                 </Box>
               </Box>
             ))}

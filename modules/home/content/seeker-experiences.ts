@@ -7,6 +7,10 @@ export type SeekerVideoItem = {
   image: string;
   /** YouTube embed URL with optional autoplay */
   embedSrc: string;
+  /**
+   * Set when the thumbnail is a plain still (no paused-player chrome). Carousel draws the play badge so it matches other tiles’ affordance.
+   */
+  playCueOverlay?: boolean;
 };
 
 export type SeekerTestimonialItem = {
@@ -20,41 +24,60 @@ export const seekerExperiencesSectionBg = "/images/Home Page Photos/pink-backgro
 
 export const seekerTestimonialCornerIcon = "/images/Home Page Photos/icon-orange.png";
 
-/** Shared YouTube embed for all seeker carousel cards (thumbnails differ). */
-const seekerCarouselEmbedSrc = "https://www.youtube.com/embed/GErQ_J7GUEM?autoplay=1";
-
 /** Card opens in-app dialog; `embedSrc` is a YouTube embed iframe URL. */
 export const seekerVideos: readonly SeekerVideoItem[] = [
   
   {
     name: "Priya Das",
     image: "/images/Home Page Photos/carousel-2.png",
-    embedSrc: seekerCarouselEmbedSrc
+    embedSrc: "https://www.youtube.com/embed/Tb3fNJHow0A?autoplay=1"
   },
   {
     name: "Neha Verma",
     image: "/images/Home Page Photos/carousel-3.png",
-    embedSrc: seekerCarouselEmbedSrc
+    embedSrc:
+      "https://www.youtube.com/embed/UCSknD2qBzs?si=1-CHsfRNNu4I0VXw&autoplay=1"
   },
   {
     name: "Vikram Singh",
     image: "/images/Home Page Photos/carousel-4.png",
-    embedSrc: seekerCarouselEmbedSrc
+    embedSrc: "https://www.youtube.com/embed/qRECI27bHw0?autoplay=1"
   },
   {
     name: "Ananya Iyer",
     image: "/images/Home Page Photos/carousel-5.png",
-    embedSrc: seekerCarouselEmbedSrc
+    embedSrc:
+      "https://www.youtube.com/embed/t24TSOwNcBk?si=3T07IYDLlcC0Fxcz&autoplay=1"
   },
   {
     name: "Priya Sharma",
     image: "/images/Home Page Photos/carousel-0.png",
-    embedSrc: seekerCarouselEmbedSrc
+    embedSrc:
+      "https://www.youtube.com/embed/tIzKw1OEbFY?si=t_qSLVTNN17Et90X&autoplay=1"
   },
   {
     name: "Karan Paul",
     image: "/images/Home Page Photos/carousel-1.png",
-    embedSrc: seekerCarouselEmbedSrc
+    embedSrc:
+      "https://www.youtube.com/embed/VKk7CU0_kbk?si=pfWh5M9P6drU8wT_&autoplay=1"
+  },
+  {
+    name: "Seeker testimonial",
+    image: "/images/Home Page Photos/carousel-7.png",
+    embedSrc: "https://www.youtube.com/embed/wXkUin2iZaM?autoplay=1",
+    playCueOverlay: true
+  },
+  {
+    name: "Community seekers",
+    image: "/images/Home Page Photos/carousel-8.png",
+    embedSrc: "https://www.youtube.com/embed/e0_a1lI_wmY?autoplay=1",
+    playCueOverlay: true
+  },
+  {
+    name: "Seeker healing story",
+    image: "/images/Home Page Photos/carousel-9.png",
+    embedSrc: "https://www.youtube.com/embed/P4JJCd2AQeU?autoplay=1",
+    playCueOverlay: true
   }
 ];
 

@@ -4,6 +4,7 @@ import { OurProgramsProgramPageShell } from "../../components";
 import { personalCounsellingPhotoGalleryMobileTabletSlides } from "../../content/personal-counselling-photo-gallery-mobile-slides";
 import { personalCounsellingPhotoGallerySlides } from "../../content/personal-counselling-photo-gallery-slides";
 import { personalCounsellingProgramHero } from "../../content/our-programs-program-heroes";
+import { seekerVideos } from "@/modules/home/content/seeker-experiences";
 import { PersonalCounsellingOverviewSection } from "./components";
 import { MarriageCounsellingPlansSection } from "../marriage-counselling/components";
 import type { PlanCard } from "../marriage-counselling/components/marriage-counselling-plans-section";
@@ -54,6 +55,7 @@ export default function OurProgramsPersonalCounsellingPage() {
       photoGallerySlides={personalCounsellingPhotoGallerySlides}
       photoGalleryMobileTabletSlides={personalCounsellingPhotoGalleryMobileTabletSlides}
       omitSeekerHowToEnrol
+      seekerVideos={seekerVideos}
     >
       <PersonalCounsellingOverviewSection>
         <MarriageCounsellingPlansSection ariaLabel="Personal counselling plans" plans={personalCounsellingPlans} />
