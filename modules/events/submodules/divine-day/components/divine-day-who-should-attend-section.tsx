@@ -192,13 +192,13 @@ export function DivineDayWhoShouldAttendSection() {
       <Box
         sx={{
           width: { xs: "100%", lg: unitScale(550) },
-          minHeight: { xs: unitScale(280), lg: unitScale(420), xl: unitScale(800) },
+          minHeight: { xs: unitScale(280), lg: unitScale(600), xl: unitScale(800) },
           alignSelf: "stretch",
           display: "flex",
           /* Mobile / tablet: in-flow so the portrait does not overlap copy; lg+: overlay at right as before */
           position: { xs: "static", lg: "absolute" },
           right: { xs: "auto", lg: 0 },
-          top: { xs: "auto", lg: "-50%" },
+          top: { xs: "auto", lg: "-25%", xl: "-50%" },
           justifyContent: { xs: "center", lg: "flex-end" },
           zIndex: { xs: 1, lg: 10 }
         }}
