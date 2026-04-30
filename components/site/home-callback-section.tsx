@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Alert, Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import type { Theme } from "@mui/material/styles";
 import { unitScale } from "@/utils/unit-scale";
 
@@ -37,8 +37,24 @@ const initialCallbackValues: CallbackFormValues = {
   message: ""
 };
 
+const CALLBACK_WHATSAPP_NUMBER = "15559167583";
+
+function buildCallbackWhatsAppUrl(values: CallbackFormValues): string {
+  const orDash = (s: string) => (s.trim() ? s.trim() : "—");
+  const text = [
+    "Hi, I want to hear more about it.",
+    "",
+    `Name: ${orDash(values.name)}`,
+    `Phone: ${orDash(values.phone)}`,
+    `Email: ${orDash(values.email)}`,
+    `Message: ${orDash(values.message)}`
+  ].join("\n");
+  return `https://wa.me/${CALLBACK_WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+}
+
 /**
- * Full-width “Get a call back” strip with four fields + CTA; posts to `/api/callback-request`.
+ * Full-width “Get a call back” strip with four fields + CTA; posts to `/api/callback-request`,
+ * then opens WhatsApp in a new tab (blank tab first so popup blockers allow it after `await`).
  */
 export function HomeCallbackSection() {
   const [callbackValues, setCallbackValues] = useState<CallbackFormValues>(initialCallbackValues);
@@ -49,19 +65,28 @@ export function HomeCallbackSection() {
     e.preventDefault();
     setCallbackStatus("loading");
     setCallbackError("");
+    const snapshot = { ...callbackValues };
+    const waUrl = buildCallbackWhatsAppUrl(snapshot);
+    const waTab = window.open("about:blank", "_blank", "noopener,noreferrer");
     try {
       const res = await fetch("/api/callback-request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(callbackValues)
+        body: JSON.stringify(snapshot)
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string };
       if (!res.ok) {
         throw new Error(data.error || "Something went wrong");
       }
+      if (waTab) {
+        waTab.location.replace(waUrl);
+      } else {
+        window.open(waUrl, "_blank", "noopener,noreferrer");
+      }
       setCallbackStatus("success");
       setCallbackValues(initialCallbackValues);
     } catch (err) {
+      waTab?.close();
       setCallbackStatus("error");
       setCallbackError(err instanceof Error ? err.message : "Request failed");
     }
@@ -185,15 +210,14 @@ export function HomeCallbackSection() {
             call back
           </Typography>
         </Button>
-        {callbackStatus === "success" ? (
-          <Alert severity="success" sx={{ mt: 1.5, textAlign: "left" }}>
-            Thank you — we will reach out soon.
-          </Alert>
-        ) : null}
-        {callbackStatus === "error" ? (
-          <Alert severity="error" sx={{ mt: 1.5, textAlign: "left" }} onClose={() => setCallbackStatus("idle")}>
+        {callbackStatus === "error" && callbackError ? (
+          <Typography
+            component="p"
+            role="alert"
+            sx={{ mt: 1.5, textAlign: "left", fontSize: unitScale(14), color: "error.main" }}
+          >
             {callbackError}
-          </Alert>
+          </Typography>
         ) : null}
       </Box>
     </Stack>

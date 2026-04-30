@@ -62,6 +62,12 @@ export const seekerVideos: readonly SeekerVideoItem[] = [
       "https://www.youtube.com/embed/VKk7CU0_kbk?si=pfWh5M9P6drU8wT_&autoplay=1"
   },
   {
+    name: "Seeker healing story",
+    image: "/images/Home Page Photos/carousel-9.png",
+    embedSrc: "https://www.youtube.com/embed/P4JJCd2AQeU?autoplay=1",
+    playCueOverlay: true
+  },
+  {
     name: "Seeker testimonial",
     image: "/images/Home Page Photos/carousel-7.png",
     embedSrc: "https://www.youtube.com/embed/wXkUin2iZaM?autoplay=1",
@@ -73,12 +79,7 @@ export const seekerVideos: readonly SeekerVideoItem[] = [
     embedSrc: "https://www.youtube.com/embed/e0_a1lI_wmY?autoplay=1",
     playCueOverlay: true
   },
-  {
-    name: "Seeker healing story",
-    image: "/images/Home Page Photos/carousel-9.png",
-    embedSrc: "https://www.youtube.com/embed/P4JJCd2AQeU?autoplay=1",
-    playCueOverlay: true
-  }
+ 
 ];
 
 export const seekerTestimonials: readonly SeekerTestimonialItem[] = [
