@@ -16,31 +16,31 @@ const POSTER_HEADING_ID = "divine-day-poster-heading";
 const metaPrimaryFont = {
   xs: unitScale(22),
   sm: unitScale(26),
-  md: unitScale(30)
+  lg: unitScale(30)
 } as const;
 
 const metaSecondaryFont = {
   xs: unitScale(12),
   sm: unitScale(13),
-  md: unitScale(14)
+  lg: unitScale(14)
 } as const;
 
 const titleFont = {
   xs: unitScale(28),
   sm: unitScale(36),
-  md: unitScale(44)
+  lg: unitScale(44)
 } as const;
 
 const taglineFont = {
   xs: unitScale(12),
   sm: unitScale(13),
-  md: unitScale(15)
+  lg: unitScale(15)
 } as const;
 
 const hostFont = {
   xs: unitScale(13),
   sm: unitScale(14),
-  md: unitScale(16)
+  lg: unitScale(16)
 } as const;
 
 export function DivineDayPosterSection() {
@@ -54,19 +54,19 @@ export function DivineDayPosterSection() {
   const posterDesktopOverlaySrc = encodePublicPath("/images/Divine day page Photos/divine.svg");
 
   const metaCellSx = {
-    p: { xs: unitScale(14), sm: unitScale(18), md: unitScale(22) },
+    p: { xs: unitScale(14), sm: unitScale(18), lg: unitScale(22) },
     display: "flex",
     flexDirection: "column" as const,
     justifyContent: "center" as const,
     gap: unitScale(6),
-    minHeight: { xs: unitScale(88), sm: unitScale(96), md: unitScale(108) }
+    minHeight: { xs: unitScale(88), sm: unitScale(96), lg: unitScale(108) }
   };
 
   const pillSizing = {
-    minHeight: { xs: unitScale(48), md: unitScale(52) },
-    px: { xs: unitScale(20), md: unitScale(28) },
-    py: { xs: unitScale(10), md: unitScale(12) },
-    fontSize: { xs: unitScale(14), md: unitScale(16) },
+    minHeight: { xs: unitScale(48), lg: unitScale(52) },
+    px: { xs: unitScale(20), lg: unitScale(28) },
+    py: { xs: unitScale(10), lg: unitScale(12) },
+    fontSize: { xs: unitScale(14), lg: unitScale(16) },
     borderRadius: 9999,
     textTransform: "none" as const,
     fontWeight: 700
@@ -80,8 +80,8 @@ export function DivineDayPosterSection() {
         position: "relative",
         overflow: "hidden",
         width: "100%",
-        minHeight: { xs: "auto", md: unitScale(640), lg: unitScale(1140) },
-        py: { xs: unitScale(40), md: unitScale(56) }
+        minHeight: { xs: "auto", lg: unitScale(640), xl: unitScale(1140) },
+        py: { xs: unitScale(40), lg: unitScale(56) }
       }}
     >
       <Box
@@ -100,7 +100,7 @@ export function DivineDayPosterSection() {
             "& img": {
               objectFit: "cover",
               /* BG: art left, flat black right — keep left anchored so content sits on the dark side */
-              objectPosition: { xs: "28% center", md: "left center" }
+              objectPosition: { xs: "28% center", lg: "left center" }
             }
           }}
         >
@@ -125,38 +125,38 @@ export function DivineDayPosterSection() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          minHeight: { xs: unitScale(420), md: unitScale(560) }
+          minHeight: { xs: unitScale(420), lg: unitScale(560) }
         }}
       >
         <Box
           sx={{
             display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            justifyContent: { xs: "flex-start", md: "flex-end" },
+            flexDirection: { xs: "column", lg: "row" },
+            justifyContent: { xs: "flex-start", lg: "flex-end" },
             alignItems: "stretch",
-            gap: { xs: unitScale(28), md: unitScale(32) },
+            gap: { xs: unitScale(28), lg: unitScale(32) },
             width: "100%"
           }}
         >
 
           <Stack
-            spacing={{ xs: unitScale(28), md: unitScale(36) }}
+            spacing={{ xs: unitScale(28), lg: unitScale(36) }}
             sx={{
               minWidth: 0,
               width: "100%",
-              maxWidth: { xs: "100%", md: unitScale(560) },
-              ml: { md: "auto" },
-              alignItems: { xs: "stretch", md: "flex-end" }
+              maxWidth: { xs: "100%", lg: unitScale(560) },
+              ml: { lg: "auto" },
+              alignItems: { xs: "stretch", lg: "flex-end" }
             }}
           >
             <Box
               sx={{
-                display: { xs: "grid", md: "none" },
+                display: { xs: "grid", lg: "none" },
                 gridTemplateColumns: "1fr 1fr",
                 width: "100%",
-                maxWidth: { xs: "100%", sm: unitScale(420), md: "100%" },
+                maxWidth: { xs: "100%", sm: unitScale(420), lg: "100%" },
                 border: `1px solid ${hairline}`,
-                alignSelf: { xs: "center", md: "flex-end" }
+                alignSelf: { xs: "center", lg: "flex-end" }
               }}
             >
               <Box sx={{ ...metaCellSx, borderRight: `1px solid ${hairline}`, borderBottom: `1px solid ${hairline}` }}>
@@ -191,14 +191,14 @@ export function DivineDayPosterSection() {
               <Box sx={{ ...metaCellSx }}>
                 <Stack direction="row" spacing={1} alignItems="flex-start">
                   <PlaceRoundedIcon sx={{ fontSize: unitScale(20), color: white, mt: unitScale(2), flexShrink: 0 }} aria-hidden />
-                  <Typography sx={{ fontFamily: "var(--font-inter), system-ui, sans-serif", fontWeight: 600, fontSize: { xs: unitScale(11), sm: unitScale(12), md: unitScale(12) }, color: white, lineHeight: 1.45, textTransform: "uppercase" }}>
+                  <Typography sx={{ fontFamily: "var(--font-inter), system-ui, sans-serif", fontWeight: 600, fontSize: { xs: unitScale(11), sm: unitScale(12), lg: unitScale(12) }, color: white, lineHeight: 1.45, textTransform: "uppercase" }}>
                     {c.meta.venue}
                   </Typography>
                 </Stack>
               </Box>
             </Box>
 
-            <Stack spacing={{ xs: unitScale(12), md: unitScale(16) }} sx={{ display: { xs: "block", md: "none" }, textAlign: { xs: "center", md: "right" }, alignItems: { xs: "center", md: "flex-end" } }}>
+            <Stack spacing={{ xs: unitScale(12), lg: unitScale(16) }} sx={{ display: { xs: "block", lg: "none" }, textAlign: { xs: "center", lg: "right" }, alignItems: { xs: "center", lg: "flex-end" } }}>
               <Typography
                 id={POSTER_HEADING_ID}
                 component="h2"
@@ -210,7 +210,7 @@ export function DivineDayPosterSection() {
                   color: coral,
                   textTransform: "uppercase",
                   textShadow: `0 0 ${unitScale(18)} ${alpha(white, 0.55)}, 0 0 ${unitScale(42)} ${alpha(ink, 0.35)}`,
-                  maxWidth: { md: unitScale(520) }
+                  maxWidth: { lg: unitScale(520) }
                 }}
               >
                 {c.title}
@@ -223,8 +223,8 @@ export function DivineDayPosterSection() {
                   lineHeight: 1.35,
                   color: white,
                   textTransform: "uppercase",
-                  letterSpacing: { xs: "0.04em", md: "0.06em" },
-                  maxWidth: { md: unitScale(520) }
+                  letterSpacing: { xs: "0.04em", lg: "0.06em" },
+                  maxWidth: { lg: unitScale(520) }
                 }}
               >
                 {c.tagline}
@@ -238,7 +238,7 @@ export function DivineDayPosterSection() {
                   color: alpha(white, 0.92),
                   textTransform: "uppercase",
                   letterSpacing: "0.12em",
-                  maxWidth: { md: unitScale(520) }
+                  maxWidth: { lg: unitScale(520) }
                 }}
               >
                 {c.host}
@@ -247,9 +247,9 @@ export function DivineDayPosterSection() {
 
             <Box
               sx={{
-                display: { xs: "none", md: "block" },
+                display: { xs: "none", lg: "block" },
                 // width: "100%",
-                width: { md: unitScale(700), lg: unitScale(780) },
+                width: { lg: unitScale(700), xl: unitScale(780) },
                 alignSelf: "flex-end"
               }}
             >
@@ -273,7 +273,7 @@ export function DivineDayPosterSection() {
                 spacing={unitScale(12)}
                 flexWrap="wrap"
                 useFlexGap
-                justifyContent={{ xs: "center", md: "flex-start" }}
+                justifyContent={{ xs: "center", lg: "flex-start" }}
                 alignItems="stretch"
                 sx={{ width: "100%" }}
               >
@@ -314,9 +314,9 @@ export function DivineDayPosterSection() {
               spacing={unitScale(12)}
               flexWrap="wrap"
               useFlexGap
-              justifyContent={{ xs: "center", md: "flex-end" }}
+              justifyContent={{ xs: "center", lg: "flex-end" }}
               alignItems="stretch"
-              sx={{ width: "100%", display: { xs: "flex", md: "none" } }}
+              sx={{ width: "100%", display: { xs: "flex", lg: "none" } }}
             >
               <Button
                 component="a"

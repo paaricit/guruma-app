@@ -44,6 +44,7 @@ export const divineDiscoursesCopy = {
   calloutBody:
     "These Divine Transformative Sessions will be Interactive and Open to all Audiences. Join these sessions at No Additional Cost. ",
   calloutEmphasis: "All are Welcome",
-  cta: "Reserve Your Spot"
+  cta: "Reserve Your Spot",
+  ctaHref: "/contact" as const
 } as const;
 

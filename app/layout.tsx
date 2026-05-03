@@ -31,7 +31,10 @@ const montserrat = Montserrat({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ffffff"
+  /** Lets iOS expose `env(safe-area-inset-*)` for notched devices. */
+  viewportFit: "cover",
+  /** Aligned with `theme.palette.background.default` (see `globals.css` --app-canvas-bg). */
+  themeColor: "#f8f8f6"
 };
 
 export const metadata: Metadata = {

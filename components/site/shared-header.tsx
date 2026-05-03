@@ -8,23 +8,31 @@ import { AppBar, Box, Button, Drawer, IconButton, Stack, Toolbar } from "@mui/ma
 import { alpha } from "@mui/material/styles";
 import { unitScale } from "@/utils/unit-scale";
 
-const navItems = [
+type NavItem = {
+  label: string;
+  href: string;
+  children?: { label: string; href: string }[];
+};
+
+const programsMenuItems = [
+  { label: "Marriage Counseling", href: "/our-programs/marriage-counselling" },
+  { label: "Personal Counseling", href: "/our-programs/personal-counselling" },
+  { label: "Meditation Programs", href: "/our-programs/meditation" },
+  { label: "Spiritual Retreats", href: "/our-programs/spiritual-retreats" }
+] as const;
+
+const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About Her", href: "/about-her" },
   { label: "Sessions", href: "/sessions" },
   { label: "Events", href: "/events" },
-  { label: "Our Programs", href: "/our-programs" },
+  { label: "Our Programs", href: "/our-programs", children: [...programsMenuItems] },
   { label: "Sapt Sadhana", href: "/sapt-sadhana" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" }
 ];
 
-const programsMenuItems: string[] = [];
-
-type SharedHeaderProps = {
-  showProgramsMenu?: boolean;
-};
-
-export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderProps) {
+export default function SharedHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleOpenMobileMenu = () => setMobileMenuOpen(true);
@@ -80,25 +88,80 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
         </Stack>
 
         <Stack direction="row" spacing={0} sx={{ display: { xs: "none", lg: "flex" }, justifyContent: 'center', flexGrow: 1 }}>
-          {navItems.map((item) => (
-            <Button
-              component={Link}
-              href={item.href}
-              key={`${item.href}-${item.label}`}
-              sx={{
-                color: "#fff",
-                textTransform: "none",
-                fontFamily: "var(--font-montserrat), sans-serif",
-                fontWeight: 600,
-                fontSize: { xs: unitScale(16), md: unitScale(18) },
-                px: 3,
-                minWidth: 0,
-                height: { xs: unitScale(56), md: unitScale(64) }
-              }}
-            >
-              {item.label}
-            </Button>
-          ))}
+          {navItems.map((item) => {
+            const children = item.children ?? [];
+            return (
+              <Box
+                key={`${item.href}-${item.label}`}
+                sx={{
+                  position: "relative",
+                  "&:hover .programs-dropdown, &:focus-within .programs-dropdown": {
+                    opacity: 1,
+                    visibility: "visible",
+                    transform: "translateY(0)"
+                  }
+                }}
+              >
+                <Button
+                  component={Link}
+                  href={item.href}
+                  sx={{
+                    color: "#fff",
+                    textTransform: "none",
+                    fontFamily: "var(--font-montserrat), sans-serif",
+                    fontWeight: 600,
+                    fontSize: { xs: unitScale(16), md: unitScale(18) },
+                    px: 3,
+                    minWidth: 0,
+                    height: { xs: unitScale(56), md: unitScale(64) }
+                  }}
+                >
+                  {item.label}
+                </Button>
+                {children.length ? (
+                  <Box
+                    className="programs-dropdown"
+                    sx={{
+                      position: "absolute",
+                      left: 0,
+                      top: "100%",
+                      minWidth: unitScale(290),
+                      border: "1px solid rgba(255,255,255,0.18)",
+                      background: "linear-gradient(180deg, #000000 30%, rgba(0, 0, 0, 0) 100%)",
+                      boxShadow: `0 ${unitScale(10)} ${unitScale(32)} rgba(0,0,0,0.25)`,
+                      opacity: 0,
+                      visibility: "hidden",
+                      transform: "translateY(6px)",
+                      transition: "opacity 180ms ease, transform 180ms ease, visibility 180ms ease"
+                    }}
+                  >
+                    {children.map((child, index) => (
+                      <Button
+                        key={child.href}
+                        component={Link}
+                        href={child.href}
+                        sx={{
+                          width: "100%",
+                          justifyContent: "flex-start",
+                          borderRadius: 0,
+                          px: unitScale(18),
+                          py: unitScale(14),
+                          color: "#fff",
+                          textTransform: "none",
+                          fontFamily: "var(--font-montserrat), sans-serif",
+                          fontWeight: 600,
+                          fontSize: unitScale(18),
+                          borderBottom: index === children.length - 1 ? "none" : "1px solid rgba(255,255,255,0.24)"
+                        }}
+                      >
+                        {child.label}
+                      </Button>
+                    ))}
+                  </Box>
+                ) : null}
+              </Box>
+            );
+          })}
         </Stack>
 
         <IconButton
@@ -109,38 +172,6 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
           <MenuRoundedIcon sx={{ fontSize: { xs: unitScale(28), md: unitScale(32) } }} />
         </IconButton>
       </Toolbar>
-
-      {/* --- Section: Programs flyout (when configured) --- */}
-      {showProgramsMenu && programsMenuItems.length > 0 && (
-        <Box
-          sx={{
-            display: { xs: "none", lg: "block" },
-            position: "absolute",
-            top: unitScale(60),
-            left: "50%",
-            transform: "translateX(-28%)",
-            bgcolor: "rgba(2, 20, 51, 0.95)",
-            border: "1px solid rgba(255,255,255,0.16)",
-            minWidth: unitScale(122),
-            zIndex: 10
-          }}
-        >
-          {programsMenuItems.map((item) => (
-            <Box
-              key={item}
-              sx={{
-                color: "#fff",
-                fontSize: { xs: unitScale(10), md: unitScale(12) },
-                px: 1,
-                py: 0.8,
-                borderBottom: "1px solid rgba(255,255,255,0.1)"
-              }}
-            >
-              {item}
-            </Box>
-          ))}
-        </Box>
-      )}
 
       {/* --- Section: Mobile navigation drawer --- */}
       <Drawer
@@ -160,22 +191,42 @@ export default function SharedHeader({ showProgramsMenu = false }: SharedHeaderP
       >
         <Stack spacing={1} sx={{ mt: 6 }}>
           {navItems.map((item) => (
-            <Button
-              key={`mobile-${item.href}-${item.label}`}
-              component={Link}
-              href={item.href}
-              onClick={handleCloseMobileMenu}
-              sx={{
-                justifyContent: "flex-start",
-                color: "#fff",
-                textTransform: "none",
-                fontFamily: "var(--font-montserrat), sans-serif",
-                fontWeight: 600,
-                fontSize: { xs: unitScale(16), md: unitScale(18) }
-              }}
-            >
-              {item.label}
-            </Button>
+            <Box key={`mobile-${item.href}-${item.label}`}>
+              <Button
+                component={Link}
+                href={item.href}
+                onClick={handleCloseMobileMenu}
+                sx={{
+                  justifyContent: "flex-start",
+                  color: "#fff",
+                  textTransform: "none",
+                  fontFamily: "var(--font-montserrat), sans-serif",
+                  fontWeight: 600,
+                  fontSize: { xs: unitScale(16), md: unitScale(18) }
+                }}
+              >
+                {item.label}
+              </Button>
+              {item.children?.map((child) => (
+                <Button
+                  key={`mobile-${child.href}-${child.label}`}
+                  component={Link}
+                  href={child.href}
+                  onClick={handleCloseMobileMenu}
+                  sx={{
+                    justifyContent: "flex-start",
+                    color: alpha("#fff", 0.9),
+                    textTransform: "none",
+                    fontFamily: "var(--font-montserrat), sans-serif",
+                    fontWeight: 500,
+                    fontSize: unitScale(14),
+                    pl: unitScale(26)
+                  }}
+                >
+                  {child.label}
+                </Button>
+              ))}
+            </Box>
           ))}
         </Stack>
       </Drawer>

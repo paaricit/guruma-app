@@ -9,5 +9,11 @@ export type DivineDaySeekerExperiencesSectionProps = SeekerExperiencesSectionPro
 
 /** Divine Day — seeker experiences band on a light surface (no hero image). */
 export function DivineDaySeekerExperiencesSection(props: DivineDaySeekerExperiencesSectionProps) {
-  return <SeekerExperiencesSection {...props} surface="plain" />;
+  return (
+    <SeekerExperiencesSection
+      {...props}
+      surface="plain"
+      stackLayoutUntilLg={props.stackLayoutUntilLg ?? true}
+    />
+  );
 }

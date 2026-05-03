@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { alpha } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { alpha, useTheme } from "@mui/material/styles";
 import { pageSectionGutterSx } from "@/theme/page-section";
 import { SectionTopArc } from "@/component/section-top-curve";
 import { SaptSadhanaCarouselControls } from "@/component/sapt-sadhana-carousel-controls";
@@ -13,13 +14,22 @@ import { SaptSadhanaStackCarousel } from "@/components/site/sapt-sadhana-stack-c
 import { unitScale } from "@/utils/unit-scale";
 
 /**
- * Carousel images from `public/images/sapt-sadhana-carousel/` (copied from your Sapt Sadhana asset folder).
+ * Desktop (`lg+`): JPEGs in `public/images/sapt-sadhana-carousel/`.
+ * Mobile / tablet (`down(lg)`): PNG frames in `public/images/sapt-sadhana-carousel/mobile-tab/`.
  * Canon `.CR3` raw files are omitted — they are not displayable in the browser; convert to JPEG/WebP to add.
  */
 const SAPT_SADHANA_CAROUSEL_SLIDE_COUNT = 11;
 const DEFAULT_SLIDES: readonly string[] = Array.from(
   { length: SAPT_SADHANA_CAROUSEL_SLIDE_COUNT },
   (_, i) => `/images/sapt-sadhana-carousel/slide-${String(i + 1).padStart(2, "0")}.jpg`
+);
+
+/** Figma-export frames for phones and tablets (`theme.breakpoints.down("lg")`). */
+const SAPT_SADHANA_MOBILE_TABLET_SLIDE_COUNT = 7;
+const DEFAULT_MOBILE_TABLET_SLIDES: readonly string[] = Array.from(
+  { length: SAPT_SADHANA_MOBILE_TABLET_SLIDE_COUNT },
+  (_, i) =>
+    `/images/sapt-sadhana-carousel/mobile-tab/slide-${String(i + 1).padStart(2, "0")}.png`
 );
 
 const ARROW_LEFT = "/images/Home Page Photos/Arrow Left-poiint.png";
@@ -66,14 +76,32 @@ const stayConnectedHeadingFontSize = {
 
 export type SaptSadhanaHomePromoSectionProps = {
   slides?: readonly string[];
+  /** Overrides default PNG gallery below the `lg` breakpoint. */
+  mobileTabletSlides?: readonly string[];
 };
 
 /**
  * Home page block: Sapt Sadhana copy, stack carousel, external controls, and “Stay Connected” bridge above the footer.
  */
-export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSadhanaHomePromoSectionProps) {
+export function SaptSadhanaHomePromoSection({
+  slides = DEFAULT_SLIDES,
+  mobileTabletSlides = DEFAULT_MOBILE_TABLET_SLIDES
+}: SaptSadhanaHomePromoSectionProps) {
+  const theme = useTheme();
+  const useMobileTabletGallery = useMediaQuery(theme.breakpoints.down("lg"), {
+    noSsr: true,
+    defaultMatches: false
+  });
+  const gallerySlides = useMobileTabletGallery ? mobileTabletSlides : slides;
+
   const [activeIndex, setActiveIndex] = useState(0);
-  const slideCount = slides.length;
+  const slideCount = gallerySlides.length;
+
+  useEffect(() => {
+    setActiveIndex((i) =>
+      slideCount > 0 ? Math.min(i, slideCount - 1) : 0
+    );
+  }, [slideCount, useMobileTabletGallery]);
 
   const onStep = useCallback(
     (delta: 1 | -1) => {
@@ -91,7 +119,8 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
         zIndex: 2,
         background: "linear-gradient(180deg, #F3F2EE 0%, #FFF 50%, #D1F1F5 100%)",
         pb: { xs: 7, md: 6 },
-        overflow: "visible"
+        overflow: "visible",
+        mt: { xs: -4, md: 0 }
       }}
     >
       <SectionTopArc surface="#F3F2EE" />
@@ -116,14 +145,14 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
               sx={{
                 position: "absolute",
                 inset: 0,
-                transform: "translateY(-49px)"
+                transform: {xs: "translateY(-29px)", md: "translateY(-49px)"}
               }}
             >
               <Image
                 alt=""
                 src={SAPT_SECTION_WAVE_ICON}
                 fill
-                sizes="(max-width: 600px) 180px, (max-width: 900px) 224px, 288px"
+                sizes="(max-width: 600px) 180px, (max-width: 767px) 224px, 288px"
                 style={{ objectFit: "contain", objectPosition: "center" }}
               />
             </Box>
@@ -165,7 +194,7 @@ export function SaptSadhanaHomePromoSection({ slides = DEFAULT_SLIDES }: SaptSad
         </Typography>
 
         <Box sx={{ mt: 3.5 }}>
-          <SaptSadhanaStackCarousel slides={slides} activeIndex={activeIndex} onStep={onStep} />
+          <SaptSadhanaStackCarousel slides={gallerySlides} activeIndex={activeIndex} onStep={onStep} />
         </Box>
 
         <SaptSadhanaCarouselControls

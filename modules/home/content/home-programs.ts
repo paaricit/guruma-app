@@ -67,7 +67,7 @@ export const homeProgramRows: readonly HomeProgramRow[] = [
     description:
       "Be a part of a mission that has fed over 10,000 people, funded several scholarships, and provided critical medical aid. Through Sapt Sadhana, we turn compassion into action.",
     primaryCta: "Support Our Mission",
-    // secondaryCta: "Learn more",
+    secondaryCta: "Learn more",
     secondaryCtaHref: "/sapt-sadhana",
     image: "/images/Home Page Photos/Sapt Sadhana  BG.webp",
     imageLeft: false

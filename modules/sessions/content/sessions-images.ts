@@ -1,5 +1,8 @@
 export const sessionsImages = {
   banner: "/images/SESSIONS (FREE LIVE SPIRITUAL SESSIONS) Photos/SESSIONS (FREE LIVE SPIRITUAL SESSIONS) Banner.webp",
+  /** Hero art below theme `md` (widths 0–767px). */
+  bannerMobile:
+    "/images/SESSIONS (FREE LIVE SPIRITUAL SESSIONS) Photos/sessions-hero-banner-mobile.png",
   videoThumb:
     "/images/SESSIONS (FREE LIVE SPIRITUAL SESSIONS) Photos/Divine Discourses Video thumbnail.webp",
   // Figma 230:1679 — `public/images/sessions/what-happens-session-right.webp` (overwrite after export if crop differs).

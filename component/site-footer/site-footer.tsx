@@ -42,7 +42,7 @@ const footerServiceLinks = [
   { label: "Events", href: "/events" },
   { label: "Our Programs", href: "/our-programs" },
   { label: "Sapt Sadhana", href: "/sapt-sadhana" },
-  { label: "Blogs", href: "/wisdom-blogs" }
+  { label: "Blogs", href: "/blog" }
 ] as const;
 
 /** White-on-transparent “negative” marks — same asset set as `components/site/contact-page.tsx` (Figma handoff). */
@@ -60,14 +60,16 @@ export default function SiteFooter() {
   return (
     <Box
       component="footer"
-      sx={{
+      sx={(theme) => ({
         position: "relative",
         zIndex: 2,
-        // overflow: "hidden",
         pt: { xs: 2.5, md: 3 },
-        pb: { xs: 2.5, md: 16 },
+        pb: {
+          xs: `calc(${theme.spacing(2.5)} + env(safe-area-inset-bottom, 0px))`,
+          md: `calc(${theme.spacing(16)} + env(safe-area-inset-bottom, 0px))`
+        },
         color: "primary.contrastText"
-      }}
+      })}
     >
       <Box
         aria-hidden

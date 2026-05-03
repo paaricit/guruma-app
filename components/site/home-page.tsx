@@ -42,7 +42,6 @@ export default function HomePage() {
       <WisdomInActionSection />
 
       <SeekerExperiencesSection />
-      jj
 
       {/* --- Section: Sapt Sadhana promo (+ footer overlap; keep overflow visible) --- */}
       <HomeSaptSadhanaPromoSection />

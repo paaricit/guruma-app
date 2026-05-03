@@ -7,6 +7,11 @@ export type OurProgramsSeekerVideoItem = {
   name: string;
   image: string;
   embedSrc: string;
+  /**
+   * When true, carousel draws the centered play badge (plain still thumbnails without paused-player chrome).
+   * Matches behaviour on `@/modules/home/content/seeker-experiences` items.
+   */
+  playCueOverlay?: boolean;
 };
 
 export type OurProgramsSeekerTestimonialItem = {

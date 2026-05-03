@@ -17,6 +17,8 @@ export type SectionTopArcProps = {
   svgHeight?: string;
   /** Preset (`default` / `paper` / `primaryLight`) or a CSS color string for a custom seam fill. */
   surface?: SectionTopArcSurfaceProp;
+  /** Optional override for top placement offset (e.g. `"100%"`); defaults to `"99%"`. */
+  bottom?: string | number;
   /**
    * `top` (default): arc along the **top** of the section (`bottom: 100%`).
    * `bottom`: same shape **rotated 180°** so the bulge points **up** into the section (`top: 100%`) — use for a bottom edge or prefer {@link SectionBottomArc}.
@@ -58,6 +60,7 @@ function resolveArcFill(theme: Theme, surface: SectionTopArcSurfaceProp): string
 export function SectionTopArc({
   svgHeight = SECTION_TOP_ARC_HEIGHT,
   surface = "default",
+  bottom = "99%",
   placement = "top"
 }: SectionTopArcProps) {
   const theme = useTheme();
@@ -71,7 +74,7 @@ export function SectionTopArc({
         position: "absolute",
         left: 0,
         right: 0,
-        ...(isBottom ? { top: "100%", transform: "rotate(180deg)", transformOrigin: "center top" } : { bottom: "99%" }),
+        ...(isBottom ? { top: "100%", transform: "rotate(180deg)", transformOrigin: "center top" } : { bottom }),
         width: "100%",
         zIndex: 2,
         pointerEvents: "none",

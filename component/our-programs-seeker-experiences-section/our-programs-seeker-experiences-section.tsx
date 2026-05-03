@@ -6,6 +6,7 @@
  * `modules/our-programs/content/our-programs-seeker-experiences.ts`.
  */
 
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -86,7 +87,8 @@ function ProgramsSeekerVideoCarousel({
 }) {
   const theme = useTheme();
   const mdUp = useMediaQuery(theme.breakpoints.up("md"), { defaultMatches: false });
-  const visibleCount = mdUp ? 3 : 1;
+  const lgUp = useMediaQuery(theme.breakpoints.up("lg"), { defaultMatches: false });
+  const visibleCount = lgUp ? 3 : mdUp ? 2 : 1;
   const maxSlide = Math.max(0, videos.length - visibleCount);
   const [slideIndex, setSlideIndex] = useState(0);
 
@@ -163,7 +165,7 @@ function ProgramsSeekerVideoCarousel({
                     alt=""
                     fill
                     src={encodePublicPath(video.image)}
-                    sizes={mdUp ? "33vw" : "100vw"}
+                    sizes={lgUp ? "33vw" : mdUp ? "50vw" : "100vw"}
                     style={{ objectFit: "cover" }}
                     aria-hidden
                   />
@@ -176,6 +178,44 @@ function ProgramsSeekerVideoCarousel({
                       pointerEvents: "none"
                     }}
                   />
+                  {video.playCueOverlay ? (
+                    <Box
+                      aria-hidden
+                      sx={{
+                        position: "absolute",
+                        inset: 0,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        pointerEvents: "none",
+                        zIndex: 1
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: { xs: unitScale(52), md: unitScale(60) },
+                          height: { xs: unitScale(52), md: unitScale(60) },
+                          borderRadius: "50%",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          bgcolor: alpha(theme.palette.common.white, 0.92),
+                          color: theme.palette.primary.main,
+                          border: (t) =>
+                            `2px solid ${alpha(isPlain ? t.palette.guru.coral : t.palette.common.white, 0.5)}`,
+                          boxShadow: (t) =>
+                            `0 ${unitScale(4)} ${unitScale(20)} ${alpha(t.palette.common.black, 0.28)}`
+                        }}
+                      >
+                        <PlayArrowRoundedIcon
+                          sx={{
+                            fontSize: { xs: unitScale(32), md: unitScale(36) },
+                            ml: 0.25
+                          }}
+                        />
+                      </Box>
+                    </Box>
+                  ) : null}
                 </Box>
               </Box>
             ))}
@@ -291,7 +331,11 @@ function ProgramsSeekerTestimonialCards({
       sx={{
         mt: { xs: 3, md: 3.5 },
         display: "grid",
-        gridTemplateColumns: { xs: "1fr", md: "repeat(3, minmax(0, 1fr))" },
+        gridTemplateColumns: {
+          xs: "1fr",
+          md: "repeat(2, minmax(0, 1fr))",
+          lg: "repeat(3, minmax(0, 1fr))"
+        },
         gap: { xs: 2.2, md: 3 },
         overflow: "visible",
         pb: 12
@@ -469,8 +513,9 @@ export function OurProgramsSeekerExperiencesSection({
         pt: omitHowToEnrol ? { xs: 7, md: 8 } : { xs: 8, md: 10 },
         pb: reserveBottomForArc
           ? {
-              xs: `calc(${SECTION_TOP_ARC_HEIGHT} + ${unitScale(50)} + ${unitScale(28)})`,
-              md: `calc(${SECTION_TOP_ARC_HEIGHT} + ${unitScale(50)} + ${unitScale(36)})`
+              xs: unitScale(32),
+              md: unitScale(40),
+              lg: `calc(${SECTION_TOP_ARC_HEIGHT} + ${unitScale(50)} + ${unitScale(36)})`
             }
           : { xs: 8, md: 10 },
         color: isPlain ? theme.palette.text.primary : theme.palette.common.white,
@@ -636,9 +681,21 @@ export function OurProgramsSeekerExperiencesSection({
 
 
       </Container>
-      <Box sx={{ position: "absolute", bgcolor: "#D1F1F5", bottom: 0, left: 0, right: 0, zIndex: 1, height: unitScale(50) }}>
-        <SectionTopArc surface="#D1F1F5" />
-
+      <Box
+        sx={{
+          position: "absolute",
+          bgcolor: "#D1F1F5",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1,
+          height: { xs: unitScale(20), lg: unitScale(50) },
+          lineHeight: 0
+        }}
+      >
+        <Box sx={{ display: { xs: "none", lg: "block" } }}>
+          <SectionTopArc surface="#D1F1F5" />
+        </Box>
       </Box>
 
     </Box>

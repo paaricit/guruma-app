@@ -16,6 +16,19 @@ export const theme = createTheme({
   shape: {
     borderRadius: 8
   },
+  /**
+   * Align `md` with common tablet / Tailwind `md` (768px). MUI’s default `md` is 900px,
+   * which left ~768px viewports on mobile layouts (single column, stacked hero, etc.).
+   */
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 768,
+      lg: 1200,
+      xl: 1536
+    }
+  },
   components
 });
 

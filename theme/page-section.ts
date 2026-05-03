@@ -21,6 +21,10 @@ const palettePaper = (palette.background as { paper?: string } | undefined)?.pap
 export const sessionsSeekerTestimonialsFaqBandGradient =
   `linear-gradient(180deg, ${paletteMint} 0%, ${palettePaper} 100%)` as const;
 
+/** `/sapt-sadhana` testimonials band — white → warm paper → mint (design spec). */
+export const saptSadhanaTestimonialsBandGradient =
+  "linear-gradient(180deg, #FFFFFF 17.77%, #F2F1ED 46.54%, #D1F1F5 75.31%)" as const;
+
 /**
  * Our Programs internal programme hero — scrim over the photo (clear top → deep navy at bottom).
  */
@@ -303,6 +307,22 @@ export function homeHeroMobileGradientBackdropSx(theme: Theme) {
   };
 }
 
+/**
+ * Left-weighted wash over the mobile hero photo (viewports below theme `md`, 768px — widths 0–767px).
+ * Keeps headline legible when the portrait sits on the right.
+ */
+export function homeHeroMobileBannerOverlaySx(theme: Theme) {
+  const ink = theme.palette.primary.dark;
+  return {
+    position: "absolute" as const,
+    inset: 0,
+    zIndex: 1,
+    display: { xs: "block", md: "none" },
+    pointerEvents: "none" as const,
+    // background: `linear-gradient(90deg, ${alpha(ink, 0.9)} 0%, ${alpha(ink, 0.52)} 44%, ${alpha(ink, 0.14)} 100%)`
+  };
+}
+
 /** Hero photo — desktop only (`md+`): cover + center under wash. */
 export function homeHeroImageLayerSx(theme: Theme, bannerSrc: string) {
   return {
@@ -313,7 +333,11 @@ export function homeHeroImageLayerSx(theme: Theme, bannerSrc: string) {
     backgroundImage: `url('${bannerSrc}')`,
     backgroundRepeat: "no-repeat" as const,
     backgroundSize: "cover" as const,
-    backgroundPosition: "center center" as const
+    /* Tablet: nudge focal point so the figure reads beside the copy without crowding the left edge. */
+    backgroundPosition: {
+      md: "56% center",
+      lg: "center center"
+    } as const
   };
 }
 
@@ -495,7 +519,7 @@ export const sessionsFaqDetailsPb = {
 } as const;
 
 /** Max width for FAQ copy column (readable measure on large screens). */
-export const sessionsFaqContainerMaxWidth = "md" as const;
+export const sessionsFaqContainerMaxWidth = "lg" as const;
 
 /** Schedule card title (~1.1rem / 1.35rem). */
 export const sessionsFluidCardTitle = {
@@ -591,7 +615,7 @@ export const sessionsWhatHappensArcSurface = "#D9F3F7" as const;
 export const sessionsSectionPyTight = {
   xs: unitScale(24),
   sm: unitScale(28),
-  md: unitScale(36)
+  md: 0
 } as const;
 
 export const sessionsSectionPySm = {
@@ -622,7 +646,7 @@ export const sessionsFaqSectionPy = {
 export const sessionsSectionPyLg = {
   xs: unitScale(48),
   sm: unitScale(64),
-  md: unitScale(90)
+  md: 0
 } as const;
 
 export const sessionsSectionPyBand = {
@@ -658,8 +682,8 @@ export const sessionsCurveHeightLarge = {
 
 /** Video / image tile min heights (Figma ~590px tall frame @ desktop). */
 export const sessionsMediaMinHeightVideo = {
-  xs: unitScale(260),
-  sm: unitScale(300),
+  xs: unitScale(380),
+  sm: unitScale(380),
   md: unitScale(560)
 } as const;
 

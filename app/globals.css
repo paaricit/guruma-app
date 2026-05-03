@@ -1,4 +1,6 @@
 :root {
+  /** Matches `theme/palette` `background.default` — use for html/body so iOS overscroll matches MUI pages. */
+  --app-canvas-bg: #f8f8f6;
   --background: transparent;
   --text: #0f172a;
   --app-bg-gradient: linear-gradient(180deg, #848484 0%, #1e1e1e 100%);
@@ -32,13 +34,13 @@ body {
   min-height: 100%;
   max-width: 100%;
   scroll-behavior: smooth;
-  background: #fff;
+  background: var(--app-canvas-bg);
 }
 
 body {
   overflow-x: clip;
   overflow-y: visible;
-  background: #fff;
+  background: var(--app-canvas-bg);
   color: var(--text);
   -webkit-text-size-adjust: 100%;
 }

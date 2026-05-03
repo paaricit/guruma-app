@@ -3,10 +3,12 @@
  */
 
 export const homeHeroContent = {
-  lead: "Happiness, Freedom & Peace Gets Unlocked with",
+  lead: "Happiness, Freedom & Peace — unlocked with",
   displayLine1: "Guru Maa",
   displayLine2: "Shubha Didi",
   bannerSrc: "/images/Home Page Photos/Home Page Banner.webp",
+  /** Hero art below theme `md` (max-width 767px). Desktop uses `bannerSrc`. */
+  bannerSrcMobile: "/images/Home Page Photos/home-hero-banner-mobile.png",
   /** Cutout portrait (black / transparent) — `public/images/About Her Page Photos/about-her-hero-portrait.png`. */
   portraitSrc: "/images/About Her Page Photos/about-her-hero-portrait.png",
   primaryCta: {
@@ -15,6 +17,6 @@ export const homeHeroContent = {
   },
   secondaryCta: {
     label: "Knowledge Shala : Explore",
-    href: "/wisdom-blogs"
+    href: "/blog"
   }
 } as const;
