@@ -43,7 +43,7 @@ const visionMissionHeadingIconSize = unitScale(40);
 /** Stacked breakpoints (`xs`–`lg`): match mobile-like centered band on tablet; `lg+` two-column uses start alignment. */
 const visionMissionCopyPanelSx = {
   position: "relative" as const,
-  p: { xs: 2, sm: 3, md: 3.5, lg: 4 },
+  p: { xs: 3, sm: 3, md: 3.5, lg: 4 },
   borderRadius: 6,
   minWidth: 0,
   zIndex: 11,
@@ -266,7 +266,7 @@ export function AboutHerVisionMissionPathwaysSection() {
                   justifyItems: { xs: "stretch", md: "center", lg: "stretch" },
                   mb: { xs: 6, md: 8, lg: 8 },
                   pb: { xs: 6, md: 9, lg: 10 },
-                  position: "relative"
+                  position: "relative",
                 }}
               >
                 <VisionMissionCopyPanel>

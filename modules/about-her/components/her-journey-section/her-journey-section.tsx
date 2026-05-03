@@ -176,7 +176,6 @@ export function HerJourneySection() {
                 width: "100%",
                 borderRadius: portraitRadiusDesktop,
                 borderBottomRightRadius: portraitBrDesktop,
-                overflow: "hidden",
                 boxShadow: portraitShadow(theme)
               }}
             >
@@ -185,7 +184,7 @@ export function HerJourneySection() {
                 fill
                 sizes="380px"
                 src={aboutHerJourneyPortraitSrc}
-                style={{ objectFit: "cover", objectPosition: "center top" }}
+                style={{  objectPosition: "center top" }}
               />
             </Box>
 

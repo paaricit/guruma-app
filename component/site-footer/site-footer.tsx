@@ -60,14 +60,16 @@ export default function SiteFooter() {
   return (
     <Box
       component="footer"
-      sx={{
+      sx={(theme) => ({
         position: "relative",
         zIndex: 2,
-        // overflow: "hidden",
         pt: { xs: 2.5, md: 3 },
-        pb: { xs: 2.5, md: 16 },
+        pb: {
+          xs: `calc(${theme.spacing(2.5)} + env(safe-area-inset-bottom, 0px))`,
+          md: `calc(${theme.spacing(16)} + env(safe-area-inset-bottom, 0px))`
+        },
         color: "primary.contrastText"
-      }}
+      })}
     >
       <Box
         aria-hidden

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
 import Box from "@mui/material/Box";
@@ -11,7 +12,7 @@ import { alpha, useTheme } from "@mui/material/styles";
 import { sessionsHeroContent } from "@/modules/sessions/content/sessions-hero";
 import {
   homeHeroImageLayerSx,
-  homeHeroMobileGradientBackdropSx,
+  homeHeroMobileBannerOverlaySx,
   pageContainerMaxWidth,
   pageSectionGutterSx,
   sessionsFluidHeroBadgeLabel,
@@ -23,6 +24,7 @@ import { encodePublicPath } from "@/utils/encode-public-path";
 import { unitScale } from "@/utils/unit-scale";
 
 const bannerSrc = encodePublicPath(sessionsHeroContent.bannerSrc);
+const bannerSrcMobile = encodePublicPath(sessionsHeroContent.bannerSrcMobile);
 
 export function SessionsHeroSection() {
   const theme = useTheme();
@@ -46,7 +48,25 @@ export function SessionsHeroSection() {
         overflow: "hidden"
       }}
     >
-      <Box sx={homeHeroMobileGradientBackdropSx(theme)} aria-hidden />
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          display: { xs: "block", md: "none" }
+        }}
+        aria-hidden
+      >
+        <Image
+          src={bannerSrcMobile}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center bottom" }}
+        />
+      </Box>
+      <Box sx={homeHeroMobileBannerOverlaySx(theme)} aria-hidden />
       <Box sx={homeHeroImageLayerSx(theme, bannerSrc)} aria-hidden />
       <Container
         maxWidth={pageContainerMaxWidth}

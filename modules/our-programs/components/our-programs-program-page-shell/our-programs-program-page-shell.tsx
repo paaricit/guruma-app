@@ -5,6 +5,9 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import { OurProgramsSeekerExperiencesSection } from "@/component/our-programs-seeker-experiences-section";
+import type {
+  OurProgramsSeekerVideoItem
+} from "@/modules/our-programs/content/our-programs-seeker-experiences";
 import type { OurProgramsProgramHero } from "../../content/our-programs-program-heroes";
 import { OurProgramsPhotoGallerySection } from "../our-programs-photo-gallery-section";
 import { OurProgramsProgramHeroSection } from "../our-programs-program-hero-section";
@@ -16,11 +19,14 @@ export type OurProgramsProgramPageShellProps = {
   children?: ReactNode;
   beforeSeekerSection?: ReactNode;
   /** Optional overrides passed through to `OurProgramsSeekerExperiencesSection`. */
+  seekerVideos?: readonly OurProgramsSeekerVideoItem[];
   seekerVideoStripHeading?: string;
   seekerTestimonialsHeading?: string;
   seekerTestimonialsDescription?: string;
   /** Optional image URLs for the Photo Gallery carousel (defaults in `our-programs-photo-gallery` content). */
   photoGallerySlides?: readonly string[];
+  /** Optional PNG (or other) frames for gallery below `lg`; desktop uses `photoGallerySlides`. */
+  photoGalleryMobileTabletSlides?: readonly string[];
   photoGalleryHeading?: string;
   positionY?: "top" | "bottom";
   /** When true, skips `OurProgramsPhotoGallerySection` (e.g. marriage counselling route). */
@@ -38,10 +44,12 @@ export function OurProgramsProgramPageShell(props: OurProgramsProgramPageShellPr
     hero,
     children,
     beforeSeekerSection,
+    seekerVideos,
     seekerVideoStripHeading,
     seekerTestimonialsHeading,
     seekerTestimonialsDescription,
     photoGallerySlides,
+    photoGalleryMobileTabletSlides,
     photoGalleryHeading,
     omitPhotoGallery = false,
     omitSeekerHowToEnrol = false
@@ -52,19 +60,24 @@ export function OurProgramsProgramPageShell(props: OurProgramsProgramPageShellPr
       <OurProgramsProgramHeroSection hero={hero} positionY={props.positionY} />
 
       {children ? (
-        <Box sx={{ py: { xs: unitScale(24), md: unitScale(32) } }}>
+        <Box sx={{ py: { xs: 0, md: unitScale(32) } }}>
           <Stack spacing={unitScale(10)}>{children}</Stack>
 
         </Box>
       ) : null}
 
       {!omitPhotoGallery ? (
-        <OurProgramsPhotoGallerySection slides={photoGallerySlides} heading={photoGalleryHeading} />
+        <OurProgramsPhotoGallerySection
+          slides={photoGallerySlides}
+          mobileTabletSlides={photoGalleryMobileTabletSlides}
+          heading={photoGalleryHeading}
+        />
       ) : null}
 
       {beforeSeekerSection}
 
       <OurProgramsSeekerExperiencesSection
+        videos={seekerVideos}
         videoStripHeading={seekerVideoStripHeading}
         testimonialsBlockHeading={seekerTestimonialsHeading}
         testimonialsDescription={seekerTestimonialsDescription}

@@ -1,6 +1,10 @@
 export const aboutHerHeroBannerSrc =
   "/images/About Her Page Photos/ABOUT HER Banner.webp" as const;
 
+/** Hero art below theme `md` (widths 0–767px). Desktop uses `aboutHerHeroBannerSrc`. */
+export const aboutHerHeroBannerSrcMobile =
+  "/images/About Her Page Photos/about-her-hero-banner-mobile.png" as const;
+
 export const aboutHerHeroOverlapSrc =
   "/images/About Her Page Photos/ABOUT HER Overlap.webp" as const;
 

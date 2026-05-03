@@ -57,7 +57,8 @@ export const aboutHerPathways: readonly AboutHerPathwayItem[] = [
     title: "3. Meditation (Dhyan):",
     description: "Guided soul-exploration to find stillness in a chaotic world.",
     icon: "nightlight",
-    iconSrc: `${pathwayAssetBase}/pathway-dhyan-tile.svg`,
+    /** Sun + crescent — peach on transparent (`pathway-dhyan-sun-moon.png`). */
+    iconSrc: `${pathwayAssetBase}/pathway-dhyan-sun-moon.png`,
     iconFillsTile: true
   },
   {

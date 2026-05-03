@@ -147,7 +147,7 @@ export function HomeProgramsSection({ programs = homeProgramRows }: HomePrograms
                   minHeight: { xs: "auto", ...programCopyMinHeight },
                   bgcolor: { xs: theme.palette.background.paper, md: "transparent" },
                   py: programCopyPy,
-                  px: { xs: 2, sm: 2.5, md: unitScale(48), lg: unitScale(67) },
+                  px: { xs: 4, sm: 2.5, md: unitScale(48), lg: unitScale(67) },
                   maxWidth: { xs: "100%", md: unitScale(780) },
                   ...(row.imageLeft ? { ml: { md: "auto" } } : {})
                 }}

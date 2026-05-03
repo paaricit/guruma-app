@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { alpha, useTheme } from "@mui/material/styles";
 import { SectionTopArc } from "@/component/section-top-curve";
 import { SaptSadhanaCarouselControls } from "@/component/sapt-sadhana-carousel-controls";
@@ -23,6 +24,11 @@ const headingFontSize = {
 
 export type OurProgramsPhotoGallerySectionProps = {
   slides?: readonly string[];
+  /**
+   * When set, used below the `lg` breakpoint (same pattern as home `SaptSadhanaHomePromoSection`).
+   * Desktop keeps `slides`.
+   */
+  mobileTabletSlides?: readonly string[];
   /** Defaults to “Photo Gallery”. */
   heading?: string;
 };
@@ -33,11 +39,25 @@ export type OurProgramsPhotoGallerySectionProps = {
  */
 export function OurProgramsPhotoGallerySection({
   slides = ourProgramsPhotoGalleryDefaultSlides,
+  mobileTabletSlides,
   heading = "Photo Gallery"
 }: OurProgramsPhotoGallerySectionProps) {
   const theme = useTheme();
+  const useMobileTabletGallery = useMediaQuery(theme.breakpoints.down("lg"), {
+    noSsr: true,
+    defaultMatches: false
+  });
+  const gallerySlides =
+    mobileTabletSlides && mobileTabletSlides.length > 0 && useMobileTabletGallery
+      ? mobileTabletSlides
+      : slides;
+
   const [activeIndex, setActiveIndex] = useState(0);
-  const slideCount = slides.length;
+  const slideCount = gallerySlides.length;
+
+  useEffect(() => {
+    setActiveIndex((i) => (slideCount > 0 ? Math.min(i, slideCount - 1) : 0));
+  }, [slideCount, useMobileTabletGallery]);
 
   const onStep = useCallback(
     (delta: 1 | -1) => {
@@ -81,7 +101,7 @@ export function OurProgramsPhotoGallerySection({
 
         <Box sx={{ mt: 3.5 }}>
           <SaptSadhanaStackCarousel
-            slides={slides}
+            slides={gallerySlides}
             activeIndex={activeIndex}
             onStep={onStep}
             coverImageObjectPosition="center center"

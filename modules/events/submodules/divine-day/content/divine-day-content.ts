@@ -13,6 +13,8 @@ export const divineDayRegisterWhatsappHref =
 export const divineDayImages = {
   /** Poster band BG: pathway / 2026 (left), solid black panel (right) — `divine-day-poster-section-bg.png`. */
   posterSectionBg: "/images/Divine day page Photos/DD-section-BG.webp",
+  /** Static hero art below theme `md` (widths 0–767px); video + overlap resume from `md`. */
+  heroBannerMobile: "/images/Divine day page Photos/divine-day-hero-banner-mobile.png",
   heroOverlap: "/images/Divine day page Photos/Divine day Banner Video Operlap.webp",
   comePeace: "/images/Divine day page Photos/Come Experience the Peace You Have Been Seeking.webp",
   givePause: "/images/Divine day page Photos/Give yourself this pause..webp",

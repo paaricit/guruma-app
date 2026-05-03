@@ -147,7 +147,7 @@ export function DivineDiscoursesScheduleSection() {
         zIndex: 2,
         isolation: "isolate",
         bgcolor: "#F3F2EE",
-        mt: { xs: 1, md: 2 },
+        mt: { xs: -2, md: 2 },
         pt: { xs: 2, md: 2.5 },
         pb: { xs: 8, md: 9 },
         overflow: "visible",

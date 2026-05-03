@@ -36,7 +36,7 @@ export function BlogLandingHeroSection() {
       aria-labelledby="blog-landing-hero-heading"
       sx={{
         position: "relative",
-        minHeight: unitScale(750),
+        minHeight: { xs: unitScale(480), md: unitScale(750) },
         display: "flex",
         alignItems: "stretch",
         justifyContent: "center",
