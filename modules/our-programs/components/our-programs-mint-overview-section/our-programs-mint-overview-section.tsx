@@ -47,22 +47,10 @@ export function OurProgramsMintOverviewSection({ content, children }: OurProgram
       }}
     >
       <Box aria-hidden sx={{ display: { xs: "none", lg: "block" }, lineHeight: 0 }}>
-        <SectionSoftWaveCap fill="#D1F1F5" height={unitScale(130)} bottom="100%" />
+        <SectionSoftWaveCap fill="#D1F1F5" height={unitScale(130)} bottom="99%" />
       </Box>
 
-      <Box
-        aria-hidden
-        sx={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: `url("${lotusBg}")`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: { xs: "120% auto", md: "30% auto" },
-          opacity: 0.35,
-          pointerEvents: "none"
-        }}
-      />
+     
       <Box
         aria-hidden
         sx={{
@@ -105,6 +93,7 @@ export function OurProgramsMintOverviewSection({ content, children }: OurProgram
               gap: { xs: 3, md: 4 },
               justifyContent: "space-between",
               alignItems: "center",
+              position: "relative",
               mx: "auto !important",
               '@media (max-width: 767px)': {
                 px: `0 !important`
@@ -164,6 +153,7 @@ export function OurProgramsMintOverviewSection({ content, children }: OurProgram
               sx={{
                 position: "relative",
                 width: "100%",
+                zIndex: 100,
                 maxWidth: unitScale(500),
                 minHeight: unitScale(550),
                 borderRadius: unitScale(24),
@@ -179,6 +169,21 @@ export function OurProgramsMintOverviewSection({ content, children }: OurProgram
                 style={{ objectFit: "cover" }}
               />
             </Box>
+            <Box
+        aria-hidden
+        sx={{
+          position: "absolute",
+          display: { xs: "none", md: "block" },
+          inset: 0,
+          left: '10%',
+          bottom: '-50%',
+          backgroundImage: `url("${lotusBg}")`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: { xs: "120% auto", md: "40% auto" },
+          pointerEvents: "none"
+        }}
+      />
           </Box>
 
           <Box sx={{ position: "relative" }}>
@@ -302,7 +307,9 @@ export function OurProgramsMintOverviewSection({ content, children }: OurProgram
               </Box>
             </Box>
           </Box>
+          
         </Stack>
+       
         {children ? <Box sx={{ mt: { xs: unitScale(22), md: unitScale(30) } }}>{children}</Box> : null}
       </Container>
 

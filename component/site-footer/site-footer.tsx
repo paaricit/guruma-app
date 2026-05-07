@@ -302,7 +302,7 @@ export default function SiteFooter() {
                       underline="hover"
                       sx={(theme) => ({
                         ...footerBodyOnPrimarySx(theme),
-                        fontSize: unitScale(22),
+                        fontSize: unitScale(28),
                         minWidth: 0
                       })}
                     >

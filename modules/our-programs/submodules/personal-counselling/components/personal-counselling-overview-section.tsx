@@ -40,7 +40,7 @@ export function PersonalCounsellingOverviewSection({ children }: { children?: Re
         <SectionSoftWaveCap fill="#D1F1F5" height={unitScale(130)} bottom="100%" />
       </Box>
 
-      <Box
+      {/* <Box
         aria-hidden
         sx={{
           position: "absolute",
@@ -53,22 +53,7 @@ export function PersonalCounsellingOverviewSection({ children }: { children?: Re
           pointerEvents: "none"
         }}
       />
-      <Box
-        aria-hidden
-        sx={{
-          position: "absolute",
-          left: { xs: "-15%", md: "0%" },
-          bottom: { xs: "-10%", md: "-12%" },
-          width: { xs: "60%", md: "55%" },
-          aspectRatio: "1",
-          backgroundImage: `url("${spiralBg}")`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "contain",
-          opacity: 0.55,
-          zIndex: 0,
-          pointerEvents: "none"
-        }}
-      />
+      */}
       <Box
         aria-hidden
         sx={{
@@ -95,7 +80,8 @@ export function PersonalCounsellingOverviewSection({ children }: { children?: Re
               gap: { xs: 3, md: 4 },
               justifyContent: "space-between",
               alignItems: "center",
-              mx: "auto !important"
+              mx: "auto !important",
+              position: "relative",
             }}
             component={Container}
             maxWidth="lg"
@@ -155,6 +141,7 @@ export function PersonalCounsellingOverviewSection({ children }: { children?: Re
                 minHeight: unitScale(550),
                 borderRadius: unitScale(24),
                 overflow: "hidden",
+                zIndex: 100,
                 boxShadow: (t) => `0 ${unitScale(12)} ${unitScale(34)} ${alpha(t.palette.primary.dark, 0.24)}`
               }}
             >
@@ -166,6 +153,21 @@ export function PersonalCounsellingOverviewSection({ children }: { children?: Re
                 style={{ objectFit: "cover" }}
               />
             </Box>
+            <Box
+        aria-hidden
+        sx={{
+          position: "absolute",
+          display: { xs: "none", md: "block" },
+          inset: 0,
+          left: '10%',
+          bottom: '-50%',
+          backgroundImage: `url("${lotusBg}")`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: { xs: "120% auto", md: "40% auto" },
+          pointerEvents: "none"
+        }}
+      />
           </Box>
 
           <Box sx={{ position: "relative" }}>
