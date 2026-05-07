@@ -15,7 +15,7 @@ export function DivineDayWhoShouldAttendSection() {
   const theme = useTheme();
   const copy = divineDayWhoShouldAttendCopy;
   const imgSrc = encodePublicPath(divineDayImages.whoOverlap);
-  const lotusSrc = encodePublicPath(divineDayImages.whoSectionLotus);
+  const lotusSrc = encodePublicPath(divineDayImages.whyLotus);
   const surfaceCream = theme.palette.guru.surfaceCream;
 
   return (
@@ -24,7 +24,7 @@ export function DivineDayWhoShouldAttendSection() {
       aria-labelledby={WHO_HEADING_ID}
       sx={(t) => ({
         position: "relative",
-        bgcolor: t.palette.guru.surfaceCream,
+        bgcolor: '#F3F3EF',
         pb: { xs: unitScale(56), lg: unitScale(88) }
       })}
     >
@@ -42,7 +42,7 @@ export function DivineDayWhoShouldAttendSection() {
           zIndex: 1
         }}
       >
-        <SectionWaveDivider fill={surfaceCream} orientation="up" />
+        <SectionWaveDivider fill={'#F3F3EF'} orientation="up" />
       </Box>
       <Box
         aria-hidden
@@ -61,10 +61,10 @@ export function DivineDayWhoShouldAttendSection() {
           /* `unitScale` requires positive atDesign — use px for small negative offsets */
           left: { xs: "-8px", lg: unitScale(12) },
           bottom: { xs: "-12px", lg: unitScale(8) },
-          width: { xs: unitScale(180), sm: unitScale(220), lg: unitScale(280) },
-          height: { xs: unitScale(180), sm: unitScale(220), lg: unitScale(280) },
+          width: { xs: unitScale(180), sm: unitScale(220), lg: unitScale(350) },
+          height: { xs: unitScale(180), sm: unitScale(220), lg: unitScale(480) },
           zIndex: 0,
-          opacity: { xs: 0.42, lg: 0.5 },
+          // opacity: { xs: 0.42, lg: 0.5 },
           pointerEvents: "none"
         }}
       >

@@ -8,9 +8,9 @@ export const aboutHerHeroBannerSrcMobile =
 export const aboutHerHeroOverlapSrc =
   "/images/About Her Page Photos/ABOUT HER Overlap.webp" as const;
 
-/** Cutout portrait — `public/images/About Her Page Photos/about-her-hero-portrait.png`. */
+/** Hero decorative SVG — `public/images/About Her Page Photos/about-her-banner.svg`. */
 export const aboutHerHeroPortraitSrc =
-  "/images/About Her Page Photos/about-her-hero-portrait.png" as const;
+  "/images/About Her Page Photos/about-her-banner.svg" as const;
 
 export const aboutHerHeroTitle = "Guru Maa Shubha Didi" as const;
 

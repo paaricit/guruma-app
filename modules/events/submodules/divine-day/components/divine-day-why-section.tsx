@@ -60,11 +60,10 @@ export function DivineDayWhySection() {
           display: { xs: "none", lg: "block" },
           position: "absolute",
           left: { lg: "-70px" },
-          top: { lg: unitScale(110) },
+          top: { lg: '-100px' },
           width: unitScale(530),
           height: unitScale(600),
-          opacity: 0.7,
-          zIndex: 0
+          zIndex: 1
         }}
       >
         <Image src={lotusSrc} alt="" fill sizes="530px" style={{ objectFit: "contain" }} />
@@ -78,8 +77,7 @@ export function DivineDayWhySection() {
           top: { lg: unitScale(390) },
           width: unitScale(530),
           height: unitScale(600),
-          opacity: 0.7,
-          zIndex: 0
+          zIndex: 1
         }}
       >
         <Image src={lotusSrc} alt="" fill sizes="530px" style={{ objectFit: "contain" }} />
@@ -93,8 +91,7 @@ export function DivineDayWhySection() {
           bottom: { lg: "-230px" },
           width: unitScale(530),
           height: unitScale(600),
-          opacity: 0.8,
-          zIndex: 0
+          zIndex: 2
         }}
       >
         <Image src={lotusSrc} alt="" fill sizes="530px" style={{ objectFit: "contain" }} />

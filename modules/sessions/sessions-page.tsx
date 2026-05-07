@@ -35,7 +35,7 @@ export default function SessionsPage() {
         }}
       >
         <SessionsSeekerTestimonialsSection />
-        <SessionsFaqSection />
+        {/* <SessionsFaqSection /> */}
       </Box>
       {/* <SessionsFinalCtaSection /> */}
     </Box>

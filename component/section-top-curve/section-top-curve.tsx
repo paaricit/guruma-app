@@ -151,7 +151,7 @@ export function SectionTopUShapedArc({
       aria-hidden
       sx={{
         position: "absolute",
-        top: 0,
+        top: '1%',
         left: 0,
         right: 0,
         width: "100%",

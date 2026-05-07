@@ -334,12 +334,12 @@ function SeekerTestimonialCards({
   const testimonialGridColumns = stackLayoutUntilLg
     ? {
         xs: "1fr",
-        lg: "repeat(2, minmax(0, 1fr))",
+        lg: "repeat(3, minmax(0, 1fr))",
         xl: "repeat(3, minmax(0, 1fr))"
       }
     : {
         xs: "1fr",
-        md: "repeat(2, minmax(0, 1fr))",
+        md: "repeat(3, minmax(0, 1fr))",
         lg: "repeat(3, minmax(0, 1fr))"
       };
   const testimonialGridGap = stackLayoutUntilLg ? { xs: 2.2, lg: 3 } : { xs: 2.2, md: 3 };

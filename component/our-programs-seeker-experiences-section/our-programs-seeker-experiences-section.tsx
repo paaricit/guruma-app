@@ -697,6 +697,23 @@ export function OurProgramsSeekerExperiencesSection({
           <SectionTopArc surface="#D1F1F5" />
         </Box>
       </Box>
+      <Box sx={{ py: { xs: unitScale(32), md: unitScale(56) }, display: { xs: "none", lg: "block" }, position:  'absolute', bottom: 0, width: '100%', zIndex: 1}}>
+        <Container maxWidth={"lg"} sx={{ ...pageSectionGutterSx }}>
+          <Typography
+            component="p"
+            sx={{
+              color: "#162B53",
+              fontFamily: "var(--font-forum), serif",
+              fontSize: { xs: unitScale(40), md: unitScale(70) },
+              fontWeight: 400,
+              lineHeight: { xs: 1.08, md: 1.05 },
+              letterSpacing: { xs: "-0.02em", md: 0 }
+            }}
+          >
+            Stay Connected
+          </Typography>
+        </Container>
+      </Box>
 
     </Box>
   );

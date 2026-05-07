@@ -122,11 +122,11 @@ export function DivineDayHeroSection() {
         />
       </Box>
       <Container maxWidth={pageContainerMaxWidth} sx={{ position: "relative", zIndex: 2, py: { xs: unitScale(16), lg: unitScale(20) }, ...pageSectionGutterSx }}>
-        <Box sx={{ maxWidth: { xs: "55%", lg: "70%" } }}>
+        <Box sx={{ maxWidth: { xs: "55%", lg: "60%" } }}>
           <Typography
             id="divine-day-hero-heading"
             component="h1"
-            sx={{ fontFamily: "var(--font-forum), serif", textTransform: 'uppercase', fontSize: { xs: unitScale(30), sm: unitScale(38), lg: unitScale(48) }, lineHeight: 1.08, color: alpha(theme.palette.common.white, 0.95), mb: unitScale(20) }}
+            sx={{ fontFamily: "var(--font-forum), serif", textTransform: 'uppercase', fontSize: { xs: unitScale(30), sm: unitScale(38), lg: unitScale(38) }, lineHeight: 1.08, color: alpha(theme.palette.common.white, 0.95), mb: unitScale(20) }}
           >
             An Evening of Meditation, Wisdom, and Inner Calm with Guru Maa Shubha Didi
           </Typography>

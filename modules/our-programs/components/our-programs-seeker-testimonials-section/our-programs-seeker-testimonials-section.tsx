@@ -90,7 +90,7 @@ export function OurProgramsSeekerTestimonialsSection() {
             gridTemplateColumns: { xs: "1fr", md: "repeat(3, minmax(0, 1fr))" },
             gap: { xs: 2.2, md: 3 },
             overflow: "visible",
-            pb: { xs: 6, md: 12 }
+            pb: { xs: 6, md: 0 }
           }}
         >
           {ourProgramsTestimonialSlides.map((item) => {
@@ -184,7 +184,7 @@ export function OurProgramsSeekerTestimonialsSection() {
                     </Typography>
                   </Box>
                 </Box>
-                <Box
+                {/* <Box
                   sx={{
                     position: "absolute",
                     bottom: {
@@ -211,13 +211,13 @@ export function OurProgramsSeekerTestimonialsSection() {
                       style={{ objectFit: "cover" }}
                     />
                   </Box>
-                </Box>
+                </Box> */}
               </Card>
             );
           })}
         </Box>
 
-        <Typography
+        {/* <Typography
           sx={{
             textAlign: "center",
             fontFamily: "var(--font-inter), system-ui, sans-serif",
@@ -237,7 +237,7 @@ export function OurProgramsSeekerTestimonialsSection() {
               <Typography sx={{ color: "#666", fontSize: sessionsFluidBody, fontFamily: "var(--font-inter), system-ui, sans-serif" }}>{l}</Typography>
             </Box>
           ))}
-        </Stack>
+        </Stack> */}
       </Container>
     </Box>
   );
