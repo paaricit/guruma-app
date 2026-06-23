@@ -38,7 +38,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://gurumaa.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.shubhadidi.com/"),
   title: {
     default: APP_NAME,
     template: `%s | ${APP_NAME}`
