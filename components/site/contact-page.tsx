@@ -15,6 +15,7 @@ import {
   Typography
 } from "@mui/material";
 import { SectionTopArc } from "@/component/section-top-curve";
+import { siteContact, siteContactWhatsAppJoinUrl } from "@/lib/site-contact";
 
 const heroBg = "/images/Blongs Internal Page Photos/Wisdom Pages Banner BG.webp";
 const sideImage = "/images/contact/CONTACT Page Photo.webp";
@@ -33,21 +34,17 @@ const communityCards = [
     title: "WhatsApp Group",
     body: "Join our daily wisdom community.",
     imgSrc: "/images/contact/whatsup.png",
-    href: "https://wa.me/"
+    href: siteContactWhatsAppJoinUrl,
+    external: true
   },
   {
     title: "Telegram Channel",
     body: "Receive spiritual insights.",
     imgSrc: "/images/contact/telegram.png",
-    href: "https://t.me/"
-  },
-  {
-    title: "Email Newsletter",
-    body: "Monthly spiritual teachings.",
-    imgSrc: "/images/contact/email.png",
-    href: "/contact"
+    href: "https://t.me/",
+    external: true
   }
-];
+] as const;
 
 const fieldSx = {
   "& .MuiInput-underline:before": { borderColor: "rgba(255,255,255,0.5)" },
@@ -198,13 +195,13 @@ export default function ContactPage() {
               <Typography sx={{ color: "rgba(255,255,255,0.7)", fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", mb: 1.5 }}>
                 Contact
               </Typography>
-              <Typography sx={{ color: "#fff", fontWeight: 600, fontSize: 16, mb: 1 }}>+91-9123-456-789</Typography>
-              <Typography sx={{ color: "#fff", fontSize: 15, mb: 4 }}>info@iishtgold.com</Typography>
+              <Typography sx={{ color: "#fff", fontWeight: 600, fontSize: 16, mb: 1 }}>{siteContact.phone}</Typography>
+              <Typography sx={{ color: "#fff", fontSize: 15, mb: 4 }}>{siteContact.email}</Typography>
               <Typography sx={{ color: "rgba(255,255,255,0.7)", fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", mb: 0.75 }}>
                 Based in
               </Typography>
               <Typography sx={{ color: "rgba(255,255,255,0.9)", fontSize: 14, mb: 10 }}>
-                4th floor, Abhinav centre, Chamiers Road, Chennai, Tamil Nadu
+                {siteContact.address}
               </Typography>
               <Stack direction="row" spacing={1.5}>
                 <Box
@@ -277,12 +274,13 @@ export default function ContactPage() {
               style={{ objectFit: "contain" }}
             />
           </Box>
-          <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" }, gap: 2.5, mt: 2 }}>
-            {communityCards.map(({ title, body, imgSrc, href }) => (
+          <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" }, gap: 2.5, mt: 2, maxWidth: 720, mx: "auto" }}>
+            {communityCards.map(({ title, body, imgSrc, href, external }) => (
               <Box
                 key={title}
                 component={Link}
                 href={href}
+                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 sx={{
                   bgcolor: "#fff",
                   borderRadius: "18px",

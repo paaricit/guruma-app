@@ -55,14 +55,14 @@ export const saptSadhanaInitiatives: readonly SaptSadhanaInitiative[] = [
     n: "05",
     title: "Women Welfare",
     body: "To empower and progress for Women means there is more nurtured upcoming generation. Support our women through collective responsibility for creating a better family and better families.",
-    image: "/images/Sapt Sadhana Page Photos/Women Welfare.webp",
+    image: "/images/Sapt Sadhana Page Photos/Women Welfare.png",
     imageFirst: false
   },
   {
     n: "06",
     title: "Medical Care for Children",
     body: "Our Surgeries for resources helps us heal they're not easy. This leads to ease the bright and beautiful even themselves.",
-    image: "/images/Sapt Sadhana Page Photos/Medical Care for Children.webp",
+    image: "/images/Sapt Sadhana Page Photos/Medical Care for Children.png",
     imageFirst: true
   },
   {

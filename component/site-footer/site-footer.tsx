@@ -13,6 +13,7 @@ import { alpha } from "@mui/material/styles";
 import Image from "next/image";
 import NextLink from "next/link";
 import { FooterContactForm } from "@/component/footer-contact-form";
+import { siteContact } from "@/lib/site-contact";
 import {
   footerBodyOnPrimarySx,
   footerColumnHeadingSx,
@@ -30,11 +31,10 @@ const footerColumnHeadingFontSize = { xs: pxToRem(24), md: pxToRem(36) };
 const footerBodyFontSize = { xs: pxToRem(15), md: pxToRem(22) };
 const footerLabelFontSize = { xs: pxToRem(16), md: pxToRem(21) };
 
-const ADDRESS =
-  "4th floor, no 4, Abhinav centre Old no 19, New, off Chamiers Road, Cooperative Colony, Chennai, Tamil Nadu 600018";
+const ADDRESS = siteContact.address;
 
-const PHONE = "+91-9840539686";
-const EMAIL = "vinita@iisht.in";
+const PHONE = siteContact.phone;
+const EMAIL = siteContact.email;
 
 const footerServiceLinks = [
   { label: "About Her", href: "/about-her" },
